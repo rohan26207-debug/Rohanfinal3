@@ -19,6 +19,7 @@ import {
   Clock
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
+import UnifiedRecords from './UnifiedRecords';
 
 const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, selectedDate }) => {
   const [formData, setFormData] = useState({
