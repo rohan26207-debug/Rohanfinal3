@@ -736,13 +736,13 @@ const ZAPTRStyleCalculator = () => {
                 </div>
               )}
 
-              {/* 2. Credit Sales */}
+              {/* Credit Sales */}
               <div className={`flex items-center justify-between py-3 px-4 rounded-lg ${
                 isDarkMode ? 'bg-gray-700' : 'bg-orange-50'
               }`}>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                    2
+                    {Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 2 : 1)}
                   </div>
                   <span className={`font-medium ${
                     isDarkMode ? 'text-white' : 'text-slate-800'
