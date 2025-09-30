@@ -10,6 +10,7 @@ import { Badge } from './ui/badge';
 import { Fuel, Calculator, Receipt, RotateCcw, IndianRupee, Droplets, Gauge, Edit3, CreditCard, Banknote, Wallet, Plus, Minus, Settings as SettingsIcon } from 'lucide-react';
 import TransactionHistory from './TransactionHistory';
 import CashManagement from './CashManagement';
+import Settings from './Settings';
 import { useToast } from '../hooks/use-toast';
 import { mockData } from '../utils/mockData';
 
