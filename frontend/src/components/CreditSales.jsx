@@ -121,6 +121,9 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
     toast({ title: "Marked as Paid", description: "Credit sale marked as paid" });
   };
 
+  // Filter credit data for the selected date
+  const filteredCreditData = creditData.filter(credit => credit.date === selectedDate);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {/* Input Form */}
