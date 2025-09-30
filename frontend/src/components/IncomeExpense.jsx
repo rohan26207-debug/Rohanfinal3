@@ -72,7 +72,6 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
 
   const resetForm = () => {
     setFormData({
-      category: '',
       amount: '',
       description: '',
       type: activeType
