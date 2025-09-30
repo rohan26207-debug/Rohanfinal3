@@ -21,7 +21,8 @@ import {
 import SalesTracker from './SalesTracker';
 import CreditSales from './CreditSales';
 import IncomeExpense from './IncomeExpense';
-import FuelSettings from './FuelSettings';
+import PriceConfiguration from './PriceConfiguration';
+import HeaderSettings from './HeaderSettings';
 
 const ZAPTRStyleCalculator = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
