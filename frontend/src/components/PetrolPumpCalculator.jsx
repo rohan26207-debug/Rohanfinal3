@@ -126,10 +126,10 @@ const PetrolPumpCalculator = () => {
       calculatedQuantity = final - initial;
     }
 
-    if (!fuelType || !amountReceived) {
+    if (!fuelType || !selectedNozzle || !amountReceived) {
       toast({
         title: "Incomplete Information",
-        description: "Please fill all required fields",
+        description: "Please select fuel type, nozzle, and enter payment amount",
         variant: "destructive",
       });
       return;
