@@ -300,10 +300,7 @@ const PetrolPumpCalculator = () => {
                       <SelectContent>
                         {Object.entries(fuelSettings).map(([type, config]) => (
                           <SelectItem key={type} value={type}>
-                            <div className="flex items-center gap-2">
-                              <Droplets className="w-4 h-4" />
-                              {type} - ₹{config.price}/L
-                            </div>
+                            {type} - ₹{config.price}/L
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -335,7 +332,7 @@ const PetrolPumpCalculator = () => {
                       disabled={!fuelType}
                     >
                       <SelectTrigger className="h-12">
-                        <SelectValue placeholder="Select nozzle" />
+                        <SelectValue placeholder={fuelType ? "Select nozzle" : "Select fuel type first"} />
                       </SelectTrigger>
                       <SelectContent>
                         {fuelType && generateNozzles(fuelType, fuelSettings[fuelType]?.nozzleCount || 0).map((nozzle) => (
