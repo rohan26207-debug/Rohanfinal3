@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 
-const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, setExpenseData, selectedDate }) => {
+const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, setExpenseData, selectedDate, salesData }) => {
   const [activeType, setActiveType] = useState('income');
   const [formData, setFormData] = useState({
     category: '',
