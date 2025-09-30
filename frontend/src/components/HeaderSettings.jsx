@@ -192,7 +192,7 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                     </div>
                     
                     <div className="text-xs text-slate-500">
-                      Price: ₹{config.price}/L (Set in Price Configuration)
+                      R.S.P.: ₹{config.price}/L (Set in R.S.P. tab)
                     </div>
                   </div>
                 </div>
