@@ -172,7 +172,7 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
                 <p className={`text-xs ${
                   isDarkMode ? 'text-gray-500' : 'text-slate-500'
                 }`}>
-                  Cash Sales: ₹{cashSalesAmount.toFixed(0)} + Other: ₹{otherIncome.toFixed(0)}
+                  Fuel: ₹{fuelCashSales.toFixed(0)} + Other: ₹{otherIncome.toFixed(0)}
                 </p>
               </div>
             </div>
