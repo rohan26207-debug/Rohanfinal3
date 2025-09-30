@@ -81,7 +81,6 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
 
   const editRecord = (record, type) => {
     setFormData({
-      category: record.category,
       amount: record.amount.toString(),
       description: record.description || '',
       type: type
