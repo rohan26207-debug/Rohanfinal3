@@ -342,6 +342,17 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
           </ScrollArea>
         </CardContent>
       </Card>
+      </div>
+      
+      {/* Unified Records View */}
+      <UnifiedRecords
+        isDarkMode={isDarkMode}
+        salesData={salesData}
+        creditData={creditData}
+        incomeData={incomeData}
+        expenseData={expenseData}
+        selectedDate={selectedDate}
+      />
     </div>
   );
 };
