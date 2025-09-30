@@ -79,8 +79,75 @@ const ZAPTRStyleCalculator = () => {
       }
     ];
 
-    setSalesData(mockSalesData);
-    setCreditData(mockCreditData);
+    // Update mock data to have different dates for testing
+    const mockSalesDataWithDates = [
+      {
+        id: 1,
+        date: new Date().toISOString().split('T')[0], // Today
+        nozzle: 'P1',
+        fuelType: 'Petrol',
+        startReading: 1250.50,
+        endReading: 1275.25,
+        liters: 24.75,
+        rate: 102.50,
+        amount: 2536.88,
+        type: 'cash'
+      },
+      {
+        id: 2,
+        date: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0], // Yesterday
+        nozzle: 'D1',
+        fuelType: 'Diesel',
+        startReading: 890.20,
+        endReading: 905.50,
+        liters: 15.30,
+        rate: 89.75,
+        amount: 1373.18,
+        type: 'cash'
+      },
+      {
+        id: 3,
+        date: new Date().toISOString().split('T')[0], // Today
+        nozzle: 'P2',
+        fuelType: 'Petrol',
+        startReading: 2340.20,
+        endReading: 2355.75,
+        liters: 15.55,
+        rate: 102.50,
+        amount: 1593.88,
+        type: 'cash'
+      }
+    ];
+
+    const mockCreditDataWithDates = [
+      {
+        id: 1,
+        date: new Date().toISOString().split('T')[0], // Today
+        customerName: 'ABC Transport Ltd.',
+        vehicleNumber: 'MH 12 AB 1234',
+        fuelType: 'Diesel',
+        liters: 50.0,
+        rate: 89.75,
+        amount: 4487.50,
+        dueDate: '2024-02-15',
+        status: 'pending'
+      },
+      {
+        id: 2,
+        date: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0], // Yesterday
+        customerName: 'XYZ Logistics',
+        vehicleNumber: 'MH 14 CD 5678',
+        fuelType: 'Petrol',
+        liters: 30.0,
+        rate: 102.50,
+        amount: 3075.00,
+        dueDate: '2024-02-10',
+        status: 'paid'
+      }
+    ];
+
+    setSalesData(mockSalesDataWithDates);
+    setCreditData(mockCreditDataWithDates);
     
     // Initialize default fuel settings
     const defaultFuelSettings = {
