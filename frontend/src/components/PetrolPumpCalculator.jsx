@@ -254,6 +254,14 @@ const PetrolPumpCalculator = () => {
               <Fuel className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-4xl font-bold text-slate-800">FuelCalc Pro</h1>
+            <Button
+              variant="outline"
+              onClick={() => setShowSettings(!showSettings)}
+              className="ml-4 flex items-center gap-2"
+            >
+              <SettingsIcon className="w-4 h-4" />
+              Settings
+            </Button>
           </div>
           <p className="text-slate-600 text-lg">Professional Petrol Pump Calculator</p>
         </div>
