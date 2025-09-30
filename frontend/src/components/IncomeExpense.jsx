@@ -324,7 +324,7 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
                     ) : (
                       <TrendingDown className="w-12 h-12 mx-auto mb-2 opacity-50" />
                     )}
-                    <p>No {activeType} records yet</p>
+                    <p>No {activeType} records for {selectedDate === new Date().toISOString().split('T')[0] ? 'today' : 'selected date'}</p>
                   </div>
                 ) : (
                   currentData.map((record) => (
