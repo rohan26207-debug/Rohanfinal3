@@ -112,13 +112,6 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
     toast({ title: "Credit Deleted", description: "Credit sale deleted successfully" });
   };
 
-  const markAsPaid = (id) => {
-    setCreditData(prev => prev.map(credit => 
-      credit.id === id ? { ...credit, status: 'paid' } : credit
-    ));
-    toast({ title: "Marked as Paid", description: "Credit sale marked as paid" });
-  };
-
   // Filter credit data for the selected date
   const filteredCreditData = creditData.filter(credit => credit.date === selectedDate);
 
