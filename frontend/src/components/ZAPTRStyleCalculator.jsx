@@ -661,42 +661,21 @@ const ZAPTRStyleCalculator = () => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div>
-                  <Label htmlFor="date-picker" className={`text-sm font-medium ${
-                    isDarkMode ? 'text-gray-300' : 'text-slate-600'
-                  }`}>
-                    Select Date
-                  </Label>
-                  <Input
-                    id="date-picker"
-                    type="date"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    className={`h-10 w-40 ${
-                      isDarkMode ? 'bg-gray-700 border-gray-600' : ''
-                    }`}
-                  />
-                </div>
-                
-                <div className={`text-center px-4 py-2 rounded-lg ${
-                  isDarkMode ? 'bg-gray-700' : 'bg-slate-100'
+              <div>
+                <Label htmlFor="date-picker" className={`text-sm font-medium ${
+                  isDarkMode ? 'text-gray-300' : 'text-slate-600'
                 }`}>
-                  <div className={`text-xs ${
-                    isDarkMode ? 'text-gray-400' : 'text-slate-600'
-                  }`}>
-                    Day {Math.floor((new Date(selectedDate) - new Date(new Date().getFullYear(), 0, 1)) / (24 * 60 * 60 * 1000)) + 1}
-                  </div>
-                  <div className={`font-semibold ${
-                    isDarkMode ? 'text-white' : 'text-slate-800'
-                  }`}>
-                    {new Date(selectedDate).toLocaleDateString('en-IN', { 
-                      day: '2-digit', 
-                      month: 'short', 
-                      year: '2-digit' 
-                    })}
-                  </div>
-                </div>
+                  Select Date
+                </Label>
+                <Input
+                  id="date-picker"
+                  type="date"
+                  value={selectedDate}
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  className={`h-10 w-40 ${
+                    isDarkMode ? 'bg-gray-700 border-gray-600' : ''
+                  }`}
+                />
               </div>
             </div>
           </CardContent>
