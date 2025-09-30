@@ -61,7 +61,9 @@ export const mockData = {
       totalCost: 1346.25,
       amountReceived: 1350,
       changeAmount: 3.75,
-      calculationMode: 'manual'
+      calculationMode: 'manual',
+      paymentMethod: 'card',
+      nozzleId: 'D1'
     },
     {
       id: 3,
