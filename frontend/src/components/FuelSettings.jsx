@@ -108,7 +108,16 @@ const FuelSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
 
   const generateNozzleList = (fuelType, count) => {
     const nozzles = [];
-    const prefix = fuelType.charAt(0).toUpperCase();
+    // Special naming for specific fuel types
+    let prefix;
+    if (fuelType.toLowerCase() === 'power') {
+      prefix = 'PO';
+    } else if (fuelType.toLowerCase() === 'premium') {
+      prefix = 'PR';
+    } else {
+      prefix = fuelType.charAt(0).toUpperCase();
+    }
+    
     for (let i = 1; i <= count; i++) {
       nozzles.push(`${prefix}${i}`);
     }
