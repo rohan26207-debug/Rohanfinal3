@@ -159,9 +159,9 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings }) =>
                 <SelectValue placeholder="Select fuel type" />
               </SelectTrigger>
               <SelectContent>
-                {fuelTypes.map(fuel => (
-                  <SelectItem key={fuel.type} value={fuel.type}>
-                    {fuel.type} - ₹{fuel.rate}/L
+                {Object.entries(fuelSettings).map(([type, config]) => (
+                  <SelectItem key={type} value={type}>
+                    {type} - ₹{config.price}/L
                   </SelectItem>
                 ))}
               </SelectContent>
