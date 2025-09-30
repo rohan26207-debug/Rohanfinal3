@@ -298,6 +298,16 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
           </CardContent>
         </Card>
       </div>
+      
+      {/* Unified Records View */}
+      <UnifiedRecords
+        isDarkMode={isDarkMode}
+        salesData={salesData}
+        creditData={creditData}
+        incomeData={incomeData}
+        expenseData={expenseData}
+        selectedDate={selectedDate}
+      />
     </div>
   );
 };
