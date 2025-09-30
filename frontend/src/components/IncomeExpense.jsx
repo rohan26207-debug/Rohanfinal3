@@ -17,6 +17,7 @@ import {
   Receipt
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
+import UnifiedRecords from './UnifiedRecords';
 
 const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, setExpenseData, selectedDate, salesData }) => {
   const [activeType, setActiveType] = useState('income');
