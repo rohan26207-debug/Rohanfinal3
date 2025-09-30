@@ -122,10 +122,14 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
     toast({ title: "Record Deleted", description: "Record deleted successfully" });
   };
 
-  const currentData = activeType === 'income' ? incomeData : expenseData;
+  // Filter data for selected date
+  const filteredIncomeData = incomeData.filter(item => item.date === selectedDate);
+  const filteredExpenseData = expenseData.filter(item => item.date === selectedDate);
+  
+  const currentData = activeType === 'income' ? filteredIncomeData : filteredExpenseData;
   const currentCategories = activeType === 'income' ? incomeCategories : expenseCategories;
-  const totalIncome = incomeData.reduce((sum, item) => sum + item.amount, 0);
-  const totalExpense = expenseData.reduce((sum, item) => sum + item.amount, 0);
+  const totalIncome = filteredIncomeData.reduce((sum, item) => sum + item.amount, 0);
+  const totalExpense = filteredExpenseData.reduce((sum, item) => sum + item.amount, 0);
   const netProfit = totalIncome - totalExpense;
 
   return (
