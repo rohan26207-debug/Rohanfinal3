@@ -686,28 +686,55 @@ const ZAPTRStyleCalculator = () => {
             </h2>
             
             <div className="space-y-3">
-              {/* 1. Reading Sales */}
-              <div className={`flex items-center justify-between py-3 px-4 rounded-lg ${
-                isDarkMode ? 'bg-gray-700' : 'bg-blue-50'
-              }`}>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                    1
+              {/* Reading Sales by Fuel Type */}
+              {Object.entries(stats.fuelSalesByType).map(([fuelType, data], index) => (
+                <div key={fuelType} className={`flex items-center justify-between py-3 px-4 rounded-lg ${
+                  isDarkMode ? 'bg-gray-700' : 'bg-blue-50'
+                }`}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                      {index + 1}
+                    </div>
+                    <span className={`font-medium ${
+                      isDarkMode ? 'text-white' : 'text-slate-800'
+                    }`}>
+                      {fuelType} Sales
+                    </span>
                   </div>
-                  <span className={`font-medium ${
-                    isDarkMode ? 'text-white' : 'text-slate-800'
-                  }`}>
-                    Reading Sales
-                  </span>
-                </div>
-                <div className="text-right">
-                  <div className={`text-lg font-bold ${
-                    isDarkMode ? 'text-white' : 'text-slate-800'
-                  }`}>
-                    {stats.totalLiters.toFixed(2)}L • ₹{stats.fuelCashSales.toFixed(2)}
+                  <div className="text-right">
+                    <div className={`text-lg font-bold ${
+                      isDarkMode ? 'text-white' : 'text-slate-800'
+                    }`}>
+                      {data.liters.toFixed(2)}L • ₹{data.amount.toFixed(2)}
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
+              
+              {/* Show total if there are multiple fuel types */}
+              {Object.keys(stats.fuelSalesByType).length > 1 && (
+                <div className={`flex items-center justify-between py-3 px-4 rounded-lg ${
+                  isDarkMode ? 'bg-gray-700' : 'bg-slate-50'
+                } border-2 border-dashed ${isDarkMode ? 'border-gray-600' : 'border-slate-300'}`}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-slate-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                      T
+                    </div>
+                    <span className={`font-medium ${
+                      isDarkMode ? 'text-white' : 'text-slate-800'
+                    }`}>
+                      Total Reading Sales
+                    </span>
+                  </div>
+                  <div className="text-right">
+                    <div className={`text-lg font-bold ${
+                      isDarkMode ? 'text-white' : 'text-slate-800'
+                    }`}>
+                      {stats.totalLiters.toFixed(2)}L • ₹{stats.fuelCashSales.toFixed(2)}
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* 2. Credit Sales */}
               <div className={`flex items-center justify-between py-3 px-4 rounded-lg ${
