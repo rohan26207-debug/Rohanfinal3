@@ -116,6 +116,9 @@ frontend:
         - working: true
           agent: "main"
           comment: "Fixed nozzle dropdown to show only nozzle ID without icons. Dynamic filtering working correctly - when fuel type is selected, only nozzles for that fuel type appear."
+        - working: true
+          agent: "testing"
+          comment: "✅ TESTED: Dynamic nozzle dropdown works perfectly. Fuel type selection (Petrol, Diesel, CNG, Premium) correctly filters nozzles. Petrol shows P1,P2,P3; Diesel shows D1,D2; CNG shows C1,C2; Premium shows PR1. Nozzle selection clears when fuel type changes. Nozzle display shows clean IDs without brackets or icons."
 
   - task: "Unified records component creation"
     implemented: true
