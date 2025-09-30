@@ -541,6 +541,75 @@ const ZAPTRStyleCalculator = () => {
           </Button>
         </div>
 
+        {/* Export Section */}
+        <Card className={`${
+          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
+        } shadow-lg mb-4`}>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <FileText className={`w-5 h-5 ${
+                  isDarkMode ? 'text-blue-400' : 'text-blue-600'
+                }`} />
+                <div>
+                  <Label className={`text-sm font-medium ${
+                    isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                  }`}>
+                    Export Daily Report
+                  </Label>
+                  <div className={`text-sm ${
+                    isDarkMode ? 'text-gray-400' : 'text-slate-500'
+                  }`}>
+                    Summary + All Records for {selectedDate}
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={exportToPDF}
+                  className={`${
+                    isDarkMode 
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
+                      : 'border-slate-300 text-slate-700 hover:bg-slate-50'
+                  }`}
+                >
+                  <FileText className="w-4 h-4 mr-1" />
+                  PDF
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={exportToCSV}
+                  className={`${
+                    isDarkMode 
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
+                      : 'border-slate-300 text-slate-700 hover:bg-slate-50'
+                  }`}
+                >
+                  <Download className="w-4 h-4 mr-1" />
+                  CSV
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={copyToClipboard}
+                  className={`${
+                    isDarkMode 
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
+                      : 'border-slate-300 text-slate-700 hover:bg-slate-50'
+                  }`}
+                >
+                  <Share2 className="w-4 h-4 mr-1" />
+                  Copy
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Date Section */}
         <Card className={`${
           isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
