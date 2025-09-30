@@ -279,37 +279,11 @@ const PetrolPumpCalculator = () => {
                         <SelectValue placeholder="Select fuel type" />
                       </SelectTrigger>
                       <SelectContent>
-                        {mockData.fuelTypes.map((fuel) => (
-                          <SelectItem key={fuel.type} value={fuel.type}>
+                        {Object.entries(fuelSettings).map(([type, config]) => (
+                          <SelectItem key={type} value={type}>
                             <div className="flex items-center gap-2">
                               <Droplets className="w-4 h-4" />
-                              {fuel.type} - ₹{fuel.price}/L
-                            </div>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="nozzle" className="text-sm font-medium text-slate-700">
-                      Select Nozzle
-                    </Label>
-                    <Select 
-                      value={selectedNozzle} 
-                      onValueChange={handleNozzleChange}
-                      disabled={!fuelType}
-                    >
-                      <SelectTrigger className="h-12">
-                        <SelectValue placeholder="Select nozzle" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {fuelType && mockData.fuelTypes
-                          .find(fuel => fuel.type === fuelType)?.nozzles.map((nozzle) => (
-                          <SelectItem key={nozzle.id} value={nozzle.id}>
-                            <div className="flex items-center gap-2">
-                              <Gauge className="w-4 h-4" />
-                              {nozzle.name} ({nozzle.currentReading}L)
+                              {type} - ₹{config.price}/L
                             </div>
                           </SelectItem>
                         ))}
@@ -330,6 +304,31 @@ const PetrolPumpCalculator = () => {
                       placeholder="0.00"
                       className="h-12"
                     />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="nozzle" className="text-sm font-medium text-slate-700">
+                      Select Nozzle
+                    </Label>
+                    <Select 
+                      value={selectedNozzle} 
+                      onValueChange={handleNozzleChange}
+                      disabled={!fuelType}
+                    >
+                      <SelectTrigger className="h-12">
+                        <SelectValue placeholder="Select nozzle" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {fuelType && generateNozzles(fuelType, fuelSettings[fuelType]?.nozzleCount || 0).map((nozzle) => (
+                          <SelectItem key={nozzle.id} value={nozzle.id}>
+                            <div className="flex items-center gap-2">
+                              <Gauge className="w-4 h-4" />
+                              {nozzle.name} ({nozzle.currentReading}L)
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
 
