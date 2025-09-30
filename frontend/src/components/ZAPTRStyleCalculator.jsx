@@ -435,13 +435,13 @@ const ZAPTRStyleCalculator = () => {
       content += '<tbody>';
       todaySales.forEach((sale, index) => {
         content += '<tr>';
-        content += `<td style="border: 1px solid #cbd5e1; padding: 8px; font-size: 16px; text-align: center;">${index + 1}</td>`;
-        content += `<td style="border: 1px solid #cbd5e1; padding: 8px; font-size: 16px;">${sale.nozzle} - ${sale.fuelType}</td>`;
-        content += `<td style="border: 1px solid #cbd5e1; padding: 8px; font-size: 16px; text-align: right;">${sale.startReading}L</td>`;
-        content += `<td style="border: 1px solid #cbd5e1; padding: 8px; font-size: 16px; text-align: right;">${sale.endReading}L</td>`;
-        content += `<td style="border: 1px solid #cbd5e1; padding: 8px; font-size: 16px; text-align: right;">₹${sale.rate}/L</td>`;
-        content += `<td style="border: 1px solid #cbd5e1; padding: 8px; font-size: 16px; text-align: right;">${sale.liters.toFixed(2)}L</td>`;
-        content += `<td style="border: 1px solid #cbd5e1; padding: 8px; font-size: 16px; text-align: right;">₹${sale.amount.toFixed(2)}</td>`;
+        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; text-align: center; color: #000000;">${index + 1}</td>`;
+        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; color: #000000;">${sale.nozzle} - ${sale.fuelType}</td>`;
+        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; text-align: right; color: #000000;">${sale.startReading}L</td>`;
+        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; text-align: right; color: #000000;">${sale.endReading}L</td>`;
+        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; text-align: right; color: #000000;">₹${sale.rate}/L</td>`;
+        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; text-align: right; color: #000000;">${sale.liters.toFixed(2)}L</td>`;
+        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; text-align: right; color: #000000;">₹${sale.amount.toFixed(2)}</td>`;
         content += '</tr>';
       });
       content += '</tbody>';
