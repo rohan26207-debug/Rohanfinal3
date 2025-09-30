@@ -16,7 +16,10 @@ import {
   Settings,
   Calendar,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  FileText,
+  Download,
+  Share2
 } from 'lucide-react';
 import SalesTracker from './SalesTracker';
 import CreditSales from './CreditSales';
