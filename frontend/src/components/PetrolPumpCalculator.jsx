@@ -106,20 +106,39 @@ const PetrolPumpCalculator = () => {
   const handleFuelTypeChange = (value) => {
     setFuelType(value);
     setSelectedNozzle(''); // Reset nozzle selection
-    const selectedFuel = mockData.fuelTypes.find(fuel => fuel.type === value);
-    if (selectedFuel) {
-      setPricePerLiter(selectedFuel.price.toString());
+    if (fuelSettings[value]) {
+      setPricePerLiter(fuelSettings[value].price.toString());
     }
   };
 
   const handleNozzleChange = (nozzleId) => {
     setSelectedNozzle(nozzleId);
-    const selectedFuel = mockData.fuelTypes.find(fuel => fuel.type === fuelType);
-    if (selectedFuel) {
-      const nozzle = selectedFuel.nozzles.find(n => n.id === nozzleId);
-      if (nozzle && calculationMode === 'meter') {
-        setInitialReading(nozzle.currentReading.toString());
+    if (calculationMode === 'meter' && nozzleReadings[nozzleId]) {
+      setInitialReading(nozzleReadings[nozzleId].toString());
+    }
+  };
+
+  const handleSettingsUpdate = (newSettings) => {
+    setFuelSettings(newSettings);
+    
+    // Generate new nozzle readings for any new nozzles
+    const newReadings = { ...nozzleReadings };
+    Object.entries(newSettings).forEach(([fuelType, config]) => {
+      const prefix = fuelType.charAt(0).toUpperCase();
+      for (let i = 1; i <= config.nozzleCount; i++) {
+        const nozzleId = `${prefix}${i}`;
+        if (!newReadings[nozzleId]) {
+          newReadings[nozzleId] = Math.floor(Math.random() * 2000) + 500;
+        }
       }
+    });
+    setNozzleReadings(newReadings);
+    
+    // Reset selections if current fuel type was removed
+    if (!newSettings[fuelType]) {
+      setFuelType('');
+      setSelectedNozzle('');
+      setPricePerLiter('');
     }
   };
 
