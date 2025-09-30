@@ -209,7 +209,7 @@ const PetrolPumpCalculator = () => {
               </CardHeader>
               <CardContent className="p-6 space-y-6">
                 {/* Fuel Selection */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="fuelType" className="text-sm font-medium text-slate-700">
                       Fuel Type
@@ -224,6 +224,32 @@ const PetrolPumpCalculator = () => {
                             <div className="flex items-center gap-2">
                               <Droplets className="w-4 h-4" />
                               {fuel.type} - ₹{fuel.price}/L
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="nozzle" className="text-sm font-medium text-slate-700">
+                      Select Nozzle
+                    </Label>
+                    <Select 
+                      value={selectedNozzle} 
+                      onValueChange={handleNozzleChange}
+                      disabled={!fuelType}
+                    >
+                      <SelectTrigger className="h-12">
+                        <SelectValue placeholder="Select nozzle" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {fuelType && mockData.fuelTypes
+                          .find(fuel => fuel.type === fuelType)?.nozzles.map((nozzle) => (
+                          <SelectItem key={nozzle.id} value={nozzle.id}>
+                            <div className="flex items-center gap-2">
+                              <Gauge className="w-4 h-4" />
+                              {nozzle.name} ({nozzle.currentReading}L)
                             </div>
                           </SelectItem>
                         ))}
