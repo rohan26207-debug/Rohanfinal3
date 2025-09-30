@@ -303,7 +303,7 @@ const ZAPTRStyleCalculator = () => {
     printWindow.document.write(`
       <html>
         <head>
-          <title>Fuel Pump Report - ${selectedDate}</title>
+          <title>Manager Petrol Pump Report - ${selectedDate}</title>
           <style>
             @media print {
               body { margin: 0; }
