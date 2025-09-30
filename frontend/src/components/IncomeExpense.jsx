@@ -166,7 +166,7 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
                 <p className={`text-xs ${
                   isDarkMode ? 'text-gray-400' : 'text-slate-600'
                 }`}>
-                  Total Expenses
+                  Expenses {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : 'Selected Day'}
                 </p>
                 <p className="text-xl font-bold text-red-600">
                   ₹{totalExpense.toFixed(2)}
