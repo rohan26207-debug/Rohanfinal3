@@ -425,9 +425,9 @@ const ZAPTRStyleCalculator = () => {
     }
 
     if (todayCredits.length > 0) {
-      content += '<div style="margin: 25px 0;"><h3 style="color: #ea580c; font-size: 16px; margin-bottom: 15px;">Credit Sales (' + todayCredits.length + ')</h3>';
+      content += '<div style="margin: 25px 0;"><h3 style="color: #ea580c; font-size: 32px; margin-bottom: 15px;">Credit Sales (' + todayCredits.length + ')</h3>';
       todayCredits.forEach(credit => {
-        content += `<p style="margin: 8px 0; padding: 12px; background: #fff7ed; border-left: 4px solid #ea580c; font-size: 12px;"><strong>${credit.customerName}</strong> (${credit.vehicleNumber || 'N/A'}): ₹${credit.amount.toFixed(2)} (${credit.liters}L ${credit.fuelType} @ ₹${credit.rate}/L)</p>`;
+        content += `<p style="margin: 8px 0; padding: 12px; background: #fff7ed; border-left: 4px solid #ea580c; font-size: 24px;"><strong>${credit.customerName}</strong> (${credit.vehicleNumber || 'N/A'}): ₹${credit.amount.toFixed(2)} (${credit.liters}L ${credit.fuelType} @ ₹${credit.rate}/L)</p>`;
       });
       content += '</div>';
     }
