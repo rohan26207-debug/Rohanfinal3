@@ -6,7 +6,7 @@ import { Label } from './ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Separator } from './ui/separator';
 import { Badge } from './ui/badge';
-import { Fuel, Calculator, Receipt, RotateCcw, IndianRupee, Droplets } from 'lucide-react';
+import { Fuel, Calculator, Receipt, RotateCcw, IndianRupee, Droplets, Gauge, Edit3 } from 'lucide-react';
 import TransactionHistory from './TransactionHistory';
 import { useToast } from '../hooks/use-toast';
 import { mockData } from '../utils/mockData';
