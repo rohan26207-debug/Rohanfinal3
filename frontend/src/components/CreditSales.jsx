@@ -91,8 +91,7 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
       vehicleNumber: '',
       fuelType: '',
       liters: '',
-      rate: '',
-      dueDate: ''
+      rate: ''
     });
     setEditingId(null);
   };
