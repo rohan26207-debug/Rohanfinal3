@@ -249,32 +249,11 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
                   }`}>
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-2">
-                        <Badge className={`border-0 ${
-                          credit.status === 'paid' 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-red-100 text-red-800'
-                        }`}>
-                          {credit.status === 'paid' ? (
-                            <><CheckCircle className="w-3 h-3 mr-1" />Paid</>
-                          ) : (
-                            <><Clock className="w-3 h-3 mr-1" />Pending</>
-                          )}
-                        </Badge>
                         <Badge className="bg-purple-100 text-purple-800 border-0">
                           {credit.fuelType}
                         </Badge>
                       </div>
                       <div className="flex items-center gap-1">
-                        {credit.status === 'pending' && (
-                          <Button 
-                            variant="ghost" 
-                            size="sm" 
-                            onClick={() => markAsPaid(credit.id)}
-                            className="text-green-600 hover:bg-green-50"
-                          >
-                            <CheckCircle className="w-3 h-3" />
-                          </Button>
-                        )}
                         <Button variant="ghost" size="sm" onClick={() => editCredit(credit)}>
                           <Edit className="w-3 h-3" />
                         </Button>
