@@ -60,9 +60,14 @@ const TransactionHistory = ({ transactions }) => {
               transactions.map((transaction) => (
                 <div key={transaction.id} className="bg-white border border-slate-200 rounded-lg p-3 hover:shadow-md transition-shadow">
                   <div className="flex items-start justify-between mb-2">
-                    <Badge className={`${getFuelTypeColor(transaction.fuelType)} border-0`}>
-                      {transaction.fuelType}
-                    </Badge>
+                    <div className="flex items-center gap-2">
+                      <Badge className={`${getFuelTypeColor(transaction.fuelType)} border-0`}>
+                        {transaction.fuelType}
+                      </Badge>
+                      {transaction.calculationMode === 'meter' && (
+                        <Gauge className="w-3 h-3 text-blue-500" title="Meter Reading" />
+                      )}
+                    </div>
                     <span className="text-xs text-slate-500">{transaction.timestamp}</span>
                   </div>
                   
