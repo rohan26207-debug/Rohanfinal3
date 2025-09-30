@@ -666,6 +666,136 @@ const ZAPTRStyleCalculator = () => {
           </CardContent>
         </Card>
 
+        {/* Summary Section */}
+        <Card className={`${
+          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
+        } shadow-lg mb-6`}>
+          <CardContent className="p-6">
+            <h2 className={`text-2xl font-bold mb-4 ${
+              isDarkMode ? 'text-white' : 'text-slate-800'
+            }`}>
+              Summary
+            </h2>
+            
+            <div className="space-y-3">
+              {/* 1. Reading Sales */}
+              <div className={`flex items-center justify-between py-3 px-4 rounded-lg ${
+                isDarkMode ? 'bg-gray-700' : 'bg-blue-50'
+              }`}>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    1
+                  </div>
+                  <span className={`font-medium ${
+                    isDarkMode ? 'text-white' : 'text-slate-800'
+                  }`}>
+                    Reading Sales
+                  </span>
+                </div>
+                <div className="text-right">
+                  <div className={`text-lg font-bold ${
+                    isDarkMode ? 'text-white' : 'text-slate-800'
+                  }`}>
+                    {stats.totalLiters.toFixed(2)}L • ₹{stats.fuelCashSales.toFixed(2)}
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. Credit Sales */}
+              <div className={`flex items-center justify-between py-3 px-4 rounded-lg ${
+                isDarkMode ? 'bg-gray-700' : 'bg-orange-50'
+              }`}>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    2
+                  </div>
+                  <span className={`font-medium ${
+                    isDarkMode ? 'text-white' : 'text-slate-800'
+                  }`}>
+                    Credit Sales
+                  </span>
+                </div>
+                <div className="text-right">
+                  <div className={`text-lg font-bold ${
+                    isDarkMode ? 'text-white' : 'text-slate-800'
+                  }`}>
+                    {stats.creditLiters.toFixed(2)}L • ₹{stats.creditAmount.toFixed(2)}
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Income */}
+              <div className={`flex items-center justify-between py-3 px-4 rounded-lg ${
+                isDarkMode ? 'bg-gray-700' : 'bg-green-50'
+              }`}>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    3
+                  </div>
+                  <span className={`font-medium ${
+                    isDarkMode ? 'text-white' : 'text-slate-800'
+                  }`}>
+                    Income
+                  </span>
+                </div>
+                <div className="text-right">
+                  <div className={`text-lg font-bold ${
+                    isDarkMode ? 'text-white' : 'text-slate-800'
+                  }`}>
+                    ₹{stats.otherIncome.toFixed(2)}
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. Expenses */}
+              <div className={`flex items-center justify-between py-3 px-4 rounded-lg ${
+                isDarkMode ? 'bg-gray-700' : 'bg-red-50'
+              }`}>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    4
+                  </div>
+                  <span className={`font-medium ${
+                    isDarkMode ? 'text-white' : 'text-slate-800'
+                  }`}>
+                    Expenses
+                  </span>
+                </div>
+                <div className="text-right">
+                  <div className={`text-lg font-bold ${
+                    isDarkMode ? 'text-white' : 'text-slate-800'
+                  }`}>
+                    ₹{stats.totalExpenses.toFixed(2)}
+                  </div>
+                </div>
+              </div>
+
+              {/* 5. Cash in Hand */}
+              <div className={`flex items-center justify-between py-3 px-4 rounded-lg ${
+                isDarkMode ? 'bg-gray-700' : 'bg-purple-50'
+              }`}>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    5
+                  </div>
+                  <span className={`font-medium ${
+                    isDarkMode ? 'text-white' : 'text-slate-800'
+                  }`}>
+                    Cash in Hand
+                  </span>
+                </div>
+                <div className="text-right">
+                  <div className={`text-lg font-bold ${
+                    isDarkMode ? 'text-white' : 'text-slate-800'
+                  }`}>
+                    ₹{stats.adjustedCashSales.toFixed(2)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <Card className={`${
