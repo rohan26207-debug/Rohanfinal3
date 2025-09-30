@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PetrolPumpCalculator from "./components/PetrolPumpCalculator";
+import ZAPTRStyleCalculator from "./components/ZAPTRStyleCalculator";
 import { Toaster } from "./components/ui/toaster";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<PetrolPumpCalculator />} />
+          <Route path="/" element={<ZAPTRStyleCalculator />} />
         </Routes>
         <Toaster />
       </BrowserRouter>
