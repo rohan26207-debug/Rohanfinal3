@@ -194,15 +194,6 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label className="text-sm font-medium">Due Date</Label>
-            <Input
-              type="date"
-              value={formData.dueDate}
-              onChange={(e) => setFormData(prev => ({ ...prev, dueDate: e.target.value }))}
-            />
-          </div>
-
           {formData.liters && formData.rate && (
             <div className={`bg-orange-50 border border-orange-200 rounded-lg p-4 ${
               isDarkMode ? 'bg-orange-900/20 border-orange-700' : ''
