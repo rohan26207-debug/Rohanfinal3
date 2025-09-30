@@ -8,7 +8,6 @@ import {
   Calculator, 
   CreditCard, 
   TrendingDown, 
-  FileText, 
   Moon,
   Sun,
   Fuel,
