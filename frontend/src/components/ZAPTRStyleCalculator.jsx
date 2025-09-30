@@ -406,12 +406,11 @@ const ZAPTRStyleCalculator = () => {
     
     csv += 'SUMMARY\n';
     csv += 'Metric,Value\n';
-    csv += `Cash in Hand,₹${stats.adjustedCashSales.toFixed(2)}\n`;
-    csv += `Credit Sales,₹${stats.creditAmount.toFixed(2)}\n`;
-    csv += `Total Liters,${stats.totalLiters.toFixed(2)}L\n`;
-    csv += `Fuel Cash Sales,₹${stats.fuelCashSales.toFixed(2)}\n`;
-    csv += `Other Income,₹${stats.otherIncome.toFixed(2)}\n`;
-    csv += `Total Expenses,₹${stats.totalExpenses.toFixed(2)}\n\n`;
+    csv += `1. Reading Sales,${stats.totalLiters.toFixed(2)}L • ₹${stats.fuelCashSales.toFixed(2)}\n`;
+    csv += `2. Credit Sales,${stats.creditLiters.toFixed(2)}L • ₹${stats.creditAmount.toFixed(2)}\n`;
+    csv += `3. Income,₹${stats.otherIncome.toFixed(2)}\n`;
+    csv += `4. Expenses,₹${stats.totalExpenses.toFixed(2)}\n`;
+    csv += `5. Cash in Hand,₹${stats.adjustedCashSales.toFixed(2)}\n\n`;
     
     csv += 'DETAILED RECORDS\n';
     csv += 'Type,Description,Amount,Details,Date\n';
