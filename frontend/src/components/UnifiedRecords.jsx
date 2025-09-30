@@ -34,6 +34,160 @@ const UnifiedRecords = ({
 
   const totalRecords = filteredSales.length + filteredCredits.length + filteredIncome.length + filteredExpenses.length;
 
+  // Export functions
+  const exportToPDF = () => {
+    // Create PDF content
+    const content = generateExportContent();
+    
+    // Create a temporary element for PDF generation
+    const element = document.createElement('div');
+    element.innerHTML = `
+      <div style="font-family: Arial, sans-serif; padding: 20px;">
+        <h1 style="text-align: center; color: #333;">Fuel Pump Records</h1>
+        <h2 style="text-align: center; color: #666;">Date: ${selectedDate}</h2>
+        <div style="margin: 20px 0;">
+          <h3>Summary</h3>
+          <p>Total Records: ${totalRecords}</p>
+          <p>Fuel Sales: ${filteredSales.length}</p>
+          <p>Credit Sales: ${filteredCredits.length}</p>
+          <p>Income Records: ${filteredIncome.length}</p>
+          <p>Expense Records: ${filteredExpenses.length}</p>
+        </div>
+        ${content}
+      </div>
+    `;
+    
+    // Simple PDF generation using print
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(element.innerHTML);
+    printWindow.document.close();
+    printWindow.print();
+  };
+
+  const exportToCSV = () => {
+    const csvContent = generateCSVContent();
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', `fuel_records_${selectedDate}.csv`);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
+  const copyToClipboard = () => {
+    const textContent = generateTextContent();
+    navigator.clipboard.writeText(textContent).then(() => {
+      alert('Records copied to clipboard!');
+    }).catch(err => {
+      console.error('Failed to copy: ', err);
+    });
+  };
+
+  const generateExportContent = () => {
+    let content = '';
+    
+    if (filteredSales.length > 0) {
+      content += '<div style="margin: 20px 0;"><h3 style="color: #2563eb;">Fuel Sales (' + filteredSales.length + ')</h3>';
+      filteredSales.forEach(sale => {
+        content += `<p><strong>${sale.nozzle} - ${sale.fuelType}:</strong> ₹${sale.amount.toFixed(2)} (${sale.liters}L @ ₹${sale.rate}/L)</p>`;
+      });
+      content += '</div>';
+    }
+
+    if (filteredCredits.length > 0) {
+      content += '<div style="margin: 20px 0;"><h3 style="color: #ea580c;">Credit Sales (' + filteredCredits.length + ')</h3>';
+      filteredCredits.forEach(credit => {
+        content += `<p><strong>${credit.customerName}:</strong> ₹${credit.amount.toFixed(2)} (${credit.liters}L ${credit.fuelType} @ ₹${credit.rate}/L)</p>`;
+      });
+      content += '</div>';
+    }
+
+    if (filteredIncome.length > 0) {
+      content += '<div style="margin: 20px 0;"><h3 style="color: #16a34a;">Income (' + filteredIncome.length + ')</h3>';
+      filteredIncome.forEach(income => {
+        content += `<p><strong>₹${income.amount.toFixed(2)}:</strong> ${income.description}</p>`;
+      });
+      content += '</div>';
+    }
+
+    if (filteredExpenses.length > 0) {
+      content += '<div style="margin: 20px 0;"><h3 style="color: #dc2626;">Expenses (' + filteredExpenses.length + ')</h3>';
+      filteredExpenses.forEach(expense => {
+        content += `<p><strong>₹${expense.amount.toFixed(2)}:</strong> ${expense.description}</p>`;
+      });
+      content += '</div>';
+    }
+
+    return content;
+  };
+
+  const generateCSVContent = () => {
+    let csv = 'Type,Description,Amount,Details,Date\n';
+    
+    filteredSales.forEach(sale => {
+      csv += `"Fuel Sale","${sale.nozzle} - ${sale.fuelType}","${sale.amount.toFixed(2)}","${sale.liters}L @ ₹${sale.rate}/L","${sale.date}"\n`;
+    });
+
+    filteredCredits.forEach(credit => {
+      csv += `"Credit Sale","${credit.customerName} - ${credit.vehicleNumber || 'N/A'}","${credit.amount.toFixed(2)}","${credit.liters}L ${credit.fuelType} @ ₹${credit.rate}/L","${credit.date}"\n`;
+    });
+
+    filteredIncome.forEach(income => {
+      csv += `"Income","${income.description}","${income.amount.toFixed(2)}","","${income.date}"\n`;
+    });
+
+    filteredExpenses.forEach(expense => {
+      csv += `"Expense","${expense.description}","${expense.amount.toFixed(2)}","","${expense.date}"\n`;
+    });
+
+    return csv;
+  };
+
+  const generateTextContent = () => {
+    let text = `FUEL PUMP RECORDS - ${selectedDate}\n`;
+    text += `Total Records: ${totalRecords}\n\n`;
+    
+    if (filteredSales.length > 0) {
+      text += `FUEL SALES (${filteredSales.length}):\n`;
+      filteredSales.forEach(sale => {
+        text += `• ${sale.nozzle} - ${sale.fuelType}: ₹${sale.amount.toFixed(2)} (${sale.liters}L @ ₹${sale.rate}/L)\n`;
+      });
+      text += '\n';
+    }
+
+    if (filteredCredits.length > 0) {
+      text += `CREDIT SALES (${filteredCredits.length}):\n`;
+      filteredCredits.forEach(credit => {
+        text += `• ${credit.customerName}: ₹${credit.amount.toFixed(2)} (${credit.liters}L ${credit.fuelType} @ ₹${credit.rate}/L)\n`;
+      });
+      text += '\n';
+    }
+
+    if (filteredIncome.length > 0) {
+      text += `INCOME (${filteredIncome.length}):\n`;
+      filteredIncome.forEach(income => {
+        text += `• ₹${income.amount.toFixed(2)}: ${income.description}\n`;
+      });
+      text += '\n';
+    }
+
+    if (filteredExpenses.length > 0) {
+      text += `EXPENSES (${filteredExpenses.length}):\n`;
+      filteredExpenses.forEach(expense => {
+        text += `• ₹${expense.amount.toFixed(2)}: ${expense.description}\n`;
+      });
+      text += '\n';
+    }
+
+    return text;
+  };
+
   const RecordGroup = ({ title, icon: Icon, records, color, renderRecord }) => {
     if (records.length === 0) return null;
 
