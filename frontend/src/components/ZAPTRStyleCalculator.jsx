@@ -263,6 +263,7 @@ const ZAPTRStyleCalculator = () => {
               isDarkMode={isDarkMode}
               creditData={creditData}
               setCreditData={setCreditData}
+              fuelSettings={fuelSettings}
             />
           </TabsContent>
 
