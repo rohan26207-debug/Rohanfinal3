@@ -38,7 +38,16 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings }) => 
   const generateNozzles = () => {
     const allNozzles = [];
     Object.entries(fuelSettings).forEach(([fuelType, config]) => {
-      const prefix = fuelType.charAt(0).toUpperCase();
+      // Special naming for specific fuel types
+      let prefix;
+      if (fuelType.toLowerCase() === 'power') {
+        prefix = 'PO';
+      } else if (fuelType.toLowerCase() === 'premium') {
+        prefix = 'PR';
+      } else {
+        prefix = fuelType.charAt(0).toUpperCase();
+      }
+      
       for (let i = 1; i <= config.nozzleCount; i++) {
         allNozzles.push(`${prefix}${i}`);
       }
