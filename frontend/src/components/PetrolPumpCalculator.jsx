@@ -378,10 +378,37 @@ const PetrolPumpCalculator = () => {
                     Payment Details
                   </h3>
                   
+                  {/* Payment Method Selection */}
+                  <div className="space-y-2">
+                    <Label className="text-sm font-medium text-slate-700">
+                      Payment Method
+                    </Label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <Button
+                        type="button"
+                        variant={paymentMethod === 'cash' ? 'default' : 'outline'}
+                        onClick={() => setPaymentMethod('cash')}
+                        className="h-12 flex items-center gap-2"
+                      >
+                        <Banknote className="w-4 h-4" />
+                        Cash
+                      </Button>
+                      <Button
+                        type="button"
+                        variant={paymentMethod === 'card' ? 'default' : 'outline'}
+                        onClick={() => setPaymentMethod('card')}
+                        className="h-12 flex items-center gap-2"
+                      >
+                        <CreditCard className="w-4 h-4" />
+                        Card
+                      </Button>
+                    </div>
+                  </div>
+                  
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="received" className="text-sm font-medium text-slate-700">
-                        Amount Received (₹)
+                        {paymentMethod === 'cash' ? 'Cash Received (₹)' : 'Card Payment (₹)'}
                       </Label>
                       <Input
                         id="received"
@@ -396,15 +423,24 @@ const PetrolPumpCalculator = () => {
 
                     <div className="space-y-2">
                       <Label className="text-sm font-medium text-slate-700">
-                        Change to Return
+                        {paymentMethod === 'cash' ? 'Change to Return' : 'Card Status'}
                       </Label>
                       <div className="h-12 px-3 py-2 bg-slate-50 border border-slate-200 rounded-md flex items-center">
-                        <div className="flex items-center gap-1">
-                          <IndianRupee className="w-4 h-4 text-orange-600" />
-                          <span className="text-lg font-semibold text-orange-600">
-                            {changeAmount.toFixed(2)}
-                          </span>
-                        </div>
+                        {paymentMethod === 'cash' ? (
+                          <div className="flex items-center gap-1">
+                            <IndianRupee className="w-4 h-4 text-orange-600" />
+                            <span className="text-lg font-semibold text-orange-600">
+                              {changeAmount.toFixed(2)}
+                            </span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-2">
+                            <CreditCard className="w-4 h-4 text-blue-600" />
+                            <span className="text-sm text-blue-600">
+                              {parseFloat(amountReceived || 0) >= totalCost ? 'Payment Complete' : 'Pending Payment'}
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
