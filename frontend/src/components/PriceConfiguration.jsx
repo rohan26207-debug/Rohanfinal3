@@ -136,7 +136,7 @@ const PriceConfiguration = ({
             <div className="space-y-4">
               {/* Quick Price Actions */}
               <div className="space-y-2">
-                <Label className="text-sm font-medium">Quick Price Adjustments</Label>
+                <Label className="text-sm font-medium">Quick R.S.P. Adjustments</Label>
                 <div className="flex gap-2 flex-wrap">
                   <Button
                     variant="outline"
