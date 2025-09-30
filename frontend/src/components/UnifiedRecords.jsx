@@ -11,12 +11,8 @@ import {
   IndianRupee,
   Fuel,
   Users,
-  Receipt,
-  FileText,
-  Download,
-  Share2
+  Receipt
 } from 'lucide-react';
-import { Button } from './ui/button';
 
 const UnifiedRecords = ({ 
   isDarkMode, 
