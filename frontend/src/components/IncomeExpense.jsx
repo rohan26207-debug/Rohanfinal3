@@ -307,24 +307,6 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
         incomeData={incomeData}
         expenseData={expenseData}
         selectedDate={selectedDate}
-        onEditSale={(sale) => {
-          toast({ title: "Edit Sale", description: "Please use the Reading Sales tab to edit this record" });
-        }}
-        onDeleteSale={(id) => {
-          setSalesData(prev => prev.filter(sale => sale.id !== id));
-          toast({ title: "Sale Deleted", description: "Sale record deleted successfully" });
-        }}
-        onEditCredit={(credit) => {
-          toast({ title: "Edit Credit", description: "Please use the Credit Sales tab to edit this record" });
-        }}
-        onDeleteCredit={(id) => {
-          setCreditData(prev => prev.filter(credit => credit.id !== id));
-          toast({ title: "Credit Deleted", description: "Credit sale deleted successfully" });
-        }}
-        onEditIncome={(income) => editRecord(income, 'income')}
-        onDeleteIncome={deleteRecord}
-        onEditExpense={(expense) => editRecord(expense, 'expense')}
-        onDeleteExpense={deleteRecord}
       />
     </div>
   );
