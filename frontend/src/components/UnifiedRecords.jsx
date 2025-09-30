@@ -154,9 +154,19 @@ const UnifiedRecords = ({
         <Badge className="bg-green-100 text-green-800 border-0">
           Income
         </Badge>
-        <div className="flex items-center gap-1 text-green-600 font-bold">
-          <IndianRupee className="w-4 h-4" />
-          <span>{income.amount.toFixed(2)}</span>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 text-green-600 font-bold">
+            <IndianRupee className="w-4 h-4" />
+            <span>{income.amount.toFixed(2)}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="sm" onClick={() => onEditIncome(income)}>
+              <Edit className="w-3 h-3" />
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => onDeleteIncome(income.id)}>
+              <Trash2 className="w-3 h-3" />
+            </Button>
+          </div>
         </div>
       </div>
       <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-slate-700'}`}>
