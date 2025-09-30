@@ -240,7 +240,7 @@ const PriceConfiguration = ({
           <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-t-lg">
             <CardTitle className="flex items-center gap-2">
               <TrendingUp className="w-5 h-5" />
-              Current Price Summary
+              Current R.S.P. Summary
             </CardTitle>
           </CardHeader>
           <CardContent className="p-0">
