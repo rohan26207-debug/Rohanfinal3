@@ -516,7 +516,7 @@ const ZAPTRStyleCalculator = () => {
             </TabsTrigger>
             <TabsTrigger value="prices" className="flex items-center gap-2">
               <IndianRupee className="w-4 h-4" />
-              R.S.P.
+              Rate
             </TabsTrigger>
           </TabsList>
 
