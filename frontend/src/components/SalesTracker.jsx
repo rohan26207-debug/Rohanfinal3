@@ -13,7 +13,8 @@ import {
   Edit,
   Trash2,
   Fuel,
-  IndianRupee 
+  IndianRupee,
+  Gauge 
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 
