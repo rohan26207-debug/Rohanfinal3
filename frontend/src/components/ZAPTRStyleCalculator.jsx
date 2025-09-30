@@ -580,6 +580,7 @@ const ZAPTRStyleCalculator = () => {
               expenseData={expenseData}
               setExpenseData={setExpenseData}
               selectedDate={selectedDate}
+              salesData={salesData}
             />
           </TabsContent>
 
