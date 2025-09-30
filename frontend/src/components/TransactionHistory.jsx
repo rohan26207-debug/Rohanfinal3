@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { ScrollArea } from './ui/scroll-area';
 import { Separator } from './ui/separator';
-import { History, IndianRupee, Fuel } from 'lucide-react';
+import { History, IndianRupee, Fuel, Gauge } from 'lucide-react';
 
 const TransactionHistory = ({ transactions }) => {
   const getTotalSales = () => {
