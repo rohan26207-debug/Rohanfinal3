@@ -197,7 +197,7 @@ const PriceConfiguration = ({
                     </div>
                     
                     <div className="flex items-center gap-2">
-                      <Label className="text-sm font-medium min-w-0">New Price:</Label>
+                      <Label className="text-sm font-medium min-w-0">New R.S.P.:</Label>
                       <div className="flex items-center gap-1">
                         <IndianRupee className="w-4 h-4 text-slate-500" />
                         <Input
