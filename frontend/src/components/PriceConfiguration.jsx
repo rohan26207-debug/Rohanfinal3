@@ -100,8 +100,8 @@ const PriceConfiguration = ({
     setTempPrices(resetPrices);
     
     toast({
-      title: "R.S.P. Reset",
-      description: "R.S.P. have been reset to current values",
+      title: "Rate Reset",
+      description: "Rates have been reset to current values",
     });
   };
 
