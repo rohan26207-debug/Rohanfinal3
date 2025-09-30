@@ -65,7 +65,7 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
 
     const creditRecord = {
       id: editingId || Date.now(),
-      date: new Date().toISOString().split('T')[0],
+      date: selectedDate,
       ...formData,
       liters: parseFloat(formData.liters),
       rate: parseFloat(formData.rate),
