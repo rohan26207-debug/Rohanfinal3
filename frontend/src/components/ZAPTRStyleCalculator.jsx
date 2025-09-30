@@ -466,11 +466,11 @@ const ZAPTRStyleCalculator = () => {
       content += '<tbody>';
       todayCredits.forEach((credit, index) => {
         content += '<tr>';
-        content += `<td style="border: 1px solid #fed7aa; padding: 8px; font-size: 16px; text-align: center;">${index + 1}</td>`;
-        content += `<td style="border: 1px solid #fed7aa; padding: 8px; font-size: 16px;">${credit.customerName} - ${credit.vehicleNumber || 'N/A'}</td>`;
-        content += `<td style="border: 1px solid #fed7aa; padding: 8px; font-size: 16px; text-align: right;">${credit.liters.toFixed(2)}L</td>`;
-        content += `<td style="border: 1px solid #fed7aa; padding: 8px; font-size: 16px; text-align: right;">₹${credit.rate}/L</td>`;
-        content += `<td style="border: 1px solid #fed7aa; padding: 8px; font-size: 16px; text-align: right;">₹${credit.amount.toFixed(2)}</td>`;
+        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; text-align: center; color: #000000;">${index + 1}</td>`;
+        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; color: #000000;">${credit.customerName} - ${credit.vehicleNumber || 'N/A'}</td>`;
+        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; text-align: right; color: #000000;">${credit.liters.toFixed(2)}L</td>`;
+        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; text-align: right; color: #000000;">₹${credit.rate}/L</td>`;
+        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; text-align: right; color: #000000;">₹${credit.amount.toFixed(2)}</td>`;
         content += '</tr>';
       });
       content += '</tbody>';
