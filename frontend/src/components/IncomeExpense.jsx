@@ -22,7 +22,6 @@ import { useToast } from '../hooks/use-toast';
 const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, setExpenseData, selectedDate, salesData }) => {
   const [activeType, setActiveType] = useState('income');
   const [formData, setFormData] = useState({
-    category: '',
     amount: '',
     description: '',
     type: 'income'
