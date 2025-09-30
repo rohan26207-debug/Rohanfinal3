@@ -34,8 +34,9 @@ const PetrolPumpCalculator = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Load mock transactions on component mount
+    // Load mock transactions and cash in hand on component mount
     setTransactions(mockData.transactions);
+    setCashInHand(mockData.cashInHand);
   }, []);
 
   useEffect(() => {
