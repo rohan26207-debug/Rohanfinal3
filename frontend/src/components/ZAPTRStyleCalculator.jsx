@@ -222,22 +222,12 @@ const ZAPTRStyleCalculator = () => {
 
   const formatDisplayDate = (dateStr) => {
     const date = new Date(dateStr);
-    const today = new Date();
-    const yesterday = new Date(today);
-    yesterday.setDate(yesterday.getDate() - 1);
-    
-    if (dateStr === today.toISOString().split('T')[0]) {
-      return 'Today';
-    } else if (dateStr === yesterday.toISOString().split('T')[0]) {
-      return 'Yesterday';
-    } else {
-      return date.toLocaleDateString('en-IN', { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-      });
-    }
+    return date.toLocaleDateString('en-IN', { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
   };
 
   const getTodayStats = () => {
