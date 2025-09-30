@@ -235,6 +235,16 @@ const ZAPTRStyleCalculator = () => {
     const todayCredits = creditData.filter(credit => credit.date === selectedDate);
     const todayIncome = incomeData.filter(income => income.date === selectedDate);
     const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
+
+    // Calculate fuel sales by fuel type
+    const fuelSalesByType = {};
+    todaySales.forEach(sale => {
+      if (!fuelSalesByType[sale.fuelType]) {
+        fuelSalesByType[sale.fuelType] = { liters: 0, amount: 0 };
+      }
+      fuelSalesByType[sale.fuelType].liters += sale.liters;
+      fuelSalesByType[sale.fuelType].amount += sale.amount;
+    });
     
     // Base cash from fuel sales
     const fuelCashSales = todaySales.reduce((sum, sale) => sum + (sale.type === 'cash' ? sale.amount : 0), 0);
