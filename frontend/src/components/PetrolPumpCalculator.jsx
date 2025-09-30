@@ -119,6 +119,8 @@ const PetrolPumpCalculator = () => {
     setTotalCost(0);
     setAmountReceived('');
     setChangeAmount(0);
+    setInitialReading('');
+    setFinalReading('');
   };
 
   return (
