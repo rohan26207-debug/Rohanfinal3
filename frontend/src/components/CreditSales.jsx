@@ -126,11 +126,12 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
   const filteredCreditData = creditData.filter(credit => credit.date === selectedDate);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      {/* Input Form */}
-      <Card className={`${
-        isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
-      } shadow-lg`}>
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Input Form */}
+        <Card className={`${
+          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
+        } shadow-lg`}>
         <CardHeader className="bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-t-lg">
           <CardTitle className="flex items-center gap-2">
             <CreditCard className="w-5 h-5" />
