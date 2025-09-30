@@ -643,15 +643,21 @@ const ZAPTRStyleCalculator = () => {
                     <ChevronRight className="w-4 h-4" />
                   </Button>
                   
-                  <Input
-                    id="date-picker"
-                    type="date"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    className={`h-10 w-40 ${
-                      isDarkMode ? 'bg-gray-700 border-gray-600' : ''
-                    }`}
-                  />
+                  <div className={`border rounded-lg p-2 ${
+                    isDarkMode 
+                      ? 'border-gray-600 bg-gray-700' 
+                      : 'border-slate-300 bg-white'
+                  }`}>
+                    <Input
+                      id="date-picker"
+                      type="date"
+                      value={selectedDate}
+                      onChange={(e) => setSelectedDate(e.target.value)}
+                      className={`h-8 w-36 border-0 bg-transparent focus:ring-0 ${
+                        isDarkMode ? 'text-white' : 'text-slate-800'
+                      }`}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
