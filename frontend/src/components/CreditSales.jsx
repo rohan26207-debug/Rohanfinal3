@@ -27,8 +27,7 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
     vehicleNumber: '',
     fuelType: '',
     liters: '',
-    rate: '',
-    dueDate: ''
+    rate: ''
   });
   const [editingId, setEditingId] = useState(null);
   const { toast } = useToast();
