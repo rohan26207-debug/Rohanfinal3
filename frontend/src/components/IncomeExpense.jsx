@@ -151,7 +151,8 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
   const netProfit = totalIncome - totalExpenses;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Input Form */}
         <Card className={`${
           isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
