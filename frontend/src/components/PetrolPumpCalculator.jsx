@@ -153,8 +153,8 @@ const PetrolPumpCalculator = () => {
       amountReceived: parseFloat(amountReceived),
       changeAmount,
       calculationMode,
-      paymentMethod: 'cash',
-      nozzleId: 'P1',
+      paymentMethod,
+      nozzleId: selectedNozzle,
       ...(calculationMode === 'meter' && {
         initialReading: parseFloat(initialReading),
         finalReading: parseFloat(finalReading)
@@ -163,9 +163,15 @@ const PetrolPumpCalculator = () => {
 
     setTransactions([newTransaction, ...transactions]);
     
+    // Update cash in hand based on payment method
+    if (paymentMethod === 'cash') {
+      setCashInHand(prev => prev + parseFloat(amountReceived) - changeAmount);
+    }
+    // Note: Card payments don't add to cash in hand
+    
     toast({
       title: "Transaction Completed",
-      description: `₹${totalCost.toFixed(2)} transaction processed successfully`,
+      description: `₹${totalCost.toFixed(2)} ${paymentMethod} transaction processed successfully`,
     });
 
     // Reset form
