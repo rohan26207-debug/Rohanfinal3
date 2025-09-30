@@ -257,10 +257,11 @@ const ZAPTRStyleCalculator = () => {
     // Expenses reduce cash
     const totalExpenses = todayExpenses.reduce((sum, expense) => sum + expense.amount, 0);
     
+    // Calculate credit amount
+    const creditAmount = todayCredits.reduce((sum, credit) => sum + credit.amount, 0);
+    
     // Adjusted cash sales = fuel cash + other income - expenses - credit sales
     const adjustedCashSales = fuelCashSales + otherIncome - totalExpenses - creditAmount;
-    
-    const creditAmount = todayCredits.reduce((sum, credit) => sum + credit.amount, 0);
     const totalLiters = todaySales.reduce((sum, sale) => sum + sale.liters, 0);
     
     // Total income is fuel sales + other income
