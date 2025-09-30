@@ -126,10 +126,25 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
           <CardHeader className="bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-t-lg">
             <CardTitle className="flex items-center gap-2 text-lg">
               <SettingsIcon className="w-5 h-5" />
-              Fuel Type Configuration
+              Settings
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-4 max-h-96 overflow-y-auto">
+          <CardContent className="p-0">
+            <Tabs defaultValue="fuel" className="w-full">
+              <TabsList className={`grid w-full grid-cols-2 ${
+                isDarkMode ? 'bg-gray-700' : 'bg-gray-100'
+              }`}>
+                <TabsTrigger value="fuel" className="flex items-center gap-2">
+                  <Fuel className="w-4 h-4" />
+                  Fuel Types
+                </TabsTrigger>
+                <TabsTrigger value="contact" className="flex items-center gap-2">
+                  <User className="w-4 h-4" />
+                  Contact
+                </TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="fuel" className="p-4 max-h-80 overflow-y-auto">
             {/* Add New Fuel Type */}
             <div className="space-y-3 mb-4">
               <Label className="text-sm font-medium">Add New Fuel Type</Label>
