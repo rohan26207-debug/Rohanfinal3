@@ -413,7 +413,7 @@ const ZAPTRStyleCalculator = () => {
         </Card>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
           <Card className={`${
             isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
           } shadow-lg`}>
