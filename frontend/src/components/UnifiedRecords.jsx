@@ -73,9 +73,19 @@ const UnifiedRecords = ({
             {sale.fuelType}
           </Badge>
         </div>
-        <div className="flex items-center gap-1 text-green-600 font-bold">
-          <IndianRupee className="w-4 h-4" />
-          <span>{sale.amount.toFixed(2)}</span>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 text-green-600 font-bold">
+            <IndianRupee className="w-4 h-4" />
+            <span>{sale.amount.toFixed(2)}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="sm" onClick={() => onEditSale(sale)}>
+              <Edit className="w-3 h-3" />
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => onDeleteSale(sale.id)}>
+              <Trash2 className="w-3 h-3" />
+            </Button>
+          </div>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-2 text-sm">
