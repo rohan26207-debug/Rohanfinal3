@@ -262,7 +262,8 @@ const ZAPTRStyleCalculator = () => {
     return { 
       fuelCashSales,
       adjustedCashSales,
-      creditAmount, 
+      creditAmount,
+      creditLiters,
       totalLiters, 
       totalSales: fuelCashSales + creditAmount,
       otherIncome,
