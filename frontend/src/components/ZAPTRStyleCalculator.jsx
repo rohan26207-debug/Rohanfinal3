@@ -12,7 +12,10 @@ import {
   Fuel,
   IndianRupee,
   TrendingUp,
-  Settings
+  Settings,
+  Calendar,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import SalesTracker from './SalesTracker';
 import CreditSales from './CreditSales';
