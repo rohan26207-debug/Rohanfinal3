@@ -102,8 +102,7 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
       vehicleNumber: credit.vehicleNumber || '',
       fuelType: credit.fuelType,
       liters: credit.liters.toString(),
-      rate: credit.rate.toString(),
-      dueDate: credit.dueDate || ''
+      rate: credit.rate.toString()
     });
     setEditingId(credit.id);
   };
