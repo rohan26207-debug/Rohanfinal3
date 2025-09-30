@@ -110,7 +110,6 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
   };
   
   const currentData = activeType === 'income' ? filteredIncomeData : filteredExpenseData;
-  const currentCategories = activeType === 'income' ? incomeCategories : expenseCategories;
   
   // Calculate financial position
   const fuelCashSales = getFuelCashSales();
