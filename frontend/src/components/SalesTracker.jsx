@@ -126,14 +126,6 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
       nozzle: nozzleId,
       startReading: yesterdayEndReading.toString()
     }));
-    
-    // Show toast to inform user about auto-filled start reading
-    if (yesterdayEndReading > 0) {
-      toast({
-        title: "Auto-filled Start Reading",
-        description: `Start reading set to ${yesterdayEndReading} (yesterday's end reading for ${nozzleId})`,
-      });
-    }
   };
 
   const calculateSale = () => {
