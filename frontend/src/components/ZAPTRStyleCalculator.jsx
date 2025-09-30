@@ -327,7 +327,7 @@ const ZAPTRStyleCalculator = () => {
     if (link.download !== undefined) {
       const url = URL.createObjectURL(blob);
       link.setAttribute('href', url);
-      link.setAttribute('download', `fuel_pump_report_${selectedDate}.csv`);
+      link.setAttribute('download', `manager_petrol_pump_report_${selectedDate}.csv`);
       link.style.visibility = 'hidden';
       document.body.appendChild(link);
       link.click();
