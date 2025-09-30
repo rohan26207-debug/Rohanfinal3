@@ -32,6 +32,11 @@ const PetrolPumpCalculator = () => {
   const [paymentMethod, setPaymentMethod] = useState('cash'); // 'cash' or 'card'
   const [cashInHand, setCashInHand] = useState(0);
   
+  // Settings states
+  const [fuelSettings, setFuelSettings] = useState({});
+  const [nozzleReadings, setNozzleReadings] = useState({});
+  const [showSettings, setShowSettings] = useState(false);
+  
   const { toast } = useToast();
 
   useEffect(() => {
