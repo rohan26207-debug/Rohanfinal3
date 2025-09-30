@@ -39,11 +39,11 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings }) =>
   }));
 
   const handleFuelChange = (fuelType) => {
-    const fuel = fuelTypes.find(f => f.type === fuelType);
+    const fuelConfig = fuelSettings[fuelType];
     setFormData(prev => ({
       ...prev,
       fuelType,
-      rate: fuel ? fuel.rate.toString() : ''
+      rate: fuelConfig ? fuelConfig.price.toString() : ''
     }));
   };
 
