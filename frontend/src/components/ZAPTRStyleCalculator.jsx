@@ -161,7 +161,6 @@ const ZAPTRStyleCalculator = () => {
       {
         id: 1,
         date: new Date().toISOString().split('T')[0], // Today
-        category: 'Fuel Sales',
         amount: 15000.00,
         description: 'Daily fuel sales revenue',
         type: 'income'
@@ -169,7 +168,6 @@ const ZAPTRStyleCalculator = () => {
       {
         id: 2,
         date: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0], // Yesterday
-        category: 'Service Charges',
         amount: 2500.00,
         description: 'Vehicle service and maintenance charges',
         type: 'income'
@@ -180,7 +178,6 @@ const ZAPTRStyleCalculator = () => {
       {
         id: 1,
         date: new Date().toISOString().split('T')[0], // Today
-        category: 'Staff Salaries',
         amount: 3000.00,
         description: 'Daily staff wages',
         type: 'expense'
@@ -188,7 +185,6 @@ const ZAPTRStyleCalculator = () => {
       {
         id: 2,
         date: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0], // Yesterday
-        category: 'Electricity',
         amount: 1200.00,
         description: 'Monthly electricity bill',
         type: 'expense'
