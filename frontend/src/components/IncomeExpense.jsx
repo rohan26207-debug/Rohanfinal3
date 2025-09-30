@@ -30,28 +30,7 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
   const [editingId, setEditingId] = useState(null);
   const { toast } = useToast();
 
-  const incomeCategories = [
-    'Fuel Sales',
-    'Service Charges',
-    'Air & Water',
-    'Car Wash',
-    'Oil Change',
-    'Other Services',
-    'Miscellaneous'
-  ];
-
-  const expenseCategories = [
-    'Fuel Purchase',
-    'Staff Salaries',
-    'Electricity',
-    'Maintenance',
-    'Equipment',
-    'License & Fees',
-    'Insurance',
-    'Rent',
-    'Marketing',
-    'Other Expenses'
-  ];
+  // Removed category arrays - simplified to just amount and description
 
   const handleSubmit = () => {
     if (!formData.category || !formData.amount) {
