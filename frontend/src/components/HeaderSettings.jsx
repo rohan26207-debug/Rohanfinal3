@@ -225,6 +225,86 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
               <RotateCcw className="w-4 h-4" />
               Reset to Defaults
             </Button>
+              </TabsContent>
+              
+              <TabsContent value="contact" className="p-4">
+                <div className="space-y-4">
+                  <div className="text-center mb-4">
+                    <div className="flex items-center justify-center w-16 h-16 mx-auto mb-3 bg-blue-100 rounded-full">
+                      <User className="w-8 h-8 text-blue-600" />
+                    </div>
+                    <h3 className={`text-lg font-semibold ${
+                      isDarkMode ? 'text-white' : 'text-slate-800'
+                    }`}>
+                      Contact Information
+                    </h3>
+                  </div>
+                  
+                  <div className={`border rounded-lg p-4 ${
+                    isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-slate-50'
+                  }`}>
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-3">
+                        <User className="w-5 h-5 text-blue-600 mt-0.5" />
+                        <div>
+                          <div className={`text-xs font-medium ${
+                            isDarkMode ? 'text-gray-400' : 'text-slate-600'
+                          }`}>
+                            Owner
+                          </div>
+                          <div className={`font-medium ${
+                            isDarkMode ? 'text-white' : 'text-slate-800'
+                          }`}>
+                            Rohan.R.Khandve
+                          </div>
+                          <div className={`text-sm ${
+                            isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                          }`}>
+                            Vishnu Parvati Petroleum
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <Separator className={isDarkMode ? 'bg-gray-600' : 'bg-slate-200'} />
+                      
+                      <div className="flex items-center gap-3">
+                        <Phone className="w-5 h-5 text-green-600" />
+                        <div>
+                          <div className={`text-xs font-medium ${
+                            isDarkMode ? 'text-gray-400' : 'text-slate-600'
+                          }`}>
+                            Mobile
+                          </div>
+                          <div className={`font-medium ${
+                            isDarkMode ? 'text-white' : 'text-slate-800'
+                          }`}>
+                            +91 9822026207
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <Separator className={isDarkMode ? 'bg-gray-600' : 'bg-slate-200'} />
+                      
+                      <div className="flex items-start gap-3">
+                        <Mail className="w-5 h-5 text-red-600 mt-0.5" />
+                        <div>
+                          <div className={`text-xs font-medium ${
+                            isDarkMode ? 'text-gray-400' : 'text-slate-600'
+                          }`}>
+                            Email
+                          </div>
+                          <div className={`font-medium break-all ${
+                            isDarkMode ? 'text-white' : 'text-slate-800'
+                          }`}>
+                            vishnuparvatipetroleum@gmail.com
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+            </Tabs>
           </CardContent>
         </Card>
       </DropdownMenuContent>
