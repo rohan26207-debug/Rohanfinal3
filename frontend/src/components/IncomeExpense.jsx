@@ -153,7 +153,7 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
   return (
     <div className="space-y-6">
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card className={`${
           isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
         } shadow-lg`}>
@@ -164,7 +164,7 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
                 <p className={`text-xs ${
                   isDarkMode ? 'text-gray-400' : 'text-slate-600'
                 }`}>
-                  Income {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : 'Selected Day'}
+                  Total Income {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : 'Selected Day'}
                 </p>
                 <p className="text-xl font-bold text-green-600">
                   ₹{totalIncome.toFixed(2)}
@@ -189,10 +189,10 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
                 <p className={`text-xs ${
                   isDarkMode ? 'text-gray-400' : 'text-slate-600'
                 }`}>
-                  Expenses {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : 'Selected Day'}
+                  Total Expenses {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : 'Selected Day'}
                 </p>
                 <p className="text-xl font-bold text-red-600">
-                  ₹{totalExpense.toFixed(2)}
+                  ₹{totalExpenses.toFixed(2)}
                 </p>
               </div>
             </div>
@@ -217,6 +217,35 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
                   netProfit >= 0 ? 'text-green-600' : 'text-red-600'
                 }`}>
                   ₹{netProfit.toFixed(2)}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className={`${
+          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
+        } shadow-lg`}>
+          <CardContent className="p-4">
+            <div className="flex items-center gap-2">
+              <IndianRupee className={`w-5 h-5 ${
+                netCashInHand >= 0 ? 'text-blue-600' : 'text-red-600'
+              }`} />
+              <div>
+                <p className={`text-xs ${
+                  isDarkMode ? 'text-gray-400' : 'text-slate-600'
+                }`}>
+                  Cash in Hand
+                </p>
+                <p className={`text-xl font-bold ${
+                  netCashInHand >= 0 ? 'text-blue-600' : 'text-red-600'
+                }`}>
+                  ₹{netCashInHand.toFixed(2)}
+                </p>
+                <p className={`text-xs ${
+                  isDarkMode ? 'text-gray-500' : 'text-slate-500'
+                }`}>
+                  Income - Expenses
                 </p>
               </div>
             </div>
