@@ -222,7 +222,7 @@ const PriceConfiguration = ({
               <div className="flex gap-3">
                 <Button onClick={savePrices} className="flex-1 bg-green-600 hover:bg-green-700">
                   <Save className="w-4 h-4 mr-2" />
-                  Save R.S.P.
+                  Save Rate
                 </Button>
                 <Button variant="outline" onClick={resetPrices}>
                   <RotateCcw className="w-4 h-4 mr-2" />
