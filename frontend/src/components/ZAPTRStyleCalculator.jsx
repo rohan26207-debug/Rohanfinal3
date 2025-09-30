@@ -27,6 +27,7 @@ const ZAPTRStyleCalculator = () => {
   const [creditData, setCreditData] = useState([]);
   const [expenseData, setExpenseData] = useState([]);
   const [incomeData, setIncomeData] = useState([]);
+  const [fuelSettings, setFuelSettings] = useState({});
 
   // Mock data
   useEffect(() => {
