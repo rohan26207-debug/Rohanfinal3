@@ -87,8 +87,8 @@ const PriceConfiguration = ({
     setFuelSettings(newSettings);
     
     toast({
-      title: "R.S.P. Updated",
-      description: `Fuel R.S.P. updated for ${selectedDate}`,
+      title: "Rate Updated",
+      description: `Fuel rate updated for ${selectedDate}`,
     });
   };
 
