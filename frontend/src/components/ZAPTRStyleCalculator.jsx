@@ -422,11 +422,21 @@ const ZAPTRStyleCalculator = () => {
     
     csv += 'SUMMARY\n';
     csv += 'Metric,Value\n';
-    csv += `1. Reading Sales,${stats.totalLiters.toFixed(2)}L • ₹${stats.fuelCashSales.toFixed(2)}\n`;
-    csv += `2. Credit Sales,${stats.creditLiters.toFixed(2)}L • ₹${stats.creditAmount.toFixed(2)}\n`;
-    csv += `3. Income,₹${stats.otherIncome.toFixed(2)}\n`;
-    csv += `4. Expenses,₹${stats.totalExpenses.toFixed(2)}\n`;
-    csv += `5. Cash in Hand,₹${stats.adjustedCashSales.toFixed(2)}\n\n`;
+    
+    // Add fuel sales by type
+    Object.entries(stats.fuelSalesByType).forEach(([fuelType, data], index) => {
+      csv += `${index + 1}. ${fuelType} Sales,${data.liters.toFixed(2)}L • ₹${data.amount.toFixed(2)}\n`;
+    });
+    
+    // Add total if multiple fuel types
+    if (Object.keys(stats.fuelSalesByType).length > 1) {
+      csv += `Total Reading Sales,${stats.totalLiters.toFixed(2)}L • ₹${stats.fuelCashSales.toFixed(2)}\n`;
+    }
+    
+    csv += `${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 2 : 1)}. Credit Sales,${stats.creditLiters.toFixed(2)}L • ₹${stats.creditAmount.toFixed(2)}\n`;
+    csv += `${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 3 : 2)}. Income,₹${stats.otherIncome.toFixed(2)}\n`;
+    csv += `${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 4 : 3)}. Expenses,₹${stats.totalExpenses.toFixed(2)}\n`;
+    csv += `${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 5 : 4)}. Cash in Hand,₹${stats.adjustedCashSales.toFixed(2)}\n\n`;
     
     csv += 'DETAILED RECORDS\n';
     csv += 'Type,Description,Amount,Details,Date\n';
