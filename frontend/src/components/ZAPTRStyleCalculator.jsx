@@ -280,8 +280,8 @@ const ZAPTRStyleCalculator = () => {
     const element = document.createElement('div');
     element.innerHTML = `
       <div style="font-family: Arial, sans-serif; padding: 20px;">
-        <h1 style="text-align: center; color: #333; margin-bottom: 10px;">Manager Petrol Pump Daily Report</h1>
-        <h2 style="text-align: center; color: #666; margin-bottom: 30px;">Date: ${selectedDate}</h2>
+        <h1 style="text-align: center; color: #333; margin-bottom: 15px; font-size: 32px; font-weight: bold;">Manager Petrol Pump Daily Report</h1>
+        <h2 style="text-align: center; color: #666; margin-bottom: 35px; font-size: 22px;">Date: ${selectedDate}</h2>
         
         <div style="margin: 20px 0; border: 2px solid #ddd; padding: 20px; border-radius: 8px; background-color: #f8f9fa;">
           <h3 style="color: #333; margin-bottom: 20px; font-size: 24px; font-weight: bold;">Daily Summary</h3>
