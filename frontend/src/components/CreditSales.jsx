@@ -1,0 +1,345 @@
+import React, { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Label } from './ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Separator } from './ui/separator';
+import { ScrollArea } from './ui/scroll-area';
+import { Badge } from './ui/badge';
+import { 
+  CreditCard, 
+  Plus, 
+  Edit,
+  Trash2,
+  Users,
+  IndianRupee,
+  Calendar,
+  CheckCircle,
+  Clock
+} from 'lucide-react';
+import { useToast } from '../hooks/use-toast';
+
+const CreditSales = ({ isDarkMode, creditData, setCreditData }) => {
+  const [formData, setFormData] = useState({
+    customerName: '',
+    vehicleNumber: '',
+    fuelType: '',
+    liters: '',
+    rate: '',
+    dueDate: ''
+  });
+  const [editingId, setEditingId] = useState(null);
+  const { toast } = useToast();
+
+  const fuelTypes = [
+    { type: 'Petrol', rate: 102.50 },
+    { type: 'Diesel', rate: 89.75 },
+    { type: 'CNG', rate: 75.20 },
+    { type: 'Premium', rate: 108.90 }
+  ];
+
+  const handleFuelChange = (fuelType) => {
+    const fuel = fuelTypes.find(f => f.type === fuelType);
+    setFormData(prev => ({
+      ...prev,
+      fuelType,
+      rate: fuel ? fuel.rate.toString() : ''
+    }));
+  };
+
+  const calculateAmount = () => {
+    const { liters, rate } = formData;
+    if (!liters || !rate) return 0;
+    return (parseFloat(liters) * parseFloat(rate)).toFixed(2);
+  };
+
+  const handleSubmit = () => {
+    if (!formData.customerName || !formData.fuelType || !formData.liters || !formData.rate) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill all required fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const creditRecord = {
+      id: editingId || Date.now(),
+      date: new Date().toISOString().split('T')[0],
+      ...formData,
+      liters: parseFloat(formData.liters),
+      rate: parseFloat(formData.rate),
+      amount: parseFloat(calculateAmount()),
+      status: 'pending'
+    };
+
+    if (editingId) {
+      setCreditData(prev => prev.map(credit => credit.id === editingId ? creditRecord : credit));
+      setEditingId(null);
+      toast({ title: "Credit Updated", description: "Credit sale updated successfully" });
+    } else {
+      setCreditData(prev => [creditRecord, ...prev]);
+      toast({ title: "Credit Added", description: "Credit sale added successfully" });
+    }
+
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setFormData({
+      customerName: '',
+      vehicleNumber: '',
+      fuelType: '',
+      liters: '',
+      rate: '',
+      dueDate: ''
+    });
+    setEditingId(null);
+  };
+
+  const editCredit = (credit) => {
+    setFormData({
+      customerName: credit.customerName,
+      vehicleNumber: credit.vehicleNumber || '',
+      fuelType: credit.fuelType,
+      liters: credit.liters.toString(),
+      rate: credit.rate.toString(),
+      dueDate: credit.dueDate || ''
+    });
+    setEditingId(credit.id);
+  };
+
+  const deleteCredit = (id) => {
+    setCreditData(prev => prev.filter(credit => credit.id !== id));
+    toast({ title: "Credit Deleted", description: "Credit sale deleted successfully" });
+  };
+
+  const markAsPaid = (id) => {
+    setCreditData(prev => prev.map(credit => 
+      credit.id === id ? { ...credit, status: 'paid' } : credit
+    ));
+    toast({ title: "Marked as Paid", description: "Credit sale marked as paid" });
+  };
+
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Input Form */}
+      <Card className={`${
+        isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
+      } shadow-lg`}>
+        <CardHeader className="bg-gradient-to-r from-orange-600 to-orange-700 text-white rounded-t-lg">
+          <CardTitle className="flex items-center gap-2">
+            <CreditCard className="w-5 h-5" />
+            {editingId ? 'Edit Credit Sale' : 'Add Credit Sale'}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-6 space-y-4">
+          <div className="space-y-2">
+            <Label className="text-sm font-medium">Customer Name *</Label>
+            <Input
+              value={formData.customerName}
+              onChange={(e) => setFormData(prev => ({ ...prev, customerName: e.target.value }))}
+              placeholder="Enter customer name"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-sm font-medium">Vehicle Number</Label>
+            <Input
+              value={formData.vehicleNumber}
+              onChange={(e) => setFormData(prev => ({ ...prev, vehicleNumber: e.target.value }))}
+              placeholder="e.g., MH 12 AB 1234"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-sm font-medium">Fuel Type *</Label>
+            <Select value={formData.fuelType} onValueChange={handleFuelChange}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select fuel type" />
+              </SelectTrigger>
+              <SelectContent>
+                {fuelTypes.map(fuel => (
+                  <SelectItem key={fuel.type} value={fuel.type}>
+                    {fuel.type} - ₹{fuel.rate}/L
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label className="text-sm font-medium">Liters *</Label>
+              <Input
+                type="number"
+                step="0.01"
+                value={formData.liters}
+                onChange={(e) => setFormData(prev => ({ ...prev, liters: e.target.value }))}
+                placeholder="0.00"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label className="text-sm font-medium">Rate per Liter (₹) *</Label>
+              <Input
+                type="number"
+                step="0.01"
+                value={formData.rate}
+                onChange={(e) => setFormData(prev => ({ ...prev, rate: e.target.value }))}
+                placeholder="0.00"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-sm font-medium">Due Date</Label>
+            <Input
+              type="date"
+              value={formData.dueDate}
+              onChange={(e) => setFormData(prev => ({ ...prev, dueDate: e.target.value }))}
+            />
+          </div>
+
+          {formData.liters && formData.rate && (
+            <div className={`bg-orange-50 border border-orange-200 rounded-lg p-4 ${
+              isDarkMode ? 'bg-orange-900/20 border-orange-700' : ''
+            }`}>
+              <div className="text-center">
+                <p className="text-sm text-orange-600">Total Amount</p>
+                <div className="flex items-center justify-center gap-1">
+                  <IndianRupee className="w-5 h-5 text-orange-700" />
+                  <p className="text-2xl font-bold text-orange-700">
+                    {calculateAmount()}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="flex gap-3 pt-4">
+            <Button onClick={handleSubmit} className="flex-1 bg-orange-600 hover:bg-orange-700">
+              <Plus className="w-4 h-4 mr-2" />
+              {editingId ? 'Update Credit' : 'Add Credit'}
+            </Button>
+            {editingId && (
+              <Button variant="outline" onClick={resetForm}>
+                Cancel
+              </Button>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Credit Sales List */}
+      <Card className={`${
+        isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
+      } shadow-lg`}>
+        <CardHeader className="bg-gradient-to-r from-red-600 to-red-700 text-white rounded-t-lg">
+          <CardTitle className="flex items-center gap-2">
+            <Users className="w-5 h-5" />
+            Credit Sales Records
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-0">
+          <ScrollArea className="h-[600px]">
+            <div className="p-4 space-y-3">
+              {creditData.length === 0 ? (
+                <div className="text-center py-8 text-slate-500">
+                  <CreditCard className="w-12 h-12 mx-auto mb-2 opacity-50" />
+                  <p>No credit sales yet</p>
+                </div>
+              ) : (
+                creditData.map((credit) => (
+                  <div key={credit.id} className={`border rounded-lg p-4 hover:shadow-md transition-shadow ${
+                    isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-white'
+                  }`}>
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <Badge className={`border-0 ${
+                          credit.status === 'paid' 
+                            ? 'bg-green-100 text-green-800' 
+                            : 'bg-red-100 text-red-800'
+                        }`}>
+                          {credit.status === 'paid' ? (
+                            <><CheckCircle className="w-3 h-3 mr-1" />Paid</>
+                          ) : (
+                            <><Clock className="w-3 h-3 mr-1" />Pending</>
+                          )}
+                        </Badge>
+                        <Badge className="bg-purple-100 text-purple-800 border-0">
+                          {credit.fuelType}
+                        </Badge>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        {credit.status === 'pending' && (
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            onClick={() => markAsPaid(credit.id)}
+                            className="text-green-600 hover:bg-green-50"
+                          >
+                            <CheckCircle className="w-3 h-3" />
+                          </Button>
+                        )}
+                        <Button variant="ghost" size="sm" onClick={() => editCredit(credit)}>
+                          <Edit className="w-3 h-3" />
+                        </Button>
+                        <Button variant="ghost" size="sm" onClick={() => deleteCredit(credit.id)}>
+                          <Trash2 className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-slate-800">{credit.customerName}</h4>
+                      {credit.vehicleNumber && (
+                        <p className="text-sm text-slate-600">Vehicle: {credit.vehicleNumber}</p>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 text-sm mt-3">
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">Liters:</span>
+                        <span className="font-medium">{credit.liters}L</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">Rate:</span>
+                        <span className="font-medium">₹{credit.rate}/L</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-slate-600">Date:</span>
+                        <span className="font-medium">{credit.date}</span>
+                      </div>
+                      {credit.dueDate && (
+                        <div className="flex justify-between">
+                          <span className="text-slate-600">Due:</span>
+                          <span className="font-medium">{credit.dueDate}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    <Separator className="my-3" />
+
+                    <div className="flex justify-between items-center">
+                      <span className="font-semibold text-slate-700">Total Amount:</span>
+                      <div className="flex items-center gap-1">
+                        <IndianRupee className="w-4 h-4 text-orange-600" />
+                        <span className="text-xl font-bold text-orange-600">
+                          {credit.amount.toFixed(2)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </ScrollArea>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
+
+export default CreditSales;

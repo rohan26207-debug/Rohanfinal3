@@ -1,0 +1,392 @@
+import React, { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Label } from './ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Textarea } from './ui/textarea';
+import { Separator } from './ui/separator';
+import { ScrollArea } from './ui/scroll-area';
+import { Badge } from './ui/badge';
+import { 
+  TrendingUp, 
+  TrendingDown, 
+  Plus, 
+  Edit,
+  Trash2,
+  IndianRupee,
+  Receipt
+} from 'lucide-react';
+import { useToast } from '../hooks/use-toast';
+
+const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, setExpenseData }) => {
+  const [activeType, setActiveType] = useState('income');
+  const [formData, setFormData] = useState({
+    category: '',
+    amount: '',
+    description: '',
+    type: 'income'
+  });
+  const [editingId, setEditingId] = useState(null);
+  const { toast } = useToast();
+
+  const incomeCategories = [
+    'Fuel Sales',
+    'Service Charges',
+    'Air & Water',
+    'Car Wash',
+    'Oil Change',
+    'Other Services',
+    'Miscellaneous'
+  ];
+
+  const expenseCategories = [
+    'Fuel Purchase',
+    'Staff Salaries',
+    'Electricity',
+    'Maintenance',
+    'Equipment',
+    'License & Fees',
+    'Insurance',
+    'Rent',
+    'Marketing',
+    'Other Expenses'
+  ];
+
+  const handleSubmit = () => {
+    if (!formData.category || !formData.amount) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill all required fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const record = {
+      id: editingId || Date.now(),
+      date: new Date().toISOString().split('T')[0],
+      ...formData,
+      amount: parseFloat(formData.amount)
+    };
+
+    if (activeType === 'income') {
+      if (editingId) {
+        setIncomeData(prev => prev.map(item => item.id === editingId ? record : item));
+      } else {
+        setIncomeData(prev => [record, ...prev]);
+      }
+    } else {
+      if (editingId) {
+        setExpenseData(prev => prev.map(item => item.id === editingId ? record : item));
+      } else {
+        setExpenseData(prev => [record, ...prev]);
+      }
+    }
+
+    toast({ 
+      title: `${activeType === 'income' ? 'Income' : 'Expense'} ${editingId ? 'Updated' : 'Added'}`,
+      description: `Record ${editingId ? 'updated' : 'added'} successfully` 
+    });
+
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setFormData({
+      category: '',
+      amount: '',
+      description: '',
+      type: activeType
+    });
+    setEditingId(null);
+  };
+
+  const editRecord = (record, type) => {
+    setFormData({
+      category: record.category,
+      amount: record.amount.toString(),
+      description: record.description || '',
+      type: type
+    });
+    setActiveType(type);
+    setEditingId(record.id);
+  };
+
+  const deleteRecord = (id, type) => {
+    if (type === 'income') {
+      setIncomeData(prev => prev.filter(item => item.id !== id));
+    } else {
+      setExpenseData(prev => prev.filter(item => item.id !== id));
+    }
+    toast({ title: "Record Deleted", description: "Record deleted successfully" });
+  };
+
+  const currentData = activeType === 'income' ? incomeData : expenseData;
+  const currentCategories = activeType === 'income' ? incomeCategories : expenseCategories;
+  const totalIncome = incomeData.reduce((sum, item) => sum + item.amount, 0);
+  const totalExpense = expenseData.reduce((sum, item) => sum + item.amount, 0);
+  const netProfit = totalIncome - totalExpense;
+
+  return (
+    <div className="space-y-6">
+      {/* Summary Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <Card className={`${
+          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
+        } shadow-lg`}>
+          <CardContent className="p-4">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-green-600" />
+              <div>
+                <p className={`text-xs ${
+                  isDarkMode ? 'text-gray-400' : 'text-slate-600'
+                }`}>
+                  Total Income
+                </p>
+                <p className="text-xl font-bold text-green-600">
+                  ₹{totalIncome.toFixed(2)}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className={`${
+          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
+        } shadow-lg`}>
+          <CardContent className="p-4">
+            <div className="flex items-center gap-2">
+              <TrendingDown className="w-5 h-5 text-red-600" />
+              <div>
+                <p className={`text-xs ${
+                  isDarkMode ? 'text-gray-400' : 'text-slate-600'
+                }`}>
+                  Total Expenses
+                </p>
+                <p className="text-xl font-bold text-red-600">
+                  ₹{totalExpense.toFixed(2)}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className={`${
+          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
+        } shadow-lg`}>
+          <CardContent className="p-4">
+            <div className="flex items-center gap-2">
+              <IndianRupee className={`w-5 h-5 ${
+                netProfit >= 0 ? 'text-green-600' : 'text-red-600'
+              }`} />
+              <div>
+                <p className={`text-xs ${
+                  isDarkMode ? 'text-gray-400' : 'text-slate-600'
+                }`}>
+                  Net Profit
+                </p>
+                <p className={`text-xl font-bold ${
+                  netProfit >= 0 ? 'text-green-600' : 'text-red-600'
+                }`}>
+                  ₹{netProfit.toFixed(2)}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Input Form */}
+        <Card className={`${
+          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
+        } shadow-lg`}>
+          <CardHeader className={`${
+            activeType === 'income' 
+              ? 'bg-gradient-to-r from-green-600 to-green-700' 
+              : 'bg-gradient-to-r from-red-600 to-red-700'
+          } text-white rounded-t-lg`}>
+            <CardTitle className="flex items-center gap-2">
+              {activeType === 'income' ? (
+                <TrendingUp className="w-5 h-5" />
+              ) : (
+                <TrendingDown className="w-5 h-5" />
+              )}
+              {editingId ? `Edit ${activeType}` : `Add ${activeType}`}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-6 space-y-4">
+            {/* Toggle Buttons */}
+            <div className="grid grid-cols-2 gap-2 mb-4">
+              <Button
+                variant={activeType === 'income' ? 'default' : 'outline'}
+                onClick={() => { setActiveType('income'); resetForm(); }}
+                className={activeType === 'income' ? 'bg-green-600 hover:bg-green-700' : ''}
+              >
+                <TrendingUp className="w-4 h-4 mr-2" />
+                Income
+              </Button>
+              <Button
+                variant={activeType === 'expense' ? 'default' : 'outline'}
+                onClick={() => { setActiveType('expense'); resetForm(); }}
+                className={activeType === 'expense' ? 'bg-red-600 hover:bg-red-700' : ''}
+              >
+                <TrendingDown className="w-4 h-4 mr-2" />
+                Expense
+              </Button>
+            </div>
+
+            <div className="space-y-2">
+              <Label className="text-sm font-medium">Category *</Label>
+              <Select 
+                value={formData.category} 
+                onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder={`Select ${activeType} category`} />
+                </SelectTrigger>
+                <SelectContent>
+                  {currentCategories.map(category => (
+                    <SelectItem key={category} value={category}>{category}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label className="text-sm font-medium">Amount (₹) *</Label>
+              <Input
+                type="number"
+                step="0.01"
+                value={formData.amount}
+                onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
+                placeholder="0.00"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label className="text-sm font-medium">Description</Label>
+              <Textarea
+                value={formData.description}
+                onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                placeholder={`Enter ${activeType} details...`}
+                rows={3}
+              />
+            </div>
+
+            <div className="flex gap-3 pt-4">
+              <Button 
+                onClick={handleSubmit} 
+                className={`flex-1 ${
+                  activeType === 'income' 
+                    ? 'bg-green-600 hover:bg-green-700' 
+                    : 'bg-red-600 hover:bg-red-700'
+                }`}
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                {editingId ? `Update ${activeType}` : `Add ${activeType}`}
+              </Button>
+              {editingId && (
+                <Button variant="outline" onClick={resetForm}>
+                  Cancel
+                </Button>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Records List */}
+        <Card className={`${
+          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
+        } shadow-lg`}>
+          <CardHeader className={`${
+            activeType === 'income' 
+              ? 'bg-gradient-to-r from-blue-600 to-blue-700' 
+              : 'bg-gradient-to-r from-purple-600 to-purple-700'
+          } text-white rounded-t-lg`}>
+            <CardTitle className="flex items-center gap-2">
+              <Receipt className="w-5 h-5" />
+              {activeType === 'income' ? 'Income' : 'Expense'} Records
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <ScrollArea className="h-[500px]">
+              <div className="p-4 space-y-3">
+                {currentData.length === 0 ? (
+                  <div className="text-center py-8 text-slate-500">
+                    {activeType === 'income' ? (
+                      <TrendingUp className="w-12 h-12 mx-auto mb-2 opacity-50" />
+                    ) : (
+                      <TrendingDown className="w-12 h-12 mx-auto mb-2 opacity-50" />
+                    )}
+                    <p>No {activeType} records yet</p>
+                  </div>
+                ) : (
+                  currentData.map((record) => (
+                    <div key={record.id} className={`border rounded-lg p-4 hover:shadow-md transition-shadow ${
+                      isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-white'
+                    }`}>
+                      <div className="flex items-start justify-between mb-3">
+                        <Badge className={`${
+                          activeType === 'income' 
+                            ? 'bg-green-100 text-green-800' 
+                            : 'bg-red-100 text-red-800'
+                        } border-0`}>
+                          {record.category}
+                        </Badge>
+                        <div className="flex items-center gap-1">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            onClick={() => editRecord(record, activeType)}
+                          >
+                            <Edit className="w-3 h-3" />
+                          </Button>
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            onClick={() => deleteRecord(record.id, activeType)}
+                          >
+                            <Trash2 className="w-3 h-3" />
+                          </Button>
+                        </div>
+                      </div>
+
+                      {record.description && (
+                        <p className="text-sm text-slate-600 mb-3">{record.description}</p>
+                      )}
+
+                      <div className="flex justify-between items-center text-sm mb-2">
+                        <span className="text-slate-600">Date:</span>
+                        <span className="font-medium">{record.date}</span>
+                      </div>
+
+                      <Separator className="my-3" />
+
+                      <div className="flex justify-between items-center">
+                        <span className="font-semibold text-slate-700">Amount:</span>
+                        <div className="flex items-center gap-1">
+                          <IndianRupee className={`w-4 h-4 ${
+                            activeType === 'income' ? 'text-green-600' : 'text-red-600'
+                          }`} />
+                          <span className={`text-xl font-bold ${
+                            activeType === 'income' ? 'text-green-600' : 'text-red-600'
+                          }`}>
+                            {record.amount.toFixed(2)}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </ScrollArea>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+};
+
+export default IncomeExpense;
