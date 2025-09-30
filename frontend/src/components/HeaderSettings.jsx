@@ -70,7 +70,7 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
     
     toast({
       title: "Fuel Type Added",
-      description: `${newFuelType} has been added successfully. Set the R.S.P. in the R.S.P. tab.`,
+      description: `${newFuelType} has been added successfully. Set the rate in the Rate tab.`,
     });
   };
 
