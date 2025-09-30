@@ -168,23 +168,6 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
             </div>
 
             <div className="space-y-2">
-              <Label className="text-sm font-medium">Category *</Label>
-              <Select 
-                value={formData.category} 
-                onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder={`Select ${activeType} category`} />
-                </SelectTrigger>
-                <SelectContent>
-                  {currentCategories.map(category => (
-                    <SelectItem key={category} value={category}>{category}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
               <Label className="text-sm font-medium">Amount (₹) *</Label>
               <Input
                 type="number"
