@@ -361,9 +361,9 @@ const ZAPTRStyleCalculator = () => {
     let content = '';
     
     if (todaySales.length > 0) {
-      content += '<div style="margin: 20px 0;"><h3 style="color: #2563eb;">Fuel Sales (' + todaySales.length + ')</h3>';
+      content += '<div style="margin: 25px 0;"><h3 style="color: #2563eb; font-size: 20px; margin-bottom: 15px;">Fuel Sales (' + todaySales.length + ')</h3>';
       todaySales.forEach(sale => {
-        content += `<p style="margin: 5px 0; padding: 8px; background: #f8fafc; border-left: 3px solid #2563eb;"><strong>${sale.nozzle} - ${sale.fuelType}:</strong> ₹${sale.amount.toFixed(2)} (${sale.liters}L @ ₹${sale.rate}/L) - Reading: ${sale.startReading}L → ${sale.endReading}L</p>`;
+        content += `<p style="margin: 8px 0; padding: 12px; background: #f8fafc; border-left: 4px solid #2563eb; font-size: 15px;"><strong>${sale.nozzle} - ${sale.fuelType}:</strong> ₹${sale.amount.toFixed(2)} (${sale.liters}L @ ₹${sale.rate}/L) - Reading: ${sale.startReading}L → ${sale.endReading}L</p>`;
       });
       content += '</div>';
     }
