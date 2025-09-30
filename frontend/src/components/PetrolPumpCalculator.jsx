@@ -135,6 +135,8 @@ const PetrolPumpCalculator = () => {
       amountReceived: parseFloat(amountReceived),
       changeAmount,
       calculationMode,
+      paymentMethod: 'cash',
+      nozzleId: 'P1',
       ...(calculationMode === 'meter' && {
         initialReading: parseFloat(initialReading),
         finalReading: parseFloat(finalReading)
