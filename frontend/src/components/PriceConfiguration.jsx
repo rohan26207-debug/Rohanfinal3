@@ -301,6 +301,34 @@ const PriceConfiguration = ({
         incomeData={incomeData}
         expenseData={expenseData}
         selectedDate={selectedDate}
+        onEditSale={(sale) => {
+          toast({ title: "Edit Sale", description: "Please use the Reading Sales tab to edit this record" });
+        }}
+        onDeleteSale={(id) => {
+          setSalesData(prev => prev.filter(sale => sale.id !== id));
+          toast({ title: "Sale Deleted", description: "Sale record deleted successfully" });
+        }}
+        onEditCredit={(credit) => {
+          toast({ title: "Edit Credit", description: "Please use the Credit Sales tab to edit this record" });
+        }}
+        onDeleteCredit={(id) => {
+          setCreditData(prev => prev.filter(credit => credit.id !== id));
+          toast({ title: "Credit Deleted", description: "Credit sale deleted successfully" });
+        }}
+        onEditIncome={(income) => {
+          toast({ title: "Edit Income", description: "Please use the Income/Expenses tab to edit this record" });
+        }}
+        onDeleteIncome={(id) => {
+          setIncomeData(prev => prev.filter(income => income.id !== id));
+          toast({ title: "Income Deleted", description: "Income record deleted successfully" });
+        }}
+        onEditExpense={(expense) => {
+          toast({ title: "Edit Expense", description: "Please use the Income/Expenses tab to edit this record" });
+        }}
+        onDeleteExpense={(id) => {
+          setExpenseData(prev => prev.filter(expense => expense.id !== id));
+          toast({ title: "Expense Deleted", description: "Expense record deleted successfully" });
+        }}
       />
     </div>
   );
