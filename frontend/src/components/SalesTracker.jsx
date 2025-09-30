@@ -226,10 +226,7 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
                 <SelectContent>
                   {formData.fuelType && generateNozzlesForFuelType(formData.fuelType).map((nozzle) => (
                     <SelectItem key={nozzle.id} value={nozzle.id}>
-                      <div className="flex items-center gap-2">
-                        <Gauge className="w-4 h-4" />
-                        {nozzle.id}
-                      </div>
+                      {nozzle.id}
                     </SelectItem>
                   ))}
                 </SelectContent>
