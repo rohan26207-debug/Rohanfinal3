@@ -157,6 +157,48 @@ const ZAPTRStyleCalculator = () => {
       'Premium': { price: 108.90, nozzleCount: 1 }
     };
     setFuelSettings(defaultFuelSettings);
+
+    // Initialize income/expense mock data with different dates
+    const mockIncomeData = [
+      {
+        id: 1,
+        date: new Date().toISOString().split('T')[0], // Today
+        category: 'Fuel Sales',
+        amount: 15000.00,
+        description: 'Daily fuel sales revenue',
+        type: 'income'
+      },
+      {
+        id: 2,
+        date: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0], // Yesterday
+        category: 'Service Charges',
+        amount: 2500.00,
+        description: 'Vehicle service and maintenance charges',
+        type: 'income'
+      }
+    ];
+
+    const mockExpenseData = [
+      {
+        id: 1,
+        date: new Date().toISOString().split('T')[0], // Today
+        category: 'Staff Salaries',
+        amount: 3000.00,
+        description: 'Daily staff wages',
+        type: 'expense'
+      },
+      {
+        id: 2,
+        date: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0], // Yesterday
+        category: 'Electricity',
+        amount: 1200.00,
+        description: 'Monthly electricity bill',
+        type: 'expense'
+      }
+    ];
+
+    setIncomeData(mockIncomeData);
+    setExpenseData(mockExpenseData);
   }, []);
 
   const toggleTheme = () => {
