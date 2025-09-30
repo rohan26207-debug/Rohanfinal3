@@ -87,14 +87,53 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
 
   const nozzles = generateNozzles();
 
+  // Function to get yesterday's end reading for a specific nozzle
+  const getYesterdayEndReading = (nozzleId) => {
+    const yesterday = new Date(selectedDate);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayStr = yesterday.toISOString().split('T')[0];
+    
+    // Find all sales for this nozzle from yesterday
+    const yesterdaySales = salesData.filter(
+      sale => sale.date === yesterdayStr && sale.nozzle === nozzleId
+    );
+    
+    if (yesterdaySales.length === 0) {
+      return 0; // No previous data, start from 0
+    }
+    
+    // Get the highest end reading from yesterday for this nozzle
+    const maxEndReading = Math.max(...yesterdaySales.map(sale => sale.endReading));
+    return maxEndReading;
+  };
+
   const handleFuelChange = (fuelType) => {
     const fuelConfig = fuelSettings[fuelType];
     setFormData(prev => ({
       ...prev,
       fuelType,
       nozzle: '', // Clear nozzle selection when fuel type changes
+      startReading: '', // Clear start reading when fuel type changes
       rate: fuelConfig ? fuelConfig.price.toString() : ''
     }));
+  };
+
+  const handleNozzleChange = (nozzleId) => {
+    const yesterdayEndReading = getYesterdayEndReading(nozzleId);
+    
+    setFormData(prev => ({
+      ...prev,
+      nozzle: nozzleId,
+      startReading: yesterdayEndReading.toString()
+    }));
+    
+    // Show toast to inform user about auto-filled start reading
+    if (yesterdayEndReading > 0) {
+      toast({
+        title: "Auto-filled Start Reading",
+        description: `Start reading set to ${yesterdayEndReading} (yesterday's end reading for ${nozzleId})`,
+      });
+    }
   };
 
   const calculateSale = () => {
