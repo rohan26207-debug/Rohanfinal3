@@ -516,6 +516,9 @@ const ZAPTRStyleCalculator = () => {
               setSalesData={setSalesData}
               fuelSettings={fuelSettings}
               selectedDate={selectedDate}
+              creditData={creditData}
+              incomeData={incomeData}
+              expenseData={expenseData}
             />
           </TabsContent>
 
