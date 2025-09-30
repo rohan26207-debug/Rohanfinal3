@@ -73,7 +73,41 @@ const PetrolPumpCalculator = () => {
   };
 
   const handleTransaction = () => {
-    if (!fuelType || !quantity || !amountReceived) {
+    let calculatedQuantity = 0;
+    
+    if (calculationMode === 'manual') {
+      if (!quantity) {
+        toast({
+          title: "Incomplete Information",
+          description: "Please enter quantity",
+          variant: "destructive",
+        });
+        return;
+      }
+      calculatedQuantity = parseFloat(quantity);
+    } else if (calculationMode === 'meter') {
+      if (!initialReading || !finalReading) {
+        toast({
+          title: "Incomplete Information",
+          description: "Please enter both initial and final meter readings",
+          variant: "destructive",
+        });
+        return;
+      }
+      const initial = parseFloat(initialReading);
+      const final = parseFloat(finalReading);
+      if (final <= initial) {
+        toast({
+          title: "Invalid Reading",
+          description: "Final reading must be greater than initial reading",
+          variant: "destructive",
+        });
+        return;
+      }
+      calculatedQuantity = final - initial;
+    }
+
+    if (!fuelType || !amountReceived) {
       toast({
         title: "Incomplete Information",
         description: "Please fill all required fields",
@@ -95,11 +129,16 @@ const PetrolPumpCalculator = () => {
       id: Date.now(),
       timestamp: new Date().toLocaleString(),
       fuelType,
-      quantity: parseFloat(quantity),
+      quantity: calculatedQuantity,
       pricePerLiter: parseFloat(pricePerLiter),
       totalCost,
       amountReceived: parseFloat(amountReceived),
-      changeAmount
+      changeAmount,
+      calculationMode,
+      ...(calculationMode === 'meter' && {
+        initialReading: parseFloat(initialReading),
+        finalReading: parseFloat(finalReading)
+      })
     };
 
     setTransactions([newTransaction, ...transactions]);
