@@ -62,6 +62,7 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
     setFormData(prev => ({
       ...prev,
       fuelType,
+      nozzle: '', // Clear nozzle selection when fuel type changes
       rate: fuelConfig ? fuelConfig.price.toString() : ''
     }));
   };
