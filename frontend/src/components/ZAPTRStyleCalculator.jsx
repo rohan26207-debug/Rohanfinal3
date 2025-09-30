@@ -497,6 +497,32 @@ const ZAPTRStyleCalculator = () => {
               </div>
             </CardContent>
           </Card>
+
+          <Card className={`${
+            isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
+          } shadow-lg`}>
+            <CardContent className="p-4">
+              <div className="flex items-center gap-2">
+                <TrendingUp className="w-5 h-5 text-blue-600" />
+                <div>
+                  <p className={`text-xs ${
+                    isDarkMode ? 'text-gray-400' : 'text-slate-600'
+                  }`}>
+                    Total Income {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : 'Selected Day'}
+                  </p>
+                  <p className="text-xl font-bold text-blue-600">
+                    ₹{stats.totalIncome.toFixed(2)}
+                  </p>
+                  <p className={`text-xs ${
+                    isDarkMode ? 'text-gray-500' : 'text-slate-500'
+                  }`}>
+                    Cash: ₹{stats.cashSales.toFixed(0)} + Other: ₹{stats.otherIncome.toFixed(0)}
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
         </div>
 
         {/* Main Tabs */}
