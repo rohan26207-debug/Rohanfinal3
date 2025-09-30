@@ -201,12 +201,21 @@ metadata:
   test_sequence: 1
   run_ui: true
 
+  - task: "PDF export font size verification"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Testing PDF export functionality to verify Daily Summary font sizes are doubled (48px heading, 32px values) and Records content font sizes are 20% smaller (16px headings, 12px content)."
+
 test_plan:
   current_focus:
-    - "Tab navigation R.S.P. to Rate renaming"
-    - "Rate tab content headers and labels"
-    - "Settings dropdown Rate integration"
-    - "Rate functionality testing"
+    - "PDF export font size verification"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
