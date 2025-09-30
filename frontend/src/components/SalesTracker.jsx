@@ -29,11 +29,39 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
   const [editingId, setEditingId] = useState(null);
   const { toast } = useToast();
 
-  // Generate fuel types and nozzles from settings
+  // Generate fuel types from settings
   const fuelTypes = Object.entries(fuelSettings).map(([type, config]) => ({
     type,
     rate: config.price
   }));
+
+  // Generate nozzles for a specific fuel type
+  const generateNozzlesForFuelType = (fuelType) => {
+    if (!fuelSettings[fuelType]) return [];
+    
+    const config = fuelSettings[fuelType];
+    const nozzles = [];
+    
+    // Special naming for specific fuel types
+    let prefix;
+    if (fuelType.toLowerCase() === 'power') {
+      prefix = 'PO';
+    } else if (fuelType.toLowerCase() === 'premium') {
+      prefix = 'PR';
+    } else {
+      prefix = fuelType.charAt(0).toUpperCase();
+    }
+    
+    for (let i = 1; i <= config.nozzleCount; i++) {
+      const nozzleId = `${prefix}${i}`;
+      nozzles.push({
+        id: nozzleId,
+        name: `Nozzle ${nozzleId}`,
+        currentReading: Math.floor(Math.random() * 2000) + 500 // Mock reading
+      });
+    }
+    return nozzles;
+  };
 
   const generateNozzles = () => {
     const allNozzles = [];
