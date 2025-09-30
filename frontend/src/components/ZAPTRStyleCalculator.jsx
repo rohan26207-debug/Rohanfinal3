@@ -534,7 +534,7 @@ const ZAPTRStyleCalculator = () => {
                   <p className={`text-xs ${
                     isDarkMode ? 'text-gray-500' : 'text-slate-500'
                   }`}>
-                    Cash: ₹{stats.cashSales.toFixed(0)} + Other: ₹{stats.otherIncome.toFixed(0)}
+                    Fuel: ₹{stats.fuelCashSales.toFixed(0)} + Other: ₹{stats.otherIncome.toFixed(0)}
                   </p>
                 </div>
               </div>
