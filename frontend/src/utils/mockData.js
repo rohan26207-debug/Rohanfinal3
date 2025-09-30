@@ -1,10 +1,40 @@
 export const mockData = {
   fuelTypes: [
-    { type: 'Petrol', price: 102.50 },
-    { type: 'Diesel', price: 89.75 },
-    { type: 'CNG', price: 75.20 },
-    { type: 'Premium', price: 108.90 }
+    { 
+      type: 'Petrol', 
+      price: 102.50,
+      nozzles: [
+        { id: 'P1', name: 'Nozzle P1', currentReading: 1250.75 },
+        { id: 'P2', name: 'Nozzle P2', currentReading: 2340.20 },
+        { id: 'P3', name: 'Nozzle P3', currentReading: 890.50 }
+      ]
+    },
+    { 
+      type: 'Diesel', 
+      price: 89.75,
+      nozzles: [
+        { id: 'D1', name: 'Nozzle D1', currentReading: 1850.30 },
+        { id: 'D2', name: 'Nozzle D2', currentReading: 3420.80 }
+      ]
+    },
+    { 
+      type: 'CNG', 
+      price: 75.20,
+      nozzles: [
+        { id: 'C1', name: 'Nozzle C1', currentReading: 560.25 },
+        { id: 'C2', name: 'Nozzle C2', currentReading: 1120.90 }
+      ]
+    },
+    { 
+      type: 'Premium', 
+      price: 108.90,
+      nozzles: [
+        { id: 'PR1', name: 'Nozzle PR1', currentReading: 740.15 }
+      ]
+    }
   ],
+  
+  cashInHand: 15500.00,
   
   transactions: [
     {
