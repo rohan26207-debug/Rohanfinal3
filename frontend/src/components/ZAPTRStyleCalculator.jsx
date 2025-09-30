@@ -283,6 +283,220 @@ const ZAPTRStyleCalculator = () => {
 
   const stats = getTodayStats();
 
+  // Export functions
+  const exportToPDF = () => {
+    const content = generateExportContent();
+    
+    const element = document.createElement('div');
+    element.innerHTML = `
+      <div style="font-family: Arial, sans-serif; padding: 20px;">
+        <h1 style="text-align: center; color: #333; margin-bottom: 10px;">Fuel Pump Daily Report</h1>
+        <h2 style="text-align: center; color: #666; margin-bottom: 30px;">Date: ${selectedDate}</h2>
+        
+        <div style="margin: 20px 0; border: 1px solid #ddd; padding: 15px; border-radius: 8px;">
+          <h3 style="color: #333; margin-bottom: 15px;">Daily Summary</h3>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr><td style="padding: 5px; border-bottom: 1px solid #eee;"><strong>Cash in Hand:</strong></td><td style="padding: 5px; border-bottom: 1px solid #eee;">₹${stats.adjustedCashSales.toFixed(2)}</td></tr>
+            <tr><td style="padding: 5px; border-bottom: 1px solid #eee;"><strong>Credit Sales:</strong></td><td style="padding: 5px; border-bottom: 1px solid #eee;">₹${stats.creditAmount.toFixed(2)}</td></tr>
+            <tr><td style="padding: 5px; border-bottom: 1px solid #eee;"><strong>Total Liters:</strong></td><td style="padding: 5px; border-bottom: 1px solid #eee;">${stats.totalLiters.toFixed(2)}L</td></tr>
+            <tr><td style="padding: 5px; border-bottom: 1px solid #eee;"><strong>Fuel Cash Sales:</strong></td><td style="padding: 5px; border-bottom: 1px solid #eee;">₹${stats.fuelCashSales.toFixed(2)}</td></tr>
+            <tr><td style="padding: 5px; border-bottom: 1px solid #eee;"><strong>Other Income:</strong></td><td style="padding: 5px; border-bottom: 1px solid #eee;">₹${stats.otherIncome.toFixed(2)}</td></tr>
+            <tr><td style="padding: 5px; border-bottom: 1px solid #eee;"><strong>Total Expenses:</strong></td><td style="padding: 5px; border-bottom: 1px solid #eee;">₹${stats.totalExpenses.toFixed(2)}</td></tr>
+          </table>
+        </div>
+        
+        ${content}
+      </div>
+    `;
+    
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Fuel Pump Report - ${selectedDate}</title>
+          <style>
+            @media print {
+              body { margin: 0; }
+            }
+          </style>
+        </head>
+        <body>
+          ${element.innerHTML}
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
+  };
+
+  const exportToCSV = () => {
+    const csvContent = generateCSVContent();
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', `fuel_pump_report_${selectedDate}.csv`);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
+  const copyToClipboard = () => {
+    const textContent = generateTextContent();
+    navigator.clipboard.writeText(textContent).then(() => {
+      alert('Daily report copied to clipboard!');
+    }).catch(err => {
+      console.error('Failed to copy: ', err);
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = textContent;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      alert('Daily report copied to clipboard!');
+    });
+  };
+
+  const generateExportContent = () => {
+    const todaySales = salesData.filter(sale => sale.date === selectedDate);
+    const todayCredits = creditData.filter(credit => credit.date === selectedDate);
+    const todayIncome = incomeData.filter(income => income.date === selectedDate);
+    const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
+
+    let content = '';
+    
+    if (todaySales.length > 0) {
+      content += '<div style="margin: 20px 0;"><h3 style="color: #2563eb;">Fuel Sales (' + todaySales.length + ')</h3>';
+      todaySales.forEach(sale => {
+        content += `<p style="margin: 5px 0; padding: 8px; background: #f8fafc; border-left: 3px solid #2563eb;"><strong>${sale.nozzle} - ${sale.fuelType}:</strong> ₹${sale.amount.toFixed(2)} (${sale.liters}L @ ₹${sale.rate}/L) - Reading: ${sale.startReading}L → ${sale.endReading}L</p>`;
+      });
+      content += '</div>';
+    }
+
+    if (todayCredits.length > 0) {
+      content += '<div style="margin: 20px 0;"><h3 style="color: #ea580c;">Credit Sales (' + todayCredits.length + ')</h3>';
+      todayCredits.forEach(credit => {
+        content += `<p style="margin: 5px 0; padding: 8px; background: #fff7ed; border-left: 3px solid #ea580c;"><strong>${credit.customerName}</strong> (${credit.vehicleNumber || 'N/A'}): ₹${credit.amount.toFixed(2)} (${credit.liters}L ${credit.fuelType} @ ₹${credit.rate}/L)</p>`;
+      });
+      content += '</div>';
+    }
+
+    if (todayIncome.length > 0) {
+      content += '<div style="margin: 20px 0;"><h3 style="color: #16a34a;">Income (' + todayIncome.length + ')</h3>';
+      todayIncome.forEach(income => {
+        content += `<p style="margin: 5px 0; padding: 8px; background: #f0fdf4; border-left: 3px solid #16a34a;"><strong>₹${income.amount.toFixed(2)}:</strong> ${income.description}</p>`;
+      });
+      content += '</div>';
+    }
+
+    if (todayExpenses.length > 0) {
+      content += '<div style="margin: 20px 0;"><h3 style="color: #dc2626;">Expenses (' + todayExpenses.length + ')</h3>';
+      todayExpenses.forEach(expense => {
+        content += `<p style="margin: 5px 0; padding: 8px; background: #fef2f2; border-left: 3px solid #dc2626;"><strong>₹${expense.amount.toFixed(2)}:</strong> ${expense.description}</p>`;
+      });
+      content += '</div>';
+    }
+
+    return content;
+  };
+
+  const generateCSVContent = () => {
+    const todaySales = salesData.filter(sale => sale.date === selectedDate);
+    const todayCredits = creditData.filter(credit => credit.date === selectedDate);
+    const todayIncome = incomeData.filter(income => income.date === selectedDate);
+    const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
+
+    let csv = `Fuel Pump Daily Report - ${selectedDate}\n\n`;
+    
+    csv += 'SUMMARY\n';
+    csv += 'Metric,Value\n';
+    csv += `Cash in Hand,₹${stats.adjustedCashSales.toFixed(2)}\n`;
+    csv += `Credit Sales,₹${stats.creditAmount.toFixed(2)}\n`;
+    csv += `Total Liters,${stats.totalLiters.toFixed(2)}L\n`;
+    csv += `Fuel Cash Sales,₹${stats.fuelCashSales.toFixed(2)}\n`;
+    csv += `Other Income,₹${stats.otherIncome.toFixed(2)}\n`;
+    csv += `Total Expenses,₹${stats.totalExpenses.toFixed(2)}\n\n`;
+    
+    csv += 'DETAILED RECORDS\n';
+    csv += 'Type,Description,Amount,Details,Date\n';
+    
+    todaySales.forEach(sale => {
+      csv += `"Fuel Sale","${sale.nozzle} - ${sale.fuelType}","₹${sale.amount.toFixed(2)}","${sale.liters}L @ ₹${sale.rate}/L (${sale.startReading}L → ${sale.endReading}L)","${sale.date}"\n`;
+    });
+
+    todayCredits.forEach(credit => {
+      csv += `"Credit Sale","${credit.customerName} - ${credit.vehicleNumber || 'N/A'}","₹${credit.amount.toFixed(2)}","${credit.liters}L ${credit.fuelType} @ ₹${credit.rate}/L","${credit.date}"\n`;
+    });
+
+    todayIncome.forEach(income => {
+      csv += `"Income","${income.description}","₹${income.amount.toFixed(2)}","","${income.date}"\n`;
+    });
+
+    todayExpenses.forEach(expense => {
+      csv += `"Expense","${expense.description}","₹${expense.amount.toFixed(2)}","","${expense.date}"\n`;
+    });
+
+    return csv;
+  };
+
+  const generateTextContent = () => {
+    const todaySales = salesData.filter(sale => sale.date === selectedDate);
+    const todayCredits = creditData.filter(credit => credit.date === selectedDate);
+    const todayIncome = incomeData.filter(income => income.date === selectedDate);
+    const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
+
+    let text = `FUEL PUMP DAILY REPORT - ${selectedDate}\n`;
+    text += `==========================================\n\n`;
+    
+    text += `DAILY SUMMARY:\n`;
+    text += `• Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}\n`;
+    text += `• Credit Sales: ₹${stats.creditAmount.toFixed(2)}\n`;
+    text += `• Total Liters: ${stats.totalLiters.toFixed(2)}L\n`;
+    text += `• Fuel Cash Sales: ₹${stats.fuelCashSales.toFixed(2)}\n`;
+    text += `• Other Income: ₹${stats.otherIncome.toFixed(2)}\n`;
+    text += `• Total Expenses: ₹${stats.totalExpenses.toFixed(2)}\n\n`;
+    
+    if (todaySales.length > 0) {
+      text += `FUEL SALES (${todaySales.length}):\n`;
+      todaySales.forEach(sale => {
+        text += `• ${sale.nozzle} - ${sale.fuelType}: ₹${sale.amount.toFixed(2)} (${sale.liters}L @ ₹${sale.rate}/L) [${sale.startReading}L → ${sale.endReading}L]\n`;
+      });
+      text += '\n';
+    }
+
+    if (todayCredits.length > 0) {
+      text += `CREDIT SALES (${todayCredits.length}):\n`;
+      todayCredits.forEach(credit => {
+        text += `• ${credit.customerName} (${credit.vehicleNumber || 'N/A'}): ₹${credit.amount.toFixed(2)} (${credit.liters}L ${credit.fuelType} @ ₹${credit.rate}/L)\n`;
+      });
+      text += '\n';
+    }
+
+    if (todayIncome.length > 0) {
+      text += `INCOME (${todayIncome.length}):\n`;
+      todayIncome.forEach(income => {
+        text += `• ₹${income.amount.toFixed(2)}: ${income.description}\n`;
+      });
+      text += '\n';
+    }
+
+    if (todayExpenses.length > 0) {
+      text += `EXPENSES (${todayExpenses.length}):\n`;
+      todayExpenses.forEach(expense => {
+        text += `• ₹${expense.amount.toFixed(2)}: ${expense.description}\n`;
+      });
+      text += '\n';
+    }
+
+    text += `Report generated on: ${new Date().toLocaleString()}\n`;
+    return text;
+  };
+
   return (
     <div className={`min-h-screen transition-colors duration-300 ${
       isDarkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-slate-50 to-slate-100'
