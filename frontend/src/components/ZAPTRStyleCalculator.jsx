@@ -693,7 +693,7 @@ const ZAPTRStyleCalculator = () => {
                   <p className={`text-xs ${
                     isDarkMode ? 'text-gray-400' : 'text-slate-600'
                   }`}>
-                    Cash in Hand {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : 'Selected Day'}
+                    Cash in Hand
                   </p>
                   <p className={`text-xl font-bold ${
                     stats.adjustedCashSales >= 0 ? 'text-green-600' : 'text-red-600'
