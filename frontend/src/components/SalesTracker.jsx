@@ -29,14 +29,24 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings }) => 
   const [editingId, setEditingId] = useState(null);
   const { toast } = useToast();
 
-  const fuelTypes = [
-    { type: 'Petrol', rate: 102.50 },
-    { type: 'Diesel', rate: 89.75 },
-    { type: 'CNG', rate: 75.20 },
-    { type: 'Premium', rate: 108.90 }
-  ];
+  // Generate fuel types and nozzles from settings
+  const fuelTypes = Object.entries(fuelSettings).map(([type, config]) => ({
+    type,
+    rate: config.price
+  }));
 
-  const nozzles = ['P1', 'P2', 'P3', 'D1', 'D2', 'C1', 'C2', 'PR1'];
+  const generateNozzles = () => {
+    const allNozzles = [];
+    Object.entries(fuelSettings).forEach(([fuelType, config]) => {
+      const prefix = fuelType.charAt(0).toUpperCase();
+      for (let i = 1; i <= config.nozzleCount; i++) {
+        allNozzles.push(`${prefix}${i}`);
+      }
+    });
+    return allNozzles;
+  };
+
+  const nozzles = generateNozzles();
 
   const handleFuelChange = (fuelType) => {
     const fuel = fuelTypes.find(f => f.type === fuelType);
