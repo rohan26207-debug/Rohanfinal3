@@ -294,7 +294,7 @@ const ZAPTRStyleCalculator = () => {
                   <p className={`text-xs ${
                     isDarkMode ? 'text-gray-400' : 'text-slate-600'
                   }`}>
-                    Cash Sales Today
+                    Cash Sales {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : 'Selected Day'}
                   </p>
                   <p className="text-xl font-bold text-green-600">
                     ₹{stats.cashSales.toFixed(2)}
