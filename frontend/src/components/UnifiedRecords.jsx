@@ -20,16 +20,7 @@ const UnifiedRecords = ({
   creditData, 
   incomeData, 
   expenseData, 
-  selectedDate,
-  // Handler functions for edit/delete operations
-  onEditSale,
-  onDeleteSale,
-  onEditCredit,
-  onDeleteCredit,
-  onEditIncome,
-  onDeleteIncome,
-  onEditExpense,
-  onDeleteExpense
+  selectedDate 
 }) => {
   // Filter all data for selected date
   const filteredSales = salesData.filter(item => item.date === selectedDate);
