@@ -134,9 +134,8 @@ const ZAPTRStyleCalculator = () => {
   };
 
   const getTodayStats = () => {
-    const today = new Date().toISOString().split('T')[0];
-    const todaySales = salesData.filter(sale => sale.date === today);
-    const todayCredits = creditData.filter(credit => credit.date === today);
+    const todaySales = salesData.filter(sale => sale.date === selectedDate);
+    const todayCredits = creditData.filter(credit => credit.date === selectedDate);
     
     const cashSales = todaySales.reduce((sum, sale) => sum + (sale.type === 'cash' ? sale.amount : 0), 0);
     const creditAmount = todayCredits.reduce((sum, credit) => sum + credit.amount, 0);
