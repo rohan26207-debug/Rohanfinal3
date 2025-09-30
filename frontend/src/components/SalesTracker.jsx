@@ -273,7 +273,7 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
         <CardHeader className="bg-gradient-to-r from-green-600 to-green-700 text-white rounded-t-lg">
           <CardTitle className="flex items-center gap-2">
             <Fuel className="w-5 h-5" />
-            Sales Records
+            Sales Records ({filteredSalesData.length})
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
