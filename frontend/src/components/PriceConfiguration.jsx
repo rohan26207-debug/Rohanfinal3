@@ -114,8 +114,8 @@ const PriceConfiguration = ({
     setTempPrices(newPrices);
     
     toast({
-      title: "Quick R.S.P. Update",
-      description: `Applied ${percentage > 0 ? '+' : ''}${percentage}% change to all R.S.P.`,
+      title: "Quick Rate Update",
+      description: `Applied ${percentage > 0 ? '+' : ''}${percentage}% change to all rates`,
     });
   };
 
