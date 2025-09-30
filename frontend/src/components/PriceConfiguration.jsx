@@ -129,7 +129,7 @@ const PriceConfiguration = ({
           <CardHeader className="bg-gradient-to-r from-green-600 to-green-700 text-white rounded-t-lg">
             <CardTitle className="flex items-center gap-2">
               <IndianRupee className="w-5 h-5" />
-              R.S.P. Configuration for {selectedDate}
+              Rate Configuration for {selectedDate}
             </CardTitle>
           </CardHeader>
           <CardContent className="p-6">
