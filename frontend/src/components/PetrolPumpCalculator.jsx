@@ -19,6 +19,12 @@ const PetrolPumpCalculator = () => {
   const [amountReceived, setAmountReceived] = useState('');
   const [changeAmount, setChangeAmount] = useState(0);
   const [transactions, setTransactions] = useState([]);
+  
+  // Meter reading states
+  const [calculationMode, setCalculationMode] = useState('manual'); // 'manual' or 'meter'
+  const [initialReading, setInitialReading] = useState('');
+  const [finalReading, setFinalReading] = useState('');
+  
   const { toast } = useToast();
 
   useEffect(() => {
