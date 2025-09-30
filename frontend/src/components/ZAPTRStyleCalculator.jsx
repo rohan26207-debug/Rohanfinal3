@@ -248,29 +248,37 @@ const ZAPTRStyleCalculator = () => {
     const todayIncome = incomeData.filter(income => income.date === selectedDate);
     const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
     
-    const cashSales = todaySales.reduce((sum, sale) => sum + (sale.type === 'cash' ? sale.amount : 0), 0);
+    // Base cash from fuel sales
+    const fuelCashSales = todaySales.reduce((sum, sale) => sum + (sale.type === 'cash' ? sale.amount : 0), 0);
+    
+    // Other income adds to cash
+    const otherIncome = todayIncome.reduce((sum, income) => sum + income.amount, 0);
+    
+    // Expenses reduce cash
+    const totalExpenses = todayExpenses.reduce((sum, expense) => sum + expense.amount, 0);
+    
+    // Adjusted cash sales = fuel cash + other income - expenses
+    const adjustedCashSales = fuelCashSales + otherIncome - totalExpenses;
+    
     const creditAmount = todayCredits.reduce((sum, credit) => sum + credit.amount, 0);
     const totalLiters = todaySales.reduce((sum, sale) => sum + sale.liters, 0);
     
-    // Calculate total income including cash sales + other income
-    const otherIncome = todayIncome.reduce((sum, income) => sum + income.amount, 0);
-    const totalIncome = cashSales + otherIncome;
+    // Total income is fuel sales + other income
+    const totalIncome = fuelCashSales + otherIncome;
     
-    // Calculate total expenses
-    const totalExpenses = todayExpenses.reduce((sum, expense) => sum + expense.amount, 0);
-    
-    // Calculate net profit
-    const netProfit = totalIncome - totalExpenses;
+    // Net cash position (what's actually in hand)
+    const netCash = adjustedCashSales;
     
     return { 
-      cashSales, 
+      fuelCashSales,
+      adjustedCashSales,
       creditAmount, 
       totalLiters, 
-      totalSales: cashSales + creditAmount,
+      totalSales: fuelCashSales + creditAmount,
       otherIncome,
       totalIncome,
       totalExpenses,
-      netProfit
+      netCash
     };
   };
 
