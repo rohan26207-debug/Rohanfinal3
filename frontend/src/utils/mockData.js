@@ -103,6 +103,8 @@ export const mockData = {
       amountReceived: 2600,
       changeAmount: 37.50,
       calculationMode: 'meter',
+      paymentMethod: 'card',
+      nozzleId: 'P2',
       initialReading: 1200.0,
       finalReading: 1225.0
     }
