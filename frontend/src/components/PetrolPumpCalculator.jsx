@@ -187,6 +187,8 @@ const PetrolPumpCalculator = () => {
     setChangeAmount(0);
     setInitialReading('');
     setFinalReading('');
+    setSelectedNozzle('');
+    setPaymentMethod('cash');
   };
 
   return (
