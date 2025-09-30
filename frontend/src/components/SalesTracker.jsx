@@ -150,6 +150,9 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
 
   const calculation = calculateSale();
 
+  // Filter sales data for the selected date
+  const filteredSalesData = salesData.filter(sale => sale.date === selectedDate);
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {/* Input Form */}
