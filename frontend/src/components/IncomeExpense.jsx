@@ -126,8 +126,8 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
   const filteredIncomeData = incomeData.filter(item => item.date === selectedDate);
   const filteredExpenseData = expenseData.filter(item => item.date === selectedDate);
   
-  // Calculate cash sales for the selected date from sales data
-  const getCashSalesForDate = () => {
+  // Calculate cash position for the selected date
+  const getFuelCashSales = () => {
     if (!salesData) return 0;
     const dailySales = salesData.filter(sale => sale.date === selectedDate);
     return dailySales.reduce((sum, sale) => sum + (sale.type === 'cash' ? sale.amount : 0), 0);
@@ -136,12 +136,19 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
   const currentData = activeType === 'income' ? filteredIncomeData : filteredExpenseData;
   const currentCategories = activeType === 'income' ? incomeCategories : expenseCategories;
   
-  // Calculate totals including cash sales from fuel transactions
+  // Calculate financial position
+  const fuelCashSales = getFuelCashSales();
   const otherIncome = filteredIncomeData.reduce((sum, item) => sum + item.amount, 0);
-  const cashSalesAmount = getCashSalesForDate(); // Will be passed from parent
-  const totalIncome = otherIncome + cashSalesAmount;
-  const totalExpense = filteredExpenseData.reduce((sum, item) => sum + item.amount, 0);
-  const netProfit = totalIncome - totalExpense;
+  const totalExpenses = filteredExpenseData.reduce((sum, item) => sum + item.amount, 0);
+  
+  // Total income from all sources
+  const totalIncome = fuelCashSales + otherIncome;
+  
+  // Net cash in hand after all transactions
+  const netCashInHand = fuelCashSales + otherIncome - totalExpenses;
+  
+  // Profit calculation (income - expenses)
+  const netProfit = totalIncome - totalExpenses;
 
   return (
     <div className="space-y-6">
