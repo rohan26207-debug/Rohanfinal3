@@ -65,7 +65,7 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
 
     const record = {
       id: editingId || Date.now(),
-      date: new Date().toISOString().split('T')[0],
+      date: selectedDate,
       ...formData,
       amount: parseFloat(formData.amount)
     };
