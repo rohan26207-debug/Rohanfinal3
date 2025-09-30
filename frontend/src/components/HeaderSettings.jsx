@@ -20,7 +20,10 @@ import {
   Trash2,
   Save,
   RotateCcw,
-  Gauge
+  Gauge,
+  User,
+  Phone,
+  Mail
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 
