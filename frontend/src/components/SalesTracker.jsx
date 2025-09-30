@@ -98,7 +98,7 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
 
     const saleRecord = {
       id: editingId || Date.now(),
-      date: new Date().toISOString().split('T')[0],
+      date: selectedDate,
       ...formData,
       startReading: parseFloat(formData.startReading),
       endReading: parseFloat(formData.endReading),
