@@ -75,6 +75,15 @@ const ZAPTRStyleCalculator = () => {
 
     setSalesData(mockSalesData);
     setCreditData(mockCreditData);
+    
+    // Initialize default fuel settings
+    const defaultFuelSettings = {
+      'Petrol': { price: 102.50, nozzleCount: 3 },
+      'Diesel': { price: 89.75, nozzleCount: 2 },
+      'CNG': { price: 75.20, nozzleCount: 2 },
+      'Premium': { price: 108.90, nozzleCount: 1 }
+    };
+    setFuelSettings(defaultFuelSettings);
   }, []);
 
   const toggleTheme = () => {
