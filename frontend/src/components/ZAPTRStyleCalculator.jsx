@@ -245,12 +245,33 @@ const ZAPTRStyleCalculator = () => {
   const getTodayStats = () => {
     const todaySales = salesData.filter(sale => sale.date === selectedDate);
     const todayCredits = creditData.filter(credit => credit.date === selectedDate);
+    const todayIncome = incomeData.filter(income => income.date === selectedDate);
+    const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
     
     const cashSales = todaySales.reduce((sum, sale) => sum + (sale.type === 'cash' ? sale.amount : 0), 0);
     const creditAmount = todayCredits.reduce((sum, credit) => sum + credit.amount, 0);
     const totalLiters = todaySales.reduce((sum, sale) => sum + sale.liters, 0);
     
-    return { cashSales, creditAmount, totalLiters, totalSales: cashSales + creditAmount };
+    // Calculate total income including cash sales + other income
+    const otherIncome = todayIncome.reduce((sum, income) => sum + income.amount, 0);
+    const totalIncome = cashSales + otherIncome;
+    
+    // Calculate total expenses
+    const totalExpenses = todayExpenses.reduce((sum, expense) => sum + expense.amount, 0);
+    
+    // Calculate net profit
+    const netProfit = totalIncome - totalExpenses;
+    
+    return { 
+      cashSales, 
+      creditAmount, 
+      totalLiters, 
+      totalSales: cashSales + creditAmount,
+      otherIncome,
+      totalIncome,
+      totalExpenses,
+      netProfit
+    };
   };
 
   const stats = getTodayStats();
