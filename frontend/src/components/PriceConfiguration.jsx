@@ -23,13 +23,9 @@ const PriceConfiguration = ({
   setFuelSettings, 
   selectedDate,
   salesData,
-  setSalesData,
   creditData,
-  setCreditData,
   incomeData,
-  setIncomeData,
-  expenseData,
-  setExpenseData
+  expenseData
 }) => {
   const [tempPrices, setTempPrices] = useState(() => {
     // Initialize temp prices with current prices
