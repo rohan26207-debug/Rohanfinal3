@@ -114,9 +114,19 @@ const UnifiedRecords = ({
             {credit.fuelType}
           </Badge>
         </div>
-        <div className="flex items-center gap-1 text-orange-600 font-bold">
-          <IndianRupee className="w-4 h-4" />
-          <span>{credit.amount.toFixed(2)}</span>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 text-orange-600 font-bold">
+            <IndianRupee className="w-4 h-4" />
+            <span>{credit.amount.toFixed(2)}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="sm" onClick={() => onEditCredit(credit)}>
+              <Edit className="w-3 h-3" />
+            </Button>
+            <Button variant="ghost" size="sm" onClick={() => onDeleteCredit(credit.id)}>
+              <Trash2 className="w-3 h-3" />
+            </Button>
+          </div>
         </div>
       </div>
       <div className="space-y-1 text-sm">
