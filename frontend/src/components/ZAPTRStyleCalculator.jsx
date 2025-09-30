@@ -1,28 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Separator } from './ui/separator';
-import { Badge } from './ui/badge';
 import { 
   Calculator, 
-  Receipt, 
-  TrendingUp, 
+  CreditCard, 
   TrendingDown, 
   FileText, 
-  Download,
   Moon,
   Sun,
   Fuel,
-  CreditCard,
   IndianRupee,
-  Calendar,
-  Users
+  TrendingUp
 } from 'lucide-react';
-import { useToast } from '../hooks/use-toast';
 import SalesTracker from './SalesTracker';
 import CreditSales from './CreditSales';
 import IncomeExpense from './IncomeExpense';
@@ -35,9 +25,8 @@ const ZAPTRStyleCalculator = () => {
   const [creditData, setCreditData] = useState([]);
   const [expenseData, setExpenseData] = useState([]);
   const [incomeData, setIncomeData] = useState([]);
-  const { toast } = useToast();
 
-  // Mock data for demonstration
+  // Mock data
   useEffect(() => {
     const mockSalesData = [
       {
@@ -112,9 +101,7 @@ const ZAPTRStyleCalculator = () => {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
-            <div className={`p-3 rounded-full ${
-              isDarkMode ? 'bg-blue-600' : 'bg-blue-600'
-            }`}>
+            <div className="p-3 bg-blue-600 rounded-full">
               <Fuel className="w-8 h-8 text-white" />
             </div>
             <div>
@@ -133,9 +120,7 @@ const ZAPTRStyleCalculator = () => {
           <Button
             variant="outline"
             onClick={toggleTheme}
-            className={`flex items-center gap-2 ${
-              isDarkMode ? 'border-gray-600 text-gray-300' : ''
-            }`}
+            className="flex items-center gap-2"
           >
             {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             {isDarkMode ? 'Light' : 'Dark'}
