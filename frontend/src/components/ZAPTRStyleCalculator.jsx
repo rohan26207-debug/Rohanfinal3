@@ -279,7 +279,8 @@ const ZAPTRStyleCalculator = () => {
       otherIncome,
       totalIncome,
       totalExpenses,
-      netCash
+      netCash,
+      fuelSalesByType
     };
   };
 
