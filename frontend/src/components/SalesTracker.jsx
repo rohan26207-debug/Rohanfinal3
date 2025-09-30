@@ -258,7 +258,7 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
               <Label className="text-sm font-medium">Nozzle</Label>
               <Select 
                 value={formData.nozzle} 
-                onValueChange={(value) => setFormData(prev => ({ ...prev, nozzle: value }))}
+                onValueChange={handleNozzleChange}
                 disabled={!formData.fuelType}
               >
                 <SelectTrigger>
