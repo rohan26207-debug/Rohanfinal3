@@ -197,31 +197,38 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
         <CardContent className="p-6 space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label className="text-sm font-medium">Nozzle</Label>
-              <Select value={formData.nozzle} onValueChange={(value) => 
-                setFormData(prev => ({ ...prev, nozzle: value }))
-              }>
+              <Label className="text-sm font-medium">Fuel Type</Label>
+              <Select value={formData.fuelType} onValueChange={handleFuelChange}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select nozzle" />
+                  <SelectValue placeholder="Select fuel type" />
                 </SelectTrigger>
                 <SelectContent>
-                  {nozzles.map(nozzle => (
-                    <SelectItem key={nozzle} value={nozzle}>{nozzle}</SelectItem>
+                  {Object.entries(fuelSettings).map(([type, config]) => (
+                    <SelectItem key={type} value={type}>
+                      {type} - ₹{config.price}/L
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
 
             <div className="space-y-2">
-              <Label className="text-sm font-medium">Fuel Type</Label>
-              <Select value={formData.fuelType} onValueChange={handleFuelChange}>
+              <Label className="text-sm font-medium">Nozzle</Label>
+              <Select 
+                value={formData.nozzle} 
+                onValueChange={(value) => setFormData(prev => ({ ...prev, nozzle: value }))}
+                disabled={!formData.fuelType}
+              >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select fuel" />
+                  <SelectValue placeholder={formData.fuelType ? "Select nozzle" : "Select fuel type first"} />
                 </SelectTrigger>
                 <SelectContent>
-                  {Object.entries(fuelSettings).map(([type, config]) => (
-                    <SelectItem key={type} value={type}>
-                      {type} - ₹{config.price}/L
+                  {formData.fuelType && generateNozzlesForFuelType(formData.fuelType).map((nozzle) => (
+                    <SelectItem key={nozzle.id} value={nozzle.id}>
+                      <div className="flex items-center gap-2">
+                        <Gauge className="w-4 h-4" />
+                        {nozzle.name} ({nozzle.currentReading}L)
+                      </div>
                     </SelectItem>
                   ))}
                 </SelectContent>
