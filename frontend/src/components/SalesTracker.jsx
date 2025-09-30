@@ -17,6 +17,7 @@ import {
   Gauge 
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
+import UnifiedRecords from './UnifiedRecords';
 
 const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selectedDate }) => {
   const [formData, setFormData] = useState({
