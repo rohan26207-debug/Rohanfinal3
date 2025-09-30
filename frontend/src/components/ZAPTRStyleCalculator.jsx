@@ -559,11 +559,16 @@ const ZAPTRStyleCalculator = () => {
             />
           </TabsContent>
 
-          <TabsContent value="settings">
-            <FuelSettings 
+          <TabsContent value="prices">
+            <PriceConfiguration 
               isDarkMode={isDarkMode}
               fuelSettings={fuelSettings}
               setFuelSettings={setFuelSettings}
+              selectedDate={selectedDate}
+              salesData={salesData}
+              creditData={creditData}
+              incomeData={incomeData}
+              expenseData={expenseData}
             />
           </TabsContent>
         </Tabs>
