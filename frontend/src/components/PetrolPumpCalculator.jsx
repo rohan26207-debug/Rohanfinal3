@@ -40,10 +40,37 @@ const PetrolPumpCalculator = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Load mock transactions and cash in hand on component mount
+    // Load mock data on component mount
     setTransactions(mockData.transactions);
     setCashInHand(mockData.cashInHand);
+    setFuelSettings(mockData.fuelSettings);
+    setNozzleReadings(mockData.nozzleReadings);
   }, []);
+
+  // Generate fuel types array from settings
+  const generateFuelTypes = () => {
+    return Object.entries(fuelSettings).map(([type, config]) => ({
+      type,
+      price: config.price,
+      nozzles: generateNozzles(type, config.nozzleCount)
+    }));
+  };
+
+  // Generate nozzles for a fuel type
+  const generateNozzles = (fuelType, count) => {
+    const nozzles = [];
+    const prefix = fuelType.charAt(0).toUpperCase();
+    
+    for (let i = 1; i <= count; i++) {
+      const nozzleId = `${prefix}${i}`;
+      nozzles.push({
+        id: nozzleId,
+        name: `Nozzle ${nozzleId}`,
+        currentReading: nozzleReadings[nozzleId] || Math.floor(Math.random() * 2000) + 500
+      });
+    }
+    return nozzles;
+  };
 
   useEffect(() => {
     let calculatedQuantity = 0;
