@@ -178,9 +178,9 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings }) => 
                   <SelectValue placeholder="Select fuel" />
                 </SelectTrigger>
                 <SelectContent>
-                  {fuelTypes.map(fuel => (
-                    <SelectItem key={fuel.type} value={fuel.type}>
-                      {fuel.type} - ₹{fuel.rate}/L
+                  {Object.entries(fuelSettings).map(([type, config]) => (
+                    <SelectItem key={type} value={type}>
+                      {type} - ₹{config.price}/L
                     </SelectItem>
                   ))}
                 </SelectContent>
