@@ -188,20 +188,87 @@ const PetrolPumpCalculator = () => {
                   </div>
                 </div>
 
-                {/* Quantity Input */}
-                <div className="space-y-2">
-                  <Label htmlFor="quantity" className="text-sm font-medium text-slate-700">
-                    Quantity (Liters)
+                {/* Quantity Calculation Mode */}
+                <div className="space-y-4">
+                  <Label className="text-sm font-medium text-slate-700">
+                    Quantity Calculation
                   </Label>
-                  <Input
-                    id="quantity"
-                    type="number"
-                    step="0.01"
-                    value={quantity}
-                    onChange={(e) => setQuantity(e.target.value)}
-                    placeholder="0.00"
-                    className="h-12 text-lg"
-                  />
+                  
+                  <Tabs value={calculationMode} onValueChange={setCalculationMode} className="w-full">
+                    <TabsList className="grid w-full grid-cols-2 h-12">
+                      <TabsTrigger value="manual" className="flex items-center gap-2">
+                        <Edit3 className="w-4 h-4" />
+                        Manual Entry
+                      </TabsTrigger>
+                      <TabsTrigger value="meter" className="flex items-center gap-2">
+                        <Gauge className="w-4 h-4" />
+                        Meter Reading
+                      </TabsTrigger>
+                    </TabsList>
+                    
+                    <TabsContent value="manual" className="space-y-2 mt-4">
+                      <Label htmlFor="quantity" className="text-sm font-medium text-slate-600">
+                        Enter Quantity (Liters)
+                      </Label>
+                      <Input
+                        id="quantity"
+                        type="number"
+                        step="0.01"
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                        placeholder="0.00"
+                        className="h-12 text-lg"
+                      />
+                    </TabsContent>
+                    
+                    <TabsContent value="meter" className="space-y-4 mt-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="initial-reading" className="text-sm font-medium text-slate-600">
+                            Initial Reading (L)
+                          </Label>
+                          <Input
+                            id="initial-reading"
+                            type="number"
+                            step="0.01"
+                            value={initialReading}
+                            onChange={(e) => setInitialReading(e.target.value)}
+                            placeholder="0.00"
+                            className="h-12"
+                          />
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <Label htmlFor="final-reading" className="text-sm font-medium text-slate-600">
+                            Final Reading (L)
+                          </Label>
+                          <Input
+                            id="final-reading"
+                            type="number"
+                            step="0.01"
+                            value={finalReading}
+                            onChange={(e) => setFinalReading(e.target.value)}
+                            placeholder="0.00"
+                            className="h-12"
+                          />
+                        </div>
+                      </div>
+                      
+                      {initialReading && finalReading && (
+                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-blue-700">Calculated Quantity:</span>
+                            <div className="flex items-center gap-1">
+                              <Droplets className="w-4 h-4 text-blue-600" />
+                              <span className="font-semibold text-blue-800">
+                                {(parseFloat(finalReading) - parseFloat(initialReading)).toFixed(2)} L
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </TabsContent>
+                  </Tabs>
                 </div>
 
                 {/* Total Cost Display */}
