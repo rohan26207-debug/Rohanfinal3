@@ -304,12 +304,6 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
                         <span className="text-slate-600">Date:</span>
                         <span className="font-medium">{credit.date}</span>
                       </div>
-                      {credit.dueDate && (
-                        <div className="flex justify-between">
-                          <span className="text-slate-600">Due:</span>
-                          <span className="font-medium">{credit.dueDate}</span>
-                        </div>
-                      )}
                     </div>
 
                     <Separator className="my-3" />
