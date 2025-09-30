@@ -67,6 +67,11 @@ const TransactionHistory = ({ transactions }) => {
                       {transaction.calculationMode === 'meter' && (
                         <Gauge className="w-3 h-3 text-blue-500" title="Meter Reading" />
                       )}
+                      {transaction.paymentMethod === 'card' ? (
+                        <CreditCard className="w-3 h-3 text-purple-500" title="Card Payment" />
+                      ) : (
+                        <Banknote className="w-3 h-3 text-green-500" title="Cash Payment" />
+                      )}
                     </div>
                     <span className="text-xs text-slate-500">{transaction.timestamp}</span>
                   </div>
