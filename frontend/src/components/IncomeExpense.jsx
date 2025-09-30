@@ -162,6 +162,11 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
                 <p className="text-xl font-bold text-green-600">
                   ₹{totalIncome.toFixed(2)}
                 </p>
+                <p className={`text-xs ${
+                  isDarkMode ? 'text-gray-500' : 'text-slate-500'
+                }`}>
+                  Cash Sales: ₹{cashSalesAmount.toFixed(0)} + Other: ₹{otherIncome.toFixed(0)}
+                </p>
               </div>
             </div>
           </CardContent>
