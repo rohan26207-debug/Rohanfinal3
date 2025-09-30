@@ -76,6 +76,10 @@ const TransactionHistory = ({ transactions }) => {
                       <span className="text-slate-600">Quantity:</span>
                       <span className="font-medium">{transaction.quantity}L</span>
                     </div>
+                    <div className="flex justify-between text-xs">
+                      <span className="text-slate-500">Nozzle:</span>
+                      <span className="text-slate-500">{transaction.nozzleId}</span>
+                    </div>
                     {transaction.calculationMode === 'meter' && (
                       <div className="flex justify-between text-xs">
                         <span className="text-slate-500">Meter:</span>
@@ -87,6 +91,10 @@ const TransactionHistory = ({ transactions }) => {
                     <div className="flex justify-between">
                       <span className="text-slate-600">Rate:</span>
                       <span className="font-medium">₹{transaction.pricePerLiter}/L</span>
+                    </div>
+                    <div className="flex justify-between text-xs">
+                      <span className="text-slate-500">Payment:</span>
+                      <span className="text-slate-500 capitalize">{transaction.paymentMethod}</span>
                     </div>
                     <Separator className="my-2" />
                     <div className="flex justify-between font-semibold">
