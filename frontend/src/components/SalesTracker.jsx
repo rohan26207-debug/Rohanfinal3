@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 
-const SalesTracker = ({ isDarkMode, salesData, setSalesData }) => {
+const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings }) => {
   const [formData, setFormData] = useState({
     nozzle: '',
     fuelType: '',
