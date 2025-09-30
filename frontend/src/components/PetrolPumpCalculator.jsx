@@ -266,6 +266,16 @@ const PetrolPumpCalculator = () => {
           <p className="text-slate-600 text-lg">Professional Petrol Pump Calculator</p>
         </div>
 
+        {/* Settings Section */}
+        {showSettings && (
+          <div className="mb-6">
+            <Settings 
+              fuelSettings={fuelSettings} 
+              onSettingsUpdate={handleSettingsUpdate}
+            />
+          </div>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Main Calculator */}
           <div className="lg:col-span-2">
