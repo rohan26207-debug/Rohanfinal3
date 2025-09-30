@@ -283,15 +283,15 @@ const ZAPTRStyleCalculator = () => {
         <h1 style="text-align: center; color: #333; margin-bottom: 10px;">Manager Petrol Pump Daily Report</h1>
         <h2 style="text-align: center; color: #666; margin-bottom: 30px;">Date: ${selectedDate}</h2>
         
-        <div style="margin: 20px 0; border: 1px solid #ddd; padding: 15px; border-radius: 8px;">
-          <h3 style="color: #333; margin-bottom: 15px;">Daily Summary</h3>
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr><td style="padding: 5px; border-bottom: 1px solid #eee;"><strong>Cash in Hand:</strong></td><td style="padding: 5px; border-bottom: 1px solid #eee;">₹${stats.adjustedCashSales.toFixed(2)}</td></tr>
-            <tr><td style="padding: 5px; border-bottom: 1px solid #eee;"><strong>Credit Sales:</strong></td><td style="padding: 5px; border-bottom: 1px solid #eee;">₹${stats.creditAmount.toFixed(2)}</td></tr>
-            <tr><td style="padding: 5px; border-bottom: 1px solid #eee;"><strong>Total Liters:</strong></td><td style="padding: 5px; border-bottom: 1px solid #eee;">${stats.totalLiters.toFixed(2)}L</td></tr>
-            <tr><td style="padding: 5px; border-bottom: 1px solid #eee;"><strong>Fuel Cash Sales:</strong></td><td style="padding: 5px; border-bottom: 1px solid #eee;">₹${stats.fuelCashSales.toFixed(2)}</td></tr>
-            <tr><td style="padding: 5px; border-bottom: 1px solid #eee;"><strong>Other Income:</strong></td><td style="padding: 5px; border-bottom: 1px solid #eee;">₹${stats.otherIncome.toFixed(2)}</td></tr>
-            <tr><td style="padding: 5px; border-bottom: 1px solid #eee;"><strong>Total Expenses:</strong></td><td style="padding: 5px; border-bottom: 1px solid #eee;">₹${stats.totalExpenses.toFixed(2)}</td></tr>
+        <div style="margin: 20px 0; border: 2px solid #ddd; padding: 20px; border-radius: 8px; background-color: #f8f9fa;">
+          <h3 style="color: #333; margin-bottom: 20px; font-size: 24px; font-weight: bold;">Daily Summary</h3>
+          <table style="width: 100%; border-collapse: collapse; font-size: 16px;">
+            <tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>Cash in Hand:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">₹${stats.adjustedCashSales.toFixed(2)}</td></tr>
+            <tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>Credit Sales:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">₹${stats.creditAmount.toFixed(2)}</td></tr>
+            <tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>Total Liters:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">${stats.totalLiters.toFixed(2)}L</td></tr>
+            <tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>Fuel Cash Sales:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">₹${stats.fuelCashSales.toFixed(2)}</td></tr>
+            <tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>Other Income:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">₹${stats.otherIncome.toFixed(2)}</td></tr>
+            <tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>Total Expenses:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">₹${stats.totalExpenses.toFixed(2)}</td></tr>
           </table>
         </div>
         
