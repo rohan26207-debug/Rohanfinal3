@@ -122,13 +122,24 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
     toast({ title: "Record Deleted", description: "Record deleted successfully" });
   };
 
-  // Filter data for selected date
+  // Filter data for selected date  
   const filteredIncomeData = incomeData.filter(item => item.date === selectedDate);
   const filteredExpenseData = expenseData.filter(item => item.date === selectedDate);
   
+  // Get cash sales for the selected date from parent component (passed via props)
+  // We'll calculate this from the parent's sales data
+  const getCashSalesForDate = () => {
+    // This will be calculated in the parent component and passed down
+    return 0; // Placeholder - will be updated via props
+  };
+  
   const currentData = activeType === 'income' ? filteredIncomeData : filteredExpenseData;
   const currentCategories = activeType === 'income' ? incomeCategories : expenseCategories;
-  const totalIncome = filteredIncomeData.reduce((sum, item) => sum + item.amount, 0);
+  
+  // Calculate totals including cash sales from fuel transactions
+  const otherIncome = filteredIncomeData.reduce((sum, item) => sum + item.amount, 0);
+  const cashSalesAmount = getCashSalesForDate(); // Will be passed from parent
+  const totalIncome = otherIncome + cashSalesAmount;
   const totalExpense = filteredExpenseData.reduce((sum, item) => sum + item.amount, 0);
   const netProfit = totalIncome - totalExpense;
 
