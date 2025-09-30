@@ -247,13 +247,13 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
         <CardContent className="p-0">
           <ScrollArea className="h-[600px]">
             <div className="p-4 space-y-3">
-              {creditData.length === 0 ? (
+              {filteredCreditData.length === 0 ? (
                 <div className="text-center py-8 text-slate-500">
                   <CreditCard className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                  <p>No credit sales yet</p>
+                  <p>No credit sales for {selectedDate === new Date().toISOString().split('T')[0] ? 'today' : 'selected date'}</p>
                 </div>
               ) : (
-                creditData.map((credit) => (
+                filteredCreditData.map((credit) => (
                   <div key={credit.id} className={`border rounded-lg p-4 hover:shadow-md transition-shadow ${
                     isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-white'
                   }`}>
