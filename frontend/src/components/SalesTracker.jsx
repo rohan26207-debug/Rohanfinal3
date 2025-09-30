@@ -279,13 +279,13 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
         <CardContent className="p-0">
           <ScrollArea className="h-[600px]">
             <div className="p-4 space-y-3">
-              {salesData.length === 0 ? (
+              {filteredSalesData.length === 0 ? (
                 <div className="text-center py-8 text-slate-500">
                   <Calculator className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                  <p>No sales records yet</p>
+                  <p>No sales records for {selectedDate === new Date().toISOString().split('T')[0] ? 'today' : 'selected date'}</p>
                 </div>
               ) : (
-                salesData.map((sale) => (
+                filteredSalesData.map((sale) => (
                   <div key={sale.id} className={`border rounded-lg p-4 hover:shadow-md transition-shadow ${
                     isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-white'
                   }`}>
