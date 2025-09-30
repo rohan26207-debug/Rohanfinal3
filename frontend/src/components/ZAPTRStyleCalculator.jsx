@@ -212,7 +212,7 @@ const ZAPTRStyleCalculator = () => {
 
         {/* Main Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className={`grid w-full grid-cols-4 mb-6 ${
+          <TabsList className={`grid w-full grid-cols-5 mb-6 ${
             isDarkMode ? 'bg-gray-800' : 'bg-slate-100'
           }`}>
             <TabsTrigger value="sales" className="flex items-center gap-2">
@@ -230,6 +230,10 @@ const ZAPTRStyleCalculator = () => {
             <TabsTrigger value="reports" className="flex items-center gap-2">
               <FileText className="w-4 h-4" />
               Reports
+            </TabsTrigger>
+            <TabsTrigger value="settings" className="flex items-center gap-2">
+              <Settings className="w-4 h-4" />
+              Settings
             </TabsTrigger>
           </TabsList>
 
