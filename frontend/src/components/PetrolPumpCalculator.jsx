@@ -72,9 +72,21 @@ const PetrolPumpCalculator = () => {
 
   const handleFuelTypeChange = (value) => {
     setFuelType(value);
+    setSelectedNozzle(''); // Reset nozzle selection
     const selectedFuel = mockData.fuelTypes.find(fuel => fuel.type === value);
     if (selectedFuel) {
       setPricePerLiter(selectedFuel.price.toString());
+    }
+  };
+
+  const handleNozzleChange = (nozzleId) => {
+    setSelectedNozzle(nozzleId);
+    const selectedFuel = mockData.fuelTypes.find(fuel => fuel.type === fuelType);
+    if (selectedFuel) {
+      const nozzle = selectedFuel.nozzles.find(n => n.id === nozzleId);
+      if (nozzle && calculationMode === 'meter') {
+        setInitialReading(nozzle.currentReading.toString());
+      }
     }
   };
 
