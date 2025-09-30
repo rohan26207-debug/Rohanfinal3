@@ -656,7 +656,7 @@ const ZAPTRStyleCalculator = () => {
                       isDarkMode ? 'border-gray-600 hover:bg-gray-700' : ''
                     }`}
                   >
-                    Today
+                    Current
                   </Button>
                 </div>
               </div>
