@@ -401,7 +401,7 @@ const ZAPTRStyleCalculator = () => {
     const todayIncome = incomeData.filter(income => income.date === selectedDate);
     const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
 
-    let csv = `Fuel Pump Daily Report - ${selectedDate}\n\n`;
+    let csv = `Manager Petrol Pump Daily Report - ${selectedDate}\n\n`;
     
     csv += 'SUMMARY\n';
     csv += 'Metric,Value\n';
