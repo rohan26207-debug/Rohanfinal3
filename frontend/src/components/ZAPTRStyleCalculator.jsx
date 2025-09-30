@@ -479,15 +479,19 @@ const ZAPTRStyleCalculator = () => {
           } shadow-lg`}>
             <CardContent className="p-4">
               <div className="flex items-center gap-2">
-                <TrendingUp className="w-5 h-5 text-purple-600" />
+                <TrendingUp className={`w-5 h-5 ${
+                  stats.netProfit >= 0 ? 'text-green-600' : 'text-red-600'
+                }`} />
                 <div>
                   <p className={`text-xs ${
                     isDarkMode ? 'text-gray-400' : 'text-slate-600'
                   }`}>
-                    Total Sales
+                    Net Profit {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : 'Selected Day'}
                   </p>
-                  <p className="text-xl font-bold text-purple-600">
-                    ₹{stats.totalSales.toFixed(2)}
+                  <p className={`text-xl font-bold ${
+                    stats.netProfit >= 0 ? 'text-green-600' : 'text-red-600'
+                  }`}>
+                    ₹{stats.netProfit.toFixed(2)}
                   </p>
                 </div>
               </div>
