@@ -339,6 +339,7 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
           </CardContent>
         </Card>
       </div>
+    </div>
   );
 };
 
