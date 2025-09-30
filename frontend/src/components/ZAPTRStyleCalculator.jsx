@@ -180,6 +180,108 @@ const ZAPTRStyleCalculator = () => {
           </Button>
         </div>
 
+        {/* Date Section */}
+        <Card className={`${
+          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
+        } shadow-lg mb-6`}>
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <Calendar className={`w-6 h-6 ${
+                    isDarkMode ? 'text-blue-400' : 'text-blue-600'
+                  }`} />
+                  <div>
+                    <Label className={`text-sm font-medium ${
+                      isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                    }`}>
+                      Operating Date
+                    </Label>
+                    <div className={`text-xl font-bold ${
+                      isDarkMode ? 'text-white' : 'text-slate-800'
+                    }`}>
+                      {formatDisplayDate(selectedDate)}
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={goToPreviousDay}
+                    className={`h-10 w-10 p-0 ${
+                      isDarkMode ? 'border-gray-600 hover:bg-gray-700' : ''
+                    }`}
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </Button>
+                  
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={goToNextDay}
+                    className={`h-10 w-10 p-0 ${
+                      isDarkMode ? 'border-gray-600 hover:bg-gray-700' : ''
+                    }`}
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </Button>
+                  
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={goToToday}
+                    className={`px-4 h-10 ${
+                      isDarkMode ? 'border-gray-600 hover:bg-gray-700' : ''
+                    }`}
+                  >
+                    Today
+                  </Button>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div>
+                  <Label htmlFor="date-picker" className={`text-sm font-medium ${
+                    isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                  }`}>
+                    Select Date
+                  </Label>
+                  <Input
+                    id="date-picker"
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    className={`h-10 w-40 ${
+                      isDarkMode ? 'bg-gray-700 border-gray-600' : ''
+                    }`}
+                  />
+                </div>
+                
+                <div className={`text-center px-4 py-2 rounded-lg ${
+                  isDarkMode ? 'bg-gray-700' : 'bg-slate-100'
+                }`}>
+                  <div className={`text-xs ${
+                    isDarkMode ? 'text-gray-400' : 'text-slate-600'
+                  }`}>
+                    Day {Math.floor((new Date(selectedDate) - new Date(new Date().getFullYear(), 0, 1)) / (24 * 60 * 60 * 1000)) + 1}
+                  </div>
+                  <div className={`font-semibold ${
+                    isDarkMode ? 'text-white' : 'text-slate-800'
+                  }`}>
+                    {new Date(selectedDate).toLocaleDateString('en-IN', { 
+                      day: '2-digit', 
+                      month: 'short', 
+                      year: '2-digit' 
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           <Card className={`${
