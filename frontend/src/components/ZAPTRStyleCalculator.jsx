@@ -11,7 +11,8 @@ import {
   Sun,
   Fuel,
   IndianRupee,
-  TrendingUp
+  TrendingUp,
+  Settings
 } from 'lucide-react';
 import SalesTracker from './SalesTracker';
 import CreditSales from './CreditSales';
