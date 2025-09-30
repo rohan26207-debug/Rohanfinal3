@@ -647,17 +647,6 @@ const ZAPTRStyleCalculator = () => {
                   >
                     <ChevronRight className="w-4 h-4" />
                   </Button>
-                  
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={goToToday}
-                    className={`px-4 h-10 ${
-                      isDarkMode ? 'border-gray-600 hover:bg-gray-700' : ''
-                    }`}
-                  >
-                    Current
-                  </Button>
                 </div>
               </div>
 
