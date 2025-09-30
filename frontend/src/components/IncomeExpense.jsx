@@ -126,11 +126,11 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
   const filteredIncomeData = incomeData.filter(item => item.date === selectedDate);
   const filteredExpenseData = expenseData.filter(item => item.date === selectedDate);
   
-  // Get cash sales for the selected date from parent component (passed via props)
-  // We'll calculate this from the parent's sales data
+  // Calculate cash sales for the selected date from sales data
   const getCashSalesForDate = () => {
-    // This will be calculated in the parent component and passed down
-    return 0; // Placeholder - will be updated via props
+    if (!salesData) return 0;
+    const dailySales = salesData.filter(sale => sale.date === selectedDate);
+    return dailySales.reduce((sum, sale) => sum + (sale.type === 'cash' ? sale.amount : 0), 0);
   };
   
   const currentData = activeType === 'income' ? filteredIncomeData : filteredExpenseData;
