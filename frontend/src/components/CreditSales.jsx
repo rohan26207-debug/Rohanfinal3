@@ -241,7 +241,7 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
         <CardHeader className="bg-gradient-to-r from-red-600 to-red-700 text-white rounded-t-lg">
           <CardTitle className="flex items-center gap-2">
             <Users className="w-5 h-5" />
-            Credit Sales Records
+            Credit Sales Records ({filteredCreditData.length})
           </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
