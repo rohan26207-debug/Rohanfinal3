@@ -476,6 +476,14 @@ const PetrolPumpCalculator = () => {
             </Card>
           </div>
 
+          {/* Cash Management */}
+          <div className="lg:col-span-1">
+            <CashManagement 
+              cashInHand={cashInHand} 
+              onCashUpdate={setCashInHand} 
+            />
+          </div>
+
           {/* Transaction History */}
           <div className="lg:col-span-1">
             <TransactionHistory transactions={transactions} />
