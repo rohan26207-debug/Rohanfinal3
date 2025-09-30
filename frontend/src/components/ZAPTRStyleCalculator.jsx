@@ -501,12 +501,15 @@ const ZAPTRStyleCalculator = () => {
                   <p className={`text-xs ${
                     isDarkMode ? 'text-gray-400' : 'text-slate-600'
                   }`}>
-                    Net Profit {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : 'Selected Day'}
+                    Total Revenue {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : 'Selected Day'}
                   </p>
-                  <p className={`text-xl font-bold ${
-                    stats.netProfit >= 0 ? 'text-green-600' : 'text-red-600'
+                  <p className="text-xl font-bold text-purple-600">
+                    ₹{(stats.totalIncome + stats.creditAmount).toFixed(2)}
+                  </p>
+                  <p className={`text-xs ${
+                    isDarkMode ? 'text-gray-500' : 'text-slate-500'
                   }`}>
-                    ₹{stats.netProfit.toFixed(2)}
+                    Cash: ₹{stats.totalIncome.toFixed(0)} + Credit: ₹{stats.creditAmount.toFixed(0)}
                   </p>
                 </div>
               </div>
