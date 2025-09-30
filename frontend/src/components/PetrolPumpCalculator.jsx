@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Separator } from './ui/separator';
 import { Badge } from './ui/badge';
-import { Fuel, Calculator, Receipt, RotateCcw, IndianRupee, Droplets, Gauge, Edit3 } from 'lucide-react';
+import { Fuel, Calculator, Receipt, RotateCcw, IndianRupee, Droplets, Gauge, Edit3, CreditCard, Banknote, Wallet, Plus, Minus } from 'lucide-react';
 import TransactionHistory from './TransactionHistory';
 import { useToast } from '../hooks/use-toast';
 import { mockData } from '../utils/mockData';
