@@ -21,7 +21,19 @@ import {
 import { useToast } from '../hooks/use-toast';
 import UnifiedRecords from './UnifiedRecords';
 
-const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, selectedDate, salesData, incomeData, expenseData }) => {
+const CreditSales = ({ 
+  isDarkMode, 
+  creditData, 
+  setCreditData, 
+  fuelSettings, 
+  selectedDate, 
+  salesData, 
+  setSalesData, 
+  incomeData, 
+  setIncomeData, 
+  expenseData, 
+  setExpenseData 
+}) => {
   const [formData, setFormData] = useState({
     customerName: '',
     vehicleNumber: '',
