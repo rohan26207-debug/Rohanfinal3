@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 
-const CreditSales = ({ isDarkMode, creditData, setCreditData }) => {
+const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings }) => {
   const [formData, setFormData] = useState({
     customerName: '',
     vehicleNumber: '',
