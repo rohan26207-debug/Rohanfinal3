@@ -315,10 +315,41 @@ const UnifiedRecords = ({
       isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
     } shadow-lg mt-6`}>
       <CardHeader className="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-t-lg">
-        <CardTitle className="flex items-center gap-2">
-          <Receipt className="w-5 h-5" />
-          All Records for {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : selectedDate} ({totalRecords})
-        </CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="flex items-center gap-2">
+            <Receipt className="w-5 h-5" />
+            All Records for {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : selectedDate} ({totalRecords})
+          </CardTitle>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={exportToPDF}
+              className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+            >
+              <FileText className="w-4 h-4 mr-1" />
+              PDF
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={exportToCSV}
+              className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+            >
+              <Download className="w-4 h-4 mr-1" />
+              CSV
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={copyToClipboard}
+              className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+            >
+              <Share2 className="w-4 h-4 mr-1" />
+              Copy
+            </Button>
+          </div>
+        </div>
       </CardHeader>
       <CardContent className="p-0">
         <ScrollArea className="h-[500px]">
