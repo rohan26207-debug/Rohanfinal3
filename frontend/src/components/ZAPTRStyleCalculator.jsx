@@ -444,12 +444,11 @@ const ZAPTRStyleCalculator = () => {
     text += `==========================================\n\n`;
     
     text += `DAILY SUMMARY:\n`;
-    text += `• Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}\n`;
-    text += `• Credit Sales: ₹${stats.creditAmount.toFixed(2)}\n`;
-    text += `• Total Liters: ${stats.totalLiters.toFixed(2)}L\n`;
-    text += `• Fuel Cash Sales: ₹${stats.fuelCashSales.toFixed(2)}\n`;
-    text += `• Other Income: ₹${stats.otherIncome.toFixed(2)}\n`;
-    text += `• Total Expenses: ₹${stats.totalExpenses.toFixed(2)}\n\n`;
+    text += `• 1. Reading Sales: ${stats.totalLiters.toFixed(2)}L • ₹${stats.fuelCashSales.toFixed(2)}\n`;
+    text += `• 2. Credit Sales: ${stats.creditLiters.toFixed(2)}L • ₹${stats.creditAmount.toFixed(2)}\n`;
+    text += `• 3. Income: ₹${stats.otherIncome.toFixed(2)}\n`;
+    text += `• 4. Expenses: ₹${stats.totalExpenses.toFixed(2)}\n`;
+    text += `• 5. Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}\n\n`;
     
     if (todaySales.length > 0) {
       text += `FUEL SALES (${todaySales.length}):\n`;
