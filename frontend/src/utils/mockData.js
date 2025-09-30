@@ -39,7 +39,10 @@ export const mockData = {
       pricePerLiter: 75.20,
       totalCost: 616.64,
       amountReceived: 620,
-      changeAmount: 3.36
+      changeAmount: 3.36,
+      calculationMode: 'meter',
+      initialReading: 892.3,
+      finalReading: 900.5
     },
     {
       id: 4,
