@@ -254,6 +254,7 @@ const ZAPTRStyleCalculator = () => {
               isDarkMode={isDarkMode}
               salesData={salesData}
               setSalesData={setSalesData}
+              fuelSettings={fuelSettings}
             />
           </TabsContent>
 
