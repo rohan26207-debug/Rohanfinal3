@@ -177,7 +177,7 @@ const PriceConfiguration = ({
 
               {/* Individual Fuel Price Settings */}
               <div className="space-y-3">
-                <Label className="text-sm font-medium">Fuel Prices (₹ per Liter)</Label>
+                <Label className="text-sm font-medium">Fuel R.S.P. (₹ per Liter)</Label>
                 {Object.entries(fuelSettings).map(([fuelType, config]) => (
                   <div key={fuelType} className={`border rounded-lg p-4 ${
                     isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-slate-50'
