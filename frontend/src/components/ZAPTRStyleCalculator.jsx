@@ -416,35 +416,115 @@ const ZAPTRStyleCalculator = () => {
 
     let content = '';
     
+    // Fuel Sales Table
     if (todaySales.length > 0) {
-      content += '<div style="margin: 25px 0;"><h3 style="color: #2563eb; font-size: 32px; margin-bottom: 15px;">Fuel Sales (' + todaySales.length + ')</h3>';
-      todaySales.forEach(sale => {
-        content += `<p style="margin: 8px 0; padding: 12px; background: #f8fafc; border-left: 4px solid #2563eb; font-size: 24px;"><strong>${sale.nozzle} - ${sale.fuelType}:</strong> ₹${sale.amount.toFixed(2)} (${sale.liters}L @ ₹${sale.rate}/L) - Reading: ${sale.startReading}L → ${sale.endReading}L</p>`;
+      content += '<div style="margin: 25px 0;">';
+      content += '<h3 style="color: #2563eb; font-size: 32px; margin-bottom: 15px;">Fuel Sales (' + todaySales.length + ')</h3>';
+      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">';
+      content += '<thead>';
+      content += '<tr style="background-color: #f1f5f9;">';
+      content += '<th style="border: 1px solid #cbd5e1; padding: 10px; font-size: 18px; text-align: center;">Sr.No</th>';
+      content += '<th style="border: 1px solid #cbd5e1; padding: 10px; font-size: 18px; text-align: center;">Description</th>';
+      content += '<th style="border: 1px solid #cbd5e1; padding: 10px; font-size: 18px; text-align: center;">Start</th>';
+      content += '<th style="border: 1px solid #cbd5e1; padding: 10px; font-size: 18px; text-align: center;">End</th>';
+      content += '<th style="border: 1px solid #cbd5e1; padding: 10px; font-size: 18px; text-align: center;">Rate</th>';
+      content += '<th style="border: 1px solid #cbd5e1; padding: 10px; font-size: 18px; text-align: center;">Litres</th>';
+      content += '<th style="border: 1px solid #cbd5e1; padding: 10px; font-size: 18px; text-align: center;">Amount</th>';
+      content += '</tr>';
+      content += '</thead>';
+      content += '<tbody>';
+      todaySales.forEach((sale, index) => {
+        content += '<tr>';
+        content += `<td style="border: 1px solid #cbd5e1; padding: 8px; font-size: 16px; text-align: center;">${index + 1}</td>`;
+        content += `<td style="border: 1px solid #cbd5e1; padding: 8px; font-size: 16px;">${sale.nozzle} - ${sale.fuelType}</td>`;
+        content += `<td style="border: 1px solid #cbd5e1; padding: 8px; font-size: 16px; text-align: right;">${sale.startReading}L</td>`;
+        content += `<td style="border: 1px solid #cbd5e1; padding: 8px; font-size: 16px; text-align: right;">${sale.endReading}L</td>`;
+        content += `<td style="border: 1px solid #cbd5e1; padding: 8px; font-size: 16px; text-align: right;">₹${sale.rate}/L</td>`;
+        content += `<td style="border: 1px solid #cbd5e1; padding: 8px; font-size: 16px; text-align: right;">${sale.liters.toFixed(2)}L</td>`;
+        content += `<td style="border: 1px solid #cbd5e1; padding: 8px; font-size: 16px; text-align: right;">₹${sale.amount.toFixed(2)}</td>`;
+        content += '</tr>';
       });
+      content += '</tbody>';
+      content += '</table>';
       content += '</div>';
     }
 
+    // Credit Sales Table
     if (todayCredits.length > 0) {
-      content += '<div style="margin: 25px 0;"><h3 style="color: #ea580c; font-size: 32px; margin-bottom: 15px;">Credit Sales (' + todayCredits.length + ')</h3>';
-      todayCredits.forEach(credit => {
-        content += `<p style="margin: 8px 0; padding: 12px; background: #fff7ed; border-left: 4px solid #ea580c; font-size: 24px;"><strong>${credit.customerName}</strong> (${credit.vehicleNumber || 'N/A'}): ₹${credit.amount.toFixed(2)} (${credit.liters}L ${credit.fuelType} @ ₹${credit.rate}/L)</p>`;
+      content += '<div style="margin: 25px 0;">';
+      content += '<h3 style="color: #ea580c; font-size: 32px; margin-bottom: 15px;">Credit Sales (' + todayCredits.length + ')</h3>';
+      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">';
+      content += '<thead>';
+      content += '<tr style="background-color: #fff7ed;">';
+      content += '<th style="border: 1px solid #fed7aa; padding: 10px; font-size: 18px; text-align: center;">Sr.No</th>';
+      content += '<th style="border: 1px solid #fed7aa; padding: 10px; font-size: 18px; text-align: center;">Description</th>';
+      content += '<th style="border: 1px solid #fed7aa; padding: 10px; font-size: 18px; text-align: center;">Litres</th>';
+      content += '<th style="border: 1px solid #fed7aa; padding: 10px; font-size: 18px; text-align: center;">Rate</th>';
+      content += '<th style="border: 1px solid #fed7aa; padding: 10px; font-size: 18px; text-align: center;">Amount</th>';
+      content += '</tr>';
+      content += '</thead>';
+      content += '<tbody>';
+      todayCredits.forEach((credit, index) => {
+        content += '<tr>';
+        content += `<td style="border: 1px solid #fed7aa; padding: 8px; font-size: 16px; text-align: center;">${index + 1}</td>`;
+        content += `<td style="border: 1px solid #fed7aa; padding: 8px; font-size: 16px;">${credit.customerName} - ${credit.vehicleNumber || 'N/A'}</td>`;
+        content += `<td style="border: 1px solid #fed7aa; padding: 8px; font-size: 16px; text-align: right;">${credit.liters.toFixed(2)}L</td>`;
+        content += `<td style="border: 1px solid #fed7aa; padding: 8px; font-size: 16px; text-align: right;">₹${credit.rate}/L</td>`;
+        content += `<td style="border: 1px solid #fed7aa; padding: 8px; font-size: 16px; text-align: right;">₹${credit.amount.toFixed(2)}</td>`;
+        content += '</tr>';
       });
+      content += '</tbody>';
+      content += '</table>';
       content += '</div>';
     }
 
+    // Income Table
     if (todayIncome.length > 0) {
-      content += '<div style="margin: 25px 0;"><h3 style="color: #16a34a; font-size: 32px; margin-bottom: 15px;">Income (' + todayIncome.length + ')</h3>';
-      todayIncome.forEach(income => {
-        content += `<p style="margin: 8px 0; padding: 12px; background: #f0fdf4; border-left: 4px solid #16a34a; font-size: 24px;"><strong>₹${income.amount.toFixed(2)}:</strong> ${income.description}</p>`;
+      content += '<div style="margin: 25px 0;">';
+      content += '<h3 style="color: #16a34a; font-size: 32px; margin-bottom: 15px;">Income (' + todayIncome.length + ')</h3>';
+      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">';
+      content += '<thead>';
+      content += '<tr style="background-color: #f0fdf4;">';
+      content += '<th style="border: 1px solid #bbf7d0; padding: 10px; font-size: 18px; text-align: center;">Sr.No</th>';
+      content += '<th style="border: 1px solid #bbf7d0; padding: 10px; font-size: 18px; text-align: center;">Description</th>';
+      content += '<th style="border: 1px solid #bbf7d0; padding: 10px; font-size: 18px; text-align: center;">Amount</th>';
+      content += '</tr>';
+      content += '</thead>';
+      content += '<tbody>';
+      todayIncome.forEach((income, index) => {
+        content += '<tr>';
+        content += `<td style="border: 1px solid #bbf7d0; padding: 8px; font-size: 16px; text-align: center;">${index + 1}</td>`;
+        content += `<td style="border: 1px solid #bbf7d0; padding: 8px; font-size: 16px;">${income.description}</td>`;
+        content += `<td style="border: 1px solid #bbf7d0; padding: 8px; font-size: 16px; text-align: right;">₹${income.amount.toFixed(2)}</td>`;
+        content += '</tr>';
       });
+      content += '</tbody>';
+      content += '</table>';
       content += '</div>';
     }
 
+    // Expenses Table
     if (todayExpenses.length > 0) {
-      content += '<div style="margin: 25px 0;"><h3 style="color: #dc2626; font-size: 32px; margin-bottom: 15px;">Expenses (' + todayExpenses.length + ')</h3>';
-      todayExpenses.forEach(expense => {
-        content += `<p style="margin: 8px 0; padding: 12px; background: #fef2f2; border-left: 4px solid #dc2626; font-size: 24px;"><strong>₹${expense.amount.toFixed(2)}:</strong> ${expense.description}</p>`;
+      content += '<div style="margin: 25px 0;">';
+      content += '<h3 style="color: #dc2626; font-size: 32px; margin-bottom: 15px;">Expenses (' + todayExpenses.length + ')</h3>';
+      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">';
+      content += '<thead>';
+      content += '<tr style="background-color: #fef2f2;">';
+      content += '<th style="border: 1px solid #fecaca; padding: 10px; font-size: 18px; text-align: center;">Sr.No</th>';
+      content += '<th style="border: 1px solid #fecaca; padding: 10px; font-size: 18px; text-align: center;">Description</th>';
+      content += '<th style="border: 1px solid #fecaca; padding: 10px; font-size: 18px; text-align: center;">Amount</th>';
+      content += '</tr>';
+      content += '</thead>';
+      content += '<tbody>';
+      todayExpenses.forEach((expense, index) => {
+        content += '<tr>';
+        content += `<td style="border: 1px solid #fecaca; padding: 8px; font-size: 16px; text-align: center;">${index + 1}</td>`;
+        content += `<td style="border: 1px solid #fecaca; padding: 8px; font-size: 16px;">${expense.description}</td>`;
+        content += `<td style="border: 1px solid #fecaca; padding: 8px; font-size: 16px; text-align: right;">₹${expense.amount.toFixed(2)}</td>`;
+        content += '</tr>';
       });
+      content += '</tbody>';
+      content += '</table>';
       content += '</div>';
     }
 
