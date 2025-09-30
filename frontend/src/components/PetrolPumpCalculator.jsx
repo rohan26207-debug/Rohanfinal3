@@ -33,13 +33,26 @@ const PetrolPumpCalculator = () => {
   }, []);
 
   useEffect(() => {
-    if (pricePerLiter && quantity) {
-      const total = parseFloat(pricePerLiter) * parseFloat(quantity);
+    let calculatedQuantity = 0;
+    
+    if (calculationMode === 'manual' && quantity) {
+      calculatedQuantity = parseFloat(quantity);
+    } else if (calculationMode === 'meter' && initialReading && finalReading) {
+      const initial = parseFloat(initialReading);
+      const final = parseFloat(finalReading);
+      if (final > initial) {
+        calculatedQuantity = final - initial;
+        setQuantity(calculatedQuantity.toFixed(2));
+      }
+    }
+    
+    if (pricePerLiter && calculatedQuantity > 0) {
+      const total = parseFloat(pricePerLiter) * calculatedQuantity;
       setTotalCost(total);
     } else {
       setTotalCost(0);
     }
-  }, [pricePerLiter, quantity]);
+  }, [pricePerLiter, quantity, calculationMode, initialReading, finalReading]);
 
   useEffect(() => {
     if (amountReceived && totalCost) {
