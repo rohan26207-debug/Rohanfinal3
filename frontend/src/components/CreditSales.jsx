@@ -32,12 +32,11 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings }) =>
   const [editingId, setEditingId] = useState(null);
   const { toast } = useToast();
 
-  const fuelTypes = [
-    { type: 'Petrol', rate: 102.50 },
-    { type: 'Diesel', rate: 89.75 },
-    { type: 'CNG', rate: 75.20 },
-    { type: 'Premium', rate: 108.90 }
-  ];
+  // Generate fuel types from settings
+  const fuelTypes = Object.entries(fuelSettings).map(([type, config]) => ({
+    type,
+    rate: config.price
+  }));
 
   const handleFuelChange = (fuelType) => {
     const fuel = fuelTypes.find(f => f.type === fuelType);
