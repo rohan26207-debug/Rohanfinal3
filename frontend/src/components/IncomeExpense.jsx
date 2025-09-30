@@ -246,7 +246,7 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
                             ? 'bg-green-100 text-green-800' 
                             : 'bg-red-100 text-red-800'
                         } border-0`}>
-                          {record.category}
+                          {activeType === 'income' ? 'Income' : 'Expense'}
                         </Badge>
                         <div className="flex items-center gap-1">
                           <Button 
