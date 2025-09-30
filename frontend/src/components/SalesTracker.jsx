@@ -381,6 +381,17 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
           </ScrollArea>
         </CardContent>
       </Card>
+      </div>
+      
+      {/* Unified Records View */}
+      <UnifiedRecords
+        isDarkMode={isDarkMode}
+        salesData={salesData}
+        creditData={creditData}
+        incomeData={incomeData}
+        expenseData={expenseData}
+        selectedDate={selectedDate}
+      />
     </div>
   );
 };
