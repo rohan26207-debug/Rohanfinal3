@@ -385,9 +385,9 @@ const ZAPTRStyleCalculator = () => {
     }
 
     if (todayExpenses.length > 0) {
-      content += '<div style="margin: 20px 0;"><h3 style="color: #dc2626;">Expenses (' + todayExpenses.length + ')</h3>';
+      content += '<div style="margin: 25px 0;"><h3 style="color: #dc2626; font-size: 20px; margin-bottom: 15px;">Expenses (' + todayExpenses.length + ')</h3>';
       todayExpenses.forEach(expense => {
-        content += `<p style="margin: 5px 0; padding: 8px; background: #fef2f2; border-left: 3px solid #dc2626;"><strong>₹${expense.amount.toFixed(2)}:</strong> ${expense.description}</p>`;
+        content += `<p style="margin: 8px 0; padding: 12px; background: #fef2f2; border-left: 4px solid #dc2626; font-size: 15px;"><strong>₹${expense.amount.toFixed(2)}:</strong> ${expense.description}</p>`;
       });
       content += '</div>';
     }
