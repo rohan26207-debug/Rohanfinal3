@@ -32,10 +32,10 @@ const IncomeExpense = ({ isDarkMode, incomeData, setIncomeData, expenseData, set
   // Removed category arrays - simplified to just amount and description
 
   const handleSubmit = () => {
-    if (!formData.category || !formData.amount) {
+    if (!formData.amount) {
       toast({
         title: "Missing Information",
-        description: "Please fill all required fields",
+        description: "Please enter an amount",
         variant: "destructive",
       });
       return;
