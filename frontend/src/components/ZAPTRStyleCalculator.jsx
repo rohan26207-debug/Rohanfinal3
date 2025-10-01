@@ -310,9 +310,9 @@ const ZAPTRStyleCalculator = () => {
             <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; border: 1px solid #333; font-family: Arial, sans-serif;">
               <thead>
                 <tr>
-                  <th style="background-color: #f2f2f2; border: 1px solid #333; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: left; font-family: Arial, sans-serif;">Category</th>
-                  <th style="background-color: #f2f2f2; border: 1px solid #333; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: right; font-family: Arial, sans-serif;">Total Litres</th>
-                  <th style="background-color: #f2f2f2; border: 1px solid #333; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: right; font-family: Arial, sans-serif;">Total Amount</th>
+                  <th style="border: 1px solid #333; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: left; font-family: Arial, sans-serif;">Category</th>
+                  <th style="border: 1px solid #333; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: right; font-family: Arial, sans-serif;">Total Litres</th>
+                  <th style="border: 1px solid #333; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: right; font-family: Arial, sans-serif;">Total Amount</th>
                 </tr>
               </thead>
               <tbody>
