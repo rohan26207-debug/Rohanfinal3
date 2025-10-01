@@ -411,8 +411,8 @@ const ZAPTRStyleCalculator = () => {
       // Cash in Hand
       pdf.setFont('helvetica', 'bold');
       pdf.text('Cash in Hand', margin, yPosition);
-      pdf.text(\`\${stats.totalLiters.toFixed(2)}L\`, margin + 200, yPosition);
-      pdf.text(\`₹\${stats.adjustedCashSales.toFixed(2)}\`, margin + 300, yPosition, { align: 'right' });
+      pdf.text(`${stats.totalLiters.toFixed(2)}L`, margin + 200, yPosition);
+      pdf.text(`₹${stats.adjustedCashSales.toFixed(2)}`, margin + 300, yPosition, { align: 'right' });
       yPosition += 20;
       
       // Add detailed records if available
