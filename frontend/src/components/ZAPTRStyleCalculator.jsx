@@ -52,12 +52,16 @@ const ZAPTRStyleCalculator = () => {
       const expenseData = localStorageService.getExpenseData();
       const fuelSettings = localStorageService.getFuelSettings();
 
+      console.log('Main: Loaded fuel settings from localStorage:', fuelSettings);
+
       // Set data in component state
       setSalesData(salesData);
       setCreditData(creditData);
       setIncomeData(incomeData);
       setExpenseData(expenseData);
       setFuelSettings(fuelSettings);
+      
+      console.log('Main: Set fuel settings in state:', fuelSettings);
 
     } catch (err) {
       console.error('Failed to load data from localStorage:', err);
