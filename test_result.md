@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Fix mobile keyboard minimizing issue in settings tabs where virtual keyboard collapses after typing each word, requiring user to click again to continue typing."
+user_problem_statement: "Remove the Employees tab from settings dropdown, keeping only Owner Details, Fuel Types, and Contact tabs."
 
 frontend:
   - task: "Tab navigation R.S.P. to Rate renaming"
