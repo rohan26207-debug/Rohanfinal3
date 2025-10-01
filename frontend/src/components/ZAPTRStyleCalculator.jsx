@@ -506,10 +506,10 @@ const ZAPTRStyleCalculator = () => {
       });
 
       // Total row
-      content += '<tr style="font-weight: bold;">';
-      content += '<td colspan="4" style="border: 1px solid #333; padding: 6px 10px; font-size: 10px; font-weight: bold; text-align: right; font-family: Arial, sans-serif;">Total:</td>';
-      content += `<td style="border: 1px solid #333; padding: 6px 10px; font-size: 10px; text-align: right; font-weight: bold; font-family: Arial, sans-serif;">${totalCreditLitres.toFixed(2)}</td>`;
-      content += `<td style="border: 1px solid #333; padding: 6px 10px; font-size: 10px; text-align: right; font-weight: bold; font-family: Arial, sans-serif;">₹${totalCreditAmount.toFixed(2)}</td>`;
+      content += '<tr>';
+      content += '<td colspan="4" style="border: 1px solid black; padding: 3px; font-size: 9px; font-weight: bold; text-align: right;">Total:</td>';
+      content += `<td style="border: 1px solid black; padding: 3px; font-size: 9px; text-align: right; font-weight: bold;">${totalCreditLitres.toFixed(2)}</td>`;
+      content += `<td style="border: 1px solid black; padding: 3px; font-size: 9px; text-align: right; font-weight: bold;">₹${totalCreditAmount.toFixed(2)}</td>`;
       content += '</tr>';
 
       content += '</tbody>';
