@@ -648,28 +648,28 @@ const ZAPTRStyleCalculator = () => {
       <div className="max-w-7xl mx-auto p-4">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-blue-600 rounded-full">
-                <Fuel className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <h1 className={`text-4xl font-bold ${
-                  isDarkMode ? 'text-white' : 'text-slate-800'
-                }`}>
-                  Manager Petrol Pump Calculator
-                </h1>
-              </div>
+          {/* Settings Dropdown - Moved to topmost left */}
+          <HeaderSettings 
+            isDarkMode={isDarkMode}
+            fuelSettings={fuelSettings}
+            setFuelSettings={setFuelSettings}
+          />
+          
+          {/* Centered App Title */}
+          <div className="flex items-center gap-3 flex-1 justify-center">
+            <div className="p-3 bg-blue-600 rounded-full">
+              <Fuel className="w-8 h-8 text-white" />
             </div>
-            
-            {/* Settings Dropdown */}
-            <HeaderSettings 
-              isDarkMode={isDarkMode}
-              fuelSettings={fuelSettings}
-              setFuelSettings={setFuelSettings}
-            />
+            <div>
+              <h1 className={`text-4xl font-bold ${
+                isDarkMode ? 'text-white' : 'text-slate-800'
+              }`}>
+                Manager Petrol Pump Calculator
+              </h1>
+            </div>
           </div>
           
+          {/* Theme Toggle - Remains on right */}
           <Button
             variant="outline"
             onClick={toggleTheme}
