@@ -306,7 +306,7 @@ metadata:
           comment: "Successfully added Owner Details tab with editable fields for petrol pump name (Vishnu Parvati Petroleum), dealer name (Rohan.R.Khandve), address, phone, and email. Full-screen interface with save functionality tested and working."
 
   - task: "Remove Employees tab from settings"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
@@ -315,7 +315,7 @@ metadata:
     status_history:
         - working: "NA"
           agent: "main"
-          comment: "Need to remove Employees tab from settings dropdown and clean up all employee-related code, state, and components."
+          comment: "Removed Employees tab from settings: 1) Removed employee state variables and functions, 2) Deleted EmployeesFullScreen component, 3) Updated dropdown to show only Owner Details, Fuel Types, and Contact tabs, 4) Cleaned up unused imports (Users icon). Settings now has 3 tabs instead of 4."
     status_history:
         - working: "NA"
           agent: "testing"
