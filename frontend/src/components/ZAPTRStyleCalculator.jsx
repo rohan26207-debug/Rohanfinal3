@@ -668,34 +668,25 @@ const ZAPTRStyleCalculator = () => {
       text += `-------\n`;
     }
     
-    // *Extras* section - Income separate
+    // *Income* section
     if (todayIncome.length > 0) {
-      text += `*Extras*\n`;
+      text += `*Income*\n`;
       todayIncome.forEach((income, index) => {
-        text += `${index + 1}. Extras:\n`;
+        text += `${index + 1}. Income:\n`;
         text += ` ${income.description}: ${income.amount.toFixed(2)}\n`;
       });
-      
-      // Add expenses after income
-      todayExpenses.forEach((expense, index) => {
-        const extraIndex = todayIncome.length + index + 1;
-        text += `${extraIndex}. Extras:\n`;
-        text += ` ${expense.description}: -${expense.amount.toFixed(2)}\n`;
-      });
-      
-      const extrasTotal = stats.otherIncome - stats.totalExpenses;
-      text += `*Extras Total: ${extrasTotal.toFixed(2)}*\n`;
+      text += `*Income Total: ${stats.otherIncome.toFixed(2)}*\n`;
       text += `-------\n`;
-    } else if (todayExpenses.length > 0) {
-      // Only expenses, no income
-      text += `*Extras*\n`;
+    }
+    
+    // *Expenses* section
+    if (todayExpenses.length > 0) {
+      text += `*Expenses*\n`;
       todayExpenses.forEach((expense, index) => {
-        text += `${index + 1}. Extras:\n`;
-        text += ` ${expense.description}: -${expense.amount.toFixed(2)}\n`;
+        text += `${index + 1}. Expenses:\n`;
+        text += ` ${expense.description}: ${expense.amount.toFixed(2)}\n`;
       });
-      
-      const extrasTotal = -stats.totalExpenses;
-      text += `*Extras Total: ${extrasTotal.toFixed(2)}*\n`;
+      text += `*Expenses Total: ${stats.totalExpenses.toFixed(2)}*\n`;
       text += `-------\n`;
     }
     
