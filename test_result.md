@@ -143,15 +143,18 @@ frontend:
 
   - task: "Rate functionality testing"
     implemented: true
-    working: "NA"
+    working: false
     file: "/app/frontend/src/components/PriceConfiguration.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: "NA"
           agent: "main"
           comment: "Rate functionality including Quick Rate Adjustments (+2%, +5%, -2%, -5%) and Save Rate button should work correctly after renaming."
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL ISSUE IDENTIFIED: User cannot save fuel rates because they are not authenticated. Backend API is working perfectly (tested successfully with Petrol ₹102.50 and Diesel ₹89.75), but all API calls return 401 Unauthorized without Google OAuth login. Frontend Rate tab functionality is correct. ROOT CAUSE: Authentication required - user needs to login via Settings > Sync > 'Connect Gmail Account' button. SOLUTION: User must complete Google OAuth authentication process to enable fuel rates saving functionality."
 
   - task: "Dynamic nozzle dropdown filtering"
     implemented: true
