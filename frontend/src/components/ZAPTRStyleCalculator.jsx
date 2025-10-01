@@ -22,7 +22,8 @@ import {
   Download,
   Share2,
   Plus,
-  Trash2
+  Trash2,
+  Gauge
 } from 'lucide-react';
 import SalesTracker from './SalesTracker';
 import CreditSales from './CreditSales';
