@@ -449,7 +449,7 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
     </div>
   );
 
-  // Full-screen Contact component
+  // Full-screen Contact component (editable)
   const ContactFullScreen = () => (
     <div className={`fixed inset-0 z-50 ${
       isDarkMode ? 'bg-gray-900' : 'bg-white'
@@ -473,96 +473,124 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
             Contact Information
           </h1>
         </div>
+        <Button onClick={saveContactInfo} className="flex items-center gap-2">
+          <Save className="w-4 h-4" />
+          Save Changes
+        </Button>
       </div>
       
       {/* Content */}
-      <div className="p-6 max-w-2xl mx-auto">
-        <Card className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'}`}>
-          <CardContent className="p-8">
-            <div className="text-center mb-8">
-              <div className="flex items-center justify-center w-24 h-24 mx-auto mb-4 bg-blue-100 rounded-full">
-                <User className="w-12 h-12 text-blue-600" />
+      <div className="p-6 max-w-3xl mx-auto">
+        <div className="space-y-6">
+          {/* Petrol Pump Name */}
+          <Card className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'}`}>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Fuel className="w-5 h-5" />
+                Petrol Pump Information
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="pumpName">Petrol Pump Name</Label>
+                <div className="flex items-center gap-2 mt-1">
+                  <Input
+                    id="pumpName"
+                    value={contactInfo.pumpName}
+                    onChange={(e) => updateContactInfo('pumpName', e.target.value)}
+                    placeholder="Enter petrol pump name"
+                  />
+                  <Edit className="w-4 h-4 text-gray-500" />
+                </div>
               </div>
-              <h2 className={`text-3xl font-bold mb-2 ${
-                isDarkMode ? 'text-white' : 'text-slate-800'
-              }`}>
-                Contact Information
-              </h2>
-              <p className={`text-lg ${
-                isDarkMode ? 'text-gray-300' : 'text-slate-600'
-              }`}>
-                Get in touch with us
-              </p>
-            </div>
-            
-            <div className="space-y-6">
-              <div className={`border rounded-xl p-6 ${
-                isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-slate-50'
-              }`}>
-                <div className="flex items-start gap-4">
-                  <User className="w-8 h-8 text-blue-600 mt-1" />
-                  <div className="flex-1">
-                    <div className={`text-sm font-medium mb-1 ${
-                      isDarkMode ? 'text-gray-400' : 'text-slate-600'
-                    }`}>
-                      Owner & Manager
-                    </div>
-                    <div className={`text-2xl font-bold mb-1 ${
-                      isDarkMode ? 'text-white' : 'text-slate-800'
-                    }`}>
-                      Rohan.R.Khandve
-                    </div>
-                    <div className={`text-lg ${
-                      isDarkMode ? 'text-gray-300' : 'text-slate-600'
-                    }`}>
-                      Vishnu Parvati Petroleum
-                    </div>
-                  </div>
+            </CardContent>
+          </Card>
+
+          {/* Dealer Information */}
+          <Card className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'}`}>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <User className="w-5 h-5" />
+                Dealer Information
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="dealerName">Dealer Name</Label>
+                <div className="flex items-center gap-2 mt-1">
+                  <Input
+                    id="dealerName"
+                    value={contactInfo.dealerName}
+                    onChange={(e) => updateContactInfo('dealerName', e.target.value)}
+                    placeholder="Enter dealer name"
+                  />
+                  <Edit className="w-4 h-4 text-gray-500" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Address Information */}
+          <Card className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'}`}>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <MapPin className="w-5 h-5" />
+                Address Information
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="address">Complete Address</Label>
+                <div className="flex items-center gap-2 mt-1">
+                  <Input
+                    id="address"
+                    value={contactInfo.address}
+                    onChange={(e) => updateContactInfo('address', e.target.value)}
+                    placeholder="Enter complete address"
+                  />
+                  <Edit className="w-4 h-4 text-gray-500" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Contact Details */}
+          <Card className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'}`}>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Phone className="w-5 h-5" />
+                Contact Details
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="phone">Phone Number</Label>
+                <div className="flex items-center gap-2 mt-1">
+                  <Input
+                    id="phone"
+                    value={contactInfo.phone}
+                    onChange={(e) => updateContactInfo('phone', e.target.value)}
+                    placeholder="Enter phone number"
+                  />
+                  <Edit className="w-4 h-4 text-gray-500" />
                 </div>
               </div>
               
-              <div className={`border rounded-xl p-6 ${
-                isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-slate-50'
-              }`}>
-                <div className="flex items-center gap-4">
-                  <Phone className="w-8 h-8 text-green-600" />
-                  <div className="flex-1">
-                    <div className={`text-sm font-medium mb-1 ${
-                      isDarkMode ? 'text-gray-400' : 'text-slate-600'
-                    }`}>
-                      Mobile Number
-                    </div>
-                    <div className={`text-2xl font-bold ${
-                      isDarkMode ? 'text-white' : 'text-slate-800'
-                    }`}>
-                      +91 9822026207
-                    </div>
-                  </div>
+              <div>
+                <Label htmlFor="email">Email Address</Label>
+                <div className="flex items-center gap-2 mt-1">
+                  <Input
+                    id="email"
+                    value={contactInfo.email}
+                    onChange={(e) => updateContactInfo('email', e.target.value)}
+                    placeholder="Enter email address"
+                  />
+                  <Edit className="w-4 h-4 text-gray-500" />
                 </div>
               </div>
-              
-              <div className={`border rounded-xl p-6 ${
-                isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-slate-50'
-              }`}>
-                <div className="flex items-start gap-4">
-                  <Mail className="w-8 h-8 text-red-600 mt-1" />
-                  <div className="flex-1">
-                    <div className={`text-sm font-medium mb-1 ${
-                      isDarkMode ? 'text-gray-400' : 'text-slate-600'
-                    }`}>
-                      Email Address
-                    </div>
-                    <div className={`text-xl font-bold break-all ${
-                      isDarkMode ? 'text-white' : 'text-slate-800'
-                    }`}>
-                      vishnuparvatipetroleum@gmail.com
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
