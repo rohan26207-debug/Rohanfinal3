@@ -600,6 +600,10 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
     return <FuelTypesFullScreen />;
   }
   
+  if (currentView === 'employees') {
+    return <EmployeesFullScreen />;
+  }
+  
   if (currentView === 'contact') {
     return <ContactFullScreen />;
   }
