@@ -447,9 +447,8 @@ const ZAPTRStyleCalculator = () => {
     
     // Reading Calculation Table
     if (todaySales.length > 0) {
-      content += '<div style="margin: 18px 0;">';
       content += '<h2 style="color: #000; margin-bottom: 15px; font-size: 16px; font-weight: bold;">Reading Calculation</h2>';
-      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 12px; border: 2px solid #444;">';
+      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; border: 1px solid #ccc;">';
       content += '<thead>';
       content += '<tr style="background-color: #e8e8e8;">';
       content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Sr.</th>';
