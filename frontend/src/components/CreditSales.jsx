@@ -74,12 +74,25 @@ const CreditSales = ({ isDarkMode, creditData, addCreditRecord, fuelSettings, se
     };
 
     if (editingId) {
-      setCreditData(prev => prev.map(credit => credit.id === editingId ? creditRecord : credit));
+      // For now, editing is not supported in offline mode
+      toast({ title: "Edit Not Supported", description: "Editing is not available in offline mode", variant: "destructive" });
       setEditingId(null);
-      toast({ title: "Credit Updated", description: "Credit sale updated successfully" });
     } else {
-      setCreditData(prev => [creditRecord, ...prev]);
-      toast({ title: "Credit Added", description: "Credit sale added successfully" });
+      const newCredit = addCreditRecord({
+        customerName: formData.customerName,
+        vehicleNumber: formData.vehicleNumber,
+        fuelType: formData.fuelType,
+        liters: parseFloat(formData.liters),
+        rate: parseFloat(formData.rate),
+        amount: parseFloat(calculateAmount()),
+        status: 'pending'
+      });
+      
+      if (newCredit) {
+        toast({ title: "Credit Added", description: "Credit sale added successfully" });
+      } else {
+        toast({ title: "Error", description: "Failed to add credit record", variant: "destructive" });
+      }
     }
 
     resetForm();
