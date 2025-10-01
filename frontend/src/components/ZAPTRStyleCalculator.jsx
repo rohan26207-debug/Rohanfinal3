@@ -463,26 +463,26 @@ const ZAPTRStyleCalculator = () => {
 
     // Credit Sales Table
     if (todayCredits.length > 0) {
-      content += '<div style="margin: 25px 0;">';
-      content += '<h3 style="color: #000000; font-size: 32px; margin-bottom: 15px;">Credit Sales (' + todayCredits.length + ')</h3>';
-      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">';
+      content += '<div style="margin: 8px 0;">';
+      content += '<h3 style="color: #000000; font-size: 12px; margin-bottom: 4px;">Credit Sales (' + todayCredits.length + ')</h3>';
+      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 6px;">';
       content += '<thead>';
-      content += '<tr style="background-color: #ffffff;">';
-      content += '<th style="border: 1px solid #000000; padding: 10px; font-size: 18px; text-align: center; background-color: #ffffff; color: #000000;">Sr.No</th>';
-      content += '<th style="border: 1px solid #000000; padding: 10px; font-size: 18px; text-align: center; background-color: #ffffff; color: #000000;">Description</th>';
-      content += '<th style="border: 1px solid #000000; padding: 10px; font-size: 18px; text-align: center; background-color: #ffffff; color: #000000;">Litres</th>';
-      content += '<th style="border: 1px solid #000000; padding: 10px; font-size: 18px; text-align: center; background-color: #ffffff; color: #000000;">Rate</th>';
-      content += '<th style="border: 1px solid #000000; padding: 10px; font-size: 18px; text-align: center; background-color: #ffffff; color: #000000;">Amount</th>';
+      content += '<tr>';
+      content += '<th style="border: 1px solid #ccc; padding: 2px; font-size: 8px; text-align: center;">Sr.</th>';
+      content += '<th style="border: 1px solid #ccc; padding: 2px; font-size: 8px; text-align: center;">Customer</th>';
+      content += '<th style="border: 1px solid #ccc; padding: 2px; font-size: 8px; text-align: center;">Litres</th>';
+      content += '<th style="border: 1px solid #ccc; padding: 2px; font-size: 8px; text-align: center;">Rate</th>';
+      content += '<th style="border: 1px solid #ccc; padding: 2px; font-size: 8px; text-align: center;">Amount</th>';
       content += '</tr>';
       content += '</thead>';
       content += '<tbody>';
       todayCredits.forEach((credit, index) => {
         content += '<tr>';
-        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; text-align: center; color: #000000;">${index + 1}</td>`;
-        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; color: #000000;">${credit.customerName} - ${credit.vehicleNumber || 'N/A'}</td>`;
-        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; text-align: right; color: #000000;">${credit.liters.toFixed(2)}</td>`;
-        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; text-align: right; color: #000000;">₹${credit.rate}</td>`;
-        content += `<td style="border: 1px solid #000000; padding: 8px; font-size: 16px; text-align: right; color: #000000;">₹${credit.amount.toFixed(2)}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 1px; font-size: 8px; text-align: center;">${index + 1}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 1px; font-size: 8px;">${credit.customerName}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 1px; font-size: 8px; text-align: right;">${credit.liters.toFixed(2)}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 1px; font-size: 8px; text-align: right;">₹${credit.rate}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 1px; font-size: 8px; text-align: right;">₹${credit.amount.toFixed(2)}</td>`;
         content += '</tr>';
       });
       content += '</tbody>';
