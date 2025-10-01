@@ -181,97 +181,87 @@ const ZAPTRStyleCalculator = () => {
 
   const stats = getTodayStats();
 
-  // Data handling functions
-  const addSaleRecord = async (saleData) => {
+  // Data handling functions (offline localStorage)
+  const addSaleRecord = (saleData) => {
     try {
-      await apiService.createFuelSale({
-        date: selectedDate,
-        fuel_type: saleData.fuelType,
-        nozzle_id: saleData.nozzle,
-        opening_reading: saleData.startReading,
-        closing_reading: saleData.endReading,
-        liters: saleData.liters,
-        rate: saleData.rate,
-        amount: saleData.amount
+      const newSale = localStorageService.addSaleRecord({
+        ...saleData,
+        date: selectedDate
       });
       
-      // Reload data to get updated list
-      await loadData();
+      // Update local state immediately
+      setSalesData(prev => [...prev, newSale]);
+      
+      return newSale;
     } catch (error) {
       console.error('Failed to add sale record:', error);
-      setError('Failed to save sale record');
     }
   };
 
-  const addCreditRecord = async (creditData) => {
+  const addCreditRecord = (creditData) => {
     try {
-      await apiService.createCreditSale({
-        date: selectedDate,
-        customer_name: creditData.customerName,
-        amount: creditData.amount,
-        description: creditData.vehicleNumber || creditData.description
+      const newCredit = localStorageService.addCreditRecord({
+        ...creditData,
+        date: selectedDate
       });
       
-      // Reload data to get updated list
-      await loadData();
+      // Update local state immediately
+      setCreditData(prev => [...prev, newCredit]);
+      
+      return newCredit;
     } catch (error) {
       console.error('Failed to add credit record:', error);
-      setError('Failed to save credit record');
     }
   };
 
-  const addIncomeRecord = async (incomeData) => {
+  const addIncomeRecord = (incomeData) => {
     try {
-      await apiService.createIncomeExpense({
-        date: selectedDate,
-        type: 'income',
-        category: incomeData.category || 'Income',
-        amount: incomeData.amount,
-        description: incomeData.description
+      const newIncome = localStorageService.addIncomeRecord({
+        ...incomeData,
+        date: selectedDate
       });
       
-      // Reload data to get updated list
-      await loadData();
+      // Update local state immediately
+      setIncomeData(prev => [...prev, newIncome]);
+      
+      return newIncome;
     } catch (error) {
       console.error('Failed to add income record:', error);
-      setError('Failed to save income record');
     }
   };
 
-  const addExpenseRecord = async (expenseData) => {
+  const addExpenseRecord = (expenseData) => {
     try {
-      await apiService.createIncomeExpense({
-        date: selectedDate,
-        type: 'expense',
-        category: expenseData.category || 'Expense',
-        amount: expenseData.amount,
-        description: expenseData.description
+      const newExpense = localStorageService.addExpenseRecord({
+        ...expenseData,
+        date: selectedDate
       });
       
-      // Reload data to get updated list
-      await loadData();
+      // Update local state immediately
+      setExpenseData(prev => [...prev, newExpense]);
+      
+      return newExpense;
     } catch (error) {
       console.error('Failed to add expense record:', error);
-      setError('Failed to save expense record');
     }
   };
 
-  const updateFuelRate = async (fuelType, rate) => {
+  const updateFuelRate = (fuelType, rate) => {
     try {
-      await apiService.createFuelRate({
-        date: selectedDate,
-        fuel_type: fuelType,
-        rate: rate
-      });
+      const success = localStorageService.updateFuelRate(fuelType, rate);
       
-      // Update local settings
-      setFuelSettings(prev => ({
-        ...prev,
-        [fuelType]: { ...prev[fuelType], price: rate }
-      }));
+      if (success) {
+        // Update local state immediately
+        setFuelSettings(prev => ({
+          ...prev,
+          [fuelType]: { ...prev[fuelType], price: parseFloat(rate) }
+        }));
+      }
+      
+      return success;
     } catch (error) {
       console.error('Failed to update fuel rate:', error);
-      setError('Failed to save fuel rate');
+      return false;
     }
   };
 
