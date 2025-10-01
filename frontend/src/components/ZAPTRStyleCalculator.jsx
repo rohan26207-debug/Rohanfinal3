@@ -393,24 +393,25 @@ const ZAPTRStyleCalculator = () => {
       pdf.text(`₹${stats.creditAmount.toFixed(0)}`, margin + 240, yPosition, { align: 'right' });
       yPosition += 10; // Reduced from 14 to 10
       
-      // Income
+      // Income (compact)
       pdf.text('Income', margin, yPosition);
-      pdf.text('-', margin + 200, yPosition);
-      pdf.text(`₹${stats.otherIncome.toFixed(2)}`, margin + 300, yPosition, { align: 'right' });
-      yPosition += 14; // 12 * 1.2 = 14.4 ≈ 14
+      pdf.text('-', margin + 180, yPosition);
+      pdf.text(`₹${stats.otherIncome.toFixed(0)}`, margin + 240, yPosition, { align: 'right' });
+      yPosition += 10; // Reduced from 14 to 10
       
-      // Expenses
+      // Expenses (compact)
       pdf.text('Expenses', margin, yPosition);
-      pdf.text('-', margin + 200, yPosition);
-      pdf.text(`₹${stats.totalExpenses.toFixed(2)}`, margin + 300, yPosition, { align: 'right' });
-      yPosition += 14; // 12 * 1.2 = 14.4 ≈ 14
+      pdf.text('-', margin + 180, yPosition);
+      pdf.text(`₹${stats.totalExpenses.toFixed(0)}`, margin + 240, yPosition, { align: 'right' });
+      yPosition += 10; // Reduced from 14 to 10
       
-      // Cash in Hand
+      // Cash in Hand (compact)
+      pdf.setFontSize(10);
       pdf.setFont('helvetica', 'bold');
-      pdf.text('Cash in Hand', margin, yPosition);
-      pdf.text(`${stats.totalLiters.toFixed(2)}L`, margin + 200, yPosition);
-      pdf.text(`₹${stats.adjustedCashSales.toFixed(2)}`, margin + 300, yPosition, { align: 'right' });
-      yPosition += 20;
+      pdf.text('Cash Total', margin, yPosition);
+      pdf.text(`${stats.totalLiters.toFixed(1)}L`, margin + 180, yPosition);
+      pdf.text(`₹${stats.adjustedCashSales.toFixed(0)}`, margin + 240, yPosition, { align: 'right' });
+      yPosition += 15; // Reduced from 20 to 15
       
       // Add detailed records if available
       const todaySales = salesData.filter(sale => sale.date === selectedDate);
