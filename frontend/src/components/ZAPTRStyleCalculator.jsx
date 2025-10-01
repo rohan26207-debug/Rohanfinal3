@@ -295,9 +295,9 @@ const ZAPTRStyleCalculator = () => {
       const htmlContent = `
         <div style="font-family: Arial, sans-serif; margin: 0; padding: 0;">
           <!-- Header Band -->
-          <div style="background-color: #444; color: white; padding: 15px 20px; margin-bottom: 25px;">
-            <h1 style="margin: 0; font-size: 20px; font-weight: bold; text-align: left;">M.Pump Calc Daily Report</h1>
-            <div style="font-size: 12px; margin-top: 5px; color: #ddd;">
+          <div style="background-color: #444; color: white; padding: 18px 25px; margin-bottom: 30px;">
+            <h1 style="margin: 0; font-size: 24px; font-weight: bold; text-align: left;">M.Pump Calc Daily Report</h1>
+            <div style="font-size: 14px; margin-top: 8px; color: #ddd;">
               <span>v 2.1.2</span> | 
               <span>Date: ${selectedDate}</span> | 
               <span>Time: ${new Date().toLocaleTimeString()}</span>
