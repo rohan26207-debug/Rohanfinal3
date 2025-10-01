@@ -262,6 +262,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "REMOVED SUMMARY TABLE: Removed the summary table section from PDF export as requested by user. Changes: 1) Eliminated Section 4 (Summary table), 2) PDF now contains only Reading Calculation, Credit Calculation, and Extra Calculation sections, 3) Individual section summaries (Total Reading Litres/Amount, Total Credit Litres/Amount, Total Extras Amount) are retained, 4) Maintains professional format without final summary table. Result: Cleaner PDF with three main sections and their individual totals only."
+        - working: "NA"
+          agent: "main"
+          comment: "RESET TO DEFAULT PDF SETTINGS: Completely reset PDF export to simple default format. Changes: 1) Removed all professional styling (headers, footers, tables, borders), 2) Simple text-based layout with basic font sizes (12px normal, 14-16px headers), 3) Removed user choice dialog - direct download only, 4) Basic sections: Sales Records, Credit Records, Income Records, Expense Records, Summary, 5) Simple list format instead of tables, 6) Standard margins (20mm) and A4 format, 7) Removed all colors, backgrounds, and complex formatting. Result: Clean, simple PDF with default jsPDF settings and basic text formatting."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
