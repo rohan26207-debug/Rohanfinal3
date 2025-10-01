@@ -337,7 +337,7 @@ test_plan:
 
 agent_communication:
     - agent: "main"
-      message: "Successfully completed all requested changes: 1) Renamed app to 'M.Pump Calc' with smaller font size, 2) Reorganized header to single line with settings and title, 3) Implemented full-screen settings windows with back buttons for Fuel Types and Contact tabs. All features tested and working perfectly."
+      message: "Successfully implemented Owner Details tab above Fuel Types and reorganized settings structure: 1) Added Owner Details tab with editable fields (petrol pump name, dealer name, address, contact), 2) Reorganized to 4 tabs in order: Owner Details, Fuel Types, Employees, Contact, 3) Made Contact tab read-only display since editing moved to Owner Details. All functionality tested and working."
     - agent: "testing"
       message: "Comprehensive testing completed successfully. All requested features are working correctly: 1) Dynamic nozzle dropdown filters properly by fuel type (Petrol→P1,P2,P3; Diesel→D1,D2; CNG→C1,C2; Premium→PR1), 2) Unified Records section appears on all tabs showing grouped records (Fuel Sales, Credit Sales, Income, Expenses) with accurate counts, 3) Date filtering updates unified records correctly, 4) Nozzle display shows clean IDs without brackets/icons, 5) Visual styling and badges are consistent across all record types. No critical issues found."
     - agent: "main"
