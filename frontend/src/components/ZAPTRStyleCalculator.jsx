@@ -487,7 +487,7 @@ const ZAPTRStyleCalculator = () => {
         content += '</tr>';
       });
       // Total row
-      content += '<tr style="background-color: #f8f8f8; font-weight: bold;">';
+      content += '<tr style="font-weight: bold;">';
       content += '<td colspan="5" style="border: 1px solid #333; padding: 6px 10px; font-size: 10px; font-weight: bold; text-align: right; font-family: Arial, sans-serif;">Total:</td>';
       content += `<td style="border: 1px solid #333; padding: 6px 10px; font-size: 10px; text-align: right; font-weight: bold; font-family: Arial, sans-serif;">${totalLitres.toFixed(2)}</td>`;
       content += `<td style="border: 1px solid #333; padding: 6px 10px; font-size: 10px; text-align: right; font-weight: bold; font-family: Arial, sans-serif;">₹${totalAmount.toFixed(2)}</td>`;
