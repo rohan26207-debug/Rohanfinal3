@@ -121,8 +121,8 @@ const CreditSales = ({ isDarkMode, creditData, addCreditRecord, fuelSettings, se
   };
 
   const deleteCredit = (id) => {
-    setCreditData(prev => prev.filter(credit => credit.id !== id));
-    toast({ title: "Credit Deleted", description: "Credit sale deleted successfully" });
+    // For now, deletion is not supported in offline mode
+    toast({ title: "Delete Not Supported", description: "Deletion is not available in offline mode", variant: "destructive" });
   };
 
   // Filter credit data for the selected date
