@@ -337,7 +337,7 @@ test_plan:
 
 agent_communication:
     - agent: "main"
-      message: "Successfully added Today Stock tab for fuel inventory management. Dashboard now has 5 tabs with comprehensive stock tracking: fuel type selection, dip readings, total stock, and net calculations. Professional interface with mock data displaying Petrol/Diesel/CNG entries, proper form inputs, and organized stock entry cards."
+      message: "Successfully reversed Today Stock tab addition and restored original 4-tab dashboard structure. Complete clean removal with no remnants: Reading Sales, Credit Sales, Income/Expenses, Rate tabs all functional. Dashboard returned to streamlined petrol pump management without inventory tracking."
     - agent: "testing"
       message: "Comprehensive testing completed successfully. All requested features are working correctly: 1) Dynamic nozzle dropdown filters properly by fuel type (Petrol→P1,P2,P3; Diesel→D1,D2; CNG→C1,C2; Premium→PR1), 2) Unified Records section appears on all tabs showing grouped records (Fuel Sales, Credit Sales, Income, Expenses) with accurate counts, 3) Date filtering updates unified records correctly, 4) Nozzle display shows clean IDs without brackets/icons, 5) Visual styling and badges are consistent across all record types. No critical issues found."
     - agent: "main"
