@@ -35,13 +35,7 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
   const [currentView, setCurrentView] = useState('dropdown'); // 'dropdown', 'owner', 'fuel', 'contact'
   const { toast } = useToast();
 
-  // Employee management state
-  const [employees, setEmployees] = useState([
-    { id: 1, name: 'Ramesh Kumar', phone: '+91 9876543210' },
-    { id: 2, name: 'Suresh Patel', phone: '+91 8765432109' }
-  ]);
-  const [newEmployeeName, setNewEmployeeName] = useState('');
-  const [newEmployeePhone, setNewEmployeePhone] = useState('');
+  // Employee management removed
 
   // Owner details state (editable)
   const [ownerDetails, setOwnerDetails] = useState({
