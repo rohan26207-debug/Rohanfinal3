@@ -292,6 +292,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "INCREASED PDF FONT SIZES: Enhanced PDF export with larger font sizes while maintaining table dimensions. Changes: 1) Header title increased from default to 28px, 2) Header date increased to 18px, 3) Section titles increased from 16px to 18px, 4) Table font size increased from 12px to 14px, 5) Table headers increased to 15px, 6) Table cell font increased to 14px, 7) Increased padding in headers (8px to 10px) and cells (6px to 8px). Result: All text in PDF is now larger and more readable while keeping same table structure and layout."
+        - working: "NA"
+          agent: "main"
+          comment: "REDUCED VERTICAL SPACING: Minimized upper and lower blank space for compact PDF layout. Changes: 1) Body margin reduced from 20px to 10px, 2) Line height reduced from 1.4 to 1.2, 3) Header margin-bottom reduced from 30px to 15px, 4) Section margin-bottom reduced from 25px to 15px, 5) Section title margin-bottom reduced from 10px to 5px, 6) Table cell padding reduced from 8px to 3px, 7) Table header padding reduced from 10px to 4px, 8) Print margins reduced from 15mm to 8mm, 9) Footer margin-top reduced from 30px to 15px. Result: Much more compact layout with minimal vertical spacing, fitting more content in less space."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
