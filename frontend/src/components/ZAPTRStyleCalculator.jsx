@@ -647,13 +647,26 @@ const ZAPTRStyleCalculator = () => {
     }`}>
       <div className="max-w-7xl mx-auto p-4">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          {/* Settings Dropdown - Moved to topmost left */}
-          <HeaderSettings 
-            isDarkMode={isDarkMode}
-            fuelSettings={fuelSettings}
-            setFuelSettings={setFuelSettings}
-          />
+        <div className="flex items-start justify-between mb-8">
+          {/* Left Side: Settings and Dark Mode Toggle stacked vertically */}
+          <div className="flex flex-col gap-2">
+            {/* Settings Dropdown - Topmost left */}
+            <HeaderSettings 
+              isDarkMode={isDarkMode}
+              fuelSettings={fuelSettings}
+              setFuelSettings={setFuelSettings}
+            />
+            
+            {/* Dark Mode Toggle - Below settings */}
+            <Button
+              variant="outline"
+              onClick={toggleTheme}
+              className="flex items-center gap-2 w-fit"
+            >
+              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {isDarkMode ? 'Light' : 'Dark'}
+            </Button>
+          </div>
           
           {/* Centered App Title */}
           <div className="flex items-center gap-3 flex-1 justify-center">
@@ -669,15 +682,8 @@ const ZAPTRStyleCalculator = () => {
             </div>
           </div>
           
-          {/* Theme Toggle - Remains on right */}
-          <Button
-            variant="outline"
-            onClick={toggleTheme}
-            className="flex items-center gap-2"
-          >
-            {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            {isDarkMode ? 'Light' : 'Dark'}
-          </Button>
+          {/* Right Side: Empty for balance */}
+          <div className="w-32"></div>
         </div>
 
         {/* Export Section */}
