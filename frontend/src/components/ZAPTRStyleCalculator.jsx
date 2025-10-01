@@ -848,7 +848,7 @@ const ZAPTRStyleCalculator = () => {
                     <div className={`text-lg font-bold ${
                       isDarkMode ? 'text-white' : 'text-slate-800'
                     }`}>
-                      {data.liters.toFixed(2)}L • ₹{data.amount.toFixed(2)}
+                      {data.liters.toFixed(2)} • ₹{data.amount.toFixed(2)}
                     </div>
                   </div>
                 </div>
