@@ -137,7 +137,8 @@ async def get_current_user(request: Request) -> Optional[User]:
         return None
     
     # Map _id to id for Pydantic compatibility
-    user_doc["id"] = user_doc.pop("_id")
+    user_doc["id"] = user_doc["_id"]
+    del user_doc["_id"]  # Remove _id to avoid conflicts
     return User(**user_doc)
 
 async def require_auth(request: Request) -> User:
