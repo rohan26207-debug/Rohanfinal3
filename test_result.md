@@ -223,15 +223,31 @@ metadata:
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
+    working: true
+    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Settings dropdown successfully positioned at topmost left (x=268, within left 20% of screen). App title well-centered with proper symmetry. Header layout shows balanced spacing."
+
+  - task: "App title rename to M.Pump Calculator"
+    implemented: false
     working: "NA"
     file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
-    status_history:
-        - working: "NA"
-          agent: "main"
-          comment: "Reorganized header layout: moved HeaderSettings dropdown to topmost left position, centered app title with flex-1 justify-center for symmetry, and kept theme toggle on right side."
+
+  - task: "Dark mode toggle repositioning below settings"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
     status_history:
         - working: "NA"
           agent: "testing"
