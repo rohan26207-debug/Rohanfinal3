@@ -334,11 +334,23 @@ const ZAPTRStyleCalculator = () => {
       element.innerHTML = htmlContent;
       
       const opt = {
-        margin: 1,
+        margin: 0.3,
         filename: `mpump_calculator_report_${selectedDate}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        image: { type: 'jpeg', quality: 0.3 },
+        html2canvas: { 
+          scale: 0.8, 
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: '#ffffff',
+          width: 595,
+          height: 842
+        },
+        jsPDF: { 
+          unit: 'pt', 
+          format: 'a4', 
+          orientation: 'portrait',
+          compress: true
+        }
       };
 
       // Generate and download PDF
