@@ -33,10 +33,74 @@ api_router = APIRouter(prefix="/api")
 class StatusCheck(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     client_name: str
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class StatusCheckCreate(BaseModel):
     client_name: str
+
+# User Authentication Models
+class User(BaseModel):
+    id: str = Field(alias="_id")
+    email: str
+    name: str
+    picture: Optional[str] = None
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    
+    class Config:
+        populate_by_name = True
+        json_encoders = {datetime: lambda v: v.isoformat()}
+
+class UserSession(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    session_token: str
+    expires_at: datetime
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    
+class SessionData(BaseModel):
+    session_token: str
+    user: User
+
+# Petrol Pump Data Models
+class FuelSale(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    date: str  # ISO date string
+    fuel_type: str
+    nozzle_id: str
+    opening_reading: float
+    closing_reading: float
+    liters: float
+    rate: float
+    amount: float
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class CreditSale(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    date: str
+    customer_name: str
+    amount: float
+    description: Optional[str] = None
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class IncomeExpense(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    date: str
+    type: str  # "income" or "expense"
+    category: str
+    amount: float
+    description: Optional[str] = None
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class FuelRate(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    user_id: str
+    date: str
+    fuel_type: str
+    rate: float
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
