@@ -28,14 +28,10 @@ import {
   LogOut
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
-import { useAuth } from '../contexts/AuthContext';
-
 const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
   const [newFuelType, setNewFuelType] = useState('');
   const [currentView, setCurrentView] = useState('dropdown'); // Only 'dropdown' needed now
-  const [syncing, setSyncing] = useState(false);
   const { toast } = useToast();
-  const { user, isAuthenticated, login, logout, syncData } = useAuth();
 
   // Employee management removed
 
