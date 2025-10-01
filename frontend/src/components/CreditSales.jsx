@@ -263,18 +263,14 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
                       )}
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2 text-sm mt-3">
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Liters:</span>
+                    <div className="space-y-1 text-sm mt-3">
+                      <div className="flex items-center gap-4">
+                        <span className="text-slate-600">Litres:</span>
                         <span className="font-medium">{credit.liters}</span>
-                      </div>
-                      <div className="flex justify-between">
                         <span className="text-slate-600">Rate:</span>
                         <span className="font-medium">₹{credit.rate}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Date:</span>
-                        <span className="font-medium">{credit.date}</span>
+                        <span className="text-slate-600">Amount:</span>
+                        <span className="font-medium">₹{credit.amount.toFixed(2)}</span>
                       </div>
                     </div>
 
