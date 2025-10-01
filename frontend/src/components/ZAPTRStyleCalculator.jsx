@@ -38,167 +38,123 @@ const ZAPTRStyleCalculator = () => {
   const [fuelSettings, setFuelSettings] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
 
-  // Mock data
+  // Load data from backend
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const loadData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      // Load all data in parallel
+      const [salesRes, creditsRes, incomeExpensesRes, ratesRes] = await Promise.all([
+        apiService.getFuelSales(),
+        apiService.getCreditSales(), 
+        apiService.getIncomeExpenses(),
+        apiService.getFuelRates()
+      ]);
+
+      // Transform backend data to match frontend format
+      setSalesData(salesRes.map(sale => ({
+        id: sale.id,
+        date: sale.date,
+        nozzle: sale.nozzle_id,
+        fuelType: sale.fuel_type,
+        startReading: sale.opening_reading,
+        endReading: sale.closing_reading,
+        liters: sale.liters,
+        rate: sale.rate,
+        amount: sale.amount,
+        type: 'cash' // Default to cash for now
+      })));
+
+      setCreditData(creditsRes.map(credit => ({
+        id: credit.id,
+        date: credit.date,
+        customerName: credit.customer_name,
+        vehicleNumber: credit.description || 'N/A',
+        fuelType: 'N/A', // Backend doesn't have fuel type for credits
+        liters: 0,
+        rate: 0,
+        amount: credit.amount,
+        dueDate: credit.date,
+        status: 'pending'
+      })));
+
+      // Separate income and expense data
+      const incomes = incomeExpensesRes.filter(record => record.type === 'income');
+      const expenses = incomeExpensesRes.filter(record => record.type === 'expense');
+      
+      setIncomeData(incomes.map(income => ({
+        id: income.id,
+        date: income.date,
+        amount: income.amount,
+        description: income.description || income.category,
+        type: 'income'
+      })));
+
+      setExpenseData(expenses.map(expense => ({
+        id: expense.id,
+        date: expense.date,
+        amount: expense.amount,
+        description: expense.description || expense.category,
+        type: 'expense'
+      })));
+
+      // Load fuel rates and update settings
+      const fuelRateSettings = {};
+      ratesRes.forEach(rate => {
+        fuelRateSettings[rate.fuel_type] = {
+          price: rate.rate,
+          nozzleCount: 3 // Default value, can be customized later
+        };
+      });
+
+      // Initialize with default rates if no data exists
+      const defaultFuelSettings = {
+        'Petrol': { price: 102.50, nozzleCount: 3 },
+        'Diesel': { price: 89.75, nozzleCount: 2 },
+        'CNG': { price: 75.20, nozzleCount: 2 },
+        'Premium': { price: 108.90, nozzleCount: 1 },
+        ...fuelRateSettings
+      };
+      setFuelSettings(defaultFuelSettings);
+
+    } catch (err) {
+      console.error('Failed to load data:', err);
+      setError('Failed to load data. Using offline mode.');
+      
+      // Fallback to empty data if API fails
+      setSalesData([]);
+      setCreditData([]);
+      setIncomeData([]);
+      setExpenseData([]);
+      
+      // Initialize default fuel settings
+      const defaultFuelSettings = {
+        'Petrol': { price: 102.50, nozzleCount: 3 },
+        'Diesel': { price: 89.75, nozzleCount: 2 },
+        'CNG': { price: 75.20, nozzleCount: 2 },
+        'Premium': { price: 108.90, nozzleCount: 1 }
+      };
+      setFuelSettings(defaultFuelSettings);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Load data on mount
   useEffect(() => {
-    const mockSalesData = [
-      {
-        id: 1,
-        date: '2024-01-15',
-        nozzle: 'P1',
-        fuelType: 'Petrol',
-        startReading: 1250.50,
-        endReading: 1275.25,
-        liters: 24.75,
-        rate: 102.50,
-        amount: 2536.88,
-        type: 'cash'
-      },
-      {
-        id: 2,
-        date: '2024-01-15',
-        nozzle: 'D1',
-        fuelType: 'Diesel',
-        startReading: 890.20,
-        endReading: 905.50,
-        liters: 15.30,
-        rate: 89.75,
-        amount: 1373.18,
-        type: 'cash'
-      }
-    ];
-
-    const mockCreditData = [
-      {
-        id: 1,
-        date: '2024-01-15',
-        customerName: 'ABC Transport Ltd.',
-        vehicleNumber: 'MH 12 AB 1234',
-        fuelType: 'Diesel',
-        liters: 50.0,
-        rate: 89.75,
-        amount: 4487.50,
-        dueDate: '2024-02-15',
-        status: 'pending'
-      }
-    ];
-
-    // Update mock data to have different dates for testing
-    const mockSalesDataWithDates = [
-      {
-        id: 1,
-        date: new Date().toISOString().split('T')[0], // Today
-        nozzle: 'P1',
-        fuelType: 'Petrol',
-        startReading: 1250.50,
-        endReading: 1275.25,
-        liters: 24.75,
-        rate: 102.50,
-        amount: 2536.88,
-        type: 'cash'
-      },
-      {
-        id: 2,
-        date: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0], // Yesterday
-        nozzle: 'D1',
-        fuelType: 'Diesel',
-        startReading: 890.20,
-        endReading: 905.50,
-        liters: 15.30,
-        rate: 89.75,
-        amount: 1373.18,
-        type: 'cash'
-      },
-      {
-        id: 3,
-        date: new Date().toISOString().split('T')[0], // Today
-        nozzle: 'P2',
-        fuelType: 'Petrol',
-        startReading: 2340.20,
-        endReading: 2355.75,
-        liters: 15.55,
-        rate: 102.50,
-        amount: 1593.88,
-        type: 'cash'
-      }
-    ];
-
-    const mockCreditDataWithDates = [
-      {
-        id: 1,
-        date: new Date().toISOString().split('T')[0], // Today
-        customerName: 'ABC Transport Ltd.',
-        vehicleNumber: 'MH 12 AB 1234',
-        fuelType: 'Diesel',
-        liters: 50.0,
-        rate: 89.75,
-        amount: 4487.50,
-        dueDate: '2024-02-15',
-        status: 'pending'
-      },
-      {
-        id: 2,
-        date: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0], // Yesterday
-        customerName: 'XYZ Logistics',
-        vehicleNumber: 'MH 14 CD 5678',
-        fuelType: 'Petrol',
-        liters: 30.0,
-        rate: 102.50,
-        amount: 3075.00,
-        dueDate: '2024-02-10',
-        status: 'paid'
-      }
-    ];
-
-    setSalesData(mockSalesDataWithDates);
-    setCreditData(mockCreditDataWithDates);
-    
-    // Initialize default fuel settings
-    const defaultFuelSettings = {
-      'Petrol': { price: 102.50, nozzleCount: 3 },
-      'Diesel': { price: 89.75, nozzleCount: 2 },
-      'CNG': { price: 75.20, nozzleCount: 2 },
-      'Premium': { price: 108.90, nozzleCount: 1 }
-    };
-    setFuelSettings(defaultFuelSettings);
-
-    // Initialize income/expense mock data with different dates
-    const mockIncomeData = [
-      {
-        id: 1,
-        date: new Date().toISOString().split('T')[0], // Today
-        amount: 15000.00,
-        description: 'Daily fuel sales revenue',
-        type: 'income'
-      },
-      {
-        id: 2,
-        date: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0], // Yesterday
-        amount: 2500.00,
-        description: 'Vehicle service and maintenance charges',
-        type: 'income'
-      }
-    ];
-
-    const mockExpenseData = [
-      {
-        id: 1,
-        date: new Date().toISOString().split('T')[0], // Today
-        amount: 3000.00,
-        description: 'Daily staff wages',
-        type: 'expense'
-      },
-      {
-        id: 2,
-        date: new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0], // Yesterday
-        amount: 1200.00,
-        description: 'Monthly electricity bill',
-        type: 'expense'
-      }
-    ];
-
-    setIncomeData(mockIncomeData);
-    setExpenseData(mockExpenseData);
+    loadData();
   }, []);
+
+  // Load data when date changes
+  useEffect(() => {
+    if (!loading) {
+      loadData();
+    }
+  }, [selectedDate]);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
