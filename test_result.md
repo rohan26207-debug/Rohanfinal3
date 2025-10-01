@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Rename app title to 'M.Pump Calculator', reorganize header with settings on leftmost side, and move dark mode toggle below settings tab on left side."
+user_problem_statement: "Rename app to 'M.Pump Calc' with half font size, keep settings and title on single header line, make settings tabs open full-screen windows with back button."
 
 frontend:
   - task: "Tab navigation R.S.P. to Rate renaming"
