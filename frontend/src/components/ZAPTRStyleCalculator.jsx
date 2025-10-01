@@ -294,13 +294,21 @@ const ZAPTRStyleCalculator = () => {
         await new Promise((resolve, reject) => {
           const script = document.createElement('script');
           script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-          script.onload = resolve;
+          script.onload = () => {
+            // Wait a bit more for the library to be fully available
+            setTimeout(resolve, 100);
+          };
           script.onerror = reject;
           document.head.appendChild(script);
         });
       }
 
-      const { jsPDF } = window.jsPDF;
+      // Check if jsPDF is properly loaded
+      if (!window.jsPDF) {
+        throw new Error('jsPDF library failed to load');
+      }
+
+      const { jsPDF } = window;
       const pdf = new jsPDF('p', 'mm', 'a4');
       
       let yPosition = 20;
