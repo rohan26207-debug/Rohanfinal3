@@ -293,27 +293,46 @@ const ZAPTRStyleCalculator = () => {
       
       // Create the HTML content for PDF
       const htmlContent = `
-        <div style="font-family: Arial, sans-serif; padding: 18px;">
-          <h1 style="text-align: center; color: #222; margin-bottom: 12px; font-size: 26px; font-weight: bold;">M.Pump Calc Daily Report</h1>
-          <h2 style="text-align: center; color: #555; margin-bottom: 18px; font-size: 20px;">Date: ${selectedDate}</h2>
-          
-          <div style="margin: 15px 0; border: 2px solid #666; padding: 12px;">
-            <h3 style="color: #222; margin-bottom: 12px; font-size: 20px; font-weight: bold;">Daily Summary</h3>
-            <table style="width: 100%; border-collapse: collapse;">
-              ${Object.entries(stats.fuelSalesByType).map(([fuelType, data], index) => 
-                `<tr><td style="padding: 6px 8px; border-bottom: 2px solid #999; font-size: 16px;"><strong>${index + 1}. ${fuelType} Sales:</strong></td><td style="padding: 6px 8px; border-bottom: 2px solid #999; font-size: 16px; font-weight: bold;">${data.liters.toFixed(2)}L • ₹${data.amount.toFixed(2)}</td></tr>`
-              ).join('')}
-              ${Object.keys(stats.fuelSalesByType).length > 1 ? 
-                `<tr><td style="padding: 6px 8px; border-bottom: 2px solid #999; font-size: 16px;"><strong>Total Reading Sales:</strong></td><td style="padding: 6px 8px; border-bottom: 2px solid #999; font-size: 16px; font-weight: bold;">${stats.totalLiters.toFixed(2)}L • ₹${stats.fuelCashSales.toFixed(2)}</td></tr>` : ''
-              }
-              <tr><td style="padding: 6px 8px; border-bottom: 2px solid #999; font-size: 16px;"><strong>${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 2 : 1)}. Credit Sales:</strong></td><td style="padding: 6px 8px; border-bottom: 2px solid #999; font-size: 16px; font-weight: bold;">${stats.creditLiters.toFixed(2)}L • ₹${stats.creditAmount.toFixed(2)}</td></tr>
-              <tr><td style="padding: 6px 8px; border-bottom: 2px solid #999; font-size: 16px;"><strong>${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 3 : 2)}. Income:</strong></td><td style="padding: 6px 8px; border-bottom: 2px solid #999; font-size: 16px; font-weight: bold;">₹${stats.otherIncome.toFixed(2)}</td></tr>
-              <tr><td style="padding: 6px 8px; border-bottom: 2px solid #999; font-size: 16px;"><strong>${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 4 : 3)}. Expenses:</strong></td><td style="padding: 6px 8px; border-bottom: 2px solid #999; font-size: 16px; font-weight: bold;">₹${stats.totalExpenses.toFixed(2)}</td></tr>
-              <tr><td style="padding: 6px 8px; border-bottom: 2px solid #999; font-size: 16px;"><strong>${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 5 : 4)}. Cash in Hand:</strong></td><td style="padding: 6px 8px; border-bottom: 2px solid #999; font-size: 16px; font-weight: bold;">₹${stats.adjustedCashSales.toFixed(2)}</td></tr>
-            </table>
+        <div style="font-family: Arial, sans-serif; margin: 0; padding: 0;">
+          <!-- Header Band -->
+          <div style="background-color: #444; color: white; padding: 15px 20px; margin-bottom: 25px;">
+            <h1 style="margin: 0; font-size: 20px; font-weight: bold; text-align: left;">M.Pump Calc Daily Report</h1>
+            <div style="font-size: 12px; margin-top: 5px; color: #ddd;">
+              <span>v 2.1.2</span> | 
+              <span>Date: ${selectedDate}</span> | 
+              <span>Time: ${new Date().toLocaleTimeString()}</span>
+            </div>
           </div>
           
-          ${content}
+          <!-- Content Area -->
+          <div style="padding: 0 20px;">
+            <h2 style="color: #000; margin-bottom: 15px; font-size: 16px; font-weight: bold;">Summary</h2>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; border: 1px solid #ccc;">
+              <thead>
+                <tr>
+                  <th style="background-color: #f2f2f2; border: 1px solid #ccc; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: left;">Category</th>
+                  <th style="background-color: #f2f2f2; border: 1px solid #ccc; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: right;">Total Litres</th>
+                  <th style="background-color: #f2f2f2; border: 1px solid #ccc; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: right;">Total Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${Object.entries(stats.fuelSalesByType).map(([fuelType, data], index) => 
+                  `<tr><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px;">${fuelType} Sales</td><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">${data.liters.toFixed(2)}L</td><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">₹${data.amount.toFixed(2)}</td></tr>`
+                ).join('')}
+                <tr><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px;">Credit Sales</td><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">${stats.creditLiters.toFixed(2)}L</td><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">₹${stats.creditAmount.toFixed(2)}</td></tr>
+                <tr><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px;">Income</td><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">-</td><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">₹${stats.otherIncome.toFixed(2)}</td></tr>
+                <tr><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px;">Expenses</td><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">-</td><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">₹${stats.totalExpenses.toFixed(2)}</td></tr>
+                <tr style="background-color: #f8f8f8; font-weight: bold;"><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; font-weight: bold;">Cash in Hand</td><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right; font-weight: bold;">${stats.totalLiters.toFixed(2)}L</td><td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right; font-weight: bold;">₹${stats.adjustedCashSales.toFixed(2)}</td></tr>
+              </tbody>
+            </table>
+            
+            ${content}
+            
+            <!-- Footer -->
+            <div style="margin-top: 30px; text-align: center; font-size: 9px; color: #666; padding-top: 15px; border-top: 1px solid #eee;">
+              Page 1 of 1 | Generated by M.Pump Calc
+            </div>
+          </div>
         </div>
       `;
 
