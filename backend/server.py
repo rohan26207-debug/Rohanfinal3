@@ -148,6 +148,104 @@ class FuelRate(BaseModel):
     rate: float
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+# Authentication routes
+@api_router.get("/auth/me")
+async def get_me(request: Request):
+    """Get current user info"""
+    user = await get_current_user(request)
+    if not user:
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    return user
+
+@api_router.post("/auth/session")
+async def create_session(request: Request, response: Response):
+    """Process session_id from Google OAuth and create session"""
+    try:
+        # Get session_id from request header
+        session_id = request.headers.get("X-Session-ID")
+        if not session_id:
+            raise HTTPException(status_code=400, detail="Session ID required")
+        
+        # Call Emergent auth service to get user data
+        async with httpx.AsyncClient() as client:
+            auth_response = await client.get(
+                "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data",
+                headers={"X-Session-ID": session_id}
+            )
+            
+            if auth_response.status_code != 200:
+                raise HTTPException(status_code=400, detail="Invalid session ID")
+            
+            session_data = auth_response.json()
+        
+        # Extract user info
+        user_data = {
+            "id": session_data["id"],
+            "email": session_data["email"],
+            "name": session_data["name"],
+            "picture": session_data.get("picture"),
+            "created_at": datetime.now(timezone.utc)
+        }
+        
+        # Check if user exists, if not create new user
+        existing_user = await db.users.find_one({"_id": user_data["id"]})
+        if not existing_user:
+            # Insert new user (use _id as MongoDB field)
+            user_doc = user_data.copy()
+            user_doc["_id"] = user_doc.pop("id")
+            await db.users.insert_one(user_doc)
+        
+        # Create new session
+        session_token = session_data["session_token"]
+        session_doc = {
+            "user_id": user_data["id"],
+            "session_token": session_token,
+            "expires_at": datetime.now(timezone.utc).replace(microsecond=0) + timedelta(days=7),
+            "created_at": datetime.now(timezone.utc)
+        }
+        
+        # Clean up existing sessions for this user
+        await db.user_sessions.delete_many({"user_id": user_data["id"]})
+        
+        # Insert new session
+        await db.user_sessions.insert_one(session_doc)
+        
+        # Set httpOnly cookie
+        response.set_cookie(
+            key="session_token",
+            value=session_token,
+            max_age=7 * 24 * 60 * 60,  # 7 days
+            httponly=True,
+            secure=True,
+            samesite="none",
+            path="/"
+        )
+        
+        # Return user data
+        return {"user": user_data, "session_token": session_token}
+        
+    except Exception as e:
+        logger.error(f"Session creation error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Session creation failed")
+
+@api_router.post("/auth/logout")
+async def logout(request: Request, response: Response):
+    """Logout user and clear session"""
+    session_token = await get_session_token(request)
+    if session_token:
+        # Delete session from database
+        await db.user_sessions.delete_many({"session_token": session_token})
+    
+    # Clear cookie
+    response.delete_cookie(
+        key="session_token",
+        path="/",
+        secure=True,
+        samesite="none"
+    )
+    
+    return {"message": "Logged out successfully"}
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
