@@ -405,7 +405,7 @@ const ZAPTRStyleCalculator = () => {
       // Expenses
       pdf.text('Expenses', margin, yPosition);
       pdf.text('-', margin + 200, yPosition);
-      pdf.text(\`₹\${stats.totalExpenses.toFixed(2)}\`, margin + 300, yPosition, { align: 'right' });
+      pdf.text(`₹${stats.totalExpenses.toFixed(2)}`, margin + 300, yPosition, { align: 'right' });
       yPosition += 12;
       
       // Cash in Hand
