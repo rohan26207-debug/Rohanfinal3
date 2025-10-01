@@ -461,28 +461,28 @@ const ZAPTRStyleCalculator = () => {
 
     // Credit Sales Table
     if (todayCredits.length > 0) {
-      content += '<div style="margin: 15px 0;">';
-      content += '<h3 style="color: #000000; font-size: 17px; margin-bottom: 8px;">Credit Sales (' + todayCredits.length + ')</h3>';
-      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">';
+      content += '<div style="margin: 18px 0;">';
+      content += '<h3 style="color: #000000; font-size: 20px; margin-bottom: 10px;">Credit Sales (' + todayCredits.length + ')</h3>';
+      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 12px; border: 2px solid #444;">';
       content += '<thead>';
-      content += '<tr style="background-color: #f5f5f5;">';
-      content += '<th style="border: 1px solid #999; padding: 5px; font-size: 12px; text-align: center;">Sr.</th>';
-      content += '<th style="border: 1px solid #999; padding: 5px; font-size: 12px; text-align: center;">Customer</th>';
-      content += '<th style="border: 1px solid #999; padding: 5px; font-size: 12px; text-align: center;">Vehicle</th>';
-      content += '<th style="border: 1px solid #999; padding: 5px; font-size: 12px; text-align: center;">Litres</th>';
-      content += '<th style="border: 1px solid #999; padding: 5px; font-size: 12px; text-align: center;">Rate</th>';
-      content += '<th style="border: 1px solid #999; padding: 5px; font-size: 12px; text-align: center;">Amount</th>';
+      content += '<tr style="background-color: #e8e8e8;">';
+      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Sr.</th>';
+      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Customer</th>';
+      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Vehicle</th>';
+      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Litres</th>';
+      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Rate</th>';
+      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Amount</th>';
       content += '</tr>';
       content += '</thead>';
       content += '<tbody>';
       todayCredits.forEach((credit, index) => {
         content += '<tr>';
-        content += `<td style="border: 1px solid #ccc; padding: 4px; font-size: 12px; text-align: center;">${index + 1}</td>`;
-        content += `<td style="border: 1px solid #ccc; padding: 4px; font-size: 12px;">${credit.customerName}</td>`;
-        content += `<td style="border: 1px solid #ccc; padding: 4px; font-size: 12px;">${credit.vehicleNumber || 'N/A'}</td>`;
-        content += `<td style="border: 1px solid #ccc; padding: 4px; font-size: 12px; text-align: right;">${credit.liters.toFixed(2)}</td>`;
-        content += `<td style="border: 1px solid #ccc; padding: 4px; font-size: 12px; text-align: right;">₹${credit.rate}</td>`;
-        content += `<td style="border: 1px solid #ccc; padding: 4px; font-size: 12px; text-align: right;">₹${credit.amount.toFixed(2)}</td>`;
+        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: center;">${index + 1}</td>`;
+        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px;">${credit.customerName}</td>`;
+        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px;">${credit.vehicleNumber || 'N/A'}</td>`;
+        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: right;">${credit.liters.toFixed(2)}</td>`;
+        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: right;">₹${credit.rate}</td>`;
+        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: right;">₹${credit.amount.toFixed(2)}</td>`;
         content += '</tr>';
       });
       content += '</tbody>';
