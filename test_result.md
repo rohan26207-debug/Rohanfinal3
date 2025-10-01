@@ -306,16 +306,16 @@ metadata:
           comment: "Successfully added Owner Details tab with editable fields for petrol pump name (Vishnu Parvati Petroleum), dealer name (Rohan.R.Khandve), address, phone, and email. Full-screen interface with save functionality tested and working."
 
   - task: "Fix mobile keyboard minimizing issue"
-    implemented: false
-    working: false
+    implemented: true
+    working: "NA"
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
     status_history:
-        - working: false
-          agent: "user"
-          comment: "User reports that mobile virtual keyboard minimizes/collapses after typing each word in settings tabs, requiring repeated clicking to continue typing. This is a mobile-specific keyboard behavior issue."
+        - working: "NA"
+          agent: "main"
+          comment: "Applied comprehensive mobile keyboard optimizations: 1) Added memoized onChange handlers using useCallback to prevent function recreation on each render, 2) Added autoComplete='off' to prevent form suggestions interfering, 3) Added appropriate inputMode attributes (text/tel/email) for better mobile keyboard layouts, 4) Optimized all input fields across Owner Details, Employees, and Fuel Types tabs."
     status_history:
         - working: "NA"
           agent: "testing"
