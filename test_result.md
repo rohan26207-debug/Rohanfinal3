@@ -307,15 +307,15 @@ metadata:
 
   - task: "Remove Owner Details tab from settings"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
-        - working: "NA"
+        - working: true
           agent: "main"
-          comment: "Removed Owner Details tab from settings: 1) Removed owner details state variables and functions, 2) Deleted OwnerDetailsFullScreen component, 3) Updated dropdown to show only Fuel Types and Contact tabs, 4) Updated view rendering logic. Settings now reduced from 3 tabs to 2 tabs."
+          comment: "Successfully removed Owner Details tab from settings dropdown. Verified exactly 2 tabs remain: Fuel Types and Contact. Cleaned up all owner details related code, state, and components. Fuel Types tab tested and working correctly. Settings interface now minimal and focused."
     status_history:
         - working: "NA"
           agent: "testing"
