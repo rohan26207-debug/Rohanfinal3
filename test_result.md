@@ -305,17 +305,17 @@ metadata:
           agent: "main"
           comment: "Successfully added Owner Details tab with editable fields for petrol pump name (Vishnu Parvati Petroleum), dealer name (Rohan.R.Khandve), address, phone, and email. Full-screen interface with save functionality tested and working."
 
-  - task: "Fix mobile keyboard minimizing issue"
-    implemented: true
-    working: true
+  - task: "Remove Employees tab from settings"
+    implemented: false
+    working: "NA"
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-        - working: true
+        - working: "NA"
           agent: "main"
-          comment: "MOBILE OPTIMIZATION SUCCESS: Comprehensive mobile keyboard fixes applied and verified working. Tested 'Multi Word Test Station' input on mobile viewport (375x667). Attributes verified: autoComplete='off', inputMode='text'/'tel'/'email'. All settings tabs now support continuous mobile typing without keyboard minimizing after each word."
+          comment: "Need to remove Employees tab from settings dropdown and clean up all employee-related code, state, and components."
     status_history:
         - working: "NA"
           agent: "testing"
