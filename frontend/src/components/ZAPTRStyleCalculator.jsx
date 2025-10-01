@@ -287,130 +287,86 @@ const ZAPTRStyleCalculator = () => {
   const stats = getTodayStats();
 
   // Export functions
-  const exportToPDF = () => {
+  const exportToPDF = async () => {
     try {
-      // Get today's data
+      // Create text content for simple PDF generation
       const todaySales = salesData.filter(sale => sale.date === selectedDate);
       const todayCredits = creditData.filter(credit => credit.date === selectedDate);
       const todayIncome = incomeData.filter(income => income.date === selectedDate);
       const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
 
-      // Generate HTML content for PDF
-      let htmlContent = `
-        <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto;">
-          <div style="text-align: center; margin-bottom: 30px;">
-            <h1 style="margin: 0; font-size: 24px; font-weight: bold;">Daily Report</h1>
-            <p style="margin: 5px 0; font-size: 14px;">Date: ${selectedDate}</p>
-          </div>
-          
-          <div style="margin-bottom: 30px;">
-            <h2 style="font-size: 18px; margin-bottom: 15px; border-bottom: 2px solid #000; padding-bottom: 5px;">Summary</h2>
-            <div style="margin-left: 10px;">
-              ${Object.entries(stats.fuelSalesByType).map(([fuelType, data]) => 
-                `<p style="margin: 5px 0;"><strong>${fuelType} Sales:</strong> ${data.liters.toFixed(2)}L - ₹${data.amount.toFixed(2)}</p>`
-              ).join('')}
-              <p style="margin: 5px 0;"><strong>Credit Sales:</strong> ${stats.creditLiters.toFixed(2)}L - ₹${stats.creditAmount.toFixed(2)}</p>
-              <p style="margin: 5px 0;"><strong>Income:</strong> ₹${stats.otherIncome.toFixed(2)}</p>
-              <p style="margin: 5px 0;"><strong>Expenses:</strong> ₹${stats.totalExpenses.toFixed(2)}</p>
-              <p style="margin: 10px 0; font-weight: bold; font-size: 16px; color: #000;"><strong>Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}</strong></p>
-            </div>
-          </div>
-      `;
+      // Generate text content
+      let textContent = `DAILY REPORT\nDate: ${selectedDate}\n\n`;
+      
+      textContent += `SUMMARY\n`;
+      textContent += `========\n`;
+      Object.entries(stats.fuelSalesByType).forEach(([fuelType, data]) => {
+        textContent += `${fuelType} Sales: ${data.liters.toFixed(2)}L - ₹${data.amount.toFixed(2)}\n`;
+      });
+      textContent += `Credit Sales: ${stats.creditLiters.toFixed(2)}L - ₹${stats.creditAmount.toFixed(2)}\n`;
+      textContent += `Income: ₹${stats.otherIncome.toFixed(2)}\n`;
+      textContent += `Expenses: ₹${stats.totalExpenses.toFixed(2)}\n`;
+      textContent += `Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}\n\n`;
 
       // Sales Records
       if (todaySales.length > 0) {
-        htmlContent += `
-          <div style="margin-bottom: 25px;">
-            <h3 style="font-size: 16px; margin-bottom: 10px; border-bottom: 1px solid #000; padding-bottom: 3px;">Sales Records</h3>
-            <div style="margin-left: 10px;">
-              ${todaySales.map((sale, index) => 
-                `<p style="margin: 4px 0; font-size: 12px;">${index + 1}. <strong>${sale.nozzle} - ${sale.fuelType}:</strong> Start: ${sale.startReading}, End: ${sale.endReading}, Rate: ₹${sale.rate}, Litres: ${sale.liters}, Amount: ₹${sale.amount.toFixed(2)}</p>`
-              ).join('')}
-            </div>
-          </div>
-        `;
+        textContent += `SALES RECORDS\n`;
+        textContent += `=============\n`;
+        todaySales.forEach((sale, index) => {
+          textContent += `${index + 1}. ${sale.nozzle} - ${sale.fuelType}: Start: ${sale.startReading}, End: ${sale.endReading}, Rate: ₹${sale.rate}, Litres: ${sale.liters}, Amount: ₹${sale.amount.toFixed(2)}\n`;
+        });
+        textContent += '\n';
       }
 
       // Credit Records
       if (todayCredits.length > 0) {
-        htmlContent += `
-          <div style="margin-bottom: 25px;">
-            <h3 style="font-size: 16px; margin-bottom: 10px; border-bottom: 1px solid #000; padding-bottom: 3px;">Credit Records</h3>
-            <div style="margin-left: 10px;">
-              ${todayCredits.map((credit, index) => 
-                `<p style="margin: 4px 0; font-size: 12px;">${index + 1}. <strong>${credit.customerName}${credit.vehicleNumber ? ' - ' + credit.vehicleNumber : ''}:</strong> ${credit.liters}L @ ₹${credit.rate} = ₹${credit.amount.toFixed(2)}</p>`
-              ).join('')}
-            </div>
-          </div>
-        `;
+        textContent += `CREDIT RECORDS\n`;
+        textContent += `==============\n`;
+        todayCredits.forEach((credit, index) => {
+          textContent += `${index + 1}. ${credit.customerName}${credit.vehicleNumber ? ' - ' + credit.vehicleNumber : ''}: ${credit.liters}L @ ₹${credit.rate} = ₹${credit.amount.toFixed(2)}\n`;
+        });
+        textContent += '\n';
       }
 
       // Income Records
       if (todayIncome.length > 0) {
-        htmlContent += `
-          <div style="margin-bottom: 25px;">
-            <h3 style="font-size: 16px; margin-bottom: 10px; border-bottom: 1px solid #000; padding-bottom: 3px;">Income Records</h3>
-            <div style="margin-left: 10px;">
-              ${todayIncome.map((income, index) => 
-                `<p style="margin: 4px 0; font-size: 12px;">${index + 1}. <strong>${income.description}:</strong> ₹${income.amount.toFixed(2)}</p>`
-              ).join('')}
-            </div>
-          </div>
-        `;
+        textContent += `INCOME RECORDS\n`;
+        textContent += `==============\n`;
+        todayIncome.forEach((income, index) => {
+          textContent += `${index + 1}. ${income.description}: ₹${income.amount.toFixed(2)}\n`;
+        });
+        textContent += '\n';
       }
 
       // Expense Records
       if (todayExpenses.length > 0) {
-        htmlContent += `
-          <div style="margin-bottom: 25px;">
-            <h3 style="font-size: 16px; margin-bottom: 10px; border-bottom: 1px solid #000; padding-bottom: 3px;">Expense Records</h3>
-            <div style="margin-left: 10px;">
-              ${todayExpenses.map((expense, index) => 
-                `<p style="margin: 4px 0; font-size: 12px;">${index + 1}. <strong>${expense.description}:</strong> ₹${expense.amount.toFixed(2)}</p>`
-              ).join('')}
-            </div>
-          </div>
-        `;
+        textContent += `EXPENSE RECORDS\n`;
+        textContent += `===============\n`;
+        todayExpenses.forEach((expense, index) => {
+          textContent += `${index + 1}. ${expense.description}: ₹${expense.amount.toFixed(2)}\n`;
+        });
+        textContent += '\n';
       }
 
-      htmlContent += '</div>';
+      textContent += `Generated on: ${new Date().toLocaleString()}`;
 
-      // Create print window
-      const printWindow = window.open('', '_blank');
-      printWindow.document.write(`
-        <html>
-          <head>
-            <title>Daily Report - ${selectedDate}</title>
-            <style>
-              @media print {
-                body { margin: 0; }
-                @page { margin: 1cm; }
-              }
-              body { 
-                font-family: Arial, sans-serif; 
-                line-height: 1.4;
-                color: #000;
-              }
-            </style>
-          </head>
-          <body>
-            ${htmlContent}
-            <script>
-              window.onload = function() {
-                window.print();
-                setTimeout(function() {
-                  window.close();
-                }, 1000);
-              };
-            </script>
-          </body>
-        </html>
-      `);
-      printWindow.document.close();
+      // Create and download text file that can be converted to PDF
+      const blob = new Blob([textContent], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `Report-${selectedDate}.txt`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      // Show user instructions
+      alert('Text file downloaded! To create PDF:\n1. Open the downloaded text file\n2. Print it (Ctrl+P)\n3. Select "Save as PDF" in the print dialog\n4. Save your PDF file');
       
     } catch (error) {
-      console.error('Error generating PDF:', error);
-      alert('Error generating PDF. Please try again.');
+      console.error('Error generating file:', error);
+      alert('Error generating file. Please try again.');
     }
   };
 
