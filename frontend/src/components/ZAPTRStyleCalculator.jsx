@@ -1083,6 +1083,207 @@ const ZAPTRStyleCalculator = () => {
               expenseData={expenseData}
             />
           </TabsContent>
+
+          <TabsContent value="stock">
+            <Card className={`${
+              isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
+            } shadow-lg`}>
+              <CardHeader>
+                <CardTitle className={`text-2xl font-bold ${
+                  isDarkMode ? 'text-white' : 'text-slate-800'
+                }`}>
+                  Today Stock Management
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {/* Add New Stock Entry */}
+                <div className={`border rounded-lg p-4 mb-6 ${
+                  isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-slate-50'
+                }`}>
+                  <h3 className={`text-lg font-semibold mb-4 ${
+                    isDarkMode ? 'text-white' : 'text-slate-800'
+                  }`}>
+                    Add/Update Stock Entry
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {/* Fuel Type Selection */}
+                    <div>
+                      <Label htmlFor="stockFuelType" className={`text-sm font-medium ${
+                        isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                      }`}>
+                        Fuel Type
+                      </Label>
+                      <select
+                        id="stockFuelType"
+                        className={`w-full mt-1 p-2 border rounded-md ${
+                          isDarkMode 
+                            ? 'bg-gray-800 border-gray-600 text-white' 
+                            : 'bg-white border-slate-300 text-slate-800'
+                        }`}
+                      >
+                        <option value="">Select Fuel Type</option>
+                        {Object.keys(fuelSettings).map((fuelType) => (
+                          <option key={fuelType} value={fuelType}>
+                            {fuelType}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Dip Editor */}
+                    <div>
+                      <Label htmlFor="stockDip" className={`text-sm font-medium ${
+                        isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                      }`}>
+                        Dip (Liters)
+                      </Label>
+                      <Input
+                        id="stockDip"
+                        type="number"
+                        step="0.01"
+                        placeholder="Enter dip reading"
+                        className={`mt-1 ${
+                          isDarkMode ? 'bg-gray-800 border-gray-600' : 'bg-white'
+                        }`}
+                      />
+                    </div>
+
+                    {/* Total Stock Editor */}
+                    <div>
+                      <Label htmlFor="totalStock" className={`text-sm font-medium ${
+                        isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                      }`}>
+                        Total Stock (Liters)
+                      </Label>
+                      <Input
+                        id="totalStock"
+                        type="number"
+                        step="0.01"
+                        placeholder="Enter total stock"
+                        className={`mt-1 ${
+                          isDarkMode ? 'bg-gray-800 border-gray-600' : 'bg-white'
+                        }`}
+                      />
+                    </div>
+
+                    {/* Net Editor */}
+                    <div>
+                      <Label htmlFor="netStock" className={`text-sm font-medium ${
+                        isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                      }`}>
+                        Net (Liters)
+                      </Label>
+                      <Input
+                        id="netStock"
+                        type="number"
+                        step="0.01"
+                        placeholder="Enter net amount"
+                        className={`mt-1 ${
+                          isDarkMode ? 'bg-gray-800 border-gray-600' : 'bg-white'
+                        }`}
+                      />
+                    </div>
+                  </div>
+
+                  <Button 
+                    className="mt-4 w-full md:w-auto"
+                    onClick={() => {
+                      // Add stock entry functionality will be added later
+                      console.log('Add stock entry');
+                    }}
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add/Update Stock Entry
+                  </Button>
+                </div>
+
+                {/* Today's Stock Entries */}
+                <div className="space-y-4">
+                  <h3 className={`text-lg font-semibold ${
+                    isDarkMode ? 'text-white' : 'text-slate-800'
+                  }`}>
+                    Today's Stock Entries ({new Date(selectedDate).toLocaleDateString()})
+                  </h3>
+
+                  {stockData.filter(stock => stock.date === selectedDate).length === 0 ? (
+                    <div className={`text-center py-8 ${
+                      isDarkMode ? 'text-gray-400' : 'text-slate-500'
+                    }`}>
+                      <Gauge className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                      <p>No stock entries for today</p>
+                      <p className="text-sm mt-1">Add stock entries using the form above</p>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                      {stockData
+                        .filter(stock => stock.date === selectedDate)
+                        .map((stock) => (
+                          <Card key={stock.id} className={`${
+                            isDarkMode ? 'bg-gray-700 border-gray-600' : 'bg-slate-50 border-slate-200'
+                          }`}>
+                            <CardContent className="p-4">
+                              <div className="flex items-center justify-between mb-3">
+                                <Badge className="bg-blue-100 text-blue-800 border-0">
+                                  {stock.fuelType}
+                                </Badge>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
+                              </div>
+                              
+                              <div className="grid grid-cols-3 gap-3 text-sm">
+                                <div>
+                                  <span className={`font-medium ${
+                                    isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                                  }`}>
+                                    Dip:
+                                  </span>
+                                  <div className={`text-lg font-bold ${
+                                    isDarkMode ? 'text-white' : 'text-slate-800'
+                                  }`}>
+                                    {stock.dip.toFixed(2)}L
+                                  </div>
+                                </div>
+                                
+                                <div>
+                                  <span className={`font-medium ${
+                                    isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                                  }`}>
+                                    Total:
+                                  </span>
+                                  <div className={`text-lg font-bold ${
+                                    isDarkMode ? 'text-white' : 'text-slate-800'
+                                  }`}>
+                                    {stock.totalStock.toFixed(2)}L
+                                  </div>
+                                </div>
+                                
+                                <div>
+                                  <span className={`font-medium ${
+                                    isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                                  }`}>
+                                    Net:
+                                  </span>
+                                  <div className={`text-lg font-bold text-green-600`}>
+                                    {stock.net.toFixed(2)}L
+                                  </div>
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))
+                      }
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
       </div>
     </div>
