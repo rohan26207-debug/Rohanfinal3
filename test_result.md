@@ -246,28 +246,40 @@ metadata:
           comment: "Successfully renamed app title from 'Manager Petrol Pump Calculator' to 'M.Pump Calculator' in main component and updated all export functions (PDF, CSV, text) to use new name."
 
   - task: "Rename to M.Pump Calc with half font size"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Successfully renamed app title to 'M.Pump Calc' and reduced font size from text-4xl to text-2xl. Updated all export functions to use new name."
 
   - task: "Single line header with settings and title"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Reorganized header to single line: settings dropdown on left, followed by app title 'M.Pump Calc' with smaller icon, dark mode toggle on right."
 
   - task: "Full-screen settings windows with back button"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Completely redesigned HeaderSettings component: dropdown shows 2 tabs (Fuel Types, Contact), each opens full-screen window covering whole viewport with back button on top-left to return to main page."
     status_history:
         - working: "NA"
           agent: "testing"
