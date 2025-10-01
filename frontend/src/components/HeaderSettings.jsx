@@ -171,11 +171,11 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
     });
   };
 
-  const updateEmployee = (employeeId, field, value) => {
+  const updateEmployee = useCallback((employeeId, field, value) => {
     setEmployees(prev => prev.map(emp => 
       emp.id === employeeId ? { ...emp, [field]: value } : emp
     ));
-  };
+  }, []);
 
   // Owner details functions
   const updateOwnerDetails = (field, value) => {
