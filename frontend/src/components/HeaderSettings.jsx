@@ -24,7 +24,10 @@ import {
   User,
   Phone,
   Mail,
-  ArrowLeft
+  ArrowLeft,
+  Users,
+  Edit,
+  MapPin
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 
