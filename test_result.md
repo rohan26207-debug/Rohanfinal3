@@ -432,14 +432,15 @@ backend:
 
 test_plan:
   current_focus:
-    - "PDF export income and expense black and white colors"
-    - "Remove all background colors from PDF export"
-    - "App title rename to M.Pump Calculator"
-    - "Add Employees tab in settings"
-  stuck_tasks:
-    - "Rate functionality testing"
-  test_all: false
-  test_priority: "high_first"
+    - "Offline mode comprehensive testing"
+    - "Data persistence in localStorage"
+    - "Rate tab offline functionality"
+    - "Export functions offline testing"
+    - "Settings functionality offline"
+    - "Data backup export feature"
+  stuck_tasks: []
+  test_all: true
+  test_priority: "offline_mode_first"
 
   - task: "Backend data persistence implementation"
     implemented: true
