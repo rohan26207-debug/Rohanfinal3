@@ -239,7 +239,7 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
                 <SelectContent>
                   {Object.entries(fuelSettings).map(([type, config]) => (
                     <SelectItem key={type} value={type}>
-                      {type} - ₹{config.price}/L
+                      {type} - ₹{config.price}
                     </SelectItem>
                   ))}
                 </SelectContent>
