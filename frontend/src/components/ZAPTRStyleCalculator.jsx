@@ -368,12 +368,12 @@ const ZAPTRStyleCalculator = () => {
       yPosition += 18; // increased spacing proportionally
       
       // Summary Table Headers
-      pdf.setFontSize(9);
+      pdf.setFontSize(11); // 9 * 1.2 = 10.8 ≈ 11
       pdf.setFont('helvetica', 'bold');
       pdf.text('Category', margin, yPosition);
       pdf.text('Total Litres', margin + 200, yPosition);
       pdf.text('Total Amount', margin + 300, yPosition, { align: 'right' });
-      yPosition += 12;
+      yPosition += 14; // 12 * 1.2 = 14.4 ≈ 14
       
       // Draw line under headers
       pdf.line(margin, yPosition - 2, pageWidth - margin, yPosition - 2);
