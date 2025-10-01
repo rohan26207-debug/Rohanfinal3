@@ -427,10 +427,6 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
   );
 
   // Render based on current view
-  if (currentView === 'owner') {
-    return <OwnerDetailsFullScreen />;
-  }
-  
   if (currentView === 'fuel') {
     return <FuelTypesFullScreen />;
   }
