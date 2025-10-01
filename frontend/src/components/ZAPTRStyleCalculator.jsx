@@ -554,7 +554,7 @@ const ZAPTRStyleCalculator = () => {
             </div>
           ` : ''}
 
-          <div style="margin-top: 30px; text-align: center; font-size: 10px; border-top: 1px solid #000; padding-top: 10px;">
+          <div style="margin-top: 15px; text-align: center; font-size: 10px; border-top: 1px solid #000; padding-top: 5px;">
             Generated on: ${new Date().toLocaleString()}
           </div>
         </body>
