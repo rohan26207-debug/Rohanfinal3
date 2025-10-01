@@ -378,7 +378,7 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
                     <div className="grid grid-cols-2 gap-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-slate-600">Reading:</span>
-                        <span className="font-medium">{sale.startReading}L → {sale.endReading}L</span>
+                        <span className="font-medium">{sale.startReading} → {sale.endReading}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-600">Liters:</span>
