@@ -289,26 +289,32 @@ const ZAPTRStyleCalculator = () => {
   // Export functions
   const exportToPDF = async () => {
     try {
-      // Load jsPDF library
+      // Load jsPDF library from different CDN
       if (typeof window.jsPDF === 'undefined') {
         await new Promise((resolve, reject) => {
           const script = document.createElement('script');
-          script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+          script.src = 'https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js';
           script.onload = () => {
-            // Wait a bit more for the library to be fully available
-            setTimeout(resolve, 100);
+            // Wait for library to be fully available
+            setTimeout(() => {
+              if (window.jsPDF) {
+                resolve();
+              } else {
+                reject(new Error('jsPDF not available after loading'));
+              }
+            }, 200);
           };
-          script.onerror = reject;
+          script.onerror = () => reject(new Error('Failed to load jsPDF script'));
           document.head.appendChild(script);
         });
       }
 
-      // Check if jsPDF is properly loaded
-      if (!window.jsPDF) {
-        throw new Error('jsPDF library failed to load');
+      // Double check if jsPDF is available
+      if (!window.jsPDF || !window.jsPDF.jsPDF) {
+        throw new Error('jsPDF library is not available');
       }
 
-      const { jsPDF } = window;
+      const { jsPDF } = window.jsPDF;
       const pdf = new jsPDF('p', 'mm', 'a4');
       
       let yPosition = 20;
