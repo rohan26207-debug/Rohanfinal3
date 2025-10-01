@@ -112,9 +112,13 @@ const UnifiedRecords = ({
           <span className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>Vehicle:</span>
           <span>{credit.vehicleNumber}</span>
         </div>
-        <div className="flex justify-between">
-          <span className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>Liters:</span>
+        <div className="flex items-center gap-4">
+          <span className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>Litres:</span>
           <span>{credit.liters}</span>
+          <span className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>Rate:</span>
+          <span>₹{credit.rate}</span>
+          <span className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>Amount:</span>
+          <span>₹{credit.amount.toFixed(2)}</span>
         </div>
       </div>
     </div>
