@@ -342,9 +342,7 @@ backend:
 
 test_plan:
   current_focus:
-    - "Google OAuth2 Authentication Backend"
-    - "User Authentication Models and Session Management"
-    - "Gmail Sync tab frontend integration"
+    - "Remove L suffixes from UI displays"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
