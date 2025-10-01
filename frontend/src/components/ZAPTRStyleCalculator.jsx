@@ -643,7 +643,6 @@ const ZAPTRStyleCalculator = () => {
       text += `*Readings*\n`;
       todaySales.forEach((sale, index) => {
         text += `${index + 1}. Readings:\n`;
-        text += ` ID: ${sale.id || (index + 1)}\n`;
         text += ` Description: ${sale.nozzle}\n`;
         text += ` Starting: ${sale.startReading}\n`;
         text += ` Ending: ${sale.endReading}\n`;
@@ -660,7 +659,6 @@ const ZAPTRStyleCalculator = () => {
       text += `*Credits*\n`;
       todayCredits.forEach((credit, index) => {
         text += `${index + 1}. Credit:\n`;
-        text += ` ID: ${credit.id || (index + 1)}\n`;
         text += ` Description: ${credit.customerName}\n`;
         text += ` Litre: ${credit.liters}\n`;
         text += ` Rate: ${credit.rate}\n`;
@@ -670,28 +668,33 @@ const ZAPTRStyleCalculator = () => {
       text += `-------\n`;
     }
     
-    // *Extras* section (Income & Expenses combined)
-    if (todayIncome.length > 0 || todayExpenses.length > 0) {
+    // *Extras* section - Income separate
+    if (todayIncome.length > 0) {
       text += `*Extras*\n`;
-      let extraIndex = 1;
-      
-      // Add Income as positive
-      todayIncome.forEach(income => {
-        text += `${extraIndex}. Extras:\n`;
-        text += ` ID: ${income.id || extraIndex}\n`;
+      todayIncome.forEach((income, index) => {
+        text += `${index + 1}. Extras:\n`;
         text += ` ${income.description}: ${income.amount.toFixed(2)}\n`;
-        extraIndex++;
       });
       
-      // Add Expenses as negative
-      todayExpenses.forEach(expense => {
+      // Add expenses after income
+      todayExpenses.forEach((expense, index) => {
+        const extraIndex = todayIncome.length + index + 1;
         text += `${extraIndex}. Extras:\n`;
-        text += ` ID: ${expense.id || extraIndex}\n`;
         text += ` ${expense.description}: -${expense.amount.toFixed(2)}\n`;
-        extraIndex++;
       });
       
       const extrasTotal = stats.otherIncome - stats.totalExpenses;
+      text += `*Extras Total: ${extrasTotal.toFixed(2)}*\n`;
+      text += `-------\n`;
+    } else if (todayExpenses.length > 0) {
+      // Only expenses, no income
+      text += `*Extras*\n`;
+      todayExpenses.forEach((expense, index) => {
+        text += `${index + 1}. Extras:\n`;
+        text += ` ${expense.description}: -${expense.amount.toFixed(2)}\n`;
+      });
+      
+      const extrasTotal = -stats.totalExpenses;
       text += `*Extras Total: ${extrasTotal.toFixed(2)}*\n`;
       text += `-------\n`;
     }
