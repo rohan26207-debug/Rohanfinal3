@@ -208,6 +208,22 @@ metadata:
     stuck_count: 0
     priority: "high"
     needs_retesting: false
+
+  - task: "PDF export income and expense black and white colors"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+
+  - task: "Header layout reorganization - settings to topmost left"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
     status_history:
         - working: "NA"
           agent: "testing"
