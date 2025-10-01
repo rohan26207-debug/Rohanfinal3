@@ -24,7 +24,8 @@ import {
   User,
   Phone,
   MapPin,
-  Download
+  Download,
+  Mail
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 import localStorageService from '../services/localStorage';
