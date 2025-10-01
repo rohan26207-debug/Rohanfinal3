@@ -1026,6 +1026,10 @@ const ZAPTRStyleCalculator = () => {
               <IndianRupee className="w-4 h-4" />
               Rate
             </TabsTrigger>
+            <TabsTrigger value="stock" className="flex items-center gap-2">
+              <Gauge className="w-4 h-4" />
+              Today Stock
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="sales">
