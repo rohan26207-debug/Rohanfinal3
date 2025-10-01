@@ -247,6 +247,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "SPACE OPTIMIZATION: Eliminated space-consuming elements to maximize text and table content density. Changes: 1) Reduced margins from 40px to 20px, 2) Compact header - title and date on same line, 3) Removed section separators and extra spacing, 4) Reduced line spacing from 14px to 10px and 9px, 5) Shortened column widths and text labels, 6) Eliminated decorative lines, 7) Used abbreviated headers (Ltr, Amt, No), 8) Removed decimal precision for amounts. Result: 50%+ more content fits on same page with focused text and table data."
+        - working: "NA"
+          agent: "main"
+          comment: "ENHANCED TEXT SIZE & COMPACT TABLES: Increased all non-header text by 50% and made tables ultra-compact. Changes: 1) Header kept same (12px), 2) Summary section: 11px → 16px, 3) Summary table headers: 10px → 15px, 4) Summary data: 9px → 14px, 5) Reading section header: 10px → 15px, 6) Reading table headers: 8px → 12px, 7) Reading data: 8px → 12px, 8) Tighter column spacing in tables, 9) Reduced column widths for ultra-compact layout. Result: All text 50% larger except header, maximum table density."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
