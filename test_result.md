@@ -232,6 +232,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "Removed all background-color styles from PDF export tables including gray header backgrounds (#f2f2f2) and light gray total row backgrounds (#f8f8f8). PDF now has pure white background with only black text and table borders."
+        - working: "NA"
+          agent: "main"
+          comment: "COMPLETE REMOVAL: Removed ALL colors, fillers, shades, and backgrounds from PDF export as requested. Changes: 1) Removed dark header background (#444) and white text color, 2) Removed summary table header gray backgrounds (#f2f2f2), 3) Removed Cash in Hand row gray background (#f8f8f8), 4) Removed footer gray color (#666) and light gray border (#ddd), 5) Fixed fallback print function colors. PDF now contains ONLY black text and table lines on pure white background."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
