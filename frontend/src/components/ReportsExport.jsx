@@ -128,7 +128,7 @@ const ReportsExport = ({ isDarkMode, salesData, creditData, incomeData, expenseD
         headers = ['Metric', 'Value'];
         rows = [
           ['Total Sales Amount', `₹${stats.totalSalesAmount.toFixed(2)}`],
-          ['Total Sales Liters', `${stats.totalSalesLiters.toFixed(2)}L`],
+          ['Total Sales Liters', `${stats.totalSalesLiters.toFixed(2)}`],
           ['Total Credit Amount', `₹${stats.totalCreditAmount.toFixed(2)}`],
           ['Total Credit Liters', `${stats.totalCreditLiters.toFixed(2)}L`],
           ['Total Income', `₹${stats.totalIncome.toFixed(2)}`],
