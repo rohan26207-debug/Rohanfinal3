@@ -178,6 +178,21 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
     ));
   };
 
+  // Owner details functions
+  const updateOwnerDetails = (field, value) => {
+    setOwnerDetails(prev => ({ ...prev, [field]: value }));
+  };
+
+  const saveOwnerDetails = () => {
+    // Update contact info to match owner details
+    setContactInfo(ownerDetails);
+    
+    toast({
+      title: "Owner Details Saved",
+      description: "Owner details have been updated successfully",
+    });
+  };
+
   // Contact information functions
   const updateContactInfo = (field, value) => {
     setContactInfo(prev => ({ ...prev, [field]: value }));
