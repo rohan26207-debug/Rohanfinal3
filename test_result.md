@@ -316,6 +316,43 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "Added Sync tab to settings with Gmail connection UI. Need to implement backend authentication endpoints and Gmail API integration for syncing all petrol pump data (sales, credit, income, expenses, fuel rates)."
+
+backend:
+  - task: "Google OAuth2 Authentication Backend"
+    implemented: false
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Starting implementation of Google OAuth2 backend using emergentintegrations library for Gmail account connection."
+
+  - task: "User Authentication Models and Session Management"
+    implemented: false
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Need to create User and Session models with proper MongoDB integration for auth system."
+
+  - task: "Petrol Pump Data Models and APIs"
+    implemented: false
+    working: "NA" 
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Need to create MongoDB schemas and API endpoints for sales, credit, expenses, fuel rates data to replace frontend mock data."
     status_history:
         - working: "NA"
           agent: "testing"
