@@ -364,34 +364,34 @@ const ZAPTRStyleCalculator = () => {
       pdf.text('Summary', margin, yPosition);
       yPosition += 12; // Reduced from 18 to 12
       
-      // Summary Table Headers
-      pdf.setFontSize(11); // 9 * 1.2 = 10.8 ≈ 11
+      // Summary Table Headers (compact)
+      pdf.setFontSize(10); // Reduced from 11 to 10
       pdf.setFont('helvetica', 'bold');
       pdf.text('Category', margin, yPosition);
-      pdf.text('Total Litres', margin + 200, yPosition);
-      pdf.text('Total Amount', margin + 300, yPosition, { align: 'right' });
-      yPosition += 14; // 12 * 1.2 = 14.4 ≈ 14
+      pdf.text('Litres', margin + 180, yPosition);
+      pdf.text('Amount', margin + 240, yPosition, { align: 'right' });
+      yPosition += 10; // Reduced from 14 to 10
       
-      // Draw line under headers
-      pdf.line(margin, yPosition - 2, pageWidth - margin, yPosition - 2);
-      yPosition += 5;
+      // No line, save space
+      yPosition += 2; // Minimal separator
       
-      // Summary Data
+      // Summary Data (compact)
       pdf.setFont('helvetica', 'normal');
+      pdf.setFontSize(9); // Smaller for data rows
       
-      // Fuel Sales by Type
+      // Fuel Sales by Type (compact)
       Object.entries(stats.fuelSalesByType).forEach(([fuelType, data]) => {
-        pdf.text(`${fuelType} Sales`, margin, yPosition);
-        pdf.text(`${data.liters.toFixed(2)}L`, margin + 200, yPosition);
-        pdf.text(`₹${data.amount.toFixed(2)}`, margin + 300, yPosition, { align: 'right' });
-        yPosition += 14; // 12 * 1.2 = 14.4 ≈ 14
+        pdf.text(`${fuelType}`, margin, yPosition);
+        pdf.text(`${data.liters.toFixed(1)}L`, margin + 180, yPosition);
+        pdf.text(`₹${data.amount.toFixed(0)}`, margin + 240, yPosition, { align: 'right' });
+        yPosition += 10; // Reduced from 14 to 10
       });
       
-      // Credit Sales
-      pdf.text('Credit Sales', margin, yPosition);
-      pdf.text(`${stats.creditLiters.toFixed(2)}L`, margin + 200, yPosition);
-      pdf.text(`₹${stats.creditAmount.toFixed(2)}`, margin + 300, yPosition, { align: 'right' });
-      yPosition += 14; // 12 * 1.2 = 14.4 ≈ 14
+      // Credit Sales (compact)
+      pdf.text('Credit', margin, yPosition);
+      pdf.text(`${stats.creditLiters.toFixed(1)}L`, margin + 180, yPosition);
+      pdf.text(`₹${stats.creditAmount.toFixed(0)}`, margin + 240, yPosition, { align: 'right' });
+      yPosition += 10; // Reduced from 14 to 10
       
       // Income
       pdf.text('Income', margin, yPosition);
