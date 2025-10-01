@@ -306,7 +306,7 @@ metadata:
           comment: "Successfully added Owner Details tab with editable fields for petrol pump name (Vishnu Parvati Petroleum), dealer name (Rohan.R.Khandve), address, phone, and email. Full-screen interface with save functionality tested and working."
 
   - task: "Remove Today Stock tab"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
     stuck_count: 0
@@ -315,7 +315,7 @@ metadata:
     status_history:
         - working: "NA"
           agent: "main"
-          comment: "Need to remove the Today Stock tab and revert to the original 4-tab structure: Reading Sales, Credit Sales, Income/Expenses, Rate."
+          comment: "Reverted Today Stock tab implementation: 1) Removed stockData state, 2) Removed mock stock data from useEffect, 3) Reverted TabsList grid from grid-cols-5 to grid-cols-4, 4) Removed Today Stock TabsTrigger and TabsContent, 5) Cleaned up unused imports (Badge, Plus, Trash2, Gauge). Back to original 4-tab structure."
     status_history:
         - working: "NA"
           agent: "testing"
