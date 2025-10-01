@@ -375,29 +375,29 @@ const ZAPTRStyleCalculator = () => {
       // No line, save space
       yPosition += 2; // Minimal separator
       
-      // Summary Data (compact)
+      // Summary Data (50% larger, ultra-compact table)
       pdf.setFont('helvetica', 'normal');
-      pdf.setFontSize(9); // Smaller for data rows
+      pdf.setFontSize(14); // 9 * 1.5 = 13.5 ≈ 14
       
-      // Fuel Sales by Type (compact)
+      // Fuel Sales by Type (more compact columns)
       Object.entries(stats.fuelSalesByType).forEach(([fuelType, data]) => {
         pdf.text(`${fuelType}`, margin, yPosition);
-        pdf.text(`${data.liters.toFixed(1)}L`, margin + 180, yPosition);
-        pdf.text(`₹${data.amount.toFixed(0)}`, margin + 240, yPosition, { align: 'right' });
-        yPosition += 10; // Reduced from 14 to 10
+        pdf.text(`${data.liters.toFixed(1)}L`, margin + 160, yPosition);
+        pdf.text(`₹${data.amount.toFixed(0)}`, margin + 220, yPosition, { align: 'right' });
+        yPosition += 12; // Compact spacing
       });
       
       // Credit Sales (compact)
       pdf.text('Credit', margin, yPosition);
-      pdf.text(`${stats.creditLiters.toFixed(1)}L`, margin + 180, yPosition);
-      pdf.text(`₹${stats.creditAmount.toFixed(0)}`, margin + 240, yPosition, { align: 'right' });
-      yPosition += 10; // Reduced from 14 to 10
+      pdf.text(`${stats.creditLiters.toFixed(1)}L`, margin + 160, yPosition);
+      pdf.text(`₹${stats.creditAmount.toFixed(0)}`, margin + 220, yPosition, { align: 'right' });
+      yPosition += 12;
       
       // Income (compact)
       pdf.text('Income', margin, yPosition);
-      pdf.text('-', margin + 180, yPosition);
-      pdf.text(`₹${stats.otherIncome.toFixed(0)}`, margin + 240, yPosition, { align: 'right' });
-      yPosition += 10; // Reduced from 14 to 10
+      pdf.text('-', margin + 160, yPosition);
+      pdf.text(`₹${stats.otherIncome.toFixed(0)}`, margin + 220, yPosition, { align: 'right' });
+      yPosition += 12;
       
       // Expenses (compact)
       pdf.text('Expenses', margin, yPosition);
