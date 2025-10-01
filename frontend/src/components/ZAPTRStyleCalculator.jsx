@@ -358,6 +358,22 @@ const ZAPTRStyleCalculator = () => {
       pdf.text(`${selectedDate}`, pageWidth - margin, yPosition, { align: 'right' });
       yPosition += 16; // Reduced from 60 total to 16
       
+      // Daily Overview Section (NEW)
+      pdf.setFontSize(20);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('Daily Overview', margin, yPosition);
+      yPosition += 20;
+      
+      pdf.setFontSize(16);
+      pdf.setFont('helvetica', 'normal');
+      pdf.text(`Total Sales: ₹${(stats.totalSales + stats.creditAmount).toFixed(0)}`, margin, yPosition);
+      pdf.text(`Cash Sales: ₹${stats.totalSales.toFixed(0)}`, margin + 150, yPosition);
+      yPosition += 16;
+      
+      pdf.text(`Credit Sales: ₹${stats.creditAmount.toFixed(0)}`, margin, yPosition);
+      pdf.text(`Net Cash: ₹${stats.adjustedCashSales.toFixed(0)}`, margin + 150, yPosition);
+      yPosition += 20;
+      
       // Summary Section (DOUBLED text size)
       pdf.setFontSize(22); // 11 * 2 = 22
       pdf.setFont('helvetica', 'bold');
