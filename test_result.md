@@ -268,6 +268,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "COMPLETE PDF EXPORT REMOVAL: Completely deleted all PDF export functionality from the application. Changes: 1) Removed PDF button from export UI section, 2) Deleted entire exportToPDF function (~200 lines), 3) Deleted generateExportContent helper function (~150 lines), 4) Removed all PDF-related code including jsPDF library loading, 5) Removed all PDF generation logic, settings, and configurations, 6) Cleaned up UI by replacing PDF button with comment placeholder. Result: Application no longer has any PDF export capabilities - only CSV and Copy Text export remain functional."
+        - working: "NA"
+          agent: "main"
+          comment: "RE-ADDED PDF EXPORT: Added back PDF export functionality as requested by user. Changes: 1) Added PDF button to export section positioned to the left of CSV button, 2) Created new exportToPDF function with comprehensive content, 3) PDF includes: Summary (fuel sales, credits, income, expenses, cash in hand), Sales Records (detailed list), Credit Records (detailed list), Income Records (detailed list), Expense Records (detailed list), 4) Uses jsPDF library with automatic page breaks, 5) Text wrapping for long lines, 6) Clean, readable format with proper sections and formatting. Result: PDF export restored with complete daily data including summary and all records."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
