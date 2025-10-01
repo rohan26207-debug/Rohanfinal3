@@ -469,13 +469,13 @@ const ZAPTRStyleCalculator = () => {
         totalLitres += parseFloat(sale.liters);
         totalAmount += parseFloat(sale.amount);
         content += '<tr>';
-        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: center;">${index + 1}</td>`;
-        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px;">${sale.nozzle} - ${sale.fuelType}</td>`;
-        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">${sale.startReading}</td>`;
-        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">${sale.endReading}</td>`;
-        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">₹${sale.rate}</td>`;
-        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">${sale.liters}</td>`;
-        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">₹${sale.amount.toFixed(2)}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 10px 16px; font-size: 12px; text-align: center;">${index + 1}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 10px 16px; font-size: 12px;">${sale.nozzle} - ${sale.fuelType}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 10px 16px; font-size: 12px; text-align: right;">${sale.startReading}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 10px 16px; font-size: 12px; text-align: right;">${sale.endReading}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 10px 16px; font-size: 12px; text-align: right;">₹${sale.rate}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 10px 16px; font-size: 12px; text-align: right;">${sale.liters}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 10px 16px; font-size: 12px; text-align: right;">₹${sale.amount.toFixed(2)}</td>`;
         content += '</tr>';
       });
       // Total row
