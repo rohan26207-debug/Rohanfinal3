@@ -544,35 +544,7 @@ const ZAPTRStyleCalculator = () => {
         yPosition += 35;
       }
       
-      // Check if we need a new page for Summary
-      if (yPosition > pageHeight - 200) {
-        pdf.addPage();
-        addFooter(1, 2);
-        yPosition = addHeader();
-      }
-      
-      // Section 4: Summary
-      pdf.setFont('helvetica', 'bold');
-      pdf.setFontSize(14);
-      pdf.text('Summary', margin, yPosition);
-      yPosition += 25;
-      
-      const summaryHeaders = ['Type', 'Litres', 'Amount'];
-      const summaryColWidths = [200, 100, 140];
-      
-      const summaryRows = [];
-      
-      // Add fuel sales by type
-      Object.entries(stats.fuelSalesByType).forEach(([fuelType, data]) => {
-        summaryRows.push([`${fuelType} Sales`, `${data.liters.toFixed(2)}`, `₹${data.amount.toFixed(2)}`]);
-      });
-      
-      summaryRows.push(['Credit Sales', `${stats.creditLiters.toFixed(2)}`, `₹${stats.creditAmount.toFixed(2)}`]);
-      summaryRows.push(['Income', '-', `₹${stats.otherIncome.toFixed(2)}`]);
-      summaryRows.push(['Expenses', '-', `₹${stats.totalExpenses.toFixed(2)}`]);
-      summaryRows.push(['Cash in Hand', `${stats.totalLiters.toFixed(2)}`, `₹${stats.adjustedCashSales.toFixed(2)}`]);
-      
-      yPosition = createTable(summaryHeaders, summaryRows, summaryColWidths, yPosition);
+      // Summary section removed as requested by user
       
       // Add footer to the last page
       const totalPages = pdf.internal.getNumberOfPages();
