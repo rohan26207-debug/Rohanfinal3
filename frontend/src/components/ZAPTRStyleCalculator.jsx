@@ -518,13 +518,13 @@ const ZAPTRStyleCalculator = () => {
 
     // Extra Calculation (Income & Expenses Combined)
     if (todayIncome.length > 0 || todayExpenses.length > 0) {
-      content += '<h2 style="color: #000; margin-bottom: 15px; font-size: 16px; font-weight: bold; font-family: Arial, sans-serif;">Extra Calculation</h2>';
-      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; border: 1px solid #333; font-family: Arial, sans-serif;">';
+      content += '<h2 style="margin: 15px 0 10px 0; font-size: 12px; font-weight: bold;">Extra Calculation</h2>';
+      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid black;">';
       content += '<thead>';
       content += '<tr>';
-      content += '<th style="border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: center; font-family: Arial, sans-serif;">Sr.</th>';
-      content += '<th style="border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: left; font-family: Arial, sans-serif;">Description</th>';
-      content += '<th style="border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: center; font-family: Arial, sans-serif;">Amount</th>';
+      content += '<th style="border: 1px solid black; padding: 4px; font-size: 10px; text-align: center;">Sr.</th>';
+      content += '<th style="border: 1px solid black; padding: 4px; font-size: 10px; text-align: left;">Description</th>';
+      content += '<th style="border: 1px solid black; padding: 4px; font-size: 10px; text-align: center;">Amount</th>';
       content += '</tr>';
       content += '</thead>';
       content += '<tbody>';
