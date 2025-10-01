@@ -305,17 +305,17 @@ metadata:
           agent: "main"
           comment: "Successfully added Owner Details tab with editable fields for petrol pump name (Vishnu Parvati Petroleum), dealer name (Rohan.R.Khandve), address, phone, and email. Full-screen interface with save functionality tested and working."
 
-  - task: "Remove Today Stock tab"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
+  - task: "Add Gmail Sync tab in settings"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/HeaderSettings.jsx, /app/backend/"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-        - working: true
+        - working: "NA"
           agent: "main"
-          comment: "Successfully reverted to original 4-tab structure. Verified: Today Stock tab completely removed, exact tab count (4), all original tabs present and functional (Reading Sales, Credit Sales, Income/Expenses, Rate). Clean reversal with no remnants of stock functionality."
+          comment: "Added Sync tab to settings with Gmail connection UI. Need to implement backend authentication endpoints and Gmail API integration for syncing all petrol pump data (sales, credit, income, expenses, fuel rates)."
     status_history:
         - working: "NA"
           agent: "testing"
