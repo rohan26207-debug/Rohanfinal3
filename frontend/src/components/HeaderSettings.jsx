@@ -320,9 +320,11 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                 <Input
                   id="ownerAddress"
                   value={ownerDetails.address}
-                  onChange={(e) => updateOwnerDetails('address', e.target.value)}
+                  onChange={handleAddressChange}
                   placeholder="Enter complete address"
                   className="mt-1"
+                  autoComplete="off"
+                  inputMode="text"
                 />
               </div>
             </CardContent>
