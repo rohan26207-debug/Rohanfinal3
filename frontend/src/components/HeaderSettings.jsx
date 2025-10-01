@@ -126,6 +126,61 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
     });
   };
 
+  // Employee management functions
+  const addEmployee = () => {
+    if (!newEmployeeName.trim() || !newEmployeePhone.trim()) {
+      toast({
+        title: "Invalid Input",
+        description: "Please enter both employee name and phone number",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const newEmployee = {
+      id: Date.now(),
+      name: newEmployeeName.trim(),
+      phone: newEmployeePhone.trim()
+    };
+
+    setEmployees(prev => [...prev, newEmployee]);
+    setNewEmployeeName('');
+    setNewEmployeePhone('');
+    
+    toast({
+      title: "Employee Added",
+      description: `${newEmployee.name} has been added successfully`,
+    });
+  };
+
+  const removeEmployee = (employeeId) => {
+    const employee = employees.find(emp => emp.id === employeeId);
+    setEmployees(prev => prev.filter(emp => emp.id !== employeeId));
+    
+    toast({
+      title: "Employee Removed",
+      description: `${employee?.name} has been removed`,
+    });
+  };
+
+  const updateEmployee = (employeeId, field, value) => {
+    setEmployees(prev => prev.map(emp => 
+      emp.id === employeeId ? { ...emp, [field]: value } : emp
+    ));
+  };
+
+  // Contact information functions
+  const updateContactInfo = (field, value) => {
+    setContactInfo(prev => ({ ...prev, [field]: value }));
+  };
+
+  const saveContactInfo = () => {
+    toast({
+      title: "Contact Information Saved",
+      description: "Contact information has been updated successfully",
+    });
+  };
+
   // Full-screen Fuel Types component
   const FuelTypesFullScreen = () => (
     <div className={`fixed inset-0 z-50 ${
