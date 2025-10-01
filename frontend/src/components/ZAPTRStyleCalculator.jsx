@@ -19,10 +19,7 @@ import {
   ChevronRight,
   FileText,
   Download,
-  Share2,
-  Plus,
-  Trash2,
-  Gauge
+  Share2
 } from 'lucide-react';
 import SalesTracker from './SalesTracker';
 import CreditSales from './CreditSales';
