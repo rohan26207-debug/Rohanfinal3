@@ -152,14 +152,7 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
 
   // Contact component removed - now inline
 
-  // Render based on current view
-  if (currentView === 'fuel') {
-    return <FuelTypesFullScreen />;
-  }
-  
-  if (currentView === 'contact') {
-    return <ContactFullScreen />;
-  }
+  // No separate views needed - everything in dropdown
 
   // Default dropdown view
   return (
