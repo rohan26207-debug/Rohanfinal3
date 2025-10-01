@@ -185,7 +185,7 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
           </CardHeader>
           <CardContent className="p-0">
             <Tabs defaultValue="fuel" className="w-full">
-              <TabsList className={`grid w-full grid-cols-3 ${
+              <TabsList className={`grid w-full grid-cols-2 ${
                 isDarkMode ? 'bg-gray-700' : 'bg-gray-100'
               }`}>
                 <TabsTrigger value="fuel" className="flex items-center gap-2">
@@ -195,10 +195,6 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                 <TabsTrigger value="contact" className="flex items-center gap-2">
                   <User className="w-4 h-4" />
                   Contact
-                </TabsTrigger>
-                <TabsTrigger value="sync" className="flex items-center gap-2">
-                  <Mail className="w-4 h-4" />
-                  Sync
                 </TabsTrigger>
               </TabsList>
               
