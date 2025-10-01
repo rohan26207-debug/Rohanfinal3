@@ -446,13 +446,13 @@ const ZAPTRStyleCalculator = () => {
         // Data rows
         pdf.setFont('helvetica', 'normal');
         todaySales.forEach((sale, index) => {
-          pdf.text(\`\${index + 1}\`, margin, yPosition);
-          pdf.text(\`\${sale.nozzle} - \${sale.fuelType}\`, margin + 30, yPosition);
-          pdf.text(\`\${sale.startReading}\`, margin + 150, yPosition);
-          pdf.text(\`\${sale.endReading}\`, margin + 200, yPosition);
-          pdf.text(\`₹\${sale.rate}\`, margin + 250, yPosition);
-          pdf.text(\`\${sale.liters}\`, margin + 300, yPosition);
-          pdf.text(\`₹\${sale.amount.toFixed(2)}\`, margin + 350, yPosition);
+          pdf.text(`${index + 1}`, margin, yPosition);
+          pdf.text(`${sale.nozzle} - ${sale.fuelType}`, margin + 30, yPosition);
+          pdf.text(`${sale.startReading}`, margin + 150, yPosition);
+          pdf.text(`${sale.endReading}`, margin + 200, yPosition);
+          pdf.text(`₹${sale.rate}`, margin + 250, yPosition);
+          pdf.text(`${sale.liters}`, margin + 300, yPosition);
+          pdf.text(`₹${sale.amount.toFixed(2)}`, margin + 350, yPosition);
           yPosition += 10;
         });
       }
