@@ -471,6 +471,23 @@ const ZAPTRStyleCalculator = () => {
         });
       }
       
+      // Final Summary Section (if there's space)
+      if (yPosition < 700) { // Check if there's space on the page
+        yPosition += 20;
+        pdf.setFontSize(18);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text('Final Summary', margin, yPosition);
+        yPosition += 18;
+        
+        pdf.setFontSize(14);
+        pdf.setFont('helvetica', 'normal');
+        pdf.text(`Total Transactions: ${todaySales.length + todayCredits.length}`, margin, yPosition);
+        yPosition += 14;
+        pdf.text(`Cash in Hand: ₹${stats.adjustedCashSales.toFixed(0)}`, margin, yPosition);
+        yPosition += 14;
+        pdf.text(`Total Fuel Sold: ${stats.totalLiters.toFixed(1)}L`, margin, yPosition);
+      }
+      
       // Ask user whether to download or open PDF
       const userChoice = window.confirm(
         "PDF Generated Successfully!\n\n" +
