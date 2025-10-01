@@ -31,11 +31,11 @@ const SalesTracker = ({ isDarkMode, salesData, addSaleRecord, fuelSettings, sele
   const [editingId, setEditingId] = useState(null);
   const { toast } = useToast();
 
-  // Generate fuel types from settings
-  const fuelTypes = Object.entries(fuelSettings).map(([type, config]) => ({
+  // Generate fuel types from settings (with safety check)
+  const fuelTypes = fuelSettings ? Object.entries(fuelSettings).map(([type, config]) => ({
     type,
     rate: config.price
-  }));
+  })) : [];
 
   // Generate nozzles for a specific fuel type
   const generateNozzlesForFuelType = (fuelType) => {
