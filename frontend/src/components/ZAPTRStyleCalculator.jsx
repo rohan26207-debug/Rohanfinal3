@@ -419,27 +419,26 @@ const ZAPTRStyleCalculator = () => {
       const todayIncome = incomeData.filter(income => income.date === selectedDate);
       const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
       
-      // Reading Calculation (ultra-compact)
+      // Reading Calculation (50% larger text, ultra-compact table)
       if (todaySales.length > 0) {
-        yPosition += 8; // Reduced from 12 to 8
-        pdf.setFontSize(10); // Reduced from 13 to 10
+        yPosition += 10;
+        pdf.setFontSize(15); // 10 * 1.5 = 15
         pdf.setFont('helvetica', 'bold');
         pdf.text('Readings', margin, yPosition);
-        yPosition += 12; // Reduced from 18 to 12
+        yPosition += 18;
         
-        // Compact Headers
-        pdf.setFontSize(8); // Reduced from 10 to 8
+        // More compact table headers (50% larger)
+        pdf.setFontSize(12); // 8 * 1.5 = 12
         pdf.text('No', margin, yPosition);
-        pdf.text('Nozzle', margin + 20, yPosition);
-        pdf.text('Start', margin + 80, yPosition);
-        pdf.text('End', margin + 120, yPosition);
-        pdf.text('Rate', margin + 160, yPosition);
-        pdf.text('Ltr', margin + 200, yPosition);
-        pdf.text('Amt', margin + 240, yPosition);
-        yPosition += 10; // Reduced from 12 to 10
+        pdf.text('Nozzle', margin + 18, yPosition); // Tighter columns
+        pdf.text('Start', margin + 60, yPosition);
+        pdf.text('End', margin + 100, yPosition);
+        pdf.text('Rate', margin + 140, yPosition);
+        pdf.text('Ltr', margin + 180, yPosition);
+        pdf.text('Amt', margin + 215, yPosition);
+        yPosition += 12;
         
-        // No line, save space
-        yPosition += 2; // Minimal separator
+        yPosition += 3; // Minimal separator
         
         // Compact Data rows
         pdf.setFont('helvetica', 'normal');
