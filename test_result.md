@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Add a new 'Today Stock' tab below the operating date with fuel type selection, dip editor, total stock editor, and net editor for inventory management."
+user_problem_statement: "Remove the Today Stock tab and revert to the previous 4-tab structure without inventory management."
 
 frontend:
   - task: "Tab navigation R.S.P. to Rate renaming"
