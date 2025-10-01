@@ -314,6 +314,14 @@ const ZAPTRStyleCalculator = () => {
               border-bottom: 2px solid #000; 
               padding-bottom: 10px; 
             }
+            .header h1 { 
+              font-size: 28px; 
+              margin: 0; 
+            }
+            .header p { 
+              font-size: 18px; 
+              margin: 5px 0; 
+            }
             .section { 
               margin-bottom: 25px; 
             }
