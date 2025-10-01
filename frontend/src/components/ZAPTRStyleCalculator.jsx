@@ -565,7 +565,7 @@ const ZAPTRStyleCalculator = () => {
     });
 
     todayCredits.forEach(credit => {
-      csv += `"Credit Sale","${credit.customerName} - ${credit.vehicleNumber || 'N/A'}","₹${credit.amount.toFixed(2)}","${credit.liters}L ${credit.fuelType} @ ₹${credit.rate}/L","${credit.date}"\n`;
+      csv += `"Credit Sale","${credit.customerName} - ${credit.vehicleNumber || 'N/A'}","₹${credit.amount.toFixed(2)}","${credit.liters} ${credit.fuelType} @ ₹${credit.rate}","${credit.date}"\n`;
     });
 
     todayIncome.forEach(income => {
