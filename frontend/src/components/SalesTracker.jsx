@@ -252,11 +252,13 @@ const SalesTracker = ({ isDarkMode, salesData, addSaleRecord, fuelSettings, sele
                   <SelectValue placeholder="Select fuel type" />
                 </SelectTrigger>
                 <SelectContent>
-                  {Object.entries(fuelSettings).map(([type, config]) => (
+                  {fuelSettings ? Object.entries(fuelSettings).map(([type, config]) => (
                     <SelectItem key={type} value={type}>
                       {type} - ₹{config.price}
                     </SelectItem>
-                  ))}
+                  )) : (
+                    <SelectItem value="" disabled>Loading fuel types...</SelectItem>
+                  )}
                 </SelectContent>
               </Select>
             </div>
