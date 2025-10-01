@@ -210,20 +210,28 @@ metadata:
     needs_retesting: false
 
   - task: "PDF export income and expense black and white colors"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Updated PDF export generateExportContent function to use black and white colors for Income and Expenses sections. Changed all green/red colors to #000000 (black) and #ffffff (white) backgrounds."
 
   - task: "Header layout reorganization - settings to topmost left"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Reorganized header layout: moved HeaderSettings dropdown to topmost left position, centered app title with flex-1 justify-center for symmetry, and kept theme toggle on right side."
     status_history:
         - working: "NA"
           agent: "testing"
