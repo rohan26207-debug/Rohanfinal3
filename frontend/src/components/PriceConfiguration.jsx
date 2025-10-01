@@ -45,12 +45,12 @@ const PriceConfiguration = ({
     }));
   };
 
-  const savePrices = () => {
+  const savePrices = async () => {
     let hasChanges = false;
     let hasErrors = false;
+    let updatedFuelTypes = [];
     
-    const newSettings = { ...fuelSettings };
-    
+    // Validate all prices first
     Object.entries(tempPrices).forEach(([fuelType, priceStr]) => {
       const price = parseFloat(priceStr);
       if (isNaN(price) || price <= 0) {
@@ -58,12 +58,9 @@ const PriceConfiguration = ({
         return;
       }
       
-      if (newSettings[fuelType] && newSettings[fuelType].price !== price) {
-        newSettings[fuelType] = {
-          ...newSettings[fuelType],
-          price: price
-        };
+      if (fuelSettings[fuelType] && fuelSettings[fuelType].price !== price) {
         hasChanges = true;
+        updatedFuelTypes.push({ fuelType, price });
       }
     });
     
@@ -83,13 +80,24 @@ const PriceConfiguration = ({
       });
       return;
     }
-    
-    setFuelSettings(newSettings);
-    
-    toast({
-      title: "Rate Updated",
-      description: `Fuel rate updated for ${selectedDate}`,
-    });
+
+    try {
+      // Update each fuel type rate via API
+      for (const { fuelType, price } of updatedFuelTypes) {
+        await updateFuelRate(fuelType, price);
+      }
+      
+      toast({
+        title: "Rate Updated",
+        description: `Fuel rate updated for ${updatedFuelTypes.length} fuel type(s) on ${selectedDate}`,
+      });
+    } catch (error) {
+      toast({
+        title: "Update Failed",
+        description: "Failed to save fuel rates. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const resetPrices = () => {
