@@ -9,10 +9,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<ZAPTRStyleCalculator />} />
-        </Routes>
-        <Toaster />
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<ZAPTRStyleCalculator />} />
+          </Routes>
+          <Toaster />
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );
