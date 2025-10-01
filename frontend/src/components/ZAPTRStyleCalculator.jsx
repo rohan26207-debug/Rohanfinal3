@@ -455,8 +455,22 @@ const ZAPTRStyleCalculator = () => {
         });
       }
       
-      // Save the PDF
-      pdf.save(`Report-${selectedDate}.pdf`);
+      // Ask user whether to download or open PDF
+      const userChoice = window.confirm(
+        "PDF Generated Successfully!\n\n" +
+        "Click 'OK' to OPEN the PDF in a new tab\n" +
+        "Click 'Cancel' to DOWNLOAD the PDF file"
+      );
+      
+      if (userChoice) {
+        // Open PDF in new tab
+        const pdfBlob = pdf.output('blob');
+        const pdfUrl = URL.createObjectURL(pdfBlob);
+        window.open(pdfUrl, '_blank');
+      } else {
+        // Download PDF file
+        pdf.save(`Report-${selectedDate}.pdf`);
+      }
       
     } catch (error) {
       console.error('Error generating PDF:', error);
