@@ -23,7 +23,8 @@ import {
   Gauge,
   User,
   Phone,
-  Mail
+  Mail,
+  ArrowLeft
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 
