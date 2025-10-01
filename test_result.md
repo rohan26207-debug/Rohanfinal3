@@ -305,17 +305,17 @@ metadata:
           agent: "main"
           comment: "Successfully added Owner Details tab with editable fields for petrol pump name (Vishnu Parvati Petroleum), dealer name (Rohan.R.Khandve), address, phone, and email. Full-screen interface with save functionality tested and working."
 
-  - task: "Reorganize settings tabs order"
-    implemented: true
-    working: true
+  - task: "Fix input focus issue in settings"
+    implemented: false
+    working: false
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-        - working: true
-          agent: "main"
-          comment: "Successfully reorganized settings dropdown to show 4 tabs in correct order: Owner Details (1st - editable), Fuel Types (2nd), Employees (3rd), Contact (4th - read-only display). All tabs navigation working correctly."
+        - working: false
+          agent: "user"
+          comment: "User reports that when editing names in settings, they can only type one word at a time. Input loses focus and requires clicking again to continue editing."
     status_history:
         - working: "NA"
           agent: "testing"
