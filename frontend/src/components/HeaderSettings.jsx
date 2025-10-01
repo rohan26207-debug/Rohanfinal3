@@ -293,15 +293,13 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
             <CardContent className="space-y-4">
               <div>
                 <Label htmlFor="ownerAddress">Complete Address</Label>
-                <div className="flex items-center gap-2 mt-1">
-                  <Input
-                    id="ownerAddress"
-                    value={ownerDetails.address}
-                    onChange={(e) => updateOwnerDetails('address', e.target.value)}
-                    placeholder="Enter complete address"
-                  />
-                  <Edit className="w-4 h-4 text-gray-500" />
-                </div>
+                <Input
+                  id="ownerAddress"
+                  value={ownerDetails.address}
+                  onChange={(e) => updateOwnerDetails('address', e.target.value)}
+                  placeholder="Enter complete address"
+                  className="mt-1"
+                />
               </div>
             </CardContent>
           </Card>
