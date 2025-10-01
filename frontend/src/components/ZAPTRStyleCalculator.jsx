@@ -399,7 +399,7 @@ const ZAPTRStyleCalculator = () => {
       // Income
       pdf.text('Income', margin, yPosition);
       pdf.text('-', margin + 200, yPosition);
-      pdf.text(\`₹\${stats.otherIncome.toFixed(2)}\`, margin + 300, yPosition, { align: 'right' });
+      pdf.text(`₹${stats.otherIncome.toFixed(2)}`, margin + 300, yPosition, { align: 'right' });
       yPosition += 12;
       
       // Expenses
