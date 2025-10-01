@@ -306,7 +306,7 @@ metadata:
           comment: "Successfully added Owner Details tab with editable fields for petrol pump name (Vishnu Parvati Petroleum), dealer name (Rohan.R.Khandve), address, phone, and email. Full-screen interface with save functionality tested and working."
 
   - task: "Remove Owner Details tab from settings"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
@@ -315,7 +315,7 @@ metadata:
     status_history:
         - working: "NA"
           agent: "main"
-          comment: "Need to remove Owner Details tab from settings dropdown and clean up all owner details related code, state, and components. Settings will be reduced to just Fuel Types and Contact tabs."
+          comment: "Removed Owner Details tab from settings: 1) Removed owner details state variables and functions, 2) Deleted OwnerDetailsFullScreen component, 3) Updated dropdown to show only Fuel Types and Contact tabs, 4) Updated view rendering logic. Settings now reduced from 3 tabs to 2 tabs."
     status_history:
         - working: "NA"
           agent: "testing"
