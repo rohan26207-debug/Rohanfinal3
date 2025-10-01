@@ -419,30 +419,30 @@ const ZAPTRStyleCalculator = () => {
       const todayIncome = incomeData.filter(income => income.date === selectedDate);
       const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
       
-      // Reading Calculation (50% larger text, ultra-compact table)
+      // Reading Calculation (DOUBLED text size)
       if (todaySales.length > 0) {
-        yPosition += 10;
-        pdf.setFontSize(15); // 10 * 1.5 = 15
+        yPosition += 12;
+        pdf.setFontSize(20); // 10 * 2 = 20
         pdf.setFont('helvetica', 'bold');
         pdf.text('Readings', margin, yPosition);
-        yPosition += 18;
+        yPosition += 24;
         
-        // More compact table headers (50% larger)
-        pdf.setFontSize(12); // 8 * 1.5 = 12
+        // Table headers (DOUBLED size)
+        pdf.setFontSize(16); // 8 * 2 = 16
         pdf.text('No', margin, yPosition);
-        pdf.text('Nozzle', margin + 18, yPosition); // Tighter columns
-        pdf.text('Start', margin + 60, yPosition);
-        pdf.text('End', margin + 100, yPosition);
-        pdf.text('Rate', margin + 140, yPosition);
-        pdf.text('Ltr', margin + 180, yPosition);
-        pdf.text('Amt', margin + 215, yPosition);
-        yPosition += 12;
+        pdf.text('Nozzle', margin + 25, yPosition);
+        pdf.text('Start', margin + 80, yPosition);
+        pdf.text('End', margin + 130, yPosition);
+        pdf.text('Rate', margin + 180, yPosition);
+        pdf.text('Ltr', margin + 230, yPosition);
+        pdf.text('Amt', margin + 280, yPosition);
+        yPosition += 16;
         
-        yPosition += 3; // Minimal separator
+        yPosition += 4; // Minimal separator
         
-        // Ultra-compact data rows (50% larger text)
+        // Data rows (DOUBLED text size)
         pdf.setFont('helvetica', 'normal');
-        pdf.setFontSize(12); // 8 * 1.5 = 12
+        pdf.setFontSize(16); // 8 * 2 = 16
         todaySales.forEach((sale, index) => {
           pdf.text(`${index + 1}`, margin, yPosition);
           pdf.text(`${sale.nozzle}`, margin + 18, yPosition);
