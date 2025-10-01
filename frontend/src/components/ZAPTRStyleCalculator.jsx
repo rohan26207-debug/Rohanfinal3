@@ -608,7 +608,7 @@ const ZAPTRStyleCalculator = () => {
     if (todaySales.length > 0) {
       text += `FUEL SALES (${todaySales.length}):\n`;
       todaySales.forEach(sale => {
-        text += `• ${sale.nozzle} - ${sale.fuelType}: ₹${sale.amount.toFixed(2)} (${sale.liters}L @ ₹${sale.rate}/L) [${sale.startReading}L → ${sale.endReading}L]\n`;
+        text += `• ${sale.nozzle} - ${sale.fuelType}: ₹${sale.amount.toFixed(2)} (${sale.liters} @ ₹${sale.rate}) [${sale.startReading} → ${sale.endReading}]\n`;
       });
       text += '\n';
     }
