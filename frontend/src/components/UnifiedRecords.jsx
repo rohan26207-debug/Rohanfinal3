@@ -108,7 +108,7 @@ const UnifiedRecords = ({
         </div>
         <div className="flex justify-between">
           <span className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>Liters:</span>
-          <span>{credit.liters}L</span>
+          <span>{credit.liters}</span>
         </div>
       </div>
     </div>
