@@ -270,7 +270,7 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-600">Rate:</span>
-                        <span className="font-medium">₹{credit.rate}/L</span>
+                        <span className="font-medium">₹{credit.rate}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-600">Date:</span>
