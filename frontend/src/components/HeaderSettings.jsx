@@ -362,6 +362,66 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                       </div>
                     </div>
                   </div>
+                  
+                  {/* Data Backup Section */}
+                  <Separator className={isDarkMode ? 'bg-gray-600' : 'bg-slate-200'} />
+                  
+                  <div className={`border rounded-lg p-4 ${
+                    isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-slate-50'
+                  }`}>
+                    <div className="space-y-3">
+                      <h4 className={`font-medium ${
+                        isDarkMode ? 'text-white' : 'text-slate-800'
+                      }`}>
+                        Data Backup (Offline Mode)
+                      </h4>
+                      
+                      <p className={`text-sm ${
+                        isDarkMode ? 'text-gray-400' : 'text-slate-600'
+                      }`}>
+                        Export all your data as a backup file or transfer to another device
+                      </p>
+                      
+                      <div className="grid grid-cols-1 gap-2">
+                        <Button 
+                          variant="outline" 
+                          className="w-full"
+                          onClick={() => {
+                            const backupData = localStorageService.exportAllData();
+                            const dataStr = JSON.stringify(backupData, null, 2);
+                            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                            
+                            const link = document.createElement('a');
+                            link.href = URL.createObjectURL(dataBlob);
+                            link.download = `mpump-backup-${new Date().toISOString().split('T')[0]}.json`;
+                            link.click();
+                            
+                            toast({
+                              title: "Data Exported",
+                              description: "Your backup file has been downloaded",
+                            });
+                          }}
+                        >
+                          💾 Export Data Backup
+                        </Button>
+                        
+                        <Button 
+                          variant="outline" 
+                          className="w-full"
+                          onClick={() => {
+                            const storageInfo = localStorageService.getStorageInfo();
+                            
+                            toast({
+                              title: "Storage Information",
+                              description: `Using ${Math.round(storageInfo.usagePercent)}% of browser storage (${storageInfo.itemCount} items)`,
+                            });
+                          }}
+                        >
+                          📊 Check Storage Usage
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </TabsContent>
               
