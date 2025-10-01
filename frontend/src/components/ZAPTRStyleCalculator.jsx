@@ -647,33 +647,19 @@ const ZAPTRStyleCalculator = () => {
     }`}>
       <div className="max-w-7xl mx-auto p-4">
         {/* Header */}
-        <div className="flex items-start justify-between mb-8">
-          {/* Left Side: Settings and Dark Mode Toggle stacked vertically */}
-          <div className="flex flex-col gap-2">
-            {/* Settings Dropdown - Topmost left */}
+        <div className="flex items-center justify-between mb-8">
+          {/* Left Side: Settings and App Title */}
+          <div className="flex items-center gap-4">
             <HeaderSettings 
               isDarkMode={isDarkMode}
               fuelSettings={fuelSettings}
               setFuelSettings={setFuelSettings}
             />
             
-            {/* Dark Mode Toggle - Below settings */}
-            <Button
-              variant="outline"
-              onClick={toggleTheme}
-              className="flex items-center gap-2 w-fit"
-            >
-              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              {isDarkMode ? 'Light' : 'Dark'}
-            </Button>
-          </div>
-          
-          {/* Centered App Title */}
-          <div className="flex items-center gap-3 flex-1 justify-center">
-            <div className="p-3 bg-blue-600 rounded-full">
-              <Fuel className="w-8 h-8 text-white" />
-            </div>
-            <div>
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-blue-600 rounded-full">
+                <Fuel className="w-6 h-6 text-white" />
+              </div>
               <h1 className={`text-2xl font-bold ${
                 isDarkMode ? 'text-white' : 'text-slate-800'
               }`}>
@@ -682,8 +668,15 @@ const ZAPTRStyleCalculator = () => {
             </div>
           </div>
           
-          {/* Right Side: Empty for balance */}
-          <div className="w-32"></div>
+          {/* Right Side: Dark Mode Toggle */}
+          <Button
+            variant="outline"
+            onClick={toggleTheme}
+            className="flex items-center gap-2"
+          >
+            {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            {isDarkMode ? 'Light' : 'Dark'}
+          </Button>
         </div>
 
         {/* Export Section */}
