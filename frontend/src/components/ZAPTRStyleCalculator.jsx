@@ -374,13 +374,44 @@ const ZAPTRStyleCalculator = () => {
           
           <div class="section">
             <div class="section-title">SUMMARY</div>
-            ${Object.entries(stats.fuelSalesByType).map(([fuelType, data]) => 
-              `<div class="summary-item"><strong>${fuelType} Sales:</strong> ${data.liters.toFixed(2)}L - ₹${data.amount.toFixed(2)}</div>`
-            ).join('')}
-            <div class="summary-item"><strong>Credit Sales:</strong> ${stats.creditLiters.toFixed(2)}L - ₹${stats.creditAmount.toFixed(2)}</div>
-            <div class="summary-item"><strong>Income:</strong> ₹${stats.otherIncome.toFixed(2)}</div>
-            <div class="summary-item"><strong>Expenses:</strong> ₹${stats.totalExpenses.toFixed(2)}</div>
-            <div class="cash-highlight"><strong>Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}</strong></div>
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 60%;">Category</th>
+                  <th style="width: 20%;">Litres</th>
+                  <th style="width: 20%;">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${Object.entries(stats.fuelSalesByType).map(([fuelType, data]) => 
+                  `<tr>
+                    <td>${fuelType} Sales</td>
+                    <td class="number">${data.liters.toFixed(2)}L</td>
+                    <td class="number">₹${data.amount.toFixed(2)}</td>
+                  </tr>`
+                ).join('')}
+                <tr>
+                  <td>Credit Sales</td>
+                  <td class="number">${stats.creditLiters.toFixed(2)}L</td>
+                  <td class="number">₹${stats.creditAmount.toFixed(2)}</td>
+                </tr>
+                <tr>
+                  <td>Income</td>
+                  <td class="number">-</td>
+                  <td class="number">₹${stats.otherIncome.toFixed(2)}</td>
+                </tr>
+                <tr>
+                  <td>Expenses</td>
+                  <td class="number">-</td>
+                  <td class="number">₹${stats.totalExpenses.toFixed(2)}</td>
+                </tr>
+                <tr class="total-row">
+                  <td><strong>Cash in Hand</strong></td>
+                  <td class="number"><strong>${stats.totalLiters.toFixed(2)}L</strong></td>
+                  <td class="number"><strong>₹${stats.adjustedCashSales.toFixed(2)}</strong></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           ${todaySales.length > 0 ? `
