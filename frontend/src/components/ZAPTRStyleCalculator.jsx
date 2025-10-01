@@ -371,8 +371,10 @@ const ZAPTRStyleCalculator = () => {
               background-color: #f8f8f8; 
             }
             @media print {
-              body { margin: 15mm; }
+              body { margin: 8mm; }
               .section { page-break-inside: avoid; }
+              .header { margin-bottom: 10px; }
+              .section { margin-bottom: 10px; }
             }
           </style>
         </head>
