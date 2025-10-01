@@ -305,17 +305,17 @@ metadata:
           agent: "main"
           comment: "Successfully added Owner Details tab with editable fields for petrol pump name (Vishnu Parvati Petroleum), dealer name (Rohan.R.Khandve), address, phone, and email. Full-screen interface with save functionality tested and working."
 
-  - task: "Fix input focus issue in all settings tabs"
-    implemented: true
-    working: true
+  - task: "Fix mobile keyboard minimizing issue"
+    implemented: false
+    working: false
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-        - working: true
-          agent: "main"
-          comment: "COMPREHENSIVE SUCCESS: All settings tabs now support continuous multi-word editing without focus loss. Verified working: Owner Details ('New Multi Word Pump Name'), Fuel Types ('Super Premium Diesel Plus'), Employees ('Maria Gonzalez Rodriguez Jr', '+91 98765 43210 ext 123'). Contact tab is read-only as designed."
+        - working: false
+          agent: "user"
+          comment: "User reports that mobile virtual keyboard minimizes/collapses after typing each word in settings tabs, requiring repeated clicking to continue typing. This is a mobile-specific keyboard behavior issue."
     status_history:
         - working: "NA"
           agent: "testing"
