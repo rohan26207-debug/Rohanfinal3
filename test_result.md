@@ -277,6 +277,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "IMPROVED PDF CREATION PROCESS: Enhanced PDF export to address user's difficulty in creating PDFs. Changes: 1) Improved HTML formatting with proper CSS styling for print, 2) Added print-optimized CSS with proper margins and page breaks, 3) Enhanced user experience - opens formatted document in new window and automatically triggers print dialog, 4) Professional layout with clean sections, headers, and styling, 5) Clear instructions for saving as PDF through browser's print function. Result: Users can now easily create PDF by clicking PDF button → print dialog opens → select 'Save as PDF' → save file."
+        - working: "NA"
+          agent: "main"
+          comment: "ADDED TABULAR FORMAT TO PDF: Converted all records to professional table format as requested. Changes: 1) Sales Records table with columns: Sr.No, Description, Start, End, Rate, Litres, Amount, 2) Credit Records table with columns: Sr.No, Customer, Vehicle, Rate, Litres, Amount, 3) Income Records table with columns: Sr.No, Description, Amount, 4) Expense Records table with columns: Sr.No, Description, Amount, 5) Added proper table styling with borders, headers, and total rows, 6) Professional formatting with alternating backgrounds and proper alignment. Result: All records now display in clean, organized tables with proper headers and totals."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
