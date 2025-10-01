@@ -26,7 +26,12 @@ class LocalStorageService {
       'Premium': { price: 108.90, nozzleCount: 1 }
     };
 
-    if (!this.getFuelSettings()) {
+    console.log('LocalStorage: Initializing default data...');
+    const existingSettings = this.getFuelSettings();
+    console.log('LocalStorage: Existing fuel settings:', existingSettings);
+    
+    if (!existingSettings) {
+      console.log('LocalStorage: Setting default fuel settings:', defaultFuelSettings);
       this.setFuelSettings(defaultFuelSettings);
     }
 
