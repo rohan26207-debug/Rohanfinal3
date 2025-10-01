@@ -243,6 +243,100 @@ const ZAPTRStyleCalculator = () => {
 
   const stats = getTodayStats();
 
+  // Data handling functions
+  const addSaleRecord = async (saleData) => {
+    try {
+      await apiService.createFuelSale({
+        date: selectedDate,
+        fuel_type: saleData.fuelType,
+        nozzle_id: saleData.nozzle,
+        opening_reading: saleData.startReading,
+        closing_reading: saleData.endReading,
+        liters: saleData.liters,
+        rate: saleData.rate,
+        amount: saleData.amount
+      });
+      
+      // Reload data to get updated list
+      await loadData();
+    } catch (error) {
+      console.error('Failed to add sale record:', error);
+      setError('Failed to save sale record');
+    }
+  };
+
+  const addCreditRecord = async (creditData) => {
+    try {
+      await apiService.createCreditSale({
+        date: selectedDate,
+        customer_name: creditData.customerName,
+        amount: creditData.amount,
+        description: creditData.vehicleNumber || creditData.description
+      });
+      
+      // Reload data to get updated list
+      await loadData();
+    } catch (error) {
+      console.error('Failed to add credit record:', error);
+      setError('Failed to save credit record');
+    }
+  };
+
+  const addIncomeRecord = async (incomeData) => {
+    try {
+      await apiService.createIncomeExpense({
+        date: selectedDate,
+        type: 'income',
+        category: incomeData.category || 'Income',
+        amount: incomeData.amount,
+        description: incomeData.description
+      });
+      
+      // Reload data to get updated list
+      await loadData();
+    } catch (error) {
+      console.error('Failed to add income record:', error);
+      setError('Failed to save income record');
+    }
+  };
+
+  const addExpenseRecord = async (expenseData) => {
+    try {
+      await apiService.createIncomeExpense({
+        date: selectedDate,
+        type: 'expense',
+        category: expenseData.category || 'Expense',
+        amount: expenseData.amount,
+        description: expenseData.description
+      });
+      
+      // Reload data to get updated list
+      await loadData();
+    } catch (error) {
+      console.error('Failed to add expense record:', error);
+      setError('Failed to save expense record');
+    }
+  };
+
+  const updateFuelRate = async (fuelType, rate) => {
+    try {
+      await apiService.createFuelRate({
+        date: selectedDate,
+        fuel_type: fuelType,
+        rate: rate
+      });
+      
+      // Update local settings
+      setFuelSettings(prev => ({
+        ...prev,
+        [fuelType]: { ...prev[fuelType], price: rate }
+      }));
+    } catch (error) {
+      console.error('Failed to update fuel rate:', error);
+      setError('Failed to save fuel rate');
+    }
+  };
+
   // Export functions
   const exportToPDF = () => {
     try {
