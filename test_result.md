@@ -281,17 +281,21 @@ metadata:
           agent: "main"
           comment: "Completely redesigned HeaderSettings component: dropdown shows 2 tabs (Fuel Types, Contact), each opens full-screen window covering whole viewport with back button on top-left. Both Fuel Types and Contact windows tested and working perfectly."
 
-  - task: "Remove dashboard cards after summary"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
+  - task: "Add Employees tab in settings"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
-    status_history:
-        - working: true
-          agent: "main"
-          comment: "Successfully removed the three dashboard cards (Cash in Hand, Credit Sales, Total Liters) that appeared after the Summary section. UI now flows directly from Summary to main tabs (Reading Sales, Credit Sales, Income/Expenses, Rate). Verified working correctly."
+    needs_retesting: true
+
+  - task: "Make Contact tab editable"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/HeaderSettings.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
     status_history:
         - working: "NA"
           agent: "testing"
