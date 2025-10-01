@@ -282,20 +282,28 @@ metadata:
           comment: "Completely redesigned HeaderSettings component: dropdown shows 2 tabs (Fuel Types, Contact), each opens full-screen window covering whole viewport with back button on top-left. Both Fuel Types and Contact windows tested and working perfectly."
 
   - task: "Add Employees tab in settings"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Added new Employees tab in settings dropdown positioned above Contact tab. Created full-screen employee management interface with add/edit/delete functionality for employee names and contact numbers."
 
   - task: "Make Contact tab editable"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Converted Contact tab to editable form with input fields for petrol pump name, dealer name, address, phone, and email. Added save functionality with toast notifications."
     status_history:
         - working: "NA"
           agent: "testing"
