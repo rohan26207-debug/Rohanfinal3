@@ -36,14 +36,7 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
 
   // Employee management removed
 
-  // Owner details state (editable)
-  const [ownerDetails, setOwnerDetails] = useState({
-    pumpName: 'Vishnu Parvati Petroleum',
-    dealerName: 'Rohan.R.Khandve',
-    address: 'Station Road, Near City Mall, Mumbai - 400001',
-    phone: '+91 9822026207',
-    email: 'vishnuparvatipetroleum@gmail.com'
-  });
+  // Owner details state removed
 
   // Contact information state (static display)
   const [contactInfo, setContactInfo] = useState({
