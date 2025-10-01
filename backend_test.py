@@ -491,7 +491,7 @@ class BackendTester:
     
     async def run_all_tests(self):
         """Run comprehensive test suite"""
-        print("🚀 Starting M.Pump Calc Backend Authentication Tests")
+        print("🚀 Starting M.Pump Calc Backend API Tests")
         print("=" * 60)
         
         # Setup
@@ -500,6 +500,9 @@ class BackendTester:
             return
         
         try:
+            # MongoDB Connection Test
+            await self.test_mongodb_connection()
+            
             # Authentication Tests
             print("\n📋 Testing Authentication Endpoints...")
             await self.test_auth_me_unauthenticated()
@@ -528,7 +531,14 @@ class BackendTester:
             await self.test_credit_sales_crud()
             await self.test_income_expenses_crud()
             await self.test_fuel_rates_crud()
-            await self.test_sync_backup()
+            await self.test_protected_endpoint_authorized("sync/backup", "POST")
+            
+            # Comprehensive Data Persistence Tests
+            await self.test_data_persistence_flow()
+            await self.test_date_filtering()
+            await self.test_uuid_generation()
+            await self.test_error_handling()
+            await self.test_all_endpoints_format()
             
         finally:
             # Cleanup
