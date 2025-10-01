@@ -67,6 +67,8 @@ const SalesTracker = ({ isDarkMode, salesData, addSaleRecord, fuelSettings, sele
 
   const generateNozzles = () => {
     const allNozzles = [];
+    if (!fuelSettings) return allNozzles;
+    
     Object.entries(fuelSettings).forEach(([fuelType, config]) => {
       // Special naming for specific fuel types
       let prefix;
