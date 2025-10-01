@@ -33,7 +33,7 @@ import { useToast } from '../hooks/use-toast';
 
 const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
   const [newFuelType, setNewFuelType] = useState('');
-  const [currentView, setCurrentView] = useState('dropdown'); // 'dropdown', 'fuel', 'employees', 'contact'
+  const [currentView, setCurrentView] = useState('dropdown'); // 'dropdown', 'owner', 'fuel', 'employees', 'contact'
   const { toast } = useToast();
 
   // Employee management state
