@@ -205,6 +205,152 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
     });
   };
 
+  // Full-screen Owner Details component
+  const OwnerDetailsFullScreen = () => (
+    <div className={`fixed inset-0 z-50 ${
+      isDarkMode ? 'bg-gray-900' : 'bg-white'
+    }`}>
+      {/* Header with back button */}
+      <div className={`flex items-center justify-between p-4 border-b ${
+        isDarkMode ? 'border-gray-700 bg-gray-800' : 'border-slate-200 bg-white'
+      }`}>
+        <div className="flex items-center gap-3">
+          <Button
+            variant="ghost"
+            onClick={() => setCurrentView('dropdown')}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Back
+          </Button>
+          <h1 className={`text-2xl font-bold ${
+            isDarkMode ? 'text-white' : 'text-slate-800'
+          }`}>
+            Owner Details
+          </h1>
+        </div>
+        <Button onClick={saveOwnerDetails} className="flex items-center gap-2">
+          <Save className="w-4 h-4" />
+          Save Changes
+        </Button>
+      </div>
+      
+      {/* Content */}
+      <div className="p-6 max-w-3xl mx-auto">
+        <div className="space-y-6">
+          {/* Petrol Pump Name */}
+          <Card className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'}`}>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Fuel className="w-5 h-5" />
+                Petrol Pump Information
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="ownerPumpName">Petrol Pump Name</Label>
+                <div className="flex items-center gap-2 mt-1">
+                  <Input
+                    id="ownerPumpName"
+                    value={ownerDetails.pumpName}
+                    onChange={(e) => updateOwnerDetails('pumpName', e.target.value)}
+                    placeholder="Enter petrol pump name"
+                  />
+                  <Edit className="w-4 h-4 text-gray-500" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Dealer Information */}
+          <Card className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'}`}>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <User className="w-5 h-5" />
+                Dealer Information
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="ownerDealerName">Dealer Name</Label>
+                <div className="flex items-center gap-2 mt-1">
+                  <Input
+                    id="ownerDealerName"
+                    value={ownerDetails.dealerName}
+                    onChange={(e) => updateOwnerDetails('dealerName', e.target.value)}
+                    placeholder="Enter dealer name"
+                  />
+                  <Edit className="w-4 h-4 text-gray-500" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Address Information */}
+          <Card className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'}`}>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <MapPin className="w-5 h-5" />
+                Address Information
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="ownerAddress">Complete Address</Label>
+                <div className="flex items-center gap-2 mt-1">
+                  <Input
+                    id="ownerAddress"
+                    value={ownerDetails.address}
+                    onChange={(e) => updateOwnerDetails('address', e.target.value)}
+                    placeholder="Enter complete address"
+                  />
+                  <Edit className="w-4 h-4 text-gray-500" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Contact Details */}
+          <Card className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'}`}>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Phone className="w-5 h-5" />
+                Contact Details
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="ownerPhone">Phone Number</Label>
+                <div className="flex items-center gap-2 mt-1">
+                  <Input
+                    id="ownerPhone"
+                    value={ownerDetails.phone}
+                    onChange={(e) => updateOwnerDetails('phone', e.target.value)}
+                    placeholder="Enter phone number"
+                  />
+                  <Edit className="w-4 h-4 text-gray-500" />
+                </div>
+              </div>
+              
+              <div>
+                <Label htmlFor="ownerEmail">Email Address</Label>
+                <div className="flex items-center gap-2 mt-1">
+                  <Input
+                    id="ownerEmail"
+                    value={ownerDetails.email}
+                    onChange={(e) => updateOwnerDetails('email', e.target.value)}
+                    placeholder="Enter email address"
+                  />
+                  <Edit className="w-4 h-4 text-gray-500" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+
   // Full-screen Fuel Types component
   const FuelTypesFullScreen = () => (
     <div className={`fixed inset-0 z-50 ${
