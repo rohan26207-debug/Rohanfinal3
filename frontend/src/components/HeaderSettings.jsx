@@ -28,6 +28,8 @@ import {
   LogOut
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
+import localStorageService from '../services/localStorage';
+
 const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
   const [newFuelType, setNewFuelType] = useState('');
   const [currentView, setCurrentView] = useState('dropdown'); // Only 'dropdown' needed now
