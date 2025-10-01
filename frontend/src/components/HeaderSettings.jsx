@@ -49,13 +49,16 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
   });
 
   const updateNozzleCount = (fuelType, delta) => {
-    setFuelSettings(prev => ({
-      ...prev,
+    const newSettings = {
+      ...fuelSettings,
       [fuelType]: {
-        ...prev[fuelType],
-        nozzleCount: Math.max(1, Math.min(10, prev[fuelType].nozzleCount + delta))
+        ...fuelSettings[fuelType],
+        nozzleCount: Math.max(1, Math.min(10, fuelSettings[fuelType].nozzleCount + delta))
       }
-    }));
+    };
+    
+    setFuelSettings(newSettings);
+    localStorageService.setFuelSettings(newSettings);
   };
 
   const addFuelType = () => {
