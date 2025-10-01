@@ -345,27 +345,24 @@ const ZAPTRStyleCalculator = () => {
       // Set font
       pdf.setFont('helvetica', 'normal');
       
-      let yPosition = 40;
+      let yPosition = 20; // Reduced from 40 to 20
       const pageWidth = pdf.internal.pageSize.getWidth();
-      const margin = 40;
+      const margin = 20; // Reduced from 40 to 20
       const contentWidth = pageWidth - (margin * 2);
       
-      // Title
-      pdf.setFontSize(19); // 16 * 1.2 = 19.2 ≈ 19
+      // Compact Header: Title and Date on same line
+      pdf.setFontSize(12); // Reduced from 19 to 12
       pdf.setFont('helvetica', 'bold');
-      pdf.text('M.Pump Calc Daily Report', pageWidth / 2, yPosition, { align: 'center' });
-      yPosition += 24; // increased spacing proportionally
-      
-      pdf.setFontSize(12); // 10 * 1.2 = 12
+      pdf.text('M.Pump Calc Report', margin, yPosition);
       pdf.setFont('helvetica', 'normal');
-      pdf.text(`Date: ${selectedDate} | Time: ${new Date().toLocaleTimeString()}`, pageWidth / 2, yPosition, { align: 'center' });
-      yPosition += 36; // increased spacing proportionally
+      pdf.text(`${selectedDate}`, pageWidth - margin, yPosition, { align: 'right' });
+      yPosition += 16; // Reduced from 60 total to 16
       
-      // Summary Section
-      pdf.setFontSize(14); // 12 * 1.2 = 14.4 ≈ 14
+      // Summary Section (no separate header, direct table)
+      pdf.setFontSize(11); // Reduced from 14 to 11
       pdf.setFont('helvetica', 'bold');
       pdf.text('Summary', margin, yPosition);
-      yPosition += 18; // increased spacing proportionally
+      yPosition += 12; // Reduced from 18 to 12
       
       // Summary Table Headers
       pdf.setFontSize(11); // 9 * 1.2 = 10.8 ≈ 11
