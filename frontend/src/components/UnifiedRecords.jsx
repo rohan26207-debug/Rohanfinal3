@@ -133,6 +133,7 @@ const UnifiedRecords = ({
           Income
         </Badge>
         <div className="flex items-center gap-1 text-green-600 font-bold">
+          <span className="text-sm font-normal">Amount:</span>
           <IndianRupee className="w-4 h-4" />
           <span>{income.amount.toFixed(2)}</span>
         </div>
