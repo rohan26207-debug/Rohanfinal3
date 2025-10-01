@@ -287,86 +287,136 @@ const ZAPTRStyleCalculator = () => {
   const stats = getTodayStats();
 
   // Export functions
-  const exportToPDF = async () => {
+  const exportToPDF = () => {
     try {
-      // Create text content for simple PDF generation
+      // Get today's data
       const todaySales = salesData.filter(sale => sale.date === selectedDate);
       const todayCredits = creditData.filter(credit => credit.date === selectedDate);
       const todayIncome = incomeData.filter(income => income.date === selectedDate);
       const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
 
-      // Generate text content
-      let textContent = `DAILY REPORT\nDate: ${selectedDate}\n\n`;
+      // Create formatted HTML content
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Daily Report - ${selectedDate}</title>
+          <style>
+            body { 
+              font-family: Arial, sans-serif; 
+              margin: 20px; 
+              line-height: 1.4; 
+              color: #000;
+            }
+            .header { 
+              text-align: center; 
+              margin-bottom: 30px; 
+              border-bottom: 2px solid #000; 
+              padding-bottom: 10px; 
+            }
+            .section { 
+              margin-bottom: 25px; 
+            }
+            .section-title { 
+              font-size: 16px; 
+              font-weight: bold; 
+              margin-bottom: 10px; 
+              border-bottom: 1px solid #000; 
+              padding-bottom: 3px; 
+            }
+            .summary-item { 
+              margin: 5px 0; 
+              font-size: 14px; 
+            }
+            .record-item { 
+              margin: 3px 0; 
+              font-size: 12px; 
+            }
+            .cash-highlight { 
+              font-weight: bold; 
+              font-size: 16px; 
+              margin: 10px 0; 
+            }
+            @media print {
+              body { margin: 15mm; }
+              .section { page-break-inside: avoid; }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h1>Daily Report</h1>
+            <p>Date: ${selectedDate}</p>
+          </div>
+          
+          <div class="section">
+            <div class="section-title">SUMMARY</div>
+            ${Object.entries(stats.fuelSalesByType).map(([fuelType, data]) => 
+              `<div class="summary-item"><strong>${fuelType} Sales:</strong> ${data.liters.toFixed(2)}L - ₹${data.amount.toFixed(2)}</div>`
+            ).join('')}
+            <div class="summary-item"><strong>Credit Sales:</strong> ${stats.creditLiters.toFixed(2)}L - ₹${stats.creditAmount.toFixed(2)}</div>
+            <div class="summary-item"><strong>Income:</strong> ₹${stats.otherIncome.toFixed(2)}</div>
+            <div class="summary-item"><strong>Expenses:</strong> ₹${stats.totalExpenses.toFixed(2)}</div>
+            <div class="cash-highlight"><strong>Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}</strong></div>
+          </div>
+
+          ${todaySales.length > 0 ? `
+            <div class="section">
+              <div class="section-title">SALES RECORDS</div>
+              ${todaySales.map((sale, index) => 
+                `<div class="record-item">${index + 1}. <strong>${sale.nozzle} - ${sale.fuelType}:</strong> Start: ${sale.startReading}, End: ${sale.endReading}, Rate: ₹${sale.rate}, Litres: ${sale.liters}, Amount: ₹${sale.amount.toFixed(2)}</div>`
+              ).join('')}
+            </div>
+          ` : ''}
+
+          ${todayCredits.length > 0 ? `
+            <div class="section">
+              <div class="section-title">CREDIT RECORDS</div>
+              ${todayCredits.map((credit, index) => 
+                `<div class="record-item">${index + 1}. <strong>${credit.customerName}${credit.vehicleNumber ? ' - ' + credit.vehicleNumber : ''}:</strong> ${credit.liters}L @ ₹${credit.rate} = ₹${credit.amount.toFixed(2)}</div>`
+              ).join('')}
+            </div>
+          ` : ''}
+
+          ${todayIncome.length > 0 ? `
+            <div class="section">
+              <div class="section-title">INCOME RECORDS</div>
+              ${todayIncome.map((income, index) => 
+                `<div class="record-item">${index + 1}. <strong>${income.description}:</strong> ₹${income.amount.toFixed(2)}</div>`
+              ).join('')}
+            </div>
+          ` : ''}
+
+          ${todayExpenses.length > 0 ? `
+            <div class="section">
+              <div class="section-title">EXPENSE RECORDS</div>
+              ${todayExpenses.map((expense, index) => 
+                `<div class="record-item">${index + 1}. <strong>${expense.description}:</strong> ₹${expense.amount.toFixed(2)}</div>`
+              ).join('')}
+            </div>
+          ` : ''}
+
+          <div style="margin-top: 30px; text-align: center; font-size: 10px; border-top: 1px solid #000; padding-top: 10px;">
+            Generated on: ${new Date().toLocaleString()}
+          </div>
+        </body>
+        </html>
+      `;
+
+      // Open in new window for printing
+      const printWindow = window.open('', '_blank');
+      printWindow.document.write(htmlContent);
+      printWindow.document.close();
       
-      textContent += `SUMMARY\n`;
-      textContent += `========\n`;
-      Object.entries(stats.fuelSalesByType).forEach(([fuelType, data]) => {
-        textContent += `${fuelType} Sales: ${data.liters.toFixed(2)}L - ₹${data.amount.toFixed(2)}\n`;
-      });
-      textContent += `Credit Sales: ${stats.creditLiters.toFixed(2)}L - ₹${stats.creditAmount.toFixed(2)}\n`;
-      textContent += `Income: ₹${stats.otherIncome.toFixed(2)}\n`;
-      textContent += `Expenses: ₹${stats.totalExpenses.toFixed(2)}\n`;
-      textContent += `Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}\n\n`;
+      // Focus and print
+      printWindow.focus();
+      setTimeout(() => {
+        printWindow.print();
+      }, 500);
 
-      // Sales Records
-      if (todaySales.length > 0) {
-        textContent += `SALES RECORDS\n`;
-        textContent += `=============\n`;
-        todaySales.forEach((sale, index) => {
-          textContent += `${index + 1}. ${sale.nozzle} - ${sale.fuelType}: Start: ${sale.startReading}, End: ${sale.endReading}, Rate: ₹${sale.rate}, Litres: ${sale.liters}, Amount: ₹${sale.amount.toFixed(2)}\n`;
-        });
-        textContent += '\n';
-      }
-
-      // Credit Records
-      if (todayCredits.length > 0) {
-        textContent += `CREDIT RECORDS\n`;
-        textContent += `==============\n`;
-        todayCredits.forEach((credit, index) => {
-          textContent += `${index + 1}. ${credit.customerName}${credit.vehicleNumber ? ' - ' + credit.vehicleNumber : ''}: ${credit.liters}L @ ₹${credit.rate} = ₹${credit.amount.toFixed(2)}\n`;
-        });
-        textContent += '\n';
-      }
-
-      // Income Records
-      if (todayIncome.length > 0) {
-        textContent += `INCOME RECORDS\n`;
-        textContent += `==============\n`;
-        todayIncome.forEach((income, index) => {
-          textContent += `${index + 1}. ${income.description}: ₹${income.amount.toFixed(2)}\n`;
-        });
-        textContent += '\n';
-      }
-
-      // Expense Records
-      if (todayExpenses.length > 0) {
-        textContent += `EXPENSE RECORDS\n`;
-        textContent += `===============\n`;
-        todayExpenses.forEach((expense, index) => {
-          textContent += `${index + 1}. ${expense.description}: ₹${expense.amount.toFixed(2)}\n`;
-        });
-        textContent += '\n';
-      }
-
-      textContent += `Generated on: ${new Date().toLocaleString()}`;
-
-      // Create and download text file that can be converted to PDF
-      const blob = new Blob([textContent], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `Report-${selectedDate}.txt`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-
-      // Show user instructions
-      alert('Text file downloaded! To create PDF:\n1. Open the downloaded text file\n2. Print it (Ctrl+P)\n3. Select "Save as PDF" in the print dialog\n4. Save your PDF file');
-      
     } catch (error) {
-      console.error('Error generating file:', error);
-      alert('Error generating file. Please try again.');
+      console.error('Error generating PDF:', error);
+      alert('Error generating PDF. Please try again.');
     }
   };
 
