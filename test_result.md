@@ -337,7 +337,7 @@ test_plan:
 
 agent_communication:
     - agent: "main"
-      message: "Removed Employees tab from settings as requested. Settings dropdown now streamlined to 3 tabs: Owner Details, Fuel Types, and Contact. Cleaned up all employee management code, state, and components. Remaining tabs fully functional."
+      message: "Removed Owner Details tab from settings as requested. Settings dropdown now minimized to just 2 essential tabs: Fuel Types and Contact. Cleaned up all owner details management code, state, and components. Both remaining tabs fully functional with clean interface."
     - agent: "testing"
       message: "Comprehensive testing completed successfully. All requested features are working correctly: 1) Dynamic nozzle dropdown filters properly by fuel type (Petrol→P1,P2,P3; Diesel→D1,D2; CNG→C1,C2; Premium→PR1), 2) Unified Records section appears on all tabs showing grouped records (Fuel Sales, Credit Sales, Income, Expenses) with accurate counts, 3) Date filtering updates unified records correctly, 4) Nozzle display shows clean IDs without brackets/icons, 5) Visual styling and badges are consistent across all record types. No critical issues found."
     - agent: "main"
