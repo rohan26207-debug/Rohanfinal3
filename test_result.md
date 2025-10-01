@@ -286,6 +286,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "ADDED DATE TO COPY TEXT: Modified copy text functionality to show date first. Changes: 1) Updated generateTextContent function to include date at the beginning of copied text, 2) Format: 'Date: YYYY-MM-DD' appears as first line, 3) Followed by existing sections (Readings, Credits, Income, Expenses), 4) Better context for copied text with date information. Result: Copy text export now starts with date followed by all daily records."
+        - working: "NA"
+          agent: "main"
+          comment: "ADDED SUMMARY TO COPY TEXT: Enhanced copy text to include summary section after date and before readings. Changes: 1) Added *Summary* section after date, 2) Includes all fuel sales by type with litres and amounts, 3) Shows credit sales, income, expenses, and cash in hand totals, 4) Positioned before *Readings* section as requested, 5) Consistent formatting with other sections. Result: Copy text structure now: Date → Summary → Readings → Credits → Income → Expenses."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
