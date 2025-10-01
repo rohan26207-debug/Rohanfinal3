@@ -360,6 +360,133 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                   </div>
                 </div>
               </TabsContent>
+              
+              <TabsContent value="sync" className="p-4">
+                <div className="space-y-4">
+                  <div className="text-center mb-4">
+                    <div className="flex items-center justify-center w-16 h-16 mx-auto mb-3 bg-red-100 rounded-full">
+                      <Mail className="w-8 h-8 text-red-600" />
+                    </div>
+                    <h3 className={`text-lg font-semibold ${
+                      isDarkMode ? 'text-white' : 'text-slate-800'
+                    }`}>
+                      Gmail Sync
+                    </h3>
+                  </div>
+                  
+                  {/* Gmail Connection Status */}
+                  <div className={`border rounded-lg p-4 ${
+                    isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-slate-50'
+                  }`}>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                          <span className={`font-medium ${
+                            isDarkMode ? 'text-white' : 'text-slate-800'
+                          }`}>
+                            Gmail Account
+                          </span>
+                        </div>
+                        <span className={`text-sm px-2 py-1 rounded ${
+                          isDarkMode ? 'bg-red-900 text-red-300' : 'bg-red-100 text-red-700'
+                        }`}>
+                          Not Connected
+                        </span>
+                      </div>
+                      
+                      <Separator className={isDarkMode ? 'bg-gray-600' : 'bg-slate-200'} />
+                      
+                      <div className="space-y-2">
+                        <Button 
+                          className="w-full bg-red-600 hover:bg-red-700 text-white"
+                          onClick={() => {
+                            // Gmail login will be implemented
+                            window.location.href = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(window.location.origin)}`;
+                          }}
+                        >
+                          <Mail className="w-4 h-4 mr-2" />
+                          Connect Gmail Account
+                        </Button>
+                        
+                        <p className={`text-xs text-center ${
+                          isDarkMode ? 'text-gray-400' : 'text-slate-500'
+                        }`}>
+                          Connect your Gmail account to sync daily reports and data
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Sync Settings */}
+                  <div className={`border rounded-lg p-4 opacity-50 ${
+                    isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-slate-50'
+                  }`}>
+                    <div className="space-y-3">
+                      <h4 className={`font-medium ${
+                        isDarkMode ? 'text-white' : 'text-slate-800'
+                      }`}>
+                        Sync Settings
+                      </h4>
+                      
+                      <div className="space-y-2">
+                        <label className="flex items-center gap-2">
+                          <input type="checkbox" disabled className="rounded" />
+                          <span className={`text-sm ${
+                            isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                          }`}>
+                            Daily Sales Reports
+                          </span>
+                        </label>
+                        
+                        <label className="flex items-center gap-2">
+                          <input type="checkbox" disabled className="rounded" />
+                          <span className={`text-sm ${
+                            isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                          }`}>
+                            Credit Sales Data
+                          </span>
+                        </label>
+                        
+                        <label className="flex items-center gap-2">
+                          <input type="checkbox" disabled className="rounded" />
+                          <span className={`text-sm ${
+                            isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                          }`}>
+                            Income & Expense Records
+                          </span>
+                        </label>
+                        
+                        <label className="flex items-center gap-2">
+                          <input type="checkbox" disabled className="rounded" />
+                          <span className={`text-sm ${
+                            isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                          }`}>
+                            Fuel Rate Changes
+                          </span>
+                        </label>
+                      </div>
+                      
+                      <Separator className={isDarkMode ? 'bg-gray-600' : 'bg-slate-200'} />
+                      
+                      <div className="space-y-2">
+                        <label className={`text-sm font-medium ${
+                          isDarkMode ? 'text-gray-300' : 'text-slate-600'
+                        }`}>
+                          Sync Frequency
+                        </label>
+                        <select disabled className={`w-full p-2 text-sm border rounded ${
+                          isDarkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-slate-300'
+                        }`}>
+                          <option>Daily (End of Day)</option>
+                          <option>Weekly</option>
+                          <option>Manual</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
             </Tabs>
           </CardContent>
         </Card>
