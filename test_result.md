@@ -337,7 +337,7 @@ test_plan:
 
 agent_communication:
     - agent: "main"
-      message: "Successfully ensured continuous editing works across ALL settings tabs. Comprehensive testing confirmed: Owner Details, Fuel Types, and Employees tabs all support uninterrupted multi-word input without focus loss. All input fields throughout settings now provide smooth editing experience."
+      message: "Fixed critical mobile keyboard minimizing issue across all settings tabs. Applied comprehensive optimizations: memoized onChange handlers, autoComplete='off', appropriate inputMode attributes. Verified on mobile viewport - users can now type continuous multi-word text without virtual keyboard collapsing after each word."
     - agent: "testing"
       message: "Comprehensive testing completed successfully. All requested features are working correctly: 1) Dynamic nozzle dropdown filters properly by fuel type (Petrol→P1,P2,P3; Diesel→D1,D2; CNG→C1,C2; Premium→PR1), 2) Unified Records section appears on all tabs showing grouped records (Fuel Sales, Credit Sales, Income, Expenses) with accurate counts, 3) Date filtering updates unified records correctly, 4) Nozzle display shows clean IDs without brackets/icons, 5) Visual styling and badges are consistent across all record types. No critical issues found."
     - agent: "main"
