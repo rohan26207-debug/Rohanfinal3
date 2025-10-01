@@ -291,47 +291,38 @@ const ZAPTRStyleCalculator = () => {
     try {
       const content = generateExportContent();
       
-      // Create the HTML content for PDF
+      // Create the HTML content for PDF (optimized for small text-based files)
       const htmlContent = `
-        <div style="font-family: Arial, sans-serif; margin: 0; padding: 0;">
-          <!-- Header Band -->
-          <div style="padding: 18px 25px; margin-bottom: 30px; border: 1px solid #333;">
-            <h1 style="margin: 0; font-size: 24px; font-weight: bold; text-align: left;">M.Pump Calc Daily Report</h1>
-            <div style="font-size: 14px; margin-top: 8px;">
-              <span>v 2.1.2</span> | 
-              <span>Date: ${selectedDate}</span> | 
-              <span>Time: ${new Date().toLocaleTimeString()}</span>
-            </div>
+        <div style="font-family: Arial, sans-serif; font-size: 12px; line-height: 1.4; margin: 0; padding: 20px;">
+          <div style="text-align: center; margin-bottom: 30px; padding: 15px; border: 1px solid black;">
+            <h1 style="margin: 0; font-size: 18px; font-weight: bold;">M.Pump Calc Daily Report</h1>
+            <p style="margin: 5px 0 0 0; font-size: 12px;">Date: ${selectedDate} | Time: ${new Date().toLocaleTimeString()}</p>
           </div>
           
-          <!-- Content Area -->
-          <div style="padding: 0 20px;">
-            <h2 style="color: #000; margin-bottom: 15px; font-size: 16px; font-weight: bold; font-family: Arial, sans-serif;">Summary</h2>
-            <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; border: 1px solid #333; font-family: Arial, sans-serif;">
-              <thead>
-                <tr>
-                  <th style="border: 1px solid #333; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: left; font-family: Arial, sans-serif;">Category</th>
-                  <th style="border: 1px solid #333; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: right; font-family: Arial, sans-serif;">Total Litres</th>
-                  <th style="border: 1px solid #333; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: right; font-family: Arial, sans-serif;">Total Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${Object.entries(stats.fuelSalesByType).map(([fuelType, data], index) => 
-                  `<tr><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; font-family: Arial, sans-serif;">${fuelType} Sales</td><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; text-align: right; font-family: Arial, sans-serif;">${data.liters.toFixed(2)}L</td><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; text-align: right; font-family: Arial, sans-serif;">₹${data.amount.toFixed(2)}</td></tr>`
-                ).join('')}
-                <tr><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; font-family: Arial, sans-serif;">Credit Sales</td><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; text-align: right; font-family: Arial, sans-serif;">${stats.creditLiters.toFixed(2)}L</td><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; text-align: right; font-family: Arial, sans-serif;">₹${stats.creditAmount.toFixed(2)}</td></tr>
-                <tr><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; font-family: Arial, sans-serif;">Income</td><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; text-align: right; font-family: Arial, sans-serif;">-</td><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; text-align: right; font-family: Arial, sans-serif;">₹${stats.otherIncome.toFixed(2)}</td></tr>
-                <tr><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; font-family: Arial, sans-serif;">Expenses</td><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; text-align: right; font-family: Arial, sans-serif;">-</td><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; text-align: right; font-family: Arial, sans-serif;">₹${stats.totalExpenses.toFixed(2)}</td></tr>
-                <tr style="font-weight: bold;"><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; font-weight: bold; font-family: Arial, sans-serif;">Cash in Hand</td><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; text-align: right; font-weight: bold; font-family: Arial, sans-serif;">${stats.totalLiters.toFixed(2)}L</td><td style="border: 1px solid #333; padding: 6px 12px; font-size: 10px; text-align: right; font-weight: bold; font-family: Arial, sans-serif;">₹${stats.adjustedCashSales.toFixed(2)}</td></tr>
-              </tbody>
-            </table>
-            
-            ${content}
-            
-            <!-- Footer -->
-            <div style="margin-top: 40px; text-align: center; font-size: 11px; padding-top: 20px; border-top: 1px solid #333;">
-              Page 1 of 1 | Generated by M.Pump Calc | ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}
-            </div>
+          <h2 style="margin: 20px 0 10px 0; font-size: 14px; font-weight: bold;">Summary</h2>
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid black;">
+            <thead>
+              <tr>
+                <th style="border: 1px solid black; padding: 5px; font-size: 11px; text-align: left;">Category</th>
+                <th style="border: 1px solid black; padding: 5px; font-size: 11px; text-align: right;">Total Litres</th>
+                <th style="border: 1px solid black; padding: 5px; font-size: 11px; text-align: right;">Total Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${Object.entries(stats.fuelSalesByType).map(([fuelType, data], index) => 
+                `<tr><td style="border: 1px solid black; padding: 4px; font-size: 10px;">${fuelType} Sales</td><td style="border: 1px solid black; padding: 4px; font-size: 10px; text-align: right;">${data.liters.toFixed(2)}L</td><td style="border: 1px solid black; padding: 4px; font-size: 10px; text-align: right;">₹${data.amount.toFixed(2)}</td></tr>`
+              ).join('')}
+              <tr><td style="border: 1px solid black; padding: 4px; font-size: 10px;">Credit Sales</td><td style="border: 1px solid black; padding: 4px; font-size: 10px; text-align: right;">${stats.creditLiters.toFixed(2)}L</td><td style="border: 1px solid black; padding: 4px; font-size: 10px; text-align: right;">₹${stats.creditAmount.toFixed(2)}</td></tr>
+              <tr><td style="border: 1px solid black; padding: 4px; font-size: 10px;">Income</td><td style="border: 1px solid black; padding: 4px; font-size: 10px; text-align: right;">-</td><td style="border: 1px solid black; padding: 4px; font-size: 10px; text-align: right;">₹${stats.otherIncome.toFixed(2)}</td></tr>
+              <tr><td style="border: 1px solid black; padding: 4px; font-size: 10px;">Expenses</td><td style="border: 1px solid black; padding: 4px; font-size: 10px; text-align: right;">-</td><td style="border: 1px solid black; padding: 4px; font-size: 10px; text-align: right;">₹${stats.totalExpenses.toFixed(2)}</td></tr>
+              <tr><td style="border: 1px solid black; padding: 4px; font-size: 10px; font-weight: bold;">Cash in Hand</td><td style="border: 1px solid black; padding: 4px; font-size: 10px; text-align: right; font-weight: bold;">${stats.totalLiters.toFixed(2)}L</td><td style="border: 1px solid black; padding: 4px; font-size: 10px; text-align: right; font-weight: bold;">₹${stats.adjustedCashSales.toFixed(2)}</td></tr>
+            </tbody>
+          </table>
+          
+          ${content}
+          
+          <div style="margin-top: 30px; text-align: center; font-size: 10px; border-top: 1px solid black; padding-top: 10px;">
+            Page 1 | Generated by M.Pump Calc | ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}
           </div>
         </div>
       `;
