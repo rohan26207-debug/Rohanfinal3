@@ -293,23 +293,23 @@ const ZAPTRStyleCalculator = () => {
       
       // Create the HTML content for PDF
       const htmlContent = `
-        <div style="font-family: Arial, sans-serif; padding: 20px;">
-          <h1 style="text-align: center; color: #333; margin-bottom: 15px; font-size: 32px; font-weight: bold;">M.Pump Calc Daily Report</h1>
-          <h2 style="text-align: center; color: #666; margin-bottom: 35px; font-size: 22px;">Date: ${selectedDate}</h2>
+        <div style="font-family: Arial, sans-serif; padding: 8px; font-size: 10px;">
+          <h1 style="text-align: center; color: #333; margin-bottom: 6px; font-size: 14px; font-weight: bold;">M.Pump Calc Daily Report</h1>
+          <h2 style="text-align: center; color: #666; margin-bottom: 10px; font-size: 11px;">Date: ${selectedDate}</h2>
           
-          <div style="margin: 20px 0; border: 2px solid #ddd; padding: 20px; border-radius: 8px; background-color: #f8f9fa;">
-            <h3 style="color: #333; margin-bottom: 20px; font-size: 24px; font-weight: bold;">Daily Summary</h3>
-            <table style="width: 100%; border-collapse: collapse; font-size: 16px;">
+          <div style="margin: 8px 0; border: 1px solid #ccc; padding: 6px;">
+            <h3 style="color: #333; margin-bottom: 6px; font-size: 12px; font-weight: bold;">Daily Summary</h3>
+            <table style="width: 100%; border-collapse: collapse; font-size: 9px;">
               ${Object.entries(stats.fuelSalesByType).map(([fuelType, data], index) => 
-                `<tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>${index + 1}. ${fuelType} Sales:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">${data.liters.toFixed(2)}L • ₹${data.amount.toFixed(2)}</td></tr>`
+                `<tr><td style="padding: 2px 4px; border-bottom: 1px solid #eee; font-size: 9px;"><strong>${index + 1}. ${fuelType} Sales:</strong></td><td style="padding: 2px 4px; border-bottom: 1px solid #eee; font-size: 9px; font-weight: bold;">${data.liters.toFixed(2)}L • ₹${data.amount.toFixed(2)}</td></tr>`
               ).join('')}
               ${Object.keys(stats.fuelSalesByType).length > 1 ? 
-                `<tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>Total Reading Sales:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">${stats.totalLiters.toFixed(2)}L • ₹${stats.fuelCashSales.toFixed(2)}</td></tr>` : ''
+                `<tr><td style="padding: 2px 4px; border-bottom: 1px solid #eee; font-size: 9px;"><strong>Total Reading Sales:</strong></td><td style="padding: 2px 4px; border-bottom: 1px solid #eee; font-size: 9px; font-weight: bold;">${stats.totalLiters.toFixed(2)}L • ₹${stats.fuelCashSales.toFixed(2)}</td></tr>` : ''
               }
-              <tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 2 : 1)}. Credit Sales:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">${stats.creditLiters.toFixed(2)}L • ₹${stats.creditAmount.toFixed(2)}</td></tr>
-              <tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 3 : 2)}. Income:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">₹${stats.otherIncome.toFixed(2)}</td></tr>
-              <tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 4 : 3)}. Expenses:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">₹${stats.totalExpenses.toFixed(2)}</td></tr>
-              <tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 5 : 4)}. Cash in Hand:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">₹${stats.adjustedCashSales.toFixed(2)}</td></tr>
+              <tr><td style="padding: 2px 4px; border-bottom: 1px solid #eee; font-size: 9px;"><strong>${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 2 : 1)}. Credit Sales:</strong></td><td style="padding: 2px 4px; border-bottom: 1px solid #eee; font-size: 9px; font-weight: bold;">${stats.creditLiters.toFixed(2)}L • ₹${stats.creditAmount.toFixed(2)}</td></tr>
+              <tr><td style="padding: 2px 4px; border-bottom: 1px solid #eee; font-size: 9px;"><strong>${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 3 : 2)}. Income:</strong></td><td style="padding: 2px 4px; border-bottom: 1px solid #eee; font-size: 9px; font-weight: bold;">₹${stats.otherIncome.toFixed(2)}</td></tr>
+              <tr><td style="padding: 2px 4px; border-bottom: 1px solid #eee; font-size: 9px;"><strong>${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 4 : 3)}. Expenses:</strong></td><td style="padding: 2px 4px; border-bottom: 1px solid #eee; font-size: 9px; font-weight: bold;">₹${stats.totalExpenses.toFixed(2)}</td></tr>
+              <tr><td style="padding: 2px 4px; border-bottom: 1px solid #eee; font-size: 9px;"><strong>${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 5 : 4)}. Cash in Hand:</strong></td><td style="padding: 2px 4px; border-bottom: 1px solid #eee; font-size: 9px; font-weight: bold;">₹${stats.adjustedCashSales.toFixed(2)}</td></tr>
             </table>
           </div>
           
