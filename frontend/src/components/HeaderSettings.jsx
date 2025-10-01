@@ -178,9 +178,9 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
   }, []);
 
   // Owner details functions
-  const updateOwnerDetails = (field, value) => {
+  const updateOwnerDetails = useCallback((field, value) => {
     setOwnerDetails(prev => ({ ...prev, [field]: value }));
-  };
+  }, []);
 
   const saveOwnerDetails = () => {
     // Update contact info to match owner details
