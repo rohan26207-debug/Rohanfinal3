@@ -544,7 +544,7 @@ const ZAPTRStyleCalculator = () => {
     
     // Add fuel sales by type
     Object.entries(stats.fuelSalesByType).forEach(([fuelType, data], index) => {
-      csv += `${index + 1}. ${fuelType} Sales,${data.liters.toFixed(2)} • ₹${data.amount.toFixed(2)}\n`;
+      csv += `${index + 1}. ${fuelType} Sales,${data.liters.toFixed(2)}L • ₹${data.amount.toFixed(2)}\n`;
     });
     
     // Add total if multiple fuel types
