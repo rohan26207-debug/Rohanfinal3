@@ -209,7 +209,7 @@ const PriceConfiguration = ({
                           placeholder="0.00"
                           className="w-24"
                         />
-                        <span className="text-sm text-slate-500">/L</span>
+                        <span className="text-sm text-slate-500"></span>
                       </div>
                     </div>
                   </div>
@@ -266,7 +266,7 @@ const PriceConfiguration = ({
                           <span className="font-bold text-green-600">
                             {config.price.toFixed(2)}
                           </span>
-                          <span className="text-sm text-slate-500">/L</span>
+                          <span className="text-sm text-slate-500"></span>
                         </div>
                       </div>
                       
