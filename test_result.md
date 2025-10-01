@@ -235,6 +235,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "COMPLETE REMOVAL: Removed ALL colors, fillers, shades, and backgrounds from PDF export as requested. Changes: 1) Removed dark header background (#444) and white text color, 2) Removed summary table header gray backgrounds (#f2f2f2), 3) Removed Cash in Hand row gray background (#f8f8f8), 4) Removed footer gray color (#666) and light gray border (#ddd), 5) Fixed fallback print function colors. PDF now contains ONLY black text and table lines on pure white background."
+        - working: "NA"
+          agent: "main"
+          comment: "OPTIMIZED FOR SMALL FILE SIZE: Completely restructured PDF generation for minimal text-based files. Changes: 1) Removed high DPI (300) and scale settings, 2) Enabled compression, 3) Simplified HTML structure, 4) Reduced font sizes (12px headers, 9px content), 5) Minimal padding (3-4px), 6) Removed all font-family declarations, 7) Changed all borders from #333 to black, 8) Optimized all table sections. Result: Pure text-based PDF with smallest possible file size."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
