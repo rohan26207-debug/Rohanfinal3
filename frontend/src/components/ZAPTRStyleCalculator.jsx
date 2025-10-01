@@ -384,9 +384,9 @@ const ZAPTRStyleCalculator = () => {
       
       // Fuel Sales by Type
       Object.entries(stats.fuelSalesByType).forEach(([fuelType, data]) => {
-        pdf.text(\`\${fuelType} Sales\`, margin, yPosition);
-        pdf.text(\`\${data.liters.toFixed(2)}L\`, margin + 200, yPosition);
-        pdf.text(\`₹\${data.amount.toFixed(2)}\`, margin + 300, yPosition, { align: 'right' });
+        pdf.text(`${fuelType} Sales`, margin, yPosition);
+        pdf.text(`${data.liters.toFixed(2)}L`, margin + 200, yPosition);
+        pdf.text(`₹${data.amount.toFixed(2)}`, margin + 300, yPosition, { align: 'right' });
         yPosition += 12;
       });
       
