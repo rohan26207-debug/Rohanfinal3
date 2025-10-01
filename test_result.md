@@ -293,17 +293,21 @@ metadata:
           agent: "main"
           comment: "Added new Employees tab in settings dropdown positioned above Contact tab. Created full-screen employee management interface with add/edit/delete functionality for employee names and contact numbers."
 
-  - task: "Make Contact tab editable"
-    implemented: true
+  - task: "Add Owner Details tab above Fuel Types"
+    implemented: false
     working: "NA"
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
-    status_history:
-        - working: "NA"
-          agent: "main"
-          comment: "Converted Contact tab to editable form with input fields for petrol pump name, dealer name, address, phone, and email. Added save functionality with toast notifications."
+
+  - task: "Reorganize settings tabs order"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/HeaderSettings.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
     status_history:
         - working: "NA"
           agent: "testing"
