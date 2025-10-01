@@ -419,27 +419,27 @@ const ZAPTRStyleCalculator = () => {
       const todayIncome = incomeData.filter(income => income.date === selectedDate);
       const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
       
-      // Reading Calculation
+      // Reading Calculation (ultra-compact)
       if (todaySales.length > 0) {
-        yPosition += 12; // 10 * 1.2 = 12
-        pdf.setFontSize(13); // 11 * 1.2 = 13.2 ≈ 13
+        yPosition += 8; // Reduced from 12 to 8
+        pdf.setFontSize(10); // Reduced from 13 to 10
         pdf.setFont('helvetica', 'bold');
-        pdf.text('Reading Calculation', margin, yPosition);
-        yPosition += 18; // 15 * 1.2 = 18
+        pdf.text('Readings', margin, yPosition);
+        yPosition += 12; // Reduced from 18 to 12
         
-        // Headers
-        pdf.setFontSize(10); // 8 * 1.2 = 9.6 ≈ 10
-        pdf.text('Sr.', margin, yPosition);
-        pdf.text('Description', margin + 30, yPosition);
-        pdf.text('Start', margin + 150, yPosition);
-        pdf.text('End', margin + 200, yPosition);
-        pdf.text('Rate', margin + 250, yPosition);
-        pdf.text('Litres', margin + 300, yPosition);
-        pdf.text('Amount', margin + 350, yPosition);
-        yPosition += 12; // 10 * 1.2 = 12
+        // Compact Headers
+        pdf.setFontSize(8); // Reduced from 10 to 8
+        pdf.text('No', margin, yPosition);
+        pdf.text('Nozzle', margin + 20, yPosition);
+        pdf.text('Start', margin + 80, yPosition);
+        pdf.text('End', margin + 120, yPosition);
+        pdf.text('Rate', margin + 160, yPosition);
+        pdf.text('Ltr', margin + 200, yPosition);
+        pdf.text('Amt', margin + 240, yPosition);
+        yPosition += 10; // Reduced from 12 to 10
         
-        pdf.line(margin, yPosition - 2, pageWidth - margin, yPosition - 2);
-        yPosition += 6; // 5 * 1.2 = 6
+        // No line, save space
+        yPosition += 2; // Minimal separator
         
         // Data rows
         pdf.setFont('helvetica', 'normal');
