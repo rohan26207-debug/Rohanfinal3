@@ -130,15 +130,7 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
     setNewFuelType(e.target.value);
   }, []);
 
-  const saveOwnerDetails = () => {
-    // Update contact info to match owner details
-    setContactInfo(ownerDetails);
-    
-    toast({
-      title: "Owner Details Saved",
-      description: "Owner details have been updated successfully",
-    });
-  };
+  // saveOwnerDetails function removed
 
   // Contact information functions
   const updateContactInfo = (field, value) => {
