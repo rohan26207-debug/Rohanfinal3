@@ -40,7 +40,6 @@ const ZAPTRStyleCalculator = () => {
   const [incomeData, setIncomeData] = useState([]);
   const [fuelSettings, setFuelSettings] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
-  const [stockData, setStockData] = useState([]);
 
   // Mock data
   useEffect(() => {
