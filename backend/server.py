@@ -392,6 +392,12 @@ async def backup_data(request: Request):
     income_expenses = await db.income_expenses.find({"user_id": user.id}).to_list(1000)
     fuel_rates = await db.fuel_rates.find({"user_id": user.id}).to_list(1000)
     
+    # Remove MongoDB _id fields to avoid serialization issues
+    for collection in [fuel_sales, credit_sales, income_expenses, fuel_rates]:
+        for item in collection:
+            if "_id" in item:
+                del item["_id"]
+    
     backup_data = {
         "user": user.dict(),
         "fuel_sales": fuel_sales,
