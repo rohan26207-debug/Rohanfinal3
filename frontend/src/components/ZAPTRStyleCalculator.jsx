@@ -636,59 +636,69 @@ const ZAPTRStyleCalculator = () => {
     const todayIncome = incomeData.filter(income => income.date === selectedDate);
     const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
 
-    let text = `M.PUMP CALC DAILY REPORT - ${selectedDate}\n`;
-    text += `==========================================\n\n`;
+    let text = '';
     
-    text += `DAILY SUMMARY:\n`;
-    
-    // Add fuel sales by type
-    Object.entries(stats.fuelSalesByType).forEach(([fuelType, data], index) => {
-      text += `• ${index + 1}. ${fuelType} Sales: ${data.liters.toFixed(2)}L • ₹${data.amount.toFixed(2)}\n`;
-    });
-    
-    // Add total if multiple fuel types
-    if (Object.keys(stats.fuelSalesByType).length > 1) {
-      text += `• Total Reading Sales: ${stats.totalLiters.toFixed(2)}L • ₹${stats.fuelCashSales.toFixed(2)}\n`;
-    }
-    
-    text += `• ${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 2 : 1)}. Credit Sales: ${stats.creditLiters.toFixed(2)}L • ₹${stats.creditAmount.toFixed(2)}\n`;
-    text += `• ${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 3 : 2)}. Income: ₹${stats.otherIncome.toFixed(2)}\n`;
-    text += `• ${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 4 : 3)}. Expenses: ₹${stats.totalExpenses.toFixed(2)}\n`;
-    text += `• ${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 5 : 4)}. Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}\n\n`;
-    
+    // *Readings* section
     if (todaySales.length > 0) {
-      text += `FUEL SALES (${todaySales.length}):\n`;
-      todaySales.forEach(sale => {
-        text += `• ${sale.nozzle} - ${sale.fuelType}: ₹${sale.amount.toFixed(2)} (${sale.liters} @ ₹${sale.rate}) [${sale.startReading} → ${sale.endReading}]\n`;
+      text += `*Readings*\n`;
+      todaySales.forEach((sale, index) => {
+        text += `${index + 1}. Readings:\n`;
+        text += ` ID: ${sale.id || (index + 1)}\n`;
+        text += ` Description: ${sale.nozzle}\n`;
+        text += ` Starting: ${sale.startReading}\n`;
+        text += ` Ending: ${sale.endReading}\n`;
+        text += ` Litres: ${sale.liters}\n`;
+        text += ` Rate: ${sale.rate}\n`;
+        text += ` Amount: ${sale.amount.toFixed(2)}\n`;
       });
-      text += '\n';
+      text += `*Readings Total: ${stats.fuelCashSales.toFixed(2)}*\n`;
+      text += `-------\n`;
     }
-
+    
+    // *Credits* section
     if (todayCredits.length > 0) {
-      text += `CREDIT SALES (${todayCredits.length}):\n`;
-      todayCredits.forEach(credit => {
-        text += `• ${credit.customerName} (${credit.vehicleNumber || 'N/A'}): ₹${credit.amount.toFixed(2)} (${credit.liters} ${credit.fuelType} @ ₹${credit.rate})\n`;
+      text += `*Credits*\n`;
+      todayCredits.forEach((credit, index) => {
+        text += `${index + 1}. Credit:\n`;
+        text += ` ID: ${credit.id || (index + 1)}\n`;
+        text += ` Description: ${credit.customerName}\n`;
+        text += ` Litre: ${credit.liters}\n`;
+        text += ` Rate: ${credit.rate}\n`;
+        text += ` Amount: ${credit.amount.toFixed(2)}\n`;
       });
-      text += '\n';
+      text += `*Credits Total: ${stats.creditAmount.toFixed(2)}*\n`;
+      text += `-------\n`;
     }
-
-    if (todayIncome.length > 0) {
-      text += `INCOME (${todayIncome.length}):\n`;
+    
+    // *Extras* section (Income & Expenses combined)
+    if (todayIncome.length > 0 || todayExpenses.length > 0) {
+      text += `*Extras*\n`;
+      let extraIndex = 1;
+      
+      // Add Income as positive
       todayIncome.forEach(income => {
-        text += `• ₹${income.amount.toFixed(2)}: ${income.description}\n`;
+        text += `${extraIndex}. Extras:\n`;
+        text += ` ID: ${income.id || extraIndex}\n`;
+        text += ` ${income.description}: ${income.amount.toFixed(2)}\n`;
+        extraIndex++;
       });
-      text += '\n';
-    }
-
-    if (todayExpenses.length > 0) {
-      text += `EXPENSES (${todayExpenses.length}):\n`;
+      
+      // Add Expenses as negative
       todayExpenses.forEach(expense => {
-        text += `• ₹${expense.amount.toFixed(2)}: ${expense.description}\n`;
+        text += `${extraIndex}. Extras:\n`;
+        text += ` ID: ${expense.id || extraIndex}\n`;
+        text += ` ${expense.description}: -${expense.amount.toFixed(2)}\n`;
+        extraIndex++;
       });
-      text += '\n';
+      
+      const extrasTotal = stats.otherIncome - stats.totalExpenses;
+      text += `*Extras Total: ${extrasTotal.toFixed(2)}*\n`;
+      text += `-------\n`;
     }
-
-    text += `Report generated on: ${new Date().toLocaleString()}\n`;
+    
+    text += `\n************************\n`;
+    text += `*Total Amount: ${stats.adjustedCashSales.toFixed(2)}*\n`;
+    
     return text;
   };
 
