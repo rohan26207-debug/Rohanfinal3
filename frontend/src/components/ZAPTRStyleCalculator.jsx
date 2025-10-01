@@ -287,185 +287,126 @@ const ZAPTRStyleCalculator = () => {
   const stats = getTodayStats();
 
   // Export functions
-  const exportToPDF = async () => {
+  const exportToPDF = () => {
     try {
-      // Load jsPDF library from different CDN
-      if (typeof window.jsPDF === 'undefined') {
-        await new Promise((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = 'https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js';
-          script.onload = () => {
-            // Wait for library to be fully available
-            setTimeout(() => {
-              if (window.jsPDF) {
-                resolve();
-              } else {
-                reject(new Error('jsPDF not available after loading'));
-              }
-            }, 200);
-          };
-          script.onerror = () => reject(new Error('Failed to load jsPDF script'));
-          document.head.appendChild(script);
-        });
-      }
-
-      // Double check if jsPDF is available
-      if (!window.jsPDF || !window.jsPDF.jsPDF) {
-        throw new Error('jsPDF library is not available');
-      }
-
-      const { jsPDF } = window.jsPDF;
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      
-      let yPosition = 20;
-      const margin = 20;
-      
-      // Header
-      pdf.setFont('helvetica', 'bold');
-      pdf.setFontSize(18);
-      pdf.text('Daily Report', margin, yPosition);
-      yPosition += 10;
-      
-      pdf.setFont('helvetica', 'normal');
-      pdf.setFontSize(12);
-      pdf.text(`Date: ${selectedDate}`, margin, yPosition);
-      yPosition += 15;
-      
-      // Summary Section
-      pdf.setFont('helvetica', 'bold');
-      pdf.setFontSize(14);
-      pdf.text('Summary', margin, yPosition);
-      yPosition += 8;
-      
-      pdf.setFont('helvetica', 'normal');
-      pdf.setFontSize(11);
-      
-      // Fuel Sales Summary
-      Object.entries(stats.fuelSalesByType).forEach(([fuelType, data]) => {
-        pdf.text(`${fuelType} Sales: ${data.liters.toFixed(2)}L - ₹${data.amount.toFixed(2)}`, margin + 5, yPosition);
-        yPosition += 6;
-      });
-      
-      pdf.text(`Credit Sales: ${stats.creditLiters.toFixed(2)}L - ₹${stats.creditAmount.toFixed(2)}`, margin + 5, yPosition);
-      yPosition += 6;
-      pdf.text(`Income: ₹${stats.otherIncome.toFixed(2)}`, margin + 5, yPosition);
-      yPosition += 6;
-      pdf.text(`Expenses: ₹${stats.totalExpenses.toFixed(2)}`, margin + 5, yPosition);
-      yPosition += 6;
-      
-      pdf.setFont('helvetica', 'bold');
-      pdf.text(`Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}`, margin + 5, yPosition);
-      yPosition += 15;
-      
       // Get today's data
       const todaySales = salesData.filter(sale => sale.date === selectedDate);
       const todayCredits = creditData.filter(credit => credit.date === selectedDate);
       const todayIncome = incomeData.filter(income => income.date === selectedDate);
       const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
-      
+
+      // Generate HTML content for PDF
+      let htmlContent = `
+        <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto;">
+          <div style="text-align: center; margin-bottom: 30px;">
+            <h1 style="margin: 0; font-size: 24px; font-weight: bold;">Daily Report</h1>
+            <p style="margin: 5px 0; font-size: 14px;">Date: ${selectedDate}</p>
+          </div>
+          
+          <div style="margin-bottom: 30px;">
+            <h2 style="font-size: 18px; margin-bottom: 15px; border-bottom: 2px solid #000; padding-bottom: 5px;">Summary</h2>
+            <div style="margin-left: 10px;">
+              ${Object.entries(stats.fuelSalesByType).map(([fuelType, data]) => 
+                `<p style="margin: 5px 0;"><strong>${fuelType} Sales:</strong> ${data.liters.toFixed(2)}L - ₹${data.amount.toFixed(2)}</p>`
+              ).join('')}
+              <p style="margin: 5px 0;"><strong>Credit Sales:</strong> ${stats.creditLiters.toFixed(2)}L - ₹${stats.creditAmount.toFixed(2)}</p>
+              <p style="margin: 5px 0;"><strong>Income:</strong> ₹${stats.otherIncome.toFixed(2)}</p>
+              <p style="margin: 5px 0;"><strong>Expenses:</strong> ₹${stats.totalExpenses.toFixed(2)}</p>
+              <p style="margin: 10px 0; font-weight: bold; font-size: 16px; color: #000;"><strong>Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}</strong></p>
+            </div>
+          </div>
+      `;
+
       // Sales Records
       if (todaySales.length > 0) {
-        pdf.setFont('helvetica', 'bold');
-        pdf.setFontSize(12);
-        pdf.text('Sales Records', margin, yPosition);
-        yPosition += 8;
-        
-        pdf.setFont('helvetica', 'normal');
-        pdf.setFontSize(9);
-        
-        todaySales.forEach((sale, index) => {
-          const text = `${index + 1}. ${sale.nozzle} - ${sale.fuelType}: Start: ${sale.startReading}, End: ${sale.endReading}, Rate: ₹${sale.rate}, Litres: ${sale.liters}, Amount: ₹${sale.amount.toFixed(2)}`;
-          
-          // Check if text fits on current line, if not wrap to next line
-          const textLines = pdf.splitTextToSize(text, 170);
-          textLines.forEach(line => {
-            if (yPosition > 280) { // Check if we need a new page
-              pdf.addPage();
-              yPosition = 20;
-            }
-            pdf.text(line, margin + 5, yPosition);
-            yPosition += 5;
-          });
-        });
-        yPosition += 8;
+        htmlContent += `
+          <div style="margin-bottom: 25px;">
+            <h3 style="font-size: 16px; margin-bottom: 10px; border-bottom: 1px solid #000; padding-bottom: 3px;">Sales Records</h3>
+            <div style="margin-left: 10px;">
+              ${todaySales.map((sale, index) => 
+                `<p style="margin: 4px 0; font-size: 12px;">${index + 1}. <strong>${sale.nozzle} - ${sale.fuelType}:</strong> Start: ${sale.startReading}, End: ${sale.endReading}, Rate: ₹${sale.rate}, Litres: ${sale.liters}, Amount: ₹${sale.amount.toFixed(2)}</p>`
+              ).join('')}
+            </div>
+          </div>
+        `;
       }
-      
+
       // Credit Records
       if (todayCredits.length > 0) {
-        if (yPosition > 250) { // Check if we need a new page
-          pdf.addPage();
-          yPosition = 20;
-        }
-        
-        pdf.setFont('helvetica', 'bold');
-        pdf.setFontSize(12);
-        pdf.text('Credit Records', margin, yPosition);
-        yPosition += 8;
-        
-        pdf.setFont('helvetica', 'normal');
-        pdf.setFontSize(9);
-        
-        todayCredits.forEach((credit, index) => {
-          const text = `${index + 1}. ${credit.customerName}${credit.vehicleNumber ? ' - ' + credit.vehicleNumber : ''}: ${credit.liters}L @ ₹${credit.rate} = ₹${credit.amount.toFixed(2)}`;
-          
-          const textLines = pdf.splitTextToSize(text, 170);
-          textLines.forEach(line => {
-            if (yPosition > 280) {
-              pdf.addPage();
-              yPosition = 20;
-            }
-            pdf.text(line, margin + 5, yPosition);
-            yPosition += 5;
-          });
-        });
-        yPosition += 8;
+        htmlContent += `
+          <div style="margin-bottom: 25px;">
+            <h3 style="font-size: 16px; margin-bottom: 10px; border-bottom: 1px solid #000; padding-bottom: 3px;">Credit Records</h3>
+            <div style="margin-left: 10px;">
+              ${todayCredits.map((credit, index) => 
+                `<p style="margin: 4px 0; font-size: 12px;">${index + 1}. <strong>${credit.customerName}${credit.vehicleNumber ? ' - ' + credit.vehicleNumber : ''}:</strong> ${credit.liters}L @ ₹${credit.rate} = ₹${credit.amount.toFixed(2)}</p>`
+              ).join('')}
+            </div>
+          </div>
+        `;
       }
-      
+
       // Income Records
       if (todayIncome.length > 0) {
-        if (yPosition > 250) {
-          pdf.addPage();
-          yPosition = 20;
-        }
-        
-        pdf.setFont('helvetica', 'bold');
-        pdf.setFontSize(12);
-        pdf.text('Income Records', margin, yPosition);
-        yPosition += 8;
-        
-        pdf.setFont('helvetica', 'normal');
-        pdf.setFontSize(9);
-        
-        todayIncome.forEach((income, index) => {
-          pdf.text(`${index + 1}. ${income.description}: ₹${income.amount.toFixed(2)}`, margin + 5, yPosition);
-          yPosition += 5;
-        });
-        yPosition += 8;
+        htmlContent += `
+          <div style="margin-bottom: 25px;">
+            <h3 style="font-size: 16px; margin-bottom: 10px; border-bottom: 1px solid #000; padding-bottom: 3px;">Income Records</h3>
+            <div style="margin-left: 10px;">
+              ${todayIncome.map((income, index) => 
+                `<p style="margin: 4px 0; font-size: 12px;">${index + 1}. <strong>${income.description}:</strong> ₹${income.amount.toFixed(2)}</p>`
+              ).join('')}
+            </div>
+          </div>
+        `;
       }
-      
+
       // Expense Records
       if (todayExpenses.length > 0) {
-        if (yPosition > 250) {
-          pdf.addPage();
-          yPosition = 20;
-        }
-        
-        pdf.setFont('helvetica', 'bold');
-        pdf.setFontSize(12);
-        pdf.text('Expense Records', margin, yPosition);
-        yPosition += 8;
-        
-        pdf.setFont('helvetica', 'normal');
-        pdf.setFontSize(9);
-        
-        todayExpenses.forEach((expense, index) => {
-          pdf.text(`${index + 1}. ${expense.description}: ₹${expense.amount.toFixed(2)}`, margin + 5, yPosition);
-          yPosition += 5;
-        });
+        htmlContent += `
+          <div style="margin-bottom: 25px;">
+            <h3 style="font-size: 16px; margin-bottom: 10px; border-bottom: 1px solid #000; padding-bottom: 3px;">Expense Records</h3>
+            <div style="margin-left: 10px;">
+              ${todayExpenses.map((expense, index) => 
+                `<p style="margin: 4px 0; font-size: 12px;">${index + 1}. <strong>${expense.description}:</strong> ₹${expense.amount.toFixed(2)}</p>`
+              ).join('')}
+            </div>
+          </div>
+        `;
       }
-      
-      // Save PDF
-      pdf.save(`Report-${selectedDate}.pdf`);
+
+      htmlContent += '</div>';
+
+      // Create print window
+      const printWindow = window.open('', '_blank');
+      printWindow.document.write(`
+        <html>
+          <head>
+            <title>Daily Report - ${selectedDate}</title>
+            <style>
+              @media print {
+                body { margin: 0; }
+                @page { margin: 1cm; }
+              }
+              body { 
+                font-family: Arial, sans-serif; 
+                line-height: 1.4;
+                color: #000;
+              }
+            </style>
+          </head>
+          <body>
+            ${htmlContent}
+            <script>
+              window.onload = function() {
+                window.print();
+                setTimeout(function() {
+                  window.close();
+                }, 1000);
+              };
+            </script>
+          </body>
+        </html>
+      `);
+      printWindow.document.close();
       
     } catch (error) {
       console.error('Error generating PDF:', error);
