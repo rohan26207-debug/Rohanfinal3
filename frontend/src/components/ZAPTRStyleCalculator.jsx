@@ -196,8 +196,36 @@ const ZAPTRStyleCalculator = () => {
       }
     ];
 
+    const mockStockData = [
+      {
+        id: 1,
+        date: new Date().toISOString().split('T')[0], // Today
+        fuelType: 'Petrol',
+        dip: 1200.5,
+        totalStock: 1500.0,
+        net: 299.5
+      },
+      {
+        id: 2,
+        date: new Date().toISOString().split('T')[0], // Today
+        fuelType: 'Diesel',
+        dip: 890.25,
+        totalStock: 1200.0,
+        net: 309.75
+      },
+      {
+        id: 3,
+        date: new Date().toISOString().split('T')[0], // Today
+        fuelType: 'CNG',
+        dip: 450.0,
+        totalStock: 600.0,
+        net: 150.0
+      }
+    ];
+
     setIncomeData(mockIncomeData);
     setExpenseData(mockExpenseData);
+    setStockData(mockStockData);
   }, []);
 
   const toggleTheme = () => {
