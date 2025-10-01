@@ -657,6 +657,17 @@ const ZAPTRStyleCalculator = () => {
 
     let text = `Date: ${selectedDate}\n\n`;
     
+    // Summary section
+    text += `*Summary*\n`;
+    Object.entries(stats.fuelSalesByType).forEach(([fuelType, data]) => {
+      text += `${fuelType} Sales: ${data.liters.toFixed(2)}L - ₹${data.amount.toFixed(2)}\n`;
+    });
+    text += `Credit Sales: ${stats.creditLiters.toFixed(2)}L - ₹${stats.creditAmount.toFixed(2)}\n`;
+    text += `Income: ₹${stats.otherIncome.toFixed(2)}\n`;
+    text += `Expenses: ₹${stats.totalExpenses.toFixed(2)}\n`;
+    text += `Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}\n`;
+    text += `-------\n\n`;
+    
     // *Readings* section
     if (todaySales.length > 0) {
       text += `*Readings*\n`;
