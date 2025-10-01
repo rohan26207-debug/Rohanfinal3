@@ -295,176 +295,87 @@ const ZAPTRStyleCalculator = () => {
       const todayIncome = incomeData.filter(income => income.date === selectedDate);
       const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
 
-      // Create formatted HTML content with tables
+      // Create formatted HTML content with simplified markup
       const htmlContent = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <title>Daily Report - ${selectedDate}</title>
-          <style>
-            body{font-family:Arial;margin:10px;line-height:1.2}
-            h1{font-size:28px;margin:0;text-align:center}
-            p{font-size:18px;margin:2px 0;text-align:center}
-            .s{margin:15px 0 5px 0;font-size:18px;font-weight:bold}
-            table{width:100%;border-collapse:collapse;font-size:14px;margin:5px 0}
-            th{background:#f0f0f0;border:1px solid #000;padding:4px;text-align:center;font-weight:bold;font-size:15px}
-            td{border:1px solid #000;padding:3px;font-size:14px}
-            .r{text-align:right}
-            .c{text-align:center}
-            .t{font-weight:bold;background:#f8f8f8}
-            @media print{body{margin:8mm}}
-          </style>
-        </head>
-        <body>
-          <h1>Daily Report</h1>
-          <p>Date: ${selectedDate}</p>
-          
-          <div class="s">SUMMARY</div>
-          <table>
-            <tr><th>Category<th>Litres<th>Amount</tr>
-            ${Object.entries(stats.fuelSalesByType).map(([fuelType, data]) => 
-              `<tr><td>${fuelType} Sales<td class="r">${data.liters.toFixed(2)}L<td class="r">₹${data.amount.toFixed(2)}</tr>`
-            ).join('')}
-            <tr><td>Credit Sales<td class="r">${stats.creditLiters.toFixed(2)}L<td class="r">₹${stats.creditAmount.toFixed(2)}</tr>
-            <tr><td>Income<td class="r">-<td class="r">₹${stats.otherIncome.toFixed(2)}</tr>
-            <tr><td>Expenses<td class="r">-<td class="r">₹${stats.totalExpenses.toFixed(2)}</tr>
-            <tr class="t"><td><b>Cash in Hand</b><td class="r"><b>${stats.totalLiters.toFixed(2)}L</b><td class="r"><b>₹${stats.adjustedCashSales.toFixed(2)}</b></tr>
-          </table>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Daily Report - ${selectedDate}</title>
+<style>
+body{font:Arial;margin:10px;line-height:1.2}
+h1{font-size:28px;margin:0;text-align:center}
+p{font-size:18px;margin:2px 0;text-align:center}
+.s{margin:15px 0 5px 0;font-size:18px;font-weight:bold}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:5px 0}
+th{background:#f0f0f0;border:1px solid #000;padding:4px;text-align:center;font-weight:bold;font-size:15px}
+td{border:1px solid #000;padding:3px;font-size:14px}
+.r{text-align:right}
+.c{text-align:center}
+.t{font-weight:bold;background:#f8f8f8}
+@media print{body{margin:8mm}}
+</style>
+</head>
+<body>
+<h1>Daily Report</h1>
+<p>Date: ${selectedDate}</p>
 
-          ${todaySales.length > 0 ? `
-            <div class="section">
-              <div class="section-title">SALES RECORDS</div>
-              <table>
-                <thead>
-                  <tr>
-                    <th style="width: 8%;">Sr.No</th>
-                    <th style="width: 22%;">Description</th>
-                    <th style="width: 12%;">Start</th>
-                    <th style="width: 12%;">End</th>
-                    <th style="width: 12%;">Rate</th>
-                    <th style="width: 12%;">Litres</th>
-                    <th style="width: 12%;">Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${todaySales.map((sale, index) => 
-                    `<tr>
-                      <td class="center">${index + 1}</td>
-                      <td>${sale.nozzle} - ${sale.fuelType}</td>
-                      <td class="number">${sale.startReading}</td>
-                      <td class="number">${sale.endReading}</td>
-                      <td class="number">₹${sale.rate}</td>
-                      <td class="number">${sale.liters}</td>
-                      <td class="number">₹${sale.amount.toFixed(2)}</td>
-                    </tr>`
-                  ).join('')}
-                  <tr class="total-row">
-                    <td colspan="5" class="number"><strong>Total:</strong></td>
-                    <td class="number"><strong>${todaySales.reduce((sum, sale) => sum + parseFloat(sale.liters), 0).toFixed(2)}</strong></td>
-                    <td class="number"><strong>₹${todaySales.reduce((sum, sale) => sum + parseFloat(sale.amount), 0).toFixed(2)}</strong></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          ` : ''}
+<div class="s">SUMMARY</div>
+<table>
+<tr><th>Category<th>Litres<th>Amount</tr>
+${Object.entries(stats.fuelSalesByType).map(([fuelType, data]) => 
+  `<tr><td>${fuelType} Sales<td class="r">${data.liters.toFixed(2)}L<td class="r">₹${data.amount.toFixed(2)}</tr>`
+).join('')}
+<tr><td>Credit Sales<td class="r">${stats.creditLiters.toFixed(2)}L<td class="r">₹${stats.creditAmount.toFixed(2)}</tr>
+<tr><td>Income<td class="r">-<td class="r">₹${stats.otherIncome.toFixed(2)}</tr>
+<tr><td>Expenses<td class="r">-<td class="r">₹${stats.totalExpenses.toFixed(2)}</tr>
+<tr class="t"><td><b>Cash in Hand</b><td class="r"><b>${stats.totalLiters.toFixed(2)}L</b><td class="r"><b>₹${stats.adjustedCashSales.toFixed(2)}</b></tr>
+</table>
 
-          ${todayCredits.length > 0 ? `
-            <div class="section">
-              <div class="section-title">CREDIT RECORDS</div>
-              <table>
-                <thead>
-                  <tr>
-                    <th style="width: 8%;">Sr.No</th>
-                    <th style="width: 35%;">Customer</th>
-                    <th style="width: 20%;">Vehicle</th>
-                    <th style="width: 12%;">Rate</th>
-                    <th style="width: 12%;">Litres</th>
-                    <th style="width: 13%;">Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${todayCredits.map((credit, index) => 
-                    `<tr>
-                      <td class="center">${index + 1}</td>
-                      <td>${credit.customerName}</td>
-                      <td>${credit.vehicleNumber || 'N/A'}</td>
-                      <td class="number">₹${credit.rate}</td>
-                      <td class="number">${credit.liters}</td>
-                      <td class="number">₹${credit.amount.toFixed(2)}</td>
-                    </tr>`
-                  ).join('')}
-                  <tr class="total-row">
-                    <td colspan="4" class="number"><strong>Total:</strong></td>
-                    <td class="number"><strong>${todayCredits.reduce((sum, credit) => sum + parseFloat(credit.liters), 0).toFixed(2)}</strong></td>
-                    <td class="number"><strong>₹${todayCredits.reduce((sum, credit) => sum + parseFloat(credit.amount), 0).toFixed(2)}</strong></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          ` : ''}
+${todaySales.length > 0 ? `
+<div class="s">SALES RECORDS</div>
+<table>
+<tr><th width="8%">Sr.No<th width="22%">Description<th width="12%">Start<th width="12%">End<th width="12%">Rate<th width="12%">Litres<th width="12%">Amount</tr>
+${todaySales.map((sale, index) => 
+  `<tr><td class="c">${index + 1}<td>${sale.nozzle} - ${sale.fuelType}<td class="r">${sale.startReading}<td class="r">${sale.endReading}<td class="r">₹${sale.rate}<td class="r">${sale.liters}<td class="r">₹${sale.amount.toFixed(2)}</tr>`
+).join('')}
+<tr class="t"><td colspan="5" class="r"><b>Total:</b><td class="r"><b>${todaySales.reduce((sum, sale) => sum + parseFloat(sale.liters), 0).toFixed(2)}</b><td class="r"><b>₹${todaySales.reduce((sum, sale) => sum + parseFloat(sale.amount), 0).toFixed(2)}</b></tr>
+</table>` : ''}
 
-          ${todayIncome.length > 0 ? `
-            <div class="section">
-              <div class="section-title">INCOME RECORDS</div>
-              <table>
-                <thead>
-                  <tr>
-                    <th style="width: 10%;">Sr.No</th>
-                    <th style="width: 70%;">Description</th>
-                    <th style="width: 20%;">Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${todayIncome.map((income, index) => 
-                    `<tr>
-                      <td class="center">${index + 1}</td>
-                      <td>${income.description}</td>
-                      <td class="number">₹${income.amount.toFixed(2)}</td>
-                    </tr>`
-                  ).join('')}
-                  <tr class="total-row">
-                    <td colspan="2" class="number"><strong>Total Income:</strong></td>
-                    <td class="number"><strong>₹${todayIncome.reduce((sum, income) => sum + parseFloat(income.amount), 0).toFixed(2)}</strong></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          ` : ''}
+${todayCredits.length > 0 ? `
+<div class="s">CREDIT RECORDS</div>
+<table>
+<tr><th width="8%">Sr.No<th width="35%">Customer<th width="20%">Vehicle<th width="12%">Rate<th width="12%">Litres<th width="13%">Amount</tr>
+${todayCredits.map((credit, index) => 
+  `<tr><td class="c">${index + 1}<td>${credit.customerName}<td>${credit.vehicleNumber || 'N/A'}<td class="r">₹${credit.rate}<td class="r">${credit.liters}<td class="r">₹${credit.amount.toFixed(2)}</tr>`
+).join('')}
+<tr class="t"><td colspan="4" class="r"><b>Total:</b><td class="r"><b>${todayCredits.reduce((sum, credit) => sum + parseFloat(credit.liters), 0).toFixed(2)}</b><td class="r"><b>₹${todayCredits.reduce((sum, credit) => sum + parseFloat(credit.amount), 0).toFixed(2)}</b></tr>
+</table>` : ''}
 
-          ${todayExpenses.length > 0 ? `
-            <div class="section">
-              <div class="section-title">EXPENSE RECORDS</div>
-              <table>
-                <thead>
-                  <tr>
-                    <th style="width: 10%;">Sr.No</th>
-                    <th style="width: 70%;">Description</th>
-                    <th style="width: 20%;">Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${todayExpenses.map((expense, index) => 
-                    `<tr>
-                      <td class="center">${index + 1}</td>
-                      <td>${expense.description}</td>
-                      <td class="number">₹${expense.amount.toFixed(2)}</td>
-                    </tr>`
-                  ).join('')}
-                  <tr class="total-row">
-                    <td colspan="2" class="number"><strong>Total Expenses:</strong></td>
-                    <td class="number"><strong>₹${todayExpenses.reduce((sum, expense) => sum + parseFloat(expense.amount), 0).toFixed(2)}</strong></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          ` : ''}
+${todayIncome.length > 0 ? `
+<div class="s">INCOME RECORDS</div>
+<table>
+<tr><th width="10%">Sr.No<th width="70%">Description<th width="20%">Amount</tr>
+${todayIncome.map((income, index) => 
+  `<tr><td class="c">${index + 1}<td>${income.description}<td class="r">₹${income.amount.toFixed(2)}</tr>`
+).join('')}
+<tr class="t"><td colspan="2" class="r"><b>Total Income:</b><td class="r"><b>₹${todayIncome.reduce((sum, income) => sum + parseFloat(income.amount), 0).toFixed(2)}</b></tr>
+</table>` : ''}
 
-          <div style="margin-top: 15px; text-align: center; font-size: 10px; border-top: 1px solid #000; padding-top: 5px;">
-            Generated on: ${new Date().toLocaleString()}
-          </div>
-        </body>
-        </html>
-      `;
+${todayExpenses.length > 0 ? `
+<div class="s">EXPENSE RECORDS</div>
+<table>
+<tr><th width="10%">Sr.No<th width="70%">Description<th width="20%">Amount</tr>
+${todayExpenses.map((expense, index) => 
+  `<tr><td class="c">${index + 1}<td>${expense.description}<td class="r">₹${expense.amount.toFixed(2)}</tr>`
+).join('')}
+<tr class="t"><td colspan="2" class="r"><b>Total Expenses:</b><td class="r"><b>₹${todayExpenses.reduce((sum, expense) => sum + parseFloat(expense.amount), 0).toFixed(2)}</b></tr>
+</table>` : ''}
+
+<div style="margin-top:15px;text-align:center;font-size:10px;border-top:1px solid #000;padding-top:5px">
+Generated on: ${new Date().toLocaleString()}
+</div>
+</body>
+</html>`;
 
       // Open in new window for printing
       const printWindow = window.open('', '_blank');
