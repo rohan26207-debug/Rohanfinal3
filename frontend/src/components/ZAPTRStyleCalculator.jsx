@@ -664,7 +664,7 @@ const ZAPTRStyleCalculator = () => {
               <h1 className={`text-4xl font-bold ${
                 isDarkMode ? 'text-white' : 'text-slate-800'
               }`}>
-                Manager Petrol Pump Calculator
+                M.Pump Calculator
               </h1>
             </div>
           </div>
