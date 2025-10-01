@@ -272,9 +272,11 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                 <Input
                   id="ownerPumpName"
                   value={ownerDetails.pumpName}
-                  onChange={(e) => updateOwnerDetails('pumpName', e.target.value)}
+                  onChange={handlePumpNameChange}
                   placeholder="Enter petrol pump name"
                   className="mt-1"
+                  autoComplete="off"
+                  inputMode="text"
                 />
               </div>
             </CardContent>
