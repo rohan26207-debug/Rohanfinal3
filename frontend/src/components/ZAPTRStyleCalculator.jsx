@@ -616,7 +616,7 @@ const ZAPTRStyleCalculator = () => {
     if (todayCredits.length > 0) {
       text += `CREDIT SALES (${todayCredits.length}):\n`;
       todayCredits.forEach(credit => {
-        text += `• ${credit.customerName} (${credit.vehicleNumber || 'N/A'}): ₹${credit.amount.toFixed(2)} (${credit.liters}L ${credit.fuelType} @ ₹${credit.rate}/L)\n`;
+        text += `• ${credit.customerName} (${credit.vehicleNumber || 'N/A'}): ₹${credit.amount.toFixed(2)} (${credit.liters} ${credit.fuelType} @ ₹${credit.rate})\n`;
       });
       text += '\n';
     }
