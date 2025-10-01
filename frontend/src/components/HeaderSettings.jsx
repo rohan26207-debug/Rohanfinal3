@@ -82,14 +82,16 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
 
     // Use a default price of 100 when adding new fuel type
     // Price will be set in the Price Configuration tab
-    setFuelSettings(prev => ({
-      ...prev,
+    const newSettings = {
+      ...fuelSettings,
       [newFuelType]: {
         price: 100.00, // Default price, will be configured in Price tab
         nozzleCount: 2
       }
-    }));
-
+    };
+    
+    setFuelSettings(newSettings);
+    localStorageService.setFuelSettings(newSettings);
     setNewFuelType('');
     
     toast({
