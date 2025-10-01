@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Remove full-screen interfaces for Fuel Types and Contact tabs, making them display inline within the settings dropdown instead of opening separate full-screen windows."
+user_problem_statement: "Add a new 'Today Stock' tab below the operating date with fuel type selection, dip editor, total stock editor, and net editor for inventory management."
 
 frontend:
   - task: "Tab navigation R.S.P. to Rate renaming"
