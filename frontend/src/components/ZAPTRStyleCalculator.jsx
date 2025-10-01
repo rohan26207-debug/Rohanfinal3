@@ -358,7 +358,7 @@ const ZAPTRStyleCalculator = () => {
       
       pdf.setFontSize(10);
       pdf.setFont('helvetica', 'normal');
-      pdf.text(\`Date: \${selectedDate} | Time: \${new Date().toLocaleTimeString()}\`, pageWidth / 2, yPosition, { align: 'center' });
+      pdf.text(`Date: ${selectedDate} | Time: ${new Date().toLocaleTimeString()}`, pageWidth / 2, yPosition, { align: 'center' });
       yPosition += 30;
       
       // Summary Section
