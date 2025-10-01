@@ -20,7 +20,7 @@ import UnifiedRecords from './UnifiedRecords';
 const PriceConfiguration = ({ 
   isDarkMode, 
   fuelSettings, 
-  setFuelSettings, 
+  updateFuelRate, 
   selectedDate,
   salesData,
   creditData,
