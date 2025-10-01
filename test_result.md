@@ -280,6 +280,18 @@ metadata:
         - working: true
           agent: "main"
           comment: "Completely redesigned HeaderSettings component: dropdown shows 2 tabs (Fuel Types, Contact), each opens full-screen window covering whole viewport with back button on top-left. Both Fuel Types and Contact windows tested and working perfectly."
+
+  - task: "Remove dashboard cards after summary"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Removed the three dashboard cards (Cash in Hand, Credit Sales, Total Liters) that appeared after the Summary section and before the main tabs. UI now flows directly from Summary to main tabs."
     status_history:
         - working: "NA"
           agent: "testing"
