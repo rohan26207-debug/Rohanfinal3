@@ -401,17 +401,17 @@ const ZAPTRStyleCalculator = () => {
       
       // Expenses (compact)
       pdf.text('Expenses', margin, yPosition);
-      pdf.text('-', margin + 180, yPosition);
-      pdf.text(`₹${stats.totalExpenses.toFixed(0)}`, margin + 240, yPosition, { align: 'right' });
-      yPosition += 10; // Reduced from 14 to 10
+      pdf.text('-', margin + 160, yPosition);
+      pdf.text(`₹${stats.totalExpenses.toFixed(0)}`, margin + 220, yPosition, { align: 'right' });
+      yPosition += 12;
       
-      // Cash in Hand (compact)
-      pdf.setFontSize(10);
+      // Cash in Hand (50% larger, bold)
+      pdf.setFontSize(15); // 10 * 1.5 = 15
       pdf.setFont('helvetica', 'bold');
       pdf.text('Cash Total', margin, yPosition);
-      pdf.text(`${stats.totalLiters.toFixed(1)}L`, margin + 180, yPosition);
-      pdf.text(`₹${stats.adjustedCashSales.toFixed(0)}`, margin + 240, yPosition, { align: 'right' });
-      yPosition += 15; // Reduced from 20 to 15
+      pdf.text(`${stats.totalLiters.toFixed(1)}L`, margin + 160, yPosition);
+      pdf.text(`₹${stats.adjustedCashSales.toFixed(0)}`, margin + 220, yPosition, { align: 'right' });
+      yPosition += 18; // Increased proportionally
       
       // Add detailed records if available
       const todaySales = salesData.filter(sale => sale.date === selectedDate);
