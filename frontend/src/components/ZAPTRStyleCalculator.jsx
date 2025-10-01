@@ -1000,7 +1000,7 @@ Generated on: ${new Date().toLocaleString()}
             <SalesTracker 
               isDarkMode={isDarkMode}
               salesData={salesData}
-              setSalesData={setSalesData}
+              addSaleRecord={addSaleRecord}
               fuelSettings={fuelSettings}
               selectedDate={selectedDate}
               creditData={creditData}
@@ -1013,7 +1013,7 @@ Generated on: ${new Date().toLocaleString()}
             <CreditSales 
               isDarkMode={isDarkMode}
               creditData={creditData}
-              setCreditData={setCreditData}
+              addCreditRecord={addCreditRecord}
               fuelSettings={fuelSettings}
               selectedDate={selectedDate}
               salesData={salesData}
@@ -1026,9 +1026,9 @@ Generated on: ${new Date().toLocaleString()}
             <IncomeExpense 
               isDarkMode={isDarkMode}
               incomeData={incomeData}
-              setIncomeData={setIncomeData}
+              addIncomeRecord={addIncomeRecord}
               expenseData={expenseData}
-              setExpenseData={setExpenseData}
+              addExpenseRecord={addExpenseRecord}
               selectedDate={selectedDate}
               salesData={salesData}
               creditData={creditData}
@@ -1039,7 +1039,7 @@ Generated on: ${new Date().toLocaleString()}
             <PriceConfiguration 
               isDarkMode={isDarkMode}
               fuelSettings={fuelSettings}
-              setFuelSettings={setFuelSettings}
+              updateFuelRate={updateFuelRate}
               selectedDate={selectedDate}
               salesData={salesData}
               creditData={creditData}
