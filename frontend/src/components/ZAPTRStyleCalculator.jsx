@@ -394,19 +394,19 @@ const ZAPTRStyleCalculator = () => {
       pdf.text('Credit Sales', margin, yPosition);
       pdf.text(`${stats.creditLiters.toFixed(2)}L`, margin + 200, yPosition);
       pdf.text(`₹${stats.creditAmount.toFixed(2)}`, margin + 300, yPosition, { align: 'right' });
-      yPosition += 12;
+      yPosition += 14; // 12 * 1.2 = 14.4 ≈ 14
       
       // Income
       pdf.text('Income', margin, yPosition);
       pdf.text('-', margin + 200, yPosition);
       pdf.text(`₹${stats.otherIncome.toFixed(2)}`, margin + 300, yPosition, { align: 'right' });
-      yPosition += 12;
+      yPosition += 14; // 12 * 1.2 = 14.4 ≈ 14
       
       // Expenses
       pdf.text('Expenses', margin, yPosition);
       pdf.text('-', margin + 200, yPosition);
       pdf.text(`₹${stats.totalExpenses.toFixed(2)}`, margin + 300, yPosition, { align: 'right' });
-      yPosition += 12;
+      yPosition += 14; // 12 * 1.2 = 14.4 ≈ 14
       
       // Cash in Hand
       pdf.setFont('helvetica', 'bold');
