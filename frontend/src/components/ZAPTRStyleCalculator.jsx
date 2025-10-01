@@ -458,7 +458,7 @@ const ZAPTRStyleCalculator = () => {
       }
       
       // Save the PDF
-      pdf.save(\`Report-\${selectedDate}.pdf\`);
+      pdf.save(`Report-${selectedDate}.pdf`);
       
     } catch (error) {
       console.error('Error generating PDF:', error);
