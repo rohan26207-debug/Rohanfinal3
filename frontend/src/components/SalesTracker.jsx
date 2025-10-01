@@ -375,22 +375,20 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2 text-sm">
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Reading:</span>
-                        <span className="font-medium">{sale.startReading} → {sale.endReading}</span>
+                    <div className="space-y-1 text-sm">
+                      <div className="flex items-center gap-4">
+                        <span className="text-slate-600">Start:</span>
+                        <span className="font-medium">{sale.startReading}</span>
+                        <span className="text-slate-600">End:</span>
+                        <span className="font-medium">{sale.endReading}</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Liters:</span>
+                      <div className="flex items-center gap-4">
+                        <span className="text-slate-600">Litres:</span>
                         <span className="font-medium">{sale.liters}</span>
-                      </div>
-                      <div className="flex justify-between">
                         <span className="text-slate-600">Rate:</span>
                         <span className="font-medium">₹{sale.rate}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-600">Date:</span>
-                        <span className="font-medium">{sale.date}</span>
+                        <span className="text-slate-600">Amount:</span>
+                        <span className="font-medium">₹{sale.amount.toFixed(2)}</span>
                       </div>
                     </div>
 
