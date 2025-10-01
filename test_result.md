@@ -375,7 +375,7 @@ test_plan:
 
 agent_communication:
     - agent: "main"
-      message: "Successfully reversed Today Stock tab addition and restored original 4-tab dashboard structure. Complete clean removal with no remnants: Reading Sales, Credit Sales, Income/Expenses, Rate tabs all functional. Dashboard returned to streamlined petrol pump management without inventory tracking."
+      message: "Starting Gmail sync feature implementation. Frontend UI already in place with 'Connect Gmail Account' button in settings. Now implementing backend OAuth2 authentication using emergentintegrations library and setting up data models for petrol pump data persistence."
     - agent: "testing"
       message: "Comprehensive testing completed successfully. All requested features are working correctly: 1) Dynamic nozzle dropdown filters properly by fuel type (Petrol→P1,P2,P3; Diesel→D1,D2; CNG→C1,C2; Premium→PR1), 2) Unified Records section appears on all tabs showing grouped records (Fuel Sales, Credit Sales, Income, Expenses) with accurate counts, 3) Date filtering updates unified records correctly, 4) Nozzle display shows clean IDs without brackets/icons, 5) Visual styling and badges are consistent across all record types. No critical issues found."
     - agent: "main"
