@@ -454,13 +454,13 @@ const ZAPTRStyleCalculator = () => {
         totalLitres += parseFloat(sale.liters);
         totalAmount += parseFloat(sale.amount);
         content += '<tr>';
-        content += `<td style="border: 1px solid #333; padding: 6px 10px; font-size: 10px; text-align: center; font-family: Arial, sans-serif;">${index + 1}</td>`;
-        content += `<td style="border: 1px solid #333; padding: 6px 10px; font-size: 10px; font-family: Arial, sans-serif;">${sale.nozzle} - ${sale.fuelType}</td>`;
-        content += `<td style="border: 1px solid #333; padding: 6px 10px; font-size: 10px; text-align: right; font-family: Arial, sans-serif;">${sale.startReading}</td>`;
-        content += `<td style="border: 1px solid #333; padding: 6px 10px; font-size: 10px; text-align: right; font-family: Arial, sans-serif;">${sale.endReading}</td>`;
-        content += `<td style="border: 1px solid #333; padding: 6px 10px; font-size: 10px; text-align: right; font-family: Arial, sans-serif;">₹${sale.rate}</td>`;
-        content += `<td style="border: 1px solid #333; padding: 6px 10px; font-size: 10px; text-align: right; font-family: Arial, sans-serif;">${sale.liters}</td>`;
-        content += `<td style="border: 1px solid #333; padding: 6px 10px; font-size: 10px; text-align: right; font-family: Arial, sans-serif;">₹${sale.amount.toFixed(2)}</td>`;
+        content += `<td style="border: 1px solid black; padding: 3px; font-size: 9px; text-align: center;">${index + 1}</td>`;
+        content += `<td style="border: 1px solid black; padding: 3px; font-size: 9px;">${sale.nozzle} - ${sale.fuelType}</td>`;
+        content += `<td style="border: 1px solid black; padding: 3px; font-size: 9px; text-align: right;">${sale.startReading}</td>`;
+        content += `<td style="border: 1px solid black; padding: 3px; font-size: 9px; text-align: right;">${sale.endReading}</td>`;
+        content += `<td style="border: 1px solid black; padding: 3px; font-size: 9px; text-align: right;">₹${sale.rate}</td>`;
+        content += `<td style="border: 1px solid black; padding: 3px; font-size: 9px; text-align: right;">${sale.liters}</td>`;
+        content += `<td style="border: 1px solid black; padding: 3px; font-size: 9px; text-align: right;">₹${sale.amount.toFixed(2)}</td>`;
         content += '</tr>';
       });
       // Total row
