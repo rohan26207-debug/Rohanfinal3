@@ -488,35 +488,47 @@ const ZAPTRStyleCalculator = () => {
       content += '</table>';
     }
 
-    // Credit Sales Table
+    // Credit Calculation Table
     if (todayCredits.length > 0) {
-      content += '<div style="margin: 18px 0;">';
-      content += '<h3 style="color: #000000; font-size: 20px; margin-bottom: 10px;">Credit Sales (' + todayCredits.length + ')</h3>';
-      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 12px; border: 2px solid #444;">';
+      content += '<h2 style="color: #000; margin-bottom: 15px; font-size: 16px; font-weight: bold;">Credit Calculation</h2>';
+      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; border: 1px solid #ccc;">';
       content += '<thead>';
-      content += '<tr style="background-color: #e8e8e8;">';
-      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Sr.</th>';
-      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Customer</th>';
-      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Vehicle</th>';
-      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Litres</th>';
-      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Rate</th>';
-      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Amount</th>';
+      content += '<tr>';
+      content += '<th style="background-color: #f2f2f2; border: 1px solid #ccc; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: center;">Sr.</th>';
+      content += '<th style="background-color: #f2f2f2; border: 1px solid #ccc; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: left;">Customer</th>';
+      content += '<th style="background-color: #f2f2f2; border: 1px solid #ccc; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: left;">Vehicle</th>';
+      content += '<th style="background-color: #f2f2f2; border: 1px solid #ccc; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: center;">Rate</th>';
+      content += '<th style="background-color: #f2f2f2; border: 1px solid #ccc; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: center;">Litres</th>';
+      content += '<th style="background-color: #f2f2f2; border: 1px solid #ccc; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: center;">Amount</th>';
       content += '</tr>';
       content += '</thead>';
       content += '<tbody>';
+
+      let totalCreditLitres = 0;
+      let totalCreditAmount = 0;
+
       todayCredits.forEach((credit, index) => {
+        totalCreditLitres += parseFloat(credit.liters);
+        totalCreditAmount += parseFloat(credit.amount);
         content += '<tr>';
-        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: center;">${index + 1}</td>`;
-        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px;">${credit.customerName}</td>`;
-        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px;">${credit.vehicleNumber || 'N/A'}</td>`;
-        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: right;">${credit.liters.toFixed(2)}</td>`;
-        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: right;">₹${credit.rate}</td>`;
-        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: right;">₹${credit.amount.toFixed(2)}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: center;">${index + 1}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px;">${credit.customerName}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px;">${credit.vehicleNumber || 'N/A'}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">₹${credit.rate}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">${credit.liters}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">₹${credit.amount.toFixed(2)}</td>`;
         content += '</tr>';
       });
+
+      // Total row
+      content += '<tr style="background-color: #f8f8f8; font-weight: bold;">';
+      content += '<td colspan="4" style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; font-weight: bold; text-align: right;">Total:</td>';
+      content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right; font-weight: bold;">${totalCreditLitres.toFixed(2)}</td>`;
+      content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right; font-weight: bold;">₹${totalCreditAmount.toFixed(2)}</td>`;
+      content += '</tr>';
+
       content += '</tbody>';
       content += '</table>';
-      content += '</div>';
     }
 
     // Income Table
