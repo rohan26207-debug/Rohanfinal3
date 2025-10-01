@@ -362,7 +362,6 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
               </TabsContent>
               
             </Tabs>
-            </Tabs>
           </CardContent>
         </Card>
       </DropdownMenuContent>
