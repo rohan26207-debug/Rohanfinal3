@@ -263,6 +263,130 @@ async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
+# Petrol Pump Data Routes (Protected)
+@api_router.get("/fuel-sales")
+async def get_fuel_sales(request: Request, date: Optional[str] = None):
+    """Get fuel sales for a specific date"""
+    user = await require_auth(request)
+    
+    query = {"user_id": user.id}
+    if date:
+        query["date"] = date
+    
+    sales = await db.fuel_sales.find(query).to_list(1000)
+    return sales
+
+@api_router.post("/fuel-sales")
+async def create_fuel_sale(request: Request, sale_data: dict):
+    """Create new fuel sale record"""
+    user = await require_auth(request)
+    
+    sale = FuelSale(
+        user_id=user.id,
+        **sale_data
+    )
+    
+    await db.fuel_sales.insert_one(sale.dict())
+    return {"message": "Fuel sale created", "id": sale.id}
+
+@api_router.get("/credit-sales")
+async def get_credit_sales(request: Request, date: Optional[str] = None):
+    """Get credit sales for a specific date"""
+    user = await require_auth(request)
+    
+    query = {"user_id": user.id}
+    if date:
+        query["date"] = date
+    
+    sales = await db.credit_sales.find(query).to_list(1000)
+    return sales
+
+@api_router.post("/credit-sales")
+async def create_credit_sale(request: Request, sale_data: dict):
+    """Create new credit sale record"""
+    user = await require_auth(request)
+    
+    sale = CreditSale(
+        user_id=user.id,
+        **sale_data
+    )
+    
+    await db.credit_sales.insert_one(sale.dict())
+    return {"message": "Credit sale created", "id": sale.id}
+
+@api_router.get("/income-expenses")
+async def get_income_expenses(request: Request, date: Optional[str] = None):
+    """Get income/expense records for a specific date"""
+    user = await require_auth(request)
+    
+    query = {"user_id": user.id}
+    if date:
+        query["date"] = date
+    
+    records = await db.income_expenses.find(query).to_list(1000)
+    return records
+
+@api_router.post("/income-expenses")
+async def create_income_expense(request: Request, record_data: dict):
+    """Create new income/expense record"""
+    user = await require_auth(request)
+    
+    record = IncomeExpense(
+        user_id=user.id,
+        **record_data
+    )
+    
+    await db.income_expenses.insert_one(record.dict())
+    return {"message": "Income/expense record created", "id": record.id}
+
+@api_router.get("/fuel-rates")
+async def get_fuel_rates(request: Request, date: Optional[str] = None):
+    """Get fuel rates for a specific date"""
+    user = await require_auth(request)
+    
+    query = {"user_id": user.id}
+    if date:
+        query["date"] = date
+    
+    rates = await db.fuel_rates.find(query).to_list(1000)
+    return rates
+
+@api_router.post("/fuel-rates")
+async def create_fuel_rate(request: Request, rate_data: dict):
+    """Create/update fuel rate record"""
+    user = await require_auth(request)
+    
+    rate = FuelRate(
+        user_id=user.id,
+        **rate_data
+    )
+    
+    await db.fuel_rates.insert_one(rate.dict())
+    return {"message": "Fuel rate created", "id": rate.id}
+
+# Sync endpoint for Gmail backup
+@api_router.post("/sync/backup")
+async def backup_data(request: Request):
+    """Backup all user data for Gmail sync"""
+    user = await require_auth(request)
+    
+    # Get all user data
+    fuel_sales = await db.fuel_sales.find({"user_id": user.id}).to_list(1000)
+    credit_sales = await db.credit_sales.find({"user_id": user.id}).to_list(1000)
+    income_expenses = await db.income_expenses.find({"user_id": user.id}).to_list(1000)
+    fuel_rates = await db.fuel_rates.find({"user_id": user.id}).to_list(1000)
+    
+    backup_data = {
+        "user": user.dict(),
+        "fuel_sales": fuel_sales,
+        "credit_sales": credit_sales,
+        "income_expenses": income_expenses,
+        "fuel_rates": fuel_rates,
+        "backup_date": datetime.now(timezone.utc).isoformat()
+    }
+    
+    return backup_data
+
 # Include the router in the main app
 app.include_router(api_router)
 
