@@ -122,7 +122,9 @@ class BackendTester:
             
             if response.status_code == 200:
                 data = response.json()
-                if data.get("id") == self.test_user_id and data.get("email"):
+                # Accept either 'id' or '_id' field for user identification
+                user_id = data.get("id") or data.get("_id")
+                if user_id == self.test_user_id and data.get("email"):
                     self.log_test("Auth Me - Authenticated", True, 
                                 f"Successfully returned user data for {data.get('email')}")
                 else:
