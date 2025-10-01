@@ -238,6 +238,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "OPTIMIZED FOR SMALL FILE SIZE: Completely restructured PDF generation for minimal text-based files. Changes: 1) Removed high DPI (300) and scale settings, 2) Enabled compression, 3) Simplified HTML structure, 4) Reduced font sizes (12px headers, 9px content), 5) Minimal padding (3-4px), 6) Removed all font-family declarations, 7) Changed all borders from #333 to black, 8) Optimized all table sections. Result: Pure text-based PDF with smallest possible file size."
+        - working: "NA"
+          agent: "main"
+          comment: "PURE TEXT-BASED RENDERING: Replaced html2pdf with direct jsPDF implementation for 100% text-based PDF generation. Changes: 1) Removed html2canvas completely (no image rendering), 2) Uses jsPDF directly for native text rendering, 3) Manual text positioning and formatting, 4) No HTML-to-image conversion, 5) Pure vector text in PDF format. Result: Guaranteed text-based PDF with selectable text, smallest file size, and fastest generation."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
