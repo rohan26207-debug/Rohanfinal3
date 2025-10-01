@@ -266,7 +266,7 @@ const CreditSales = ({ isDarkMode, creditData, setCreditData, fuelSettings, sele
                     <div className="grid grid-cols-2 gap-2 text-sm mt-3">
                       <div className="flex justify-between">
                         <span className="text-slate-600">Liters:</span>
-                        <span className="font-medium">{credit.liters}L</span>
+                        <span className="font-medium">{credit.liters}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-600">Rate:</span>
