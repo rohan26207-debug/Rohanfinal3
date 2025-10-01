@@ -302,80 +302,17 @@ const ZAPTRStyleCalculator = () => {
         <head>
           <title>Daily Report - ${selectedDate}</title>
           <style>
-            body { 
-              font-family: Arial, sans-serif; 
-              margin: 10px; 
-              line-height: 1.2; 
-              color: #000;
-            }
-            .header { 
-              text-align: center; 
-              margin-bottom: 15px; 
-              border-bottom: 2px solid #000; 
-              padding-bottom: 5px; 
-            }
-            .header h1 { 
-              font-size: 28px; 
-              margin: 0; 
-            }
-            .header p { 
-              font-size: 18px; 
-              margin: 2px 0; 
-            }
-            .section { 
-              margin-bottom: 15px; 
-            }
-            .section-title { 
-              font-size: 18px; 
-              font-weight: bold; 
-              margin-bottom: 5px; 
-              padding-bottom: 2px; 
-            }
-            .summary-item { 
-              margin: 5px 0; 
-              font-size: 16px; 
-            }
-            .cash-highlight { 
-              font-weight: bold; 
-              font-size: 18px; 
-              margin: 10px 0; 
-            }
-            table { 
-              width: 100%; 
-              border-collapse: collapse; 
-              margin-top: 5px; 
-              font-size: 14px; 
-            }
-            th { 
-              background-color: #f0f0f0; 
-              border: 1px solid #000; 
-              padding: 4px; 
-              text-align: center; 
-              font-weight: bold; 
-              font-size: 15px;
-            }
-            td { 
-              border: 1px solid #000; 
-              padding: 3px; 
-              text-align: left; 
-              font-size: 14px;
-            }
-            td.number { 
-              text-align: right; 
-            }
-            td.center { 
-              text-align: center; 
-            }
-            .total-row { 
-              font-weight: bold; 
-              background-color: #f8f8f8; 
-            }
-            @media print {
-              body { margin: 8mm; }
-              .section { page-break-inside: avoid; }
-              .header { margin-bottom: 10px; }
-              .section { margin-bottom: 10px; }
-            }
+            body{font-family:Arial;margin:10px;line-height:1.2}
+            h1{font-size:28px;margin:0;text-align:center}
+            p{font-size:18px;margin:2px 0;text-align:center}
+            .s{margin:15px 0 5px 0;font-size:18px;font-weight:bold}
+            table{width:100%;border-collapse:collapse;font-size:14px;margin:5px 0}
+            th{background:#f0f0f0;border:1px solid #000;padding:4px;text-align:center;font-weight:bold;font-size:15px}
+            td{border:1px solid #000;padding:3px;font-size:14px}
+            .r{text-align:right}
+            .c{text-align:center}
+            .t{font-weight:bold;background:#f8f8f8}
+            @media print{body{margin:8mm}}
           </style>
         </head>
         <body>
