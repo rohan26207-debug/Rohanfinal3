@@ -305,17 +305,17 @@ metadata:
           agent: "main"
           comment: "Successfully added Owner Details tab with editable fields for petrol pump name (Vishnu Parvati Petroleum), dealer name (Rohan.R.Khandve), address, phone, and email. Full-screen interface with save functionality tested and working."
 
-  - task: "Remove full-screen interfaces for Fuel Types and Contact"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/components/HeaderSettings.jsx"
+  - task: "Add Today Stock tab with inventory management"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-        - working: true
+        - working: "NA"
           agent: "main"
-          comment: "Successfully converted to inline tabbed interface within settings dropdown. Verified: No back buttons (no full-screen), fuel types configuration working inline, contact information displaying inline, smooth tab switching. More efficient UX with faster access to settings."
+          comment: "Need to add new Today Stock tab to main dashboard with fuel type selection, dip editor, total stock editor, and net editor for fuel inventory management."
     status_history:
         - working: "NA"
           agent: "testing"
