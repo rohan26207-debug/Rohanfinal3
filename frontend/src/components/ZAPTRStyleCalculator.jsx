@@ -531,54 +531,52 @@ const ZAPTRStyleCalculator = () => {
       content += '</table>';
     }
 
-    // Income Table
-    if (todayIncome.length > 0) {
-      content += '<div style="margin: 18px 0;">';
-      content += '<h3 style="color: #000000; font-size: 20px; margin-bottom: 10px;">Income (' + todayIncome.length + ')</h3>';
-      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 12px; border: 2px solid #444;">';
+    // Extra Calculation (Income & Expenses Combined)
+    if (todayIncome.length > 0 || todayExpenses.length > 0) {
+      content += '<h2 style="color: #000; margin-bottom: 15px; font-size: 16px; font-weight: bold;">Extra Calculation</h2>';
+      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; border: 1px solid #ccc;">';
       content += '<thead>';
-      content += '<tr style="background-color: #e8e8e8;">';
-      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Sr.</th>';
-      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Description</th>';
-      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Amount</th>';
+      content += '<tr>';
+      content += '<th style="background-color: #f2f2f2; border: 1px solid #ccc; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: center;">Sr.</th>';
+      content += '<th style="background-color: #f2f2f2; border: 1px solid #ccc; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: left;">Description</th>';
+      content += '<th style="background-color: #f2f2f2; border: 1px solid #ccc; padding: 8px 12px; font-size: 11px; font-weight: bold; text-align: center;">Amount</th>';
       content += '</tr>';
       content += '</thead>';
       content += '<tbody>';
-      todayIncome.forEach((income, index) => {
-        content += '<tr>';
-        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: center;">${index + 1}</td>`;
-        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px;">${income.description}</td>`;
-        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: right;">₹${income.amount.toFixed(2)}</td>`;
-        content += '</tr>';
-      });
-      content += '</tbody>';
-      content += '</table>';
-      content += '</div>';
-    }
 
-    // Expenses Table
-    if (todayExpenses.length > 0) {
-      content += '<div style="margin: 18px 0;">';
-      content += '<h3 style="color: #000000; font-size: 20px; margin-bottom: 10px;">Expenses (' + todayExpenses.length + ')</h3>';
-      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 12px; border: 2px solid #444;">';
-      content += '<thead>';
-      content += '<tr style="background-color: #e8e8e8;">';
-      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Sr.</th>';
-      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Description</th>';
-      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Amount</th>';
-      content += '</tr>';
-      content += '</thead>';
-      content += '<tbody>';
-      todayExpenses.forEach((expense, index) => {
+      let extraRowIndex = 1;
+      let totalExtraAmount = 0;
+
+      // Add Income entries
+      todayIncome.forEach((income) => {
+        totalExtraAmount += parseFloat(income.amount);
         content += '<tr>';
-        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: center;">${index + 1}</td>`;
-        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px;">${expense.description}</td>`;
-        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: right;">₹${expense.amount.toFixed(2)}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: center;">${extraRowIndex}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px;">${income.description} (Income)</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">₹${income.amount.toFixed(2)}</td>`;
         content += '</tr>';
+        extraRowIndex++;
       });
+
+      // Add Expense entries  
+      todayExpenses.forEach((expense) => {
+        totalExtraAmount -= parseFloat(expense.amount);
+        content += '<tr>';
+        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: center;">${extraRowIndex}</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px;">${expense.description} (Expense)</td>`;
+        content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right;">-₹${expense.amount.toFixed(2)}</td>`;
+        content += '</tr>';
+        extraRowIndex++;
+      });
+
+      // Total row
+      content += '<tr style="background-color: #f8f8f8; font-weight: bold;">';
+      content += '<td colspan="2" style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; font-weight: bold; text-align: right;">Total:</td>';
+      content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right; font-weight: bold;">₹${totalExtraAmount.toFixed(2)}</td>`;
+      content += '</tr>';
+
       content += '</tbody>';
       content += '</table>';
-      content += '</div>';
     }
 
     return content;
