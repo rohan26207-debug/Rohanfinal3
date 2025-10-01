@@ -38,94 +38,31 @@ const ZAPTRStyleCalculator = () => {
   const [fuelSettings, setFuelSettings] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
 
-  // Load data from backend
+  // Load data from localStorage (offline mode)
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  const loadData = async () => {
+  const loadData = () => {
     try {
       setLoading(true);
-      setError(null);
 
-      // Load all data in parallel
-      const [salesRes, creditsRes, incomeExpensesRes, ratesRes] = await Promise.all([
-        apiService.getFuelSales(),
-        apiService.getCreditSales(), 
-        apiService.getIncomeExpenses(),
-        apiService.getFuelRates()
-      ]);
+      // Load all data from localStorage
+      const salesData = localStorageService.getSalesData();
+      const creditData = localStorageService.getCreditData();
+      const incomeData = localStorageService.getIncomeData();
+      const expenseData = localStorageService.getExpenseData();
+      const fuelSettings = localStorageService.getFuelSettings();
 
-      // Transform backend data to match frontend format
-      setSalesData(salesRes.map(sale => ({
-        id: sale.id,
-        date: sale.date,
-        nozzle: sale.nozzle_id,
-        fuelType: sale.fuel_type,
-        startReading: sale.opening_reading,
-        endReading: sale.closing_reading,
-        liters: sale.liters,
-        rate: sale.rate,
-        amount: sale.amount,
-        type: 'cash' // Default to cash for now
-      })));
-
-      setCreditData(creditsRes.map(credit => ({
-        id: credit.id,
-        date: credit.date,
-        customerName: credit.customer_name,
-        vehicleNumber: credit.description || 'N/A',
-        fuelType: 'N/A', // Backend doesn't have fuel type for credits
-        liters: 0,
-        rate: 0,
-        amount: credit.amount,
-        dueDate: credit.date,
-        status: 'pending'
-      })));
-
-      // Separate income and expense data
-      const incomes = incomeExpensesRes.filter(record => record.type === 'income');
-      const expenses = incomeExpensesRes.filter(record => record.type === 'expense');
-      
-      setIncomeData(incomes.map(income => ({
-        id: income.id,
-        date: income.date,
-        amount: income.amount,
-        description: income.description || income.category,
-        type: 'income'
-      })));
-
-      setExpenseData(expenses.map(expense => ({
-        id: expense.id,
-        date: expense.date,
-        amount: expense.amount,
-        description: expense.description || expense.category,
-        type: 'expense'
-      })));
-
-      // Load fuel rates and update settings
-      const fuelRateSettings = {};
-      ratesRes.forEach(rate => {
-        fuelRateSettings[rate.fuel_type] = {
-          price: rate.rate,
-          nozzleCount: 3 // Default value, can be customized later
-        };
-      });
-
-      // Initialize with default rates if no data exists
-      const defaultFuelSettings = {
-        'Petrol': { price: 102.50, nozzleCount: 3 },
-        'Diesel': { price: 89.75, nozzleCount: 2 },
-        'CNG': { price: 75.20, nozzleCount: 2 },
-        'Premium': { price: 108.90, nozzleCount: 1 },
-        ...fuelRateSettings
-      };
-      setFuelSettings(defaultFuelSettings);
+      // Set data in component state
+      setSalesData(salesData);
+      setCreditData(creditData);
+      setIncomeData(incomeData);
+      setExpenseData(expenseData);
+      setFuelSettings(fuelSettings);
 
     } catch (err) {
-      console.error('Failed to load data:', err);
-      setError('Failed to load data. Using offline mode.');
+      console.error('Failed to load data from localStorage:', err);
       
-      // Fallback to empty data if API fails
+      // Initialize with empty data if localStorage fails
       setSalesData([]);
       setCreditData([]);
       setIncomeData([]);
@@ -139,6 +76,7 @@ const ZAPTRStyleCalculator = () => {
         'Premium': { price: 108.90, nozzleCount: 1 }
       };
       setFuelSettings(defaultFuelSettings);
+      localStorageService.setFuelSettings(defaultFuelSettings);
     } finally {
       setLoading(false);
     }
@@ -149,7 +87,7 @@ const ZAPTRStyleCalculator = () => {
     loadData();
   }, []);
 
-  // Load data when date changes
+  // Reload data when date changes (to reflect any new data)
   useEffect(() => {
     if (!loading) {
       loadData();
