@@ -110,7 +110,7 @@ const SalesTracker = ({ isDarkMode, salesData, addSaleRecord, fuelSettings, sele
   };
 
   const handleFuelChange = (fuelType) => {
-    const fuelConfig = fuelSettings[fuelType];
+    const fuelConfig = fuelSettings && fuelSettings[fuelType];
     setFormData(prev => ({
       ...prev,
       fuelType,
