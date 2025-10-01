@@ -441,17 +441,18 @@ const ZAPTRStyleCalculator = () => {
         // No line, save space
         yPosition += 2; // Minimal separator
         
-        // Data rows
+        // Compact Data rows
         pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(8); // Smaller font for data
         todaySales.forEach((sale, index) => {
           pdf.text(`${index + 1}`, margin, yPosition);
-          pdf.text(`${sale.nozzle} - ${sale.fuelType}`, margin + 30, yPosition);
-          pdf.text(`${sale.startReading}`, margin + 150, yPosition);
-          pdf.text(`${sale.endReading}`, margin + 200, yPosition);
-          pdf.text(`₹${sale.rate}`, margin + 250, yPosition);
-          pdf.text(`${sale.liters}`, margin + 300, yPosition);
-          pdf.text(`₹${sale.amount.toFixed(2)}`, margin + 350, yPosition);
-          yPosition += 12; // 10 * 1.2 = 12
+          pdf.text(`${sale.nozzle}`, margin + 20, yPosition);
+          pdf.text(`${sale.startReading}`, margin + 80, yPosition);
+          pdf.text(`${sale.endReading}`, margin + 120, yPosition);
+          pdf.text(`${sale.rate}`, margin + 160, yPosition);
+          pdf.text(`${sale.liters}`, margin + 200, yPosition);
+          pdf.text(`${sale.amount.toFixed(0)}`, margin + 240, yPosition);
+          yPosition += 9; // Reduced from 12 to 9
         });
       }
       
