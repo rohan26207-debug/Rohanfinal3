@@ -502,12 +502,12 @@ const ZAPTRStyleCalculator = () => {
       content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; border: 1px solid #333; font-family: Arial, sans-serif;">';
       content += '<thead>';
       content += '<tr>';
-      content += '<th style="background-color: #f2f2f2; border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: center; font-family: Arial, sans-serif;">Sr.</th>';
-      content += '<th style="background-color: #f2f2f2; border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: left; font-family: Arial, sans-serif;">Customer</th>';
-      content += '<th style="background-color: #f2f2f2; border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: left; font-family: Arial, sans-serif;">Vehicle</th>';
-      content += '<th style="background-color: #f2f2f2; border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: center; font-family: Arial, sans-serif;">Rate</th>';
-      content += '<th style="background-color: #f2f2f2; border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: center; font-family: Arial, sans-serif;">Litres</th>';
-      content += '<th style="background-color: #f2f2f2; border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: center; font-family: Arial, sans-serif;">Amount</th>';
+      content += '<th style="border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: center; font-family: Arial, sans-serif;">Sr.</th>';
+      content += '<th style="border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: left; font-family: Arial, sans-serif;">Customer</th>';
+      content += '<th style="border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: left; font-family: Arial, sans-serif;">Vehicle</th>';
+      content += '<th style="border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: center; font-family: Arial, sans-serif;">Rate</th>';
+      content += '<th style="border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: center; font-family: Arial, sans-serif;">Litres</th>';
+      content += '<th style="border: 1px solid #333; padding: 8px 10px; font-size: 11px; font-weight: bold; text-align: center; font-family: Arial, sans-serif;">Amount</th>';
       content += '</tr>';
       content += '</thead>';
       content += '<tbody>';
