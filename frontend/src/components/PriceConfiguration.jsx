@@ -192,7 +192,7 @@ const PriceConfiguration = ({
                         </span>
                       </div>
                       <div className="text-xs text-slate-500">
-                        Current: ₹{config.price}/L
+                        Current: ₹{config.price}
                       </div>
                     </div>
                     
