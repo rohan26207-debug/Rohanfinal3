@@ -303,6 +303,10 @@ async def get_credit_sales(request: Request, date: Optional[str] = None):
         query["date"] = date
     
     sales = await db.credit_sales.find(query).to_list(1000)
+    # Remove MongoDB _id field to avoid serialization issues
+    for sale in sales:
+        if "_id" in sale:
+            del sale["_id"]
     return sales
 
 @api_router.post("/credit-sales")
