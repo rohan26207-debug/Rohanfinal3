@@ -974,76 +974,7 @@ const ZAPTRStyleCalculator = () => {
           </CardContent>
         </Card>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <Card className={`${
-            isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
-          } shadow-lg`}>
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2">
-                <IndianRupee className="w-5 h-5 text-green-600" />
-                <div>
-                  <p className={`text-xs ${
-                    isDarkMode ? 'text-gray-400' : 'text-slate-600'
-                  }`}>
-                    Cash in Hand
-                  </p>
-                  <p className={`text-xl font-bold ${
-                    stats.adjustedCashSales >= 0 ? 'text-green-600' : 'text-red-600'
-                  }`}>
-                    ₹{stats.adjustedCashSales.toFixed(2)}
-                  </p>
-                  <p className={`text-xs ${
-                    isDarkMode ? 'text-gray-500' : 'text-slate-500'
-                  }`}>
-                    Fuel: ₹{stats.fuelCashSales.toFixed(0)} + Inc: ₹{stats.otherIncome.toFixed(0)} - Exp: ₹{stats.totalExpenses.toFixed(0)} - Credit: ₹{stats.creditAmount.toFixed(0)}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className={`${
-            isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
-          } shadow-lg`}>
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2">
-                <CreditCard className="w-5 h-5 text-orange-600" />
-                <div>
-                  <p className={`text-xs ${
-                    isDarkMode ? 'text-gray-400' : 'text-slate-600'
-                  }`}>
-                    Credit Sales
-                  </p>
-                  <p className="text-xl font-bold text-orange-600">
-                    ₹{stats.creditAmount.toFixed(2)}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className={`${
-            isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
-          } shadow-lg`}>
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2">
-                <Fuel className="w-5 h-5 text-blue-600" />
-                <div>
-                  <p className={`text-xs ${
-                    isDarkMode ? 'text-gray-400' : 'text-slate-600'
-                  }`}>
-                    Total Liters
-                  </p>
-                  <p className="text-xl font-bold text-blue-600">
-                    {stats.totalLiters.toFixed(2)}L
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-        </div>
+        {/* Stats Cards section removed as requested by user */}
 
         {/* Main Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
