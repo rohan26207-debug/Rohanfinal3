@@ -301,7 +301,7 @@ const ZAPTRStyleCalculator = () => {
             <h3 style="color: #333; margin-bottom: 20px; font-size: 24px; font-weight: bold;">Daily Summary</h3>
             <table style="width: 100%; border-collapse: collapse; font-size: 16px;">
               ${Object.entries(stats.fuelSalesByType).map(([fuelType, data], index) => 
-                `<tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>${index + 1}. ${fuelType} Sales:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">${data.liters.toFixed(2)} • ₹${data.amount.toFixed(2)}</td></tr>`
+                `<tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>${index + 1}. ${fuelType} Sales:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">${data.liters.toFixed(2)}L • ₹${data.amount.toFixed(2)}</td></tr>`
               ).join('')}
               ${Object.keys(stats.fuelSalesByType).length > 1 ? 
                 `<tr><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px;"><strong>Total Reading Sales:</strong></td><td style="padding: 12px 8px; border-bottom: 1px solid #ddd; font-size: 16px; font-weight: bold;">${stats.totalLiters.toFixed(2)} • ₹${stats.fuelCashSales.toFixed(2)}</td></tr>` : ''
