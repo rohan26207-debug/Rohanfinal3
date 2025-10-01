@@ -156,14 +156,7 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
     updateOwnerDetails('email', e.target.value);
   }, [updateOwnerDetails]);
 
-  // Employee form handlers
-  const handleNewEmployeeNameChange = useCallback((e) => {
-    setNewEmployeeName(e.target.value);
-  }, []);
-
-  const handleNewEmployeePhoneChange = useCallback((e) => {
-    setNewEmployeePhone(e.target.value);
-  }, []);
+  // Employee form handlers removed
 
   const handleNewFuelTypeChange = useCallback((e) => {
     setNewFuelType(e.target.value);
