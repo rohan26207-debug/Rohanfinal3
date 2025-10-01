@@ -385,7 +385,9 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                          <div className={`w-3 h-3 rounded-full ${
+                            isAuthenticated ? 'bg-green-500' : 'bg-red-500'
+                          }`}></div>
                           <span className={`font-medium ${
                             isDarkMode ? 'text-white' : 'text-slate-800'
                           }`}>
@@ -393,37 +395,100 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                           </span>
                         </div>
                         <span className={`text-sm px-2 py-1 rounded ${
-                          isDarkMode ? 'bg-red-900 text-red-300' : 'bg-red-100 text-red-700'
+                          isAuthenticated 
+                            ? (isDarkMode ? 'bg-green-900 text-green-300' : 'bg-green-100 text-green-700')
+                            : (isDarkMode ? 'bg-red-900 text-red-300' : 'bg-red-100 text-red-700')
                         }`}>
-                          Not Connected
+                          {isAuthenticated ? 'Connected' : 'Not Connected'}
                         </span>
                       </div>
+                      
+                      {isAuthenticated && user && (
+                        <div className="flex items-center gap-3 mt-2">
+                          <img 
+                            src={user.picture || 'https://via.placeholder.com/32'} 
+                            alt="Profile" 
+                            className="w-8 h-8 rounded-full"
+                          />
+                          <div>
+                            <div className={`font-medium text-sm ${
+                              isDarkMode ? 'text-white' : 'text-slate-800'
+                            }`}>
+                              {user.name}
+                            </div>
+                            <div className={`text-xs ${
+                              isDarkMode ? 'text-gray-400' : 'text-slate-600'
+                            }`}>
+                              {user.email}
+                            </div>
+                          </div>
+                        </div>
+                      )}
                       
                       <Separator className={isDarkMode ? 'bg-gray-600' : 'bg-slate-200'} />
                       
                       <div className="space-y-2">
-                        <Button 
-                          className="w-full bg-red-600 hover:bg-red-700 text-white"
-                          onClick={() => {
-                            // Gmail login will be implemented
-                            window.location.href = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(window.location.origin)}`;
-                          }}
-                        >
-                          <Mail className="w-4 h-4 mr-2" />
-                          Connect Gmail Account
-                        </Button>
-                        
-                        <p className={`text-xs text-center ${
-                          isDarkMode ? 'text-gray-400' : 'text-slate-500'
-                        }`}>
-                          Connect your Gmail account to sync daily reports and data
-                        </p>
+                        {!isAuthenticated ? (
+                          <>
+                            <Button 
+                              className="w-full bg-red-600 hover:bg-red-700 text-white"
+                              onClick={login}
+                            >
+                              <Mail className="w-4 h-4 mr-2" />
+                              Connect Gmail Account
+                            </Button>
+                            
+                            <p className={`text-xs text-center ${
+                              isDarkMode ? 'text-gray-400' : 'text-slate-500'
+                            }`}>
+                              Connect your Gmail account to sync daily reports and data
+                            </p>
+                          </>
+                        ) : (
+                          <div className="space-y-2">
+                            <Button 
+                              className="w-full bg-green-600 hover:bg-green-700 text-white"
+                              onClick={async () => {
+                                setSyncing(true);
+                                try {
+                                  const backupData = await syncData();
+                                  toast({
+                                    title: "Sync Successful",
+                                    description: "Your data has been backed up successfully",
+                                  });
+                                } catch (error) {
+                                  toast({
+                                    title: "Sync Failed",
+                                    description: "Failed to backup data. Please try again.",
+                                    variant: "destructive",
+                                  });
+                                }
+                                setSyncing(false);
+                              }}
+                              disabled={syncing}
+                            >
+                              <Mail className="w-4 h-4 mr-2" />
+                              {syncing ? 'Syncing...' : 'Sync Data Now'}
+                            </Button>
+                            
+                            <Button 
+                              variant="outline" 
+                              className="w-full"
+                              onClick={logout}
+                            >
+                              <LogOut className="w-4 h-4 mr-2" />
+                              Disconnect Account
+                            </Button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
                   
                   {/* Sync Settings */}
-                  <div className={`border rounded-lg p-4 opacity-50 ${
+                  <div className={`border rounded-lg p-4 ${
+                    !isAuthenticated ? 'opacity-50' : ''
+                  } ${
                     isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-slate-50'
                   }`}>
                     <div className="space-y-3">
@@ -435,7 +500,12 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                       
                       <div className="space-y-2">
                         <label className="flex items-center gap-2">
-                          <input type="checkbox" disabled className="rounded" />
+                          <input 
+                            type="checkbox" 
+                            disabled={!isAuthenticated} 
+                            className="rounded" 
+                            defaultChecked={isAuthenticated}
+                          />
                           <span className={`text-sm ${
                             isDarkMode ? 'text-gray-300' : 'text-slate-600'
                           }`}>
@@ -444,7 +514,12 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                         </label>
                         
                         <label className="flex items-center gap-2">
-                          <input type="checkbox" disabled className="rounded" />
+                          <input 
+                            type="checkbox" 
+                            disabled={!isAuthenticated} 
+                            className="rounded"
+                            defaultChecked={isAuthenticated}
+                          />
                           <span className={`text-sm ${
                             isDarkMode ? 'text-gray-300' : 'text-slate-600'
                           }`}>
@@ -453,7 +528,12 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                         </label>
                         
                         <label className="flex items-center gap-2">
-                          <input type="checkbox" disabled className="rounded" />
+                          <input 
+                            type="checkbox" 
+                            disabled={!isAuthenticated} 
+                            className="rounded"
+                            defaultChecked={isAuthenticated}
+                          />
                           <span className={`text-sm ${
                             isDarkMode ? 'text-gray-300' : 'text-slate-600'
                           }`}>
@@ -462,7 +542,12 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                         </label>
                         
                         <label className="flex items-center gap-2">
-                          <input type="checkbox" disabled className="rounded" />
+                          <input 
+                            type="checkbox" 
+                            disabled={!isAuthenticated} 
+                            className="rounded"
+                            defaultChecked={isAuthenticated}
+                          />
                           <span className={`text-sm ${
                             isDarkMode ? 'text-gray-300' : 'text-slate-600'
                           }`}>
@@ -479,12 +564,16 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                         }`}>
                           Sync Frequency
                         </label>
-                        <select disabled className={`w-full p-2 text-sm border rounded ${
-                          isDarkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-slate-300'
-                        }`}>
-                          <option>Daily (End of Day)</option>
-                          <option>Weekly</option>
-                          <option>Manual</option>
+                        <select 
+                          disabled={!isAuthenticated} 
+                          className={`w-full p-2 text-sm border rounded ${
+                            isDarkMode ? 'bg-gray-800 border-gray-600' : 'bg-white border-slate-300'
+                          }`}
+                          defaultValue="manual"
+                        >
+                          <option value="daily">Daily (End of Day)</option>
+                          <option value="weekly">Weekly</option>
+                          <option value="manual">Manual</option>
                         </select>
                       </div>
                     </div>
