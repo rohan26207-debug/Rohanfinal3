@@ -269,8 +269,8 @@ metadata:
 
 test_plan:
   current_focus:
-    - "PDF export income and expense black and white colors"
-    - "Header layout reorganization - settings to topmost left"
+    - "App title rename to M.Pump Calculator"
+    - "Dark mode toggle repositioning below settings"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
