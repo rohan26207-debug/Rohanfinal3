@@ -305,17 +305,17 @@ metadata:
           agent: "main"
           comment: "Successfully added Owner Details tab with editable fields for petrol pump name (Vishnu Parvati Petroleum), dealer name (Rohan.R.Khandve), address, phone, and email. Full-screen interface with save functionality tested and working."
 
-  - task: "Fix input focus issue in settings"
-    implemented: true
-    working: true
+  - task: "Fix input focus issue in all settings tabs"
+    implemented: false
+    working: false
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
         - working: true
           agent: "main"
-          comment: "Successfully fixed input focus issue by removing Edit icons and wrapper divs that were interfering with input field behavior. All inputs in Owner Details now use clean Input components with proper focus handling. Users can now type multi-word text without losing focus."
+          comment: "Fixed Owner Details tab input focus issues. Now need to ensure Employees and Fuel Types tabs also have proper continuous editing capabilities."
     status_history:
         - working: "NA"
           agent: "testing"
