@@ -24,9 +24,11 @@ import {
   User,
   Phone,
   Mail,
-  MapPin
+  MapPin,
+  LogOut
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
+import { useAuth } from '../contexts/AuthContext';
 
 const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
   const [newFuelType, setNewFuelType] = useState('');
