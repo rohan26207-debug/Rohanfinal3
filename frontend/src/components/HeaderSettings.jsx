@@ -291,7 +291,7 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                 <div className="space-y-4">
                   <div className="text-center mb-4">
                     <div className="flex items-center justify-center w-16 h-16 mx-auto mb-3 bg-blue-100 rounded-full">
-                      <User className="w-8 h-8 text-blue-600" />
+                      <Phone className="w-8 h-8 text-blue-600" />
                     </div>
                     <h3 className={`text-lg font-semibold ${
                       isDarkMode ? 'text-white' : 'text-slate-800'
