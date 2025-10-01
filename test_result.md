@@ -265,6 +265,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "RESET TO DEFAULT PDF SETTINGS: Completely reset PDF export to simple default format. Changes: 1) Removed all professional styling (headers, footers, tables, borders), 2) Simple text-based layout with basic font sizes (12px normal, 14-16px headers), 3) Removed user choice dialog - direct download only, 4) Basic sections: Sales Records, Credit Records, Income Records, Expense Records, Summary, 5) Simple list format instead of tables, 6) Standard margins (20mm) and A4 format, 7) Removed all colors, backgrounds, and complex formatting. Result: Clean, simple PDF with default jsPDF settings and basic text formatting."
+        - working: "NA"
+          agent: "main"
+          comment: "COMPLETE PDF EXPORT REMOVAL: Completely deleted all PDF export functionality from the application. Changes: 1) Removed PDF button from export UI section, 2) Deleted entire exportToPDF function (~200 lines), 3) Deleted generateExportContent helper function (~150 lines), 4) Removed all PDF-related code including jsPDF library loading, 5) Removed all PDF generation logic, settings, and configurations, 6) Cleaned up UI by replacing PDF button with comment placeholder. Result: Application no longer has any PDF export capabilities - only CSV and Copy Text export remain functional."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
