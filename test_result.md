@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Rename app to 'M.Pump Calc' with half font size, keep settings and title on single header line, make settings tabs open full-screen windows with back button."
+user_problem_statement: "Remove the three dashboard cards (Cash in Hand, Credit Sales, Total Litres) that appear after Summary section and before the main tabs."
 
 frontend:
   - task: "Tab navigation R.S.P. to Rate renaming"
