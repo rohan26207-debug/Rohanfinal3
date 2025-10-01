@@ -407,6 +407,102 @@ metadata:
           agent: "main"
           comment: "Added Sync tab to settings with Gmail connection UI. Need to implement backend authentication endpoints and Gmail API integration for syncing all petrol pump data (sales, credit, income, expenses, fuel rates)."
 
+  - task: "Offline mode basic app loading"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Testing offline mode app loading with offline banner display and all UI components rendering correctly without backend dependencies."
+
+  - task: "Data entry testing in all tabs"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/SalesTracker.jsx, /app/frontend/src/components/CreditSales.jsx, /app/frontend/src/components/IncomeExpense.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Testing data entry functionality in Reading Sales, Credit Sales, and Income/Expenses tabs to verify localStorage persistence works correctly."
+
+  - task: "Rate tab offline functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/PriceConfiguration.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Testing Rate tab price configuration and saving functionality in offline mode to verify the 'Not able to save price' issue is resolved without authentication requirements."
+
+  - task: "Export functions offline testing"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Testing PDF, CSV, and Copy export functions work correctly in offline mode without backend API calls."
+
+  - task: "Settings functionality offline"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/HeaderSettings.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Testing Settings panel functionality including Fuel Types configuration and Contact information display in offline mode."
+
+  - task: "Data backup export feature"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/HeaderSettings.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Testing data backup export functionality in Contact tab to verify JSON backup file generation works correctly."
+
+  - task: "Data persistence across page refreshes"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/services/localStorage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Testing data persistence in localStorage to verify all data (sales, credit, income, expenses, fuel rates) persists correctly across browser sessions and page refreshes."
+
+  - task: "Navigation between tabs"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Testing tab navigation functionality to verify all tabs (Reading Sales, Credit Sales, Income/Expenses, Rate) work correctly in offline mode."
+
 backend:
   - task: "Remove L suffixes from UI displays"
     implemented: true
