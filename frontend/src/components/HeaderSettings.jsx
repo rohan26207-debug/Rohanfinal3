@@ -182,6 +182,27 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
     setOwnerDetails(prev => ({ ...prev, [field]: value }));
   }, []);
 
+  // Memoized onChange handlers to prevent mobile keyboard issues
+  const handlePumpNameChange = useCallback((e) => {
+    updateOwnerDetails('pumpName', e.target.value);
+  }, [updateOwnerDetails]);
+
+  const handleDealerNameChange = useCallback((e) => {
+    updateOwnerDetails('dealerName', e.target.value);
+  }, [updateOwnerDetails]);
+
+  const handleAddressChange = useCallback((e) => {
+    updateOwnerDetails('address', e.target.value);
+  }, [updateOwnerDetails]);
+
+  const handlePhoneChange = useCallback((e) => {
+    updateOwnerDetails('phone', e.target.value);
+  }, [updateOwnerDetails]);
+
+  const handleEmailChange = useCallback((e) => {
+    updateOwnerDetails('email', e.target.value);
+  }, [updateOwnerDetails]);
+
   const saveOwnerDetails = () => {
     // Update contact info to match owner details
     setContactInfo(ownerDetails);
