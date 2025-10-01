@@ -306,7 +306,7 @@ metadata:
           comment: "Successfully added Owner Details tab with editable fields for petrol pump name (Vishnu Parvati Petroleum), dealer name (Rohan.R.Khandve), address, phone, and email. Full-screen interface with save functionality tested and working."
 
   - task: "Remove full-screen interfaces for Fuel Types and Contact"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
@@ -315,7 +315,7 @@ metadata:
     status_history:
         - working: "NA"
           agent: "main"
-          comment: "Need to remove full-screen modal interfaces for Fuel Types and Contact tabs, converting them to display inline within the settings dropdown instead of separate windows."
+          comment: "Removed full-screen modal interfaces for both Fuel Types and Contact tabs. Converted to inline tabbed interface within settings dropdown using Tabs component. Fuel Types and Contact content now display directly in dropdown without separate windows or back buttons."
     status_history:
         - working: "NA"
           agent: "testing"
