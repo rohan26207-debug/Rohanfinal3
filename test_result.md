@@ -294,20 +294,28 @@ metadata:
           comment: "Added new Employees tab in settings dropdown positioned above Contact tab. Created full-screen employee management interface with add/edit/delete functionality for employee names and contact numbers."
 
   - task: "Add Owner Details tab above Fuel Types"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Added Owner Details tab with editable fields for petrol pump name, dealer name, address, and contact information. Full-screen interface with save functionality."
 
   - task: "Reorganize settings tabs order"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Reorganized settings dropdown to show tabs in order: Owner Details, Fuel Types, Employees, Contact. Updated Contact tab to be read-only display since editing moved to Owner Details."
     status_history:
         - working: "NA"
           agent: "testing"
