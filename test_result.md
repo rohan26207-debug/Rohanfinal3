@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Fix PDF export to make income and expense data black and white, and reorganize header layout to move settings dropdown to topmost left position for better app name symmetry."
+user_problem_statement: "Rename app title to 'M.Pump Calculator', reorganize header with settings on leftmost side, and move dark mode toggle below settings tab on left side."
 
 frontend:
   - task: "Tab navigation R.S.P. to Rate renaming"
