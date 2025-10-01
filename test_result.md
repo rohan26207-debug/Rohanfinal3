@@ -295,6 +295,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "REDUCED VERTICAL SPACING: Minimized upper and lower blank space for compact PDF layout. Changes: 1) Body margin reduced from 20px to 10px, 2) Line height reduced from 1.4 to 1.2, 3) Header margin-bottom reduced from 30px to 15px, 4) Section margin-bottom reduced from 25px to 15px, 5) Section title margin-bottom reduced from 10px to 5px, 6) Table cell padding reduced from 8px to 3px, 7) Table header padding reduced from 10px to 4px, 8) Print margins reduced from 15mm to 8mm, 9) Footer margin-top reduced from 30px to 15px. Result: Much more compact layout with minimal vertical spacing, fitting more content in less space."
+        - working: "NA"
+          agent: "main"
+          comment: "SIMPLIFIED HTML MARKUP: Optimized PDF export HTML table structure for efficiency and convenience. Changes: 1) Removed unnecessary indentation and whitespace from HTML output, 2) Simplified table structure by eliminating wrapper divs and redundant thead/tbody tags, 3) Converted inline styles to width attributes for better performance, 4) Consolidated CSS declarations and removed unnecessary properties, 5) Made template generation more compact while maintaining functionality. Result: Much more efficient HTML markup with significantly reduced code bloat, improved PDF generation performance, and easier maintenance."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
