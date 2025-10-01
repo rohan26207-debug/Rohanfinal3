@@ -280,6 +280,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "ADDED TABULAR FORMAT TO PDF: Converted all records to professional table format as requested. Changes: 1) Sales Records table with columns: Sr.No, Description, Start, End, Rate, Litres, Amount, 2) Credit Records table with columns: Sr.No, Customer, Vehicle, Rate, Litres, Amount, 3) Income Records table with columns: Sr.No, Description, Amount, 4) Expense Records table with columns: Sr.No, Description, Amount, 5) Added proper table styling with borders, headers, and total rows, 6) Professional formatting with alternating backgrounds and proper alignment. Result: All records now display in clean, organized tables with proper headers and totals."
+        - working: "NA"
+          agent: "main"
+          comment: "ENHANCED PDF FORMATTING: Removed horizontal lines and converted summary to table format. Changes: 1) Removed border-bottom lines from all section titles (Summary, Sales Records, Credit Records, Income Records, Expense Records), 2) Converted Summary section to tabular format with columns: Category, Litres, Amount, 3) Summary table includes all fuel sales by type, credit sales, income, expenses, and cash in hand total row, 4) Cleaner appearance without underlines under section headers, 5) Consistent table formatting throughout the PDF. Result: All sections now use clean table format without horizontal divider lines."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
