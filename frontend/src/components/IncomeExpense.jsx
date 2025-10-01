@@ -48,17 +48,32 @@ const IncomeExpense = ({ isDarkMode, incomeData, addIncomeRecord, expenseData, a
       amount: parseFloat(formData.amount)
     };
 
+    if (editingId) {
+      // For now, editing is not supported in offline mode
+      toast({ title: "Edit Not Supported", description: "Editing is not available in offline mode", variant: "destructive" });
+      setEditingId(null);
+      return;
+    }
+    
     if (activeType === 'income') {
-      if (editingId) {
-        setIncomeData(prev => prev.map(item => item.id === editingId ? record : item));
-      } else {
-        setIncomeData(prev => [record, ...prev]);
+      const newIncome = addIncomeRecord({
+        amount: parseFloat(formData.amount),
+        description: formData.description
+      });
+      
+      if (!newIncome) {
+        toast({ title: "Error", description: "Failed to add income record", variant: "destructive" });
+        return;
       }
     } else {
-      if (editingId) {
-        setExpenseData(prev => prev.map(item => item.id === editingId ? record : item));
-      } else {
-        setExpenseData(prev => [record, ...prev]);
+      const newExpense = addExpenseRecord({
+        amount: parseFloat(formData.amount),
+        description: formData.description
+      });
+      
+      if (!newExpense) {
+        toast({ title: "Error", description: "Failed to add expense record", variant: "destructive" });
+        return;
       }
     }
 
