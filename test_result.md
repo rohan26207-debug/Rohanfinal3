@@ -366,8 +366,9 @@ backend:
 
 test_plan:
   current_focus:
-    - "App title rename to M.Pump Calculator"
-    - "Dark mode toggle repositioning below settings"
+    - "Google OAuth2 Authentication Backend"
+    - "User Authentication Models and Session Management"
+    - "Gmail Sync tab frontend integration"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
