@@ -387,7 +387,7 @@ const ZAPTRStyleCalculator = () => {
         pdf.text(`${fuelType} Sales`, margin, yPosition);
         pdf.text(`${data.liters.toFixed(2)}L`, margin + 200, yPosition);
         pdf.text(`₹${data.amount.toFixed(2)}`, margin + 300, yPosition, { align: 'right' });
-        yPosition += 12;
+        yPosition += 14; // 12 * 1.2 = 14.4 ≈ 14
       });
       
       // Credit Sales
