@@ -241,6 +241,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "PURE TEXT-BASED RENDERING: Replaced html2pdf with direct jsPDF implementation for 100% text-based PDF generation. Changes: 1) Removed html2canvas completely (no image rendering), 2) Uses jsPDF directly for native text rendering, 3) Manual text positioning and formatting, 4) No HTML-to-image conversion, 5) Pure vector text in PDF format. Result: Guaranteed text-based PDF with selectable text, smallest file size, and fastest generation."
+        - working: "NA"
+          agent: "main"
+          comment: "INCREASED TEXT SIZE BY 20%: Updated all font sizes in PDF export for better readability. Changes: 1) Title increased from 16px to 19px, 2) Date/time from 10px to 12px, 3) Summary header from 12px to 14px, 4) Summary table headers from 9px to 11px, 5) Reading calculation header from 11px to 13px, 6) Reading table headers from 8px to 10px, 7) Proportionally increased all line spacing. Result: All text 20% larger for improved readability while maintaining layout structure."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
