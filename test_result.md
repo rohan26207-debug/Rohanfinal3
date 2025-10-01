@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Add Employees tab in settings above Contact tab for managing employee names and contact numbers. Make Contact tab editable with fields for petrol pump name, dealer name, address, and contact information."
+user_problem_statement: "Add Owner Details tab above Fuel Types with editable fields for petrol pump name, dealer name, address, and contact. Keep Employees tab above Contact tab for managing employee names and contact numbers."
 
 frontend:
   - task: "Tab navigation R.S.P. to Rate renaming"
