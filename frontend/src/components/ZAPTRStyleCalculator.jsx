@@ -351,21 +351,21 @@ const ZAPTRStyleCalculator = () => {
       const contentWidth = pageWidth - (margin * 2);
       
       // Title
-      pdf.setFontSize(16);
+      pdf.setFontSize(19); // 16 * 1.2 = 19.2 ≈ 19
       pdf.setFont('helvetica', 'bold');
       pdf.text('M.Pump Calc Daily Report', pageWidth / 2, yPosition, { align: 'center' });
-      yPosition += 20;
+      yPosition += 24; // increased spacing proportionally
       
-      pdf.setFontSize(10);
+      pdf.setFontSize(12); // 10 * 1.2 = 12
       pdf.setFont('helvetica', 'normal');
       pdf.text(`Date: ${selectedDate} | Time: ${new Date().toLocaleTimeString()}`, pageWidth / 2, yPosition, { align: 'center' });
-      yPosition += 30;
+      yPosition += 36; // increased spacing proportionally
       
       // Summary Section
-      pdf.setFontSize(12);
+      pdf.setFontSize(14); // 12 * 1.2 = 14.4 ≈ 14
       pdf.setFont('helvetica', 'bold');
       pdf.text('Summary', margin, yPosition);
-      yPosition += 15;
+      yPosition += 18; // increased spacing proportionally
       
       // Summary Table Headers
       pdf.setFontSize(9);
