@@ -287,7 +287,177 @@ const ZAPTRStyleCalculator = () => {
   const stats = getTodayStats();
 
   // Export functions
-  // PDF export functionality removed
+  const exportToPDF = async () => {
+    try {
+      // Load jsPDF library
+      if (typeof window.jsPDF === 'undefined') {
+        await new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+      }
+
+      const { jsPDF } = window.jsPDF;
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      
+      let yPosition = 20;
+      const margin = 20;
+      
+      // Header
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFontSize(18);
+      pdf.text('Daily Report', margin, yPosition);
+      yPosition += 10;
+      
+      pdf.setFont('helvetica', 'normal');
+      pdf.setFontSize(12);
+      pdf.text(`Date: ${selectedDate}`, margin, yPosition);
+      yPosition += 15;
+      
+      // Summary Section
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFontSize(14);
+      pdf.text('Summary', margin, yPosition);
+      yPosition += 8;
+      
+      pdf.setFont('helvetica', 'normal');
+      pdf.setFontSize(11);
+      
+      // Fuel Sales Summary
+      Object.entries(stats.fuelSalesByType).forEach(([fuelType, data]) => {
+        pdf.text(`${fuelType} Sales: ${data.liters.toFixed(2)}L - ₹${data.amount.toFixed(2)}`, margin + 5, yPosition);
+        yPosition += 6;
+      });
+      
+      pdf.text(`Credit Sales: ${stats.creditLiters.toFixed(2)}L - ₹${stats.creditAmount.toFixed(2)}`, margin + 5, yPosition);
+      yPosition += 6;
+      pdf.text(`Income: ₹${stats.otherIncome.toFixed(2)}`, margin + 5, yPosition);
+      yPosition += 6;
+      pdf.text(`Expenses: ₹${stats.totalExpenses.toFixed(2)}`, margin + 5, yPosition);
+      yPosition += 6;
+      
+      pdf.setFont('helvetica', 'bold');
+      pdf.text(`Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}`, margin + 5, yPosition);
+      yPosition += 15;
+      
+      // Get today's data
+      const todaySales = salesData.filter(sale => sale.date === selectedDate);
+      const todayCredits = creditData.filter(credit => credit.date === selectedDate);
+      const todayIncome = incomeData.filter(income => income.date === selectedDate);
+      const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
+      
+      // Sales Records
+      if (todaySales.length > 0) {
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFontSize(12);
+        pdf.text('Sales Records', margin, yPosition);
+        yPosition += 8;
+        
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(9);
+        
+        todaySales.forEach((sale, index) => {
+          const text = `${index + 1}. ${sale.nozzle} - ${sale.fuelType}: Start: ${sale.startReading}, End: ${sale.endReading}, Rate: ₹${sale.rate}, Litres: ${sale.liters}, Amount: ₹${sale.amount.toFixed(2)}`;
+          
+          // Check if text fits on current line, if not wrap to next line
+          const textLines = pdf.splitTextToSize(text, 170);
+          textLines.forEach(line => {
+            if (yPosition > 280) { // Check if we need a new page
+              pdf.addPage();
+              yPosition = 20;
+            }
+            pdf.text(line, margin + 5, yPosition);
+            yPosition += 5;
+          });
+        });
+        yPosition += 8;
+      }
+      
+      // Credit Records
+      if (todayCredits.length > 0) {
+        if (yPosition > 250) { // Check if we need a new page
+          pdf.addPage();
+          yPosition = 20;
+        }
+        
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFontSize(12);
+        pdf.text('Credit Records', margin, yPosition);
+        yPosition += 8;
+        
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(9);
+        
+        todayCredits.forEach((credit, index) => {
+          const text = `${index + 1}. ${credit.customerName}${credit.vehicleNumber ? ' - ' + credit.vehicleNumber : ''}: ${credit.liters}L @ ₹${credit.rate} = ₹${credit.amount.toFixed(2)}`;
+          
+          const textLines = pdf.splitTextToSize(text, 170);
+          textLines.forEach(line => {
+            if (yPosition > 280) {
+              pdf.addPage();
+              yPosition = 20;
+            }
+            pdf.text(line, margin + 5, yPosition);
+            yPosition += 5;
+          });
+        });
+        yPosition += 8;
+      }
+      
+      // Income Records
+      if (todayIncome.length > 0) {
+        if (yPosition > 250) {
+          pdf.addPage();
+          yPosition = 20;
+        }
+        
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFontSize(12);
+        pdf.text('Income Records', margin, yPosition);
+        yPosition += 8;
+        
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(9);
+        
+        todayIncome.forEach((income, index) => {
+          pdf.text(`${index + 1}. ${income.description}: ₹${income.amount.toFixed(2)}`, margin + 5, yPosition);
+          yPosition += 5;
+        });
+        yPosition += 8;
+      }
+      
+      // Expense Records
+      if (todayExpenses.length > 0) {
+        if (yPosition > 250) {
+          pdf.addPage();
+          yPosition = 20;
+        }
+        
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFontSize(12);
+        pdf.text('Expense Records', margin, yPosition);
+        yPosition += 8;
+        
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(9);
+        
+        todayExpenses.forEach((expense, index) => {
+          pdf.text(`${index + 1}. ${expense.description}: ₹${expense.amount.toFixed(2)}`, margin + 5, yPosition);
+          yPosition += 5;
+        });
+      }
+      
+      // Save PDF
+      pdf.save(`Report-${selectedDate}.pdf`);
+      
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Error generating PDF. Please try again.');
+    }
+  };
 
   const exportToCSV = () => {
     const csvContent = generateCSVContent();
