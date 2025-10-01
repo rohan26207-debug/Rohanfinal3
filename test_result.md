@@ -283,6 +283,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "ENHANCED PDF FORMATTING: Removed horizontal lines and converted summary to table format. Changes: 1) Removed border-bottom lines from all section titles (Summary, Sales Records, Credit Records, Income Records, Expense Records), 2) Converted Summary section to tabular format with columns: Category, Litres, Amount, 3) Summary table includes all fuel sales by type, credit sales, income, expenses, and cash in hand total row, 4) Cleaner appearance without underlines under section headers, 5) Consistent table formatting throughout the PDF. Result: All sections now use clean table format without horizontal divider lines."
+        - working: "NA"
+          agent: "main"
+          comment: "ADDED DATE TO COPY TEXT: Modified copy text functionality to show date first. Changes: 1) Updated generateTextContent function to include date at the beginning of copied text, 2) Format: 'Date: YYYY-MM-DD' appears as first line, 3) Followed by existing sections (Readings, Credits, Income, Expenses), 4) Better context for copied text with date information. Result: Copy text export now starts with date followed by all daily records."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
