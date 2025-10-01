@@ -321,7 +321,6 @@ const ZAPTRStyleCalculator = () => {
               font-size: 16px; 
               font-weight: bold; 
               margin-bottom: 10px; 
-              border-bottom: 1px solid #000; 
               padding-bottom: 3px; 
             }
             .summary-item { 
