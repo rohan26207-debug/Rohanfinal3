@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Remove the Owner Details tab from settings dropdown, keeping only Fuel Types and Contact tabs."
+user_problem_statement: "Remove full-screen interfaces for Fuel Types and Contact tabs, making them display inline within the settings dropdown instead of opening separate full-screen windows."
 
 frontend:
   - task: "Tab navigation R.S.P. to Rate renaming"
