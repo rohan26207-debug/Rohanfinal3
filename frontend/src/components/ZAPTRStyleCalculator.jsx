@@ -486,7 +486,6 @@ const ZAPTRStyleCalculator = () => {
       content += '</tr>';
       content += '</tbody>';
       content += '</table>';
-      content += '</div>';
     }
 
     // Credit Sales Table
