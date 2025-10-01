@@ -26,7 +26,7 @@ import CreditSales from './CreditSales';
 import IncomeExpense from './IncomeExpense';
 import PriceConfiguration from './PriceConfiguration';
 import HeaderSettings from './HeaderSettings';
-import apiService from '../services/api';
+import localStorageService from '../services/localStorage';
 
 const ZAPTRStyleCalculator = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
