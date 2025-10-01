@@ -305,17 +305,17 @@ metadata:
           agent: "main"
           comment: "Successfully added Owner Details tab with editable fields for petrol pump name (Vishnu Parvati Petroleum), dealer name (Rohan.R.Khandve), address, phone, and email. Full-screen interface with save functionality tested and working."
 
-  - task: "Add Today Stock tab with inventory management"
-    implemented: true
-    working: true
+  - task: "Remove Today Stock tab"
+    implemented: false
+    working: "NA"
     file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-        - working: true
+        - working: "NA"
           agent: "main"
-          comment: "Successfully added Today Stock tab as 5th tab. Verified all components working: fuel type dropdown (Petrol/Diesel/CNG/Premium), dip editor, total stock editor, net editor, add/update button. Mock stock entries displaying correctly for today's date. Professional interface with proper dark mode support."
+          comment: "Need to remove the Today Stock tab and revert to the original 4-tab structure: Reading Sales, Credit Sales, Income/Expenses, Rate."
     status_history:
         - working: "NA"
           agent: "testing"
