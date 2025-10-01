@@ -306,7 +306,7 @@ metadata:
           comment: "Successfully added Owner Details tab with editable fields for petrol pump name (Vishnu Parvati Petroleum), dealer name (Rohan.R.Khandve), address, phone, and email. Full-screen interface with save functionality tested and working."
 
   - task: "Add Today Stock tab with inventory management"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
     stuck_count: 0
@@ -315,7 +315,7 @@ metadata:
     status_history:
         - working: "NA"
           agent: "main"
-          comment: "Need to add new Today Stock tab to main dashboard with fuel type selection, dip editor, total stock editor, and net editor for fuel inventory management."
+          comment: "Added Today Stock tab as 5th tab in main dashboard. Features: fuel type dropdown selection, dip editor (liters), total stock editor (liters), net editor (liters), add/update functionality, display of today's stock entries with mock data for Petrol/Diesel/CNG."
     status_history:
         - working: "NA"
           agent: "testing"
