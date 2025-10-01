@@ -671,7 +671,19 @@ const ZAPTRStyleCalculator = () => {
               </div>
               
               <div className="flex items-center gap-2">
-                {/* PDF export removed */}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={exportToPDF}
+                  className={`${
+                    isDarkMode 
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
+                      : 'border-slate-300 text-slate-700 hover:bg-slate-50'
+                  }`}
+                >
+                  <FileText className="w-4 h-4 mr-1" />
+                  PDF
+                </Button>
                 <Button
                   variant="outline"
                   size="sm"
