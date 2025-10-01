@@ -344,9 +344,11 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                 <Input
                   id="ownerPhone"
                   value={ownerDetails.phone}
-                  onChange={(e) => updateOwnerDetails('phone', e.target.value)}
+                  onChange={handlePhoneChange}
                   placeholder="Enter phone number"
                   className="mt-1"
+                  autoComplete="off"
+                  inputMode="tel"
                 />
               </div>
               
