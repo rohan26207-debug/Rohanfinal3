@@ -561,7 +561,7 @@ const ZAPTRStyleCalculator = () => {
     csv += 'Type,Description,Amount,Details,Date\n';
     
     todaySales.forEach(sale => {
-      csv += `"Fuel Sale","${sale.nozzle} - ${sale.fuelType}","₹${sale.amount.toFixed(2)}","${sale.liters}L @ ₹${sale.rate}/L (${sale.startReading}L → ${sale.endReading}L)","${sale.date}"\n`;
+      csv += `"Fuel Sale","${sale.nozzle} - ${sale.fuelType}","₹${sale.amount.toFixed(2)}","${sale.liters} @ ₹${sale.rate} (${sale.startReading} → ${sale.endReading})","${sale.date}"\n`;
     });
 
     todayCredits.forEach(credit => {
