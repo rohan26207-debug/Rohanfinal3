@@ -289,6 +289,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "ADDED SUMMARY TO COPY TEXT: Enhanced copy text to include summary section after date and before readings. Changes: 1) Added *Summary* section after date, 2) Includes all fuel sales by type with litres and amounts, 3) Shows credit sales, income, expenses, and cash in hand totals, 4) Positioned before *Readings* section as requested, 5) Consistent formatting with other sections. Result: Copy text structure now: Date → Summary → Readings → Credits → Income → Expenses."
+        - working: "NA"
+          agent: "main"
+          comment: "INCREASED PDF FONT SIZES: Enhanced PDF export with larger font sizes while maintaining table dimensions. Changes: 1) Header title increased from default to 28px, 2) Header date increased to 18px, 3) Section titles increased from 16px to 18px, 4) Table font size increased from 12px to 14px, 5) Table headers increased to 15px, 6) Table cell font increased to 14px, 7) Increased padding in headers (8px to 10px) and cells (6px to 8px). Result: All text in PDF is now larger and more readable while keeping same table structure and layout."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
