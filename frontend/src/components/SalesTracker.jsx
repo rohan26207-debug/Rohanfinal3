@@ -386,7 +386,7 @@ const SalesTracker = ({ isDarkMode, salesData, setSalesData, fuelSettings, selec
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-600">Rate:</span>
-                        <span className="font-medium">₹{sale.rate}/L</span>
+                        <span className="font-medium">₹{sale.rate}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-600">Date:</span>
