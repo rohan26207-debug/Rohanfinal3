@@ -319,6 +319,136 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
     </div>
   );
 
+  // Full-screen Employees component
+  const EmployeesFullScreen = () => (
+    <div className={`fixed inset-0 z-50 ${
+      isDarkMode ? 'bg-gray-900' : 'bg-white'
+    }`}>
+      {/* Header with back button */}
+      <div className={`flex items-center justify-between p-4 border-b ${
+        isDarkMode ? 'border-gray-700 bg-gray-800' : 'border-slate-200 bg-white'
+      }`}>
+        <div className="flex items-center gap-3">
+          <Button
+            variant="ghost"
+            onClick={() => setCurrentView('dropdown')}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Back
+          </Button>
+          <h1 className={`text-2xl font-bold ${
+            isDarkMode ? 'text-white' : 'text-slate-800'
+          }`}>
+            Employee Management
+          </h1>
+        </div>
+      </div>
+      
+      {/* Content */}
+      <div className="p-6 max-w-4xl mx-auto">
+        <div className="space-y-6">
+          {/* Add New Employee */}
+          <Card className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'}`}>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Plus className="w-5 h-5" />
+                Add New Employee
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <Label htmlFor="employeeName">Employee Name</Label>
+                  <Input
+                    id="employeeName"
+                    value={newEmployeeName}
+                    onChange={(e) => setNewEmployeeName(e.target.value)}
+                    placeholder="Enter employee name"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="employeePhone">Phone Number</Label>
+                  <Input
+                    id="employeePhone"
+                    value={newEmployeePhone}
+                    onChange={(e) => setNewEmployeePhone(e.target.value)}
+                    placeholder="Enter phone number"
+                  />
+                </div>
+              </div>
+              <Button onClick={addEmployee} className="w-full">
+                <Plus className="w-4 h-4 mr-2" />
+                Add Employee
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Existing Employees */}
+          <Card className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'}`}>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="w-5 h-5" />
+                Employee List ({employees.length})
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {employees.length === 0 ? (
+                <div className={`text-center py-8 ${
+                  isDarkMode ? 'text-gray-400' : 'text-slate-500'
+                }`}>
+                  <Users className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                  <p>No employees added yet</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {employees.map((employee) => (
+                    <div key={employee.id} className={`border rounded-lg p-4 ${
+                      isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-slate-50'
+                    }`}>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <User className="w-5 h-5 text-blue-600" />
+                          </div>
+                          <div className="space-y-1">
+                            <Input
+                              value={employee.name}
+                              onChange={(e) => updateEmployee(employee.id, 'name', e.target.value)}
+                              className="font-medium text-lg"
+                              placeholder="Employee name"
+                            />
+                          </div>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => removeEmployee(employee.id)}
+                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                      
+                      <div className="flex items-center gap-3">
+                        <Phone className="w-4 h-4 text-green-600" />
+                        <Input
+                          value={employee.phone}
+                          onChange={(e) => updateEmployee(employee.id, 'phone', e.target.value)}
+                          placeholder="Phone number"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+
   // Full-screen Contact component
   const ContactFullScreen = () => (
     <div className={`fixed inset-0 z-50 ${
