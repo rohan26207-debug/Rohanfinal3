@@ -438,10 +438,10 @@ const ZAPTRStyleCalculator = () => {
         pdf.text('Rate', margin + 250, yPosition);
         pdf.text('Litres', margin + 300, yPosition);
         pdf.text('Amount', margin + 350, yPosition);
-        yPosition += 10;
+        yPosition += 12; // 10 * 1.2 = 12
         
         pdf.line(margin, yPosition - 2, pageWidth - margin, yPosition - 2);
-        yPosition += 5;
+        yPosition += 6; // 5 * 1.2 = 6
         
         // Data rows
         pdf.setFont('helvetica', 'normal');
@@ -453,7 +453,7 @@ const ZAPTRStyleCalculator = () => {
           pdf.text(`₹${sale.rate}`, margin + 250, yPosition);
           pdf.text(`${sale.liters}`, margin + 300, yPosition);
           pdf.text(`₹${sale.amount.toFixed(2)}`, margin + 350, yPosition);
-          yPosition += 10;
+          yPosition += 12; // 10 * 1.2 = 12
         });
       }
       
