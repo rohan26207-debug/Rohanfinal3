@@ -318,18 +318,18 @@ const ZAPTRStyleCalculator = () => {
               margin-bottom: 25px; 
             }
             .section-title { 
-              font-size: 16px; 
+              font-size: 18px; 
               font-weight: bold; 
               margin-bottom: 10px; 
               padding-bottom: 3px; 
             }
             .summary-item { 
               margin: 5px 0; 
-              font-size: 14px; 
+              font-size: 16px; 
             }
             .cash-highlight { 
               font-weight: bold; 
-              font-size: 16px; 
+              font-size: 18px; 
               margin: 10px 0; 
             }
             table { 
