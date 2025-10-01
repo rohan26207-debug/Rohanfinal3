@@ -137,15 +137,18 @@ frontend:
 
   - task: "Settings dropdown Rate integration"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/components/HeaderSettings.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: "NA"
           agent: "main"
           comment: "Updated HeaderSettings component to show 'Rate: ₹XX.XX/L (Set in Rate tab)' instead of R.S.P. references."
+        - working: true
+          agent: "testing"
+          comment: "✅ VERIFIED: Settings dropdown successfully updated to show 'Rate: ₹XX.XX/L (Set in Rate tab)' instead of R.S.P. references. Integration between settings and Rate tab terminology is consistent."
 
   - task: "Rate functionality testing"
     implemented: true
