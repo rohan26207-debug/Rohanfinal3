@@ -327,7 +327,7 @@ const ZAPTRStyleCalculator = () => {
         </div>
       `;
 
-      // Load jsPDF for pure text-based PDF generation
+      // Load jsPDF for professional PDF generation matching uploaded format
       if (typeof window.jsPDF === 'undefined') {
         await new Promise((resolve, reject) => {
           const script = document.createElement('script');
@@ -338,154 +338,247 @@ const ZAPTRStyleCalculator = () => {
         });
       }
 
-      // Generate pure text-based PDF using jsPDF directly
+      // Generate PDF matching the uploaded format exactly
       const { jsPDF } = window.jsPDF;
       const pdf = new jsPDF('p', 'pt', 'a4');
       
-      // Set font
-      pdf.setFont('helvetica', 'normal');
-      
-      let yPosition = 20; // Reduced from 40 to 20
       const pageWidth = pdf.internal.pageSize.getWidth();
-      const margin = 20; // Reduced from 40 to 20
-      const contentWidth = pageWidth - (margin * 2);
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const margin = 40;
+      let yPosition = 40;
+
+      // Helper function to add header on each page
+      const addHeader = () => {
+        // Dark grey header bar
+        pdf.setFillColor(64, 64, 64); // Dark grey
+        pdf.rect(0, 0, pageWidth, 35, 'F');
+        
+        // Header text in white
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(12);
+        pdf.setTextColor(255, 255, 255); // White text
+        pdf.text('Fuel Pump Calculator', margin, 22);
+        pdf.text('v 2.1.2', pageWidth / 2, 22, { align: 'center' });
+        pdf.text(`Date: ${selectedDate} Time: ${new Date().toLocaleTimeString()}`, pageWidth - margin, 22, { align: 'right' });
+        
+        // Reset text color to black for content
+        pdf.setTextColor(0, 0, 0);
+        return 60; // Return starting Y position after header
+      };
+
+      // Helper function to add footer
+      const addFooter = (pageNum, totalPages) => {
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(9);
+        pdf.setTextColor(64, 64, 64); // Grey text
+        pdf.text(`Page ${pageNum} of ${totalPages} | Generated using Fuel Pump Calculator app by ZAPTR © 2025`, margin, pageHeight - 20);
+      };
+
+      // Helper function to create table
+      const createTable = (headers, rows, colWidths, yPos) => {
+        let currentY = yPos;
+        
+        // Table header background
+        pdf.setFillColor(220, 220, 220); // Light grey
+        let headerHeight = 25;
+        let xPos = margin;
+        
+        // Draw header background
+        pdf.rect(margin, currentY, colWidths.reduce((a, b) => a + b, 0), headerHeight, 'F');
+        
+        // Draw header borders and text
+        pdf.setLineWidth(0.5);
+        pdf.setDrawColor(0, 0, 0); // Black borders
+        headers.forEach((header, i) => {
+          // Border
+          pdf.rect(xPos, currentY, colWidths[i], headerHeight);
+          
+          // Header text
+          pdf.setFont('helvetica', 'bold');
+          pdf.setFontSize(10);
+          pdf.text(header, xPos + colWidths[i] / 2, currentY + 16, { align: 'center' });
+          xPos += colWidths[i];
+        });
+        
+        currentY += headerHeight;
+        
+        // Data rows
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(9);
+        
+        rows.forEach(row => {
+          xPos = margin;
+          let rowHeight = 20;
+          
+          // Draw row background (white)
+          pdf.setFillColor(255, 255, 255);
+          pdf.rect(margin, currentY, colWidths.reduce((a, b) => a + b, 0), rowHeight, 'F');
+          
+          row.forEach((cell, i) => {
+            // Border
+            pdf.rect(xPos, currentY, colWidths[i], rowHeight);
+            
+            // Cell text with proper alignment
+            let textAlign = 'left';
+            let textX = xPos + 5; // Left padding
+            
+            if (i === 0) { // S.No - centered
+              textAlign = 'center';
+              textX = xPos + colWidths[i] / 2;
+            } else if (i > 1 || (headers[i] && (headers[i].includes('Amount') || headers[i].includes('Rate') || headers[i].includes('Litre') || headers[i].includes('Start') || headers[i].includes('End')))) {
+              // Numeric columns - right aligned
+              textAlign = 'right';
+              textX = xPos + colWidths[i] - 5; // Right padding
+            }
+            
+            pdf.text(String(cell), textX, currentY + 12, { align: textAlign });
+            xPos += colWidths[i];
+          });
+          
+          currentY += rowHeight;
+        });
+        
+        return currentY + 10; // Return Y position after table
+      };
+
+      // Page 1 - Start with header
+      yPosition = addHeader();
       
-      // Compact Header: Title and Date on same line
-      pdf.setFontSize(12); // Reduced from 19 to 12
-      pdf.setFont('helvetica', 'bold');
-      pdf.text('M.Pump Calc Report', margin, yPosition);
-      pdf.setFont('helvetica', 'normal');
-      pdf.text(`${selectedDate}`, pageWidth - margin, yPosition, { align: 'right' });
-      yPosition += 16; // Reduced from 60 total to 16
-      
-      // Daily Overview Section (NEW)
-      pdf.setFontSize(20);
-      pdf.setFont('helvetica', 'bold');
-      pdf.text('Daily Overview', margin, yPosition);
-      yPosition += 20;
-      
-      pdf.setFontSize(16);
-      pdf.setFont('helvetica', 'normal');
-      pdf.text(`Total Sales: ₹${(stats.totalSales + stats.creditAmount).toFixed(0)}`, margin, yPosition);
-      pdf.text(`Cash Sales: ₹${stats.totalSales.toFixed(0)}`, margin + 150, yPosition);
-      yPosition += 16;
-      
-      pdf.text(`Credit Sales: ₹${stats.creditAmount.toFixed(0)}`, margin, yPosition);
-      pdf.text(`Net Cash: ₹${stats.adjustedCashSales.toFixed(0)}`, margin + 150, yPosition);
-      yPosition += 20;
-      
-      // Summary Section (DOUBLED text size)
-      pdf.setFontSize(22); // 11 * 2 = 22
-      pdf.setFont('helvetica', 'bold');
-      pdf.text('Summary', margin, yPosition);
-      yPosition += 24; // Increased proportionally
-      
-      // Summary Table Headers (DOUBLED size)
-      pdf.setFontSize(20); // 10 * 2 = 20
-      pdf.setFont('helvetica', 'bold');
-      pdf.text('Category', margin, yPosition);
-      pdf.text('Litres', margin + 140, yPosition); // Adjusted for larger text
-      pdf.text('Amount', margin + 200, yPosition, { align: 'right' }); 
-      yPosition += 20; // Increased proportionally
-      
-      // No line, save space
-      yPosition += 2; // Minimal separator
-      
-      // Summary Data (DOUBLED size, compact table)
-      pdf.setFont('helvetica', 'normal');
-      pdf.setFontSize(18); // 9 * 2 = 18
-      
-      // Fuel Sales by Type (adjusted for larger text)
-      Object.entries(stats.fuelSalesByType).forEach(([fuelType, data]) => {
-        pdf.text(`${fuelType}`, margin, yPosition);
-        pdf.text(`${data.liters.toFixed(1)}L`, margin + 140, yPosition);
-        pdf.text(`₹${data.amount.toFixed(0)}`, margin + 200, yPosition, { align: 'right' });
-        yPosition += 16; // Increased spacing for larger text
-      });
-      
-      // Credit Sales
-      pdf.text('Credit', margin, yPosition);
-      pdf.text(`${stats.creditLiters.toFixed(1)}L`, margin + 140, yPosition);
-      pdf.text(`₹${stats.creditAmount.toFixed(0)}`, margin + 200, yPosition, { align: 'right' });
-      yPosition += 16;
-      
-      // Income
-      pdf.text('Income', margin, yPosition);
-      pdf.text('-', margin + 140, yPosition);
-      pdf.text(`₹${stats.otherIncome.toFixed(0)}`, margin + 200, yPosition, { align: 'right' });
-      yPosition += 16;
-      
-      // Expenses
-      pdf.text('Expenses', margin, yPosition);
-      pdf.text('-', margin + 140, yPosition);
-      pdf.text(`₹${stats.totalExpenses.toFixed(0)}`, margin + 200, yPosition, { align: 'right' });
-      yPosition += 16;
-      
-      // Cash in Hand (DOUBLED size, bold)
-      pdf.setFontSize(20); // 10 * 2 = 20
-      pdf.setFont('helvetica', 'bold');
-      pdf.text('Cash Total', margin, yPosition);
-      pdf.text(`${stats.totalLiters.toFixed(1)}L`, margin + 140, yPosition);
-      pdf.text(`₹${stats.adjustedCashSales.toFixed(0)}`, margin + 200, yPosition, { align: 'right' });
-      yPosition += 24; // Increased proportionally
-      
-      // Add detailed records if available
+      // Get today's data
       const todaySales = salesData.filter(sale => sale.date === selectedDate);
       const todayCredits = creditData.filter(credit => credit.date === selectedDate);
       const todayIncome = incomeData.filter(income => income.date === selectedDate);
       const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
       
-      // Reading Calculation (DOUBLED text size)
+      // Section 1: Reading Calculation
       if (todaySales.length > 0) {
-        yPosition += 12;
-        pdf.setFontSize(20); // 10 * 2 = 20
         pdf.setFont('helvetica', 'bold');
-        pdf.text('Readings', margin, yPosition);
-        yPosition += 24;
+        pdf.setFontSize(14);
+        pdf.text('Reading Calculation', margin, yPosition);
+        yPosition += 25;
         
-        // Table headers (DOUBLED size)
-        pdf.setFontSize(16); // 8 * 2 = 16
-        pdf.text('No', margin, yPosition);
-        pdf.text('Nozzle', margin + 25, yPosition);
-        pdf.text('Start', margin + 80, yPosition);
-        pdf.text('End', margin + 130, yPosition);
-        pdf.text('Rate', margin + 180, yPosition);
-        pdf.text('Ltr', margin + 230, yPosition);
-        pdf.text('Amt', margin + 280, yPosition);
-        yPosition += 16;
+        const readingHeaders = ['S.No', 'Description', 'Start', 'End', 'Rate', 'Litres', 'Amount'];
+        const readingColWidths = [40, 120, 60, 60, 60, 60, 80];
         
-        yPosition += 4; // Minimal separator
+        const readingRows = todaySales.map((sale, index) => [
+          index + 1,
+          `${sale.nozzle} - ${sale.fuelType}`,
+          sale.startReading,
+          sale.endReading,
+          `₹${sale.rate}`,
+          sale.liters,
+          `₹${sale.amount.toFixed(2)}`
+        ]);
         
-        // Data rows (DOUBLED text size)
+        yPosition = createTable(readingHeaders, readingRows, readingColWidths, yPosition);
+        
+        // Summary text
+        const totalReadingLitres = todaySales.reduce((sum, sale) => sum + parseFloat(sale.liters), 0);
+        const totalReadingAmount = todaySales.reduce((sum, sale) => sum + parseFloat(sale.amount), 0);
+        
         pdf.setFont('helvetica', 'normal');
-        pdf.setFontSize(16); // 8 * 2 = 16
-        todaySales.forEach((sale, index) => {
-          pdf.text(`${index + 1}`, margin, yPosition);
-          pdf.text(`${sale.nozzle}`, margin + 25, yPosition);
-          pdf.text(`${sale.startReading}`, margin + 80, yPosition);
-          pdf.text(`${sale.endReading}`, margin + 130, yPosition);
-          pdf.text(`${sale.rate}`, margin + 180, yPosition);
-          pdf.text(`${sale.liters}`, margin + 230, yPosition);
-          pdf.text(`${sale.amount.toFixed(0)}`, margin + 280, yPosition);
-          yPosition += 15; // Increased spacing for larger text
-        });
+        pdf.setFontSize(10);
+        pdf.text(`Total Reading Litres: ${totalReadingLitres.toFixed(2)}`, margin, yPosition);
+        yPosition += 15;
+        pdf.text(`Total Reading Amount: ₹${totalReadingAmount.toFixed(2)}`, margin, yPosition);
+        yPosition += 25;
       }
       
-      // Final Summary Section (if there's space)
-      if (yPosition < 700) { // Check if there's space on the page
-        yPosition += 20;
-        pdf.setFontSize(18);
+      // Section 2: Credit Calculation
+      if (todayCredits.length > 0) {
         pdf.setFont('helvetica', 'bold');
-        pdf.text('Final Summary', margin, yPosition);
-        yPosition += 18;
-        
         pdf.setFontSize(14);
+        pdf.text('Credit Calculation', margin, yPosition);
+        yPosition += 25;
+        
+        const creditHeaders = ['S.No', 'Description', 'Litre', 'Rate', 'Amount'];
+        const creditColWidths = [40, 200, 60, 60, 80];
+        
+        const creditRows = todayCredits.map((credit, index) => [
+          index + 1,
+          `${credit.customerName}${credit.vehicleNumber ? ' - ' + credit.vehicleNumber : ''}`,
+          credit.liters,
+          `₹${credit.rate}`,
+          `₹${credit.amount.toFixed(2)}`
+        ]);
+        
+        yPosition = createTable(creditHeaders, creditRows, creditColWidths, yPosition);
+        
+        // Summary text
         pdf.setFont('helvetica', 'normal');
-        pdf.text(`Total Transactions: ${todaySales.length + todayCredits.length}`, margin, yPosition);
-        yPosition += 14;
-        pdf.text(`Cash in Hand: ₹${stats.adjustedCashSales.toFixed(0)}`, margin, yPosition);
-        yPosition += 14;
-        pdf.text(`Total Fuel Sold: ${stats.totalLiters.toFixed(1)}L`, margin, yPosition);
+        pdf.setFontSize(10);
+        pdf.text(`Total Credit Litres: ${stats.creditLiters.toFixed(2)}`, margin, yPosition);
+        yPosition += 15;
+        pdf.text(`Total Credit Amount: ₹${stats.creditAmount.toFixed(2)}`, margin, yPosition);
+        yPosition += 25;
+      }
+      
+      // Section 3: Extra Calculation (Income & Expenses)
+      const extraData = [
+        ...todayIncome.map(income => ({ type: 'Income', description: income.description, amount: income.amount })),
+        ...todayExpenses.map(expense => ({ type: 'Expense', description: expense.description, amount: -expense.amount }))
+      ];
+      
+      if (extraData.length > 0) {
+        pdf.setFont('helvetica', 'bold');
+        pdf.setFontSize(14);
+        pdf.text('Extra Calculation', margin, yPosition);
+        yPosition += 25;
+        
+        const extraHeaders = ['S.No', 'Description', 'Amount'];
+        const extraColWidths = [40, 300, 100];
+        
+        const extraRows = extraData.map((item, index) => [
+          index + 1,
+          `${item.description} (${item.type})`,
+          `₹${item.amount.toFixed(2)}`
+        ]);
+        
+        yPosition = createTable(extraHeaders, extraRows, extraColWidths, yPosition);
+        
+        // Summary text
+        const totalExtrasAmount = stats.otherIncome - stats.totalExpenses;
+        pdf.setFont('helvetica', 'normal');
+        pdf.setFontSize(10);
+        pdf.text(`Total Extras Amount: ₹${totalExtrasAmount.toFixed(2)}`, margin, yPosition);
+        yPosition += 35;
+      }
+      
+      // Check if we need a new page for Summary
+      if (yPosition > pageHeight - 200) {
+        pdf.addPage();
+        addFooter(1, 2);
+        yPosition = addHeader();
+      }
+      
+      // Section 4: Summary
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFontSize(14);
+      pdf.text('Summary', margin, yPosition);
+      yPosition += 25;
+      
+      const summaryHeaders = ['Type', 'Litres', 'Amount'];
+      const summaryColWidths = [200, 100, 140];
+      
+      const summaryRows = [];
+      
+      // Add fuel sales by type
+      Object.entries(stats.fuelSalesByType).forEach(([fuelType, data]) => {
+        summaryRows.push([`${fuelType} Sales`, `${data.liters.toFixed(2)}`, `₹${data.amount.toFixed(2)}`]);
+      });
+      
+      summaryRows.push(['Credit Sales', `${stats.creditLiters.toFixed(2)}`, `₹${stats.creditAmount.toFixed(2)}`]);
+      summaryRows.push(['Income', '-', `₹${stats.otherIncome.toFixed(2)}`]);
+      summaryRows.push(['Expenses', '-', `₹${stats.totalExpenses.toFixed(2)}`]);
+      summaryRows.push(['Cash in Hand', `${stats.totalLiters.toFixed(2)}`, `₹${stats.adjustedCashSales.toFixed(2)}`]);
+      
+      yPosition = createTable(summaryHeaders, summaryRows, summaryColWidths, yPosition);
+      
+      // Add footer to the last page
+      const totalPages = pdf.internal.getNumberOfPages();
+      for (let i = 1; i <= totalPages; i++) {
+        pdf.setPage(i);
+        addFooter(i, totalPages);
       }
       
       // Ask user whether to download or open PDF
@@ -502,7 +595,7 @@ const ZAPTRStyleCalculator = () => {
         window.open(pdfUrl, '_blank');
       } else {
         // Download PDF file
-        pdf.save(`Report-${selectedDate}.pdf`);
+        pdf.save(`${selectedDate}.pdf`);
       }
       
     } catch (error) {
