@@ -296,9 +296,11 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                 <Input
                   id="ownerDealerName"
                   value={ownerDetails.dealerName}
-                  onChange={(e) => updateOwnerDetails('dealerName', e.target.value)}
+                  onChange={handleDealerNameChange}
                   placeholder="Enter dealer name"
                   className="mt-1"
+                  autoComplete="off"
+                  inputMode="text"
                 />
               </div>
             </CardContent>
