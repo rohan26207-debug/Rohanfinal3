@@ -170,12 +170,26 @@ const SalesTracker = ({ isDarkMode, salesData, addSaleRecord, fuelSettings, sele
     };
 
     if (editingId) {
-      setSalesData(prev => prev.map(sale => sale.id === editingId ? saleRecord : sale));
+      // For now, editing is not supported in offline mode
+      // TODO: Implement edit functionality with localStorage
+      toast({ title: "Edit Not Supported", description: "Editing is not available in offline mode", variant: "destructive" });
       setEditingId(null);
-      toast({ title: "Sale Updated", description: "Sale record updated successfully" });
     } else {
-      setSalesData(prev => [saleRecord, ...prev]);
-      toast({ title: "Sale Added", description: "Sale record added successfully" });
+      const newSale = addSaleRecord({
+        nozzle: formData.nozzle,
+        fuelType: formData.fuelType,
+        startReading: parseFloat(formData.startReading),
+        endReading: parseFloat(formData.endReading),
+        rate: parseFloat(formData.rate),
+        liters: parseFloat(calculation.liters),
+        amount: parseFloat(calculation.amount)
+      });
+      
+      if (newSale) {
+        toast({ title: "Sale Added", description: "Sale record added successfully" });
+      } else {
+        toast({ title: "Error", description: "Failed to add sale record", variant: "destructive" });
+      }
     }
 
     resetForm();
