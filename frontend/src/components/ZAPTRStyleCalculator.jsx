@@ -445,13 +445,13 @@ const ZAPTRStyleCalculator = () => {
         pdf.setFontSize(16); // 8 * 2 = 16
         todaySales.forEach((sale, index) => {
           pdf.text(`${index + 1}`, margin, yPosition);
-          pdf.text(`${sale.nozzle}`, margin + 18, yPosition);
-          pdf.text(`${sale.startReading}`, margin + 60, yPosition);
-          pdf.text(`${sale.endReading}`, margin + 100, yPosition);
-          pdf.text(`${sale.rate}`, margin + 140, yPosition);
-          pdf.text(`${sale.liters}`, margin + 180, yPosition);
-          pdf.text(`${sale.amount.toFixed(0)}`, margin + 215, yPosition);
-          yPosition += 11; // Compact but readable
+          pdf.text(`${sale.nozzle}`, margin + 25, yPosition);
+          pdf.text(`${sale.startReading}`, margin + 80, yPosition);
+          pdf.text(`${sale.endReading}`, margin + 130, yPosition);
+          pdf.text(`${sale.rate}`, margin + 180, yPosition);
+          pdf.text(`${sale.liters}`, margin + 230, yPosition);
+          pdf.text(`${sale.amount.toFixed(0)}`, margin + 280, yPosition);
+          yPosition += 15; // Increased spacing for larger text
         });
       }
       
