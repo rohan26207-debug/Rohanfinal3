@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Fix input editing issue in settings where users can only type one word at a time before losing focus and needing to click again to continue editing."
+user_problem_statement: "Ensure continuous editing and writing works in ALL settings tabs - Owner Details, Fuel Types, Employees, and Contact tabs should allow uninterrupted multi-word input without focus loss."
 
 frontend:
   - task: "Tab navigation R.S.P. to Rate renaming"
