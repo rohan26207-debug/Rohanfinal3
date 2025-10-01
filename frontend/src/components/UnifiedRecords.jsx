@@ -66,14 +66,20 @@ const UnifiedRecords = ({
           <span>{sale.amount.toFixed(2)}</span>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-2 text-sm">
-        <div className="flex justify-between">
-          <span className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>Reading:</span>
-          <span>{sale.startReading} → {sale.endReading}</span>
+      <div className="space-y-1 text-sm">
+        <div className="flex items-center gap-4">
+          <span className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>Start:</span>
+          <span>{sale.startReading}</span>
+          <span className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>End:</span>
+          <span>{sale.endReading}</span>
         </div>
-        <div className="flex justify-between">
-          <span className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>Liters:</span>
+        <div className="flex items-center gap-4">
+          <span className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>Litres:</span>
           <span>{sale.liters}</span>
+          <span className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>Rate:</span>
+          <span>₹{sale.rate}</span>
+          <span className={`${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>Amount:</span>
+          <span>₹{sale.amount.toFixed(2)}</span>
         </div>
       </div>
     </div>
