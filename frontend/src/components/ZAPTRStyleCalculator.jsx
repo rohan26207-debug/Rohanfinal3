@@ -480,9 +480,9 @@ const ZAPTRStyleCalculator = () => {
       });
       // Total row
       content += '<tr style="background-color: #f8f8f8; font-weight: bold;">';
-      content += '<td colspan="5" style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; font-weight: bold; text-align: right;">Total:</td>';
-      content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right; font-weight: bold;">${totalLitres.toFixed(2)}</td>`;
-      content += `<td style="border: 1px solid #ccc; padding: 8px 12px; font-size: 10px; text-align: right; font-weight: bold;">₹${totalAmount.toFixed(2)}</td>`;
+      content += '<td colspan="5" style="border: 1px solid #999; padding: 10px 16px; font-size: 12px; font-weight: bold; text-align: right;">Total:</td>';
+      content += `<td style="border: 1px solid #999; padding: 10px 16px; font-size: 12px; text-align: right; font-weight: bold;">${totalLitres.toFixed(2)}</td>`;
+      content += `<td style="border: 1px solid #999; padding: 10px 16px; font-size: 12px; text-align: right; font-weight: bold;">₹${totalAmount.toFixed(2)}</td>`;
       content += '</tr>';
       content += '</tbody>';
       content += '</table>';
