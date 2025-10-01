@@ -203,6 +203,19 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
     updateOwnerDetails('email', e.target.value);
   }, [updateOwnerDetails]);
 
+  // Employee form handlers
+  const handleNewEmployeeNameChange = useCallback((e) => {
+    setNewEmployeeName(e.target.value);
+  }, []);
+
+  const handleNewEmployeePhoneChange = useCallback((e) => {
+    setNewEmployeePhone(e.target.value);
+  }, []);
+
+  const handleNewFuelTypeChange = useCallback((e) => {
+    setNewFuelType(e.target.value);
+  }, []);
+
   const saveOwnerDetails = () => {
     // Update contact info to match owner details
     setContactInfo(ownerDetails);
