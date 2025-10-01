@@ -24,7 +24,6 @@ import {
   User,
   Phone,
   Mail,
-  ArrowLeft,
   MapPin
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
