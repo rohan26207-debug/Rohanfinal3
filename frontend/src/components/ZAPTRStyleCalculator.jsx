@@ -399,19 +399,19 @@ const ZAPTRStyleCalculator = () => {
       pdf.text(`₹${stats.otherIncome.toFixed(0)}`, margin + 200, yPosition, { align: 'right' });
       yPosition += 16;
       
-      // Expenses (compact)
+      // Expenses
       pdf.text('Expenses', margin, yPosition);
-      pdf.text('-', margin + 160, yPosition);
-      pdf.text(`₹${stats.totalExpenses.toFixed(0)}`, margin + 220, yPosition, { align: 'right' });
-      yPosition += 12;
+      pdf.text('-', margin + 140, yPosition);
+      pdf.text(`₹${stats.totalExpenses.toFixed(0)}`, margin + 200, yPosition, { align: 'right' });
+      yPosition += 16;
       
-      // Cash in Hand (50% larger, bold)
-      pdf.setFontSize(15); // 10 * 1.5 = 15
+      // Cash in Hand (DOUBLED size, bold)
+      pdf.setFontSize(20); // 10 * 2 = 20
       pdf.setFont('helvetica', 'bold');
       pdf.text('Cash Total', margin, yPosition);
-      pdf.text(`${stats.totalLiters.toFixed(1)}L`, margin + 160, yPosition);
-      pdf.text(`₹${stats.adjustedCashSales.toFixed(0)}`, margin + 220, yPosition, { align: 'right' });
-      yPosition += 18; // Increased proportionally
+      pdf.text(`${stats.totalLiters.toFixed(1)}L`, margin + 140, yPosition);
+      pdf.text(`₹${stats.adjustedCashSales.toFixed(0)}`, margin + 200, yPosition, { align: 'right' });
+      yPosition += 24; // Increased proportionally
       
       // Add detailed records if available
       const todaySales = salesData.filter(sale => sale.date === selectedDate);
