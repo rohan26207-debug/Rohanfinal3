@@ -245,17 +245,29 @@ metadata:
           agent: "main"
           comment: "Successfully renamed app title from 'Manager Petrol Pump Calculator' to 'M.Pump Calculator' in main component and updated all export functions (PDF, CSV, text) to use new name."
 
-  - task: "Dark mode toggle repositioning below settings"
-    implemented: true
+  - task: "Rename to M.Pump Calc with half font size"
+    implemented: false
     working: "NA"
     file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
-    status_history:
-        - working: "NA"
-          agent: "main"
-          comment: "Reorganized header layout: created vertical stack on left side with settings dropdown at top and dark mode toggle below it. Centered app title and added empty right div for balance."
+
+  - task: "Single line header with settings and title"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+
+  - task: "Full-screen settings windows with back button"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/HeaderSettings.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
     status_history:
         - working: "NA"
           agent: "testing"
