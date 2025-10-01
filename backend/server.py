@@ -332,6 +332,10 @@ async def get_income_expenses(request: Request, date: Optional[str] = None):
         query["date"] = date
     
     records = await db.income_expenses.find(query).to_list(1000)
+    # Remove MongoDB _id field to avoid serialization issues
+    for record in records:
+        if "_id" in record:
+            del record["_id"]
     return records
 
 @api_router.post("/income-expenses")
