@@ -626,6 +626,8 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                               onChange={(e) => updateEmployee(employee.id, 'name', e.target.value)}
                               className="font-medium text-lg"
                               placeholder="Employee name"
+                              autoComplete="off"
+                              inputMode="text"
                             />
                           </div>
                         </div>
