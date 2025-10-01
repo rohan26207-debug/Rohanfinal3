@@ -336,19 +336,21 @@ const ZAPTRStyleCalculator = () => {
               width: 100%; 
               border-collapse: collapse; 
               margin-top: 10px; 
-              font-size: 12px; 
+              font-size: 14px; 
             }
             th { 
               background-color: #f0f0f0; 
               border: 1px solid #000; 
-              padding: 8px; 
+              padding: 10px; 
               text-align: center; 
               font-weight: bold; 
+              font-size: 15px;
             }
             td { 
               border: 1px solid #000; 
-              padding: 6px; 
+              padding: 8px; 
               text-align: left; 
+              font-size: 14px;
             }
             td.number { 
               text-align: right; 
