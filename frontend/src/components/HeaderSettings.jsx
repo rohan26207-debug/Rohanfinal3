@@ -577,8 +577,10 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                   <Input
                     id="employeePhone"
                     value={newEmployeePhone}
-                    onChange={(e) => setNewEmployeePhone(e.target.value)}
+                    onChange={handleNewEmployeePhoneChange}
                     placeholder="Enter phone number"
+                    autoComplete="off"
+                    inputMode="tel"
                   />
                 </div>
               </div>
