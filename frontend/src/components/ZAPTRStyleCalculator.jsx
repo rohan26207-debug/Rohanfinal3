@@ -316,52 +316,20 @@ const ZAPTRStyleCalculator = () => {
           </style>
         </head>
         <body>
-          <div class="header">
-            <h1>Daily Report</h1>
-            <p>Date: ${selectedDate}</p>
-          </div>
+          <h1>Daily Report</h1>
+          <p>Date: ${selectedDate}</p>
           
-          <div class="section">
-            <div class="section-title">SUMMARY</div>
-            <table>
-              <thead>
-                <tr>
-                  <th style="width: 60%;">Category</th>
-                  <th style="width: 20%;">Litres</th>
-                  <th style="width: 20%;">Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${Object.entries(stats.fuelSalesByType).map(([fuelType, data]) => 
-                  `<tr>
-                    <td>${fuelType} Sales</td>
-                    <td class="number">${data.liters.toFixed(2)}L</td>
-                    <td class="number">₹${data.amount.toFixed(2)}</td>
-                  </tr>`
-                ).join('')}
-                <tr>
-                  <td>Credit Sales</td>
-                  <td class="number">${stats.creditLiters.toFixed(2)}L</td>
-                  <td class="number">₹${stats.creditAmount.toFixed(2)}</td>
-                </tr>
-                <tr>
-                  <td>Income</td>
-                  <td class="number">-</td>
-                  <td class="number">₹${stats.otherIncome.toFixed(2)}</td>
-                </tr>
-                <tr>
-                  <td>Expenses</td>
-                  <td class="number">-</td>
-                  <td class="number">₹${stats.totalExpenses.toFixed(2)}</td>
-                </tr>
-                <tr class="total-row">
-                  <td><strong>Cash in Hand</strong></td>
-                  <td class="number"><strong>${stats.totalLiters.toFixed(2)}L</strong></td>
-                  <td class="number"><strong>₹${stats.adjustedCashSales.toFixed(2)}</strong></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <div class="s">SUMMARY</div>
+          <table>
+            <tr><th>Category<th>Litres<th>Amount</tr>
+            ${Object.entries(stats.fuelSalesByType).map(([fuelType, data]) => 
+              `<tr><td>${fuelType} Sales<td class="r">${data.liters.toFixed(2)}L<td class="r">₹${data.amount.toFixed(2)}</tr>`
+            ).join('')}
+            <tr><td>Credit Sales<td class="r">${stats.creditLiters.toFixed(2)}L<td class="r">₹${stats.creditAmount.toFixed(2)}</tr>
+            <tr><td>Income<td class="r">-<td class="r">₹${stats.otherIncome.toFixed(2)}</tr>
+            <tr><td>Expenses<td class="r">-<td class="r">₹${stats.totalExpenses.toFixed(2)}</tr>
+            <tr class="t"><td><b>Cash in Hand</b><td class="r"><b>${stats.totalLiters.toFixed(2)}L</b><td class="r"><b>₹${stats.adjustedCashSales.toFixed(2)}</b></tr>
+          </table>
 
           ${todaySales.length > 0 ? `
             <div class="section">
