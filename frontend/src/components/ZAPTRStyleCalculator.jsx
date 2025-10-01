@@ -294,7 +294,7 @@ const ZAPTRStyleCalculator = () => {
       // Create the HTML content for PDF
       const htmlContent = `
         <div style="font-family: Arial, sans-serif; padding: 20px;">
-          <h1 style="text-align: center; color: #333; margin-bottom: 15px; font-size: 32px; font-weight: bold;">Manager Petrol Pump Daily Report</h1>
+          <h1 style="text-align: center; color: #333; margin-bottom: 15px; font-size: 32px; font-weight: bold;">M.Pump Calculator Daily Report</h1>
           <h2 style="text-align: center; color: #666; margin-bottom: 35px; font-size: 22px;">Date: ${selectedDate}</h2>
           
           <div style="margin: 20px 0; border: 2px solid #ddd; padding: 20px; border-radius: 8px; background-color: #f8f9fa;">
@@ -352,7 +352,7 @@ const ZAPTRStyleCalculator = () => {
       const element = document.createElement('div');
       element.innerHTML = `
         <div style="font-family: Arial, sans-serif; padding: 20px;">
-          <h1 style="text-align: center; color: #333; margin-bottom: 15px; font-size: 32px; font-weight: bold;">Manager Petrol Pump Daily Report</h1>
+          <h1 style="text-align: center; color: #333; margin-bottom: 15px; font-size: 32px; font-weight: bold;">M.Pump Calculator Daily Report</h1>
           <h2 style="text-align: center; color: #666; margin-bottom: 35px; font-size: 22px;">Date: ${selectedDate}</h2>
           ${content}
         </div>
