@@ -28,6 +28,52 @@ app = FastAPI()
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
+# Authentication helper functions
+async def get_session_token(request: Request) -> Optional[str]:
+    """Extract session token from cookie or Authorization header"""
+    # First check cookies (preferred)
+    session_token = request.cookies.get("session_token")
+    if session_token:
+        return session_token
+    
+    # Fallback to Authorization header
+    auth_header = request.headers.get("Authorization")
+    if auth_header and auth_header.startswith("Bearer "):
+        return auth_header[7:]  # Remove "Bearer " prefix
+    
+    return None
+
+async def get_current_user(request: Request) -> Optional[User]:
+    """Get current authenticated user from session token"""
+    session_token = await get_session_token(request)
+    if not session_token:
+        return None
+    
+    # Check if session exists and is valid
+    session = await db.user_sessions.find_one({
+        "session_token": session_token,
+        "expires_at": {"$gt": datetime.now(timezone.utc)}
+    })
+    
+    if not session:
+        return None
+    
+    # Get user data
+    user_doc = await db.users.find_one({"_id": session["user_id"]})
+    if not user_doc:
+        return None
+    
+    # Map _id to id for Pydantic compatibility
+    user_doc["id"] = user_doc.pop("_id")
+    return User(**user_doc)
+
+async def require_auth(request: Request) -> User:
+    """Dependency to require authentication"""
+    user = await get_current_user(request)
+    if not user:
+        raise HTTPException(status_code=401, detail="Authentication required")
+    return user
+
 
 # Define Models
 class StatusCheck(BaseModel):
