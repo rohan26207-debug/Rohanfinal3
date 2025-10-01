@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Add a new 'Sync' tab in settings after the Contact tab for Gmail account synchronization functionality."
+user_problem_statement: "Remove 'L' suffix from readings, rate, and litres displays since it is understandable from context."
 
 frontend:
   - task: "Tab navigation R.S.P. to Rate renaming"
