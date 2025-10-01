@@ -33,8 +33,25 @@ import { useToast } from '../hooks/use-toast';
 
 const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
   const [newFuelType, setNewFuelType] = useState('');
-  const [currentView, setCurrentView] = useState('dropdown'); // 'dropdown', 'fuel', 'contact'
+  const [currentView, setCurrentView] = useState('dropdown'); // 'dropdown', 'fuel', 'employees', 'contact'
   const { toast } = useToast();
+
+  // Employee management state
+  const [employees, setEmployees] = useState([
+    { id: 1, name: 'Ramesh Kumar', phone: '+91 9876543210' },
+    { id: 2, name: 'Suresh Patel', phone: '+91 8765432109' }
+  ]);
+  const [newEmployeeName, setNewEmployeeName] = useState('');
+  const [newEmployeePhone, setNewEmployeePhone] = useState('');
+
+  // Contact information state (editable)
+  const [contactInfo, setContactInfo] = useState({
+    pumpName: 'Vishnu Parvati Petroleum',
+    dealerName: 'Rohan.R.Khandve',
+    address: 'Station Road, Near City Mall, Mumbai - 400001',
+    phone: '+91 9822026207',
+    email: 'vishnuparvatipetroleum@gmail.com'
+  });
 
   const updateNozzleCount = (fuelType, delta) => {
     setFuelSettings(prev => ({
