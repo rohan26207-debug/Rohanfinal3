@@ -566,8 +566,10 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                   <Input
                     id="employeeName"
                     value={newEmployeeName}
-                    onChange={(e) => setNewEmployeeName(e.target.value)}
+                    onChange={handleNewEmployeeNameChange}
                     placeholder="Enter employee name"
+                    autoComplete="off"
+                    inputMode="text"
                   />
                 </div>
                 <div>
