@@ -234,20 +234,28 @@ metadata:
           comment: "Settings dropdown successfully positioned at topmost left (x=268, within left 20% of screen). App title well-centered with proper symmetry. Header layout shows balanced spacing."
 
   - task: "App title rename to M.Pump Calculator"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Successfully renamed app title from 'Manager Petrol Pump Calculator' to 'M.Pump Calculator' in main component and updated all export functions (PDF, CSV, text) to use new name."
 
   - task: "Dark mode toggle repositioning below settings"
-    implemented: false
+    implemented: true
     working: "NA"
     file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Reorganized header layout: created vertical stack on left side with settings dropdown at top and dark mode toggle below it. Centered app title and added empty right div for balance."
     status_history:
         - working: "NA"
           agent: "testing"
