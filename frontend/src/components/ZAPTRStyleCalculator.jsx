@@ -304,15 +304,15 @@ const ZAPTRStyleCalculator = () => {
           <style>
             body { 
               font-family: Arial, sans-serif; 
-              margin: 20px; 
-              line-height: 1.4; 
+              margin: 10px; 
+              line-height: 1.2; 
               color: #000;
             }
             .header { 
               text-align: center; 
-              margin-bottom: 30px; 
+              margin-bottom: 15px; 
               border-bottom: 2px solid #000; 
-              padding-bottom: 10px; 
+              padding-bottom: 5px; 
             }
             .header h1 { 
               font-size: 28px; 
@@ -320,16 +320,16 @@ const ZAPTRStyleCalculator = () => {
             }
             .header p { 
               font-size: 18px; 
-              margin: 5px 0; 
+              margin: 2px 0; 
             }
             .section { 
-              margin-bottom: 25px; 
+              margin-bottom: 15px; 
             }
             .section-title { 
               font-size: 18px; 
               font-weight: bold; 
-              margin-bottom: 10px; 
-              padding-bottom: 3px; 
+              margin-bottom: 5px; 
+              padding-bottom: 2px; 
             }
             .summary-item { 
               margin: 5px 0; 
