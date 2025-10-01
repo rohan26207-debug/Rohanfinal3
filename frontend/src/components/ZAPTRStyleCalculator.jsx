@@ -358,19 +358,19 @@ const ZAPTRStyleCalculator = () => {
       pdf.text(`${selectedDate}`, pageWidth - margin, yPosition, { align: 'right' });
       yPosition += 16; // Reduced from 60 total to 16
       
-      // Summary Section (50% larger text)
-      pdf.setFontSize(16); // 11 * 1.5 = 16.5 ≈ 16
+      // Summary Section (DOUBLED text size)
+      pdf.setFontSize(22); // 11 * 2 = 22
       pdf.setFont('helvetica', 'bold');
       pdf.text('Summary', margin, yPosition);
-      yPosition += 18; // Increased proportionally
+      yPosition += 24; // Increased proportionally
       
-      // Summary Table Headers (compact but 50% larger)
-      pdf.setFontSize(15); // 10 * 1.5 = 15
+      // Summary Table Headers (DOUBLED size)
+      pdf.setFontSize(20); // 10 * 2 = 20
       pdf.setFont('helvetica', 'bold');
       pdf.text('Category', margin, yPosition);
-      pdf.text('Litres', margin + 160, yPosition); // More compact columns
-      pdf.text('Amount', margin + 220, yPosition, { align: 'right' }); // More compact
-      yPosition += 15; // Increased proportionally
+      pdf.text('Litres', margin + 140, yPosition); // Adjusted for larger text
+      pdf.text('Amount', margin + 200, yPosition, { align: 'right' }); 
+      yPosition += 20; // Increased proportionally
       
       // No line, save space
       yPosition += 2; // Minimal separator
