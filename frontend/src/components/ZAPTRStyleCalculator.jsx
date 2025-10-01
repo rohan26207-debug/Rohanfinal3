@@ -655,7 +655,7 @@ const ZAPTRStyleCalculator = () => {
     const todayIncome = incomeData.filter(income => income.date === selectedDate);
     const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
 
-    let text = '';
+    let text = `Date: ${selectedDate}\n\n`;
     
     // *Readings* section
     if (todaySales.length > 0) {
