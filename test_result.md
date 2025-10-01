@@ -318,41 +318,17 @@ metadata:
           comment: "Added Sync tab to settings with Gmail connection UI. Need to implement backend authentication endpoints and Gmail API integration for syncing all petrol pump data (sales, credit, income, expenses, fuel rates)."
 
 backend:
-  - task: "Google OAuth2 Authentication Backend"
-    implemented: false
-    working: "NA"
-    file: "/app/backend/server.py"
+  - task: "Remove L suffixes from UI displays"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/*.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
-        - working: "NA"
+        - working: true
           agent: "main"
-          comment: "Starting implementation of Google OAuth2 backend using emergentintegrations library for Gmail account connection."
-
-  - task: "User Authentication Models and Session Management"
-    implemented: false
-    working: "NA"
-    file: "/app/backend/server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: true
-    status_history:
-        - working: "NA"
-          agent: "main"
-          comment: "Need to create User and Session models with proper MongoDB integration for auth system."
-
-  - task: "Petrol Pump Data Models and APIs"
-    implemented: false
-    working: "NA" 
-    file: "/app/backend/server.py"
-    stuck_count: 0
-    priority: "high"
-    needs_retesting: true
-    status_history:
-        - working: "NA"
-          agent: "main"
-          comment: "Need to create MongoDB schemas and API endpoints for sales, credit, expenses, fuel rates data to replace frontend mock data."
+          comment: "Successfully removed all 'L' suffixes from readings, rate displays, and liters across all components: SalesTracker, CreditSales, PriceConfiguration, ZAPTRStyleCalculator, UnifiedRecords, PetrolPumpCalculator, and ReportsExport. Also updated export functions (PDF, CSV, copy) to remove L suffixes."
     status_history:
         - working: "NA"
           agent: "testing"
