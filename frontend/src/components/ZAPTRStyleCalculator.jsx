@@ -585,7 +585,7 @@ const ZAPTRStyleCalculator = () => {
     const todayIncome = incomeData.filter(income => income.date === selectedDate);
     const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
 
-    let text = `MANAGER PETROL PUMP DAILY REPORT - ${selectedDate}\n`;
+    let text = `M.PUMP CALCULATOR DAILY REPORT - ${selectedDate}\n`;
     text += `==========================================\n\n`;
     
     text += `DAILY SUMMARY:\n`;
