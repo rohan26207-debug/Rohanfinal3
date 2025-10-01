@@ -221,6 +221,18 @@ metadata:
           agent: "main"
           comment: "Updated PDF export generateExportContent function to use black and white colors for Income and Expenses sections. Changed all green/red colors to #000000 (black) and #ffffff (white) backgrounds."
 
+  - task: "Remove all background colors from PDF export"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Removed all background-color styles from PDF export tables including gray header backgrounds (#f2f2f2) and light gray total row backgrounds (#f8f8f8). PDF now has pure white background with only black text and table borders."
+
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
     working: true
