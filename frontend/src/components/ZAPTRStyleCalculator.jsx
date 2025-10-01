@@ -327,49 +327,138 @@ const ZAPTRStyleCalculator = () => {
         </div>
       `;
 
-      // Check if html2pdf is available (try to load it dynamically)
-      if (typeof html2pdf === 'undefined') {
-        // Load html2pdf library dynamically
+      // Load jsPDF for pure text-based PDF generation
+      if (typeof window.jsPDF === 'undefined') {
         await new Promise((resolve, reject) => {
           const script = document.createElement('script');
-          script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+          script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
           script.onload = resolve;
           script.onerror = reject;
           document.head.appendChild(script);
         });
       }
 
-      // Generate PDF using html2pdf
-      const element = document.createElement('div');
-      element.innerHTML = htmlContent;
+      // Generate pure text-based PDF using jsPDF directly
+      const { jsPDF } = window.jsPDF;
+      const pdf = new jsPDF('p', 'pt', 'a4');
       
-      const opt = {
-        margin: [0.4, 0.4, 0.6, 0.4],
-        filename: `Report-${selectedDate}.pdf`,
-        html2canvas: { 
-          scale: 1,
-          useCORS: false,
-          allowTaint: false,
-          backgroundColor: null,
-          logging: false,
-          imageTimeout: 0,
-          removeContainer: true,
-          foreignObjectRendering: true,
-          width: 794,
-          height: 1123
-        },
-        jsPDF: { 
-          unit: 'in', 
-          format: 'a4', 
-          orientation: 'portrait', 
-          compress: true,
-          precision: 2
-        },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-      };
-
-      // Generate and download PDF
-      html2pdf().from(element).set(opt).save();
+      // Set font
+      pdf.setFont('helvetica', 'normal');
+      
+      let yPosition = 40;
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const margin = 40;
+      const contentWidth = pageWidth - (margin * 2);
+      
+      // Title
+      pdf.setFontSize(16);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('M.Pump Calc Daily Report', pageWidth / 2, yPosition, { align: 'center' });
+      yPosition += 20;
+      
+      pdf.setFontSize(10);
+      pdf.setFont('helvetica', 'normal');
+      pdf.text(\`Date: \${selectedDate} | Time: \${new Date().toLocaleTimeString()}\`, pageWidth / 2, yPosition, { align: 'center' });
+      yPosition += 30;
+      
+      // Summary Section
+      pdf.setFontSize(12);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('Summary', margin, yPosition);
+      yPosition += 15;
+      
+      // Summary Table Headers
+      pdf.setFontSize(9);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('Category', margin, yPosition);
+      pdf.text('Total Litres', margin + 200, yPosition);
+      pdf.text('Total Amount', margin + 300, yPosition, { align: 'right' });
+      yPosition += 12;
+      
+      // Draw line under headers
+      pdf.line(margin, yPosition - 2, pageWidth - margin, yPosition - 2);
+      yPosition += 5;
+      
+      // Summary Data
+      pdf.setFont('helvetica', 'normal');
+      
+      // Fuel Sales by Type
+      Object.entries(stats.fuelSalesByType).forEach(([fuelType, data]) => {
+        pdf.text(\`\${fuelType} Sales\`, margin, yPosition);
+        pdf.text(\`\${data.liters.toFixed(2)}L\`, margin + 200, yPosition);
+        pdf.text(\`₹\${data.amount.toFixed(2)}\`, margin + 300, yPosition, { align: 'right' });
+        yPosition += 12;
+      });
+      
+      // Credit Sales
+      pdf.text('Credit Sales', margin, yPosition);
+      pdf.text(\`\${stats.creditLiters.toFixed(2)}L\`, margin + 200, yPosition);
+      pdf.text(\`₹\${stats.creditAmount.toFixed(2)}\`, margin + 300, yPosition, { align: 'right' });
+      yPosition += 12;
+      
+      // Income
+      pdf.text('Income', margin, yPosition);
+      pdf.text('-', margin + 200, yPosition);
+      pdf.text(\`₹\${stats.otherIncome.toFixed(2)}\`, margin + 300, yPosition, { align: 'right' });
+      yPosition += 12;
+      
+      // Expenses
+      pdf.text('Expenses', margin, yPosition);
+      pdf.text('-', margin + 200, yPosition);
+      pdf.text(\`₹\${stats.totalExpenses.toFixed(2)}\`, margin + 300, yPosition, { align: 'right' });
+      yPosition += 12;
+      
+      // Cash in Hand
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('Cash in Hand', margin, yPosition);
+      pdf.text(\`\${stats.totalLiters.toFixed(2)}L\`, margin + 200, yPosition);
+      pdf.text(\`₹\${stats.adjustedCashSales.toFixed(2)}\`, margin + 300, yPosition, { align: 'right' });
+      yPosition += 20;
+      
+      // Add detailed records if available
+      const todaySales = salesData.filter(sale => sale.date === selectedDate);
+      const todayCredits = creditData.filter(credit => credit.date === selectedDate);
+      const todayIncome = incomeData.filter(income => income.date === selectedDate);
+      const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
+      
+      // Reading Calculation
+      if (todaySales.length > 0) {
+        yPosition += 10;
+        pdf.setFontSize(11);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text('Reading Calculation', margin, yPosition);
+        yPosition += 15;
+        
+        // Headers
+        pdf.setFontSize(8);
+        pdf.text('Sr.', margin, yPosition);
+        pdf.text('Description', margin + 30, yPosition);
+        pdf.text('Start', margin + 150, yPosition);
+        pdf.text('End', margin + 200, yPosition);
+        pdf.text('Rate', margin + 250, yPosition);
+        pdf.text('Litres', margin + 300, yPosition);
+        pdf.text('Amount', margin + 350, yPosition);
+        yPosition += 10;
+        
+        pdf.line(margin, yPosition - 2, pageWidth - margin, yPosition - 2);
+        yPosition += 5;
+        
+        // Data rows
+        pdf.setFont('helvetica', 'normal');
+        todaySales.forEach((sale, index) => {
+          pdf.text(\`\${index + 1}\`, margin, yPosition);
+          pdf.text(\`\${sale.nozzle} - \${sale.fuelType}\`, margin + 30, yPosition);
+          pdf.text(\`\${sale.startReading}\`, margin + 150, yPosition);
+          pdf.text(\`\${sale.endReading}\`, margin + 200, yPosition);
+          pdf.text(\`₹\${sale.rate}\`, margin + 250, yPosition);
+          pdf.text(\`\${sale.liters}\`, margin + 300, yPosition);
+          pdf.text(\`₹\${sale.amount.toFixed(2)}\`, margin + 350, yPosition);
+          yPosition += 10;
+        });
+      }
+      
+      // Save the PDF
+      pdf.save(\`Report-\${selectedDate}.pdf\`);
       
     } catch (error) {
       console.error('Error generating PDF:', error);
