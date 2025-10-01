@@ -122,31 +122,7 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
 
   // Employee management functions removed
 
-  // Owner details functions
-  const updateOwnerDetails = useCallback((field, value) => {
-    setOwnerDetails(prev => ({ ...prev, [field]: value }));
-  }, []);
-
-  // Memoized onChange handlers to prevent mobile keyboard issues
-  const handlePumpNameChange = useCallback((e) => {
-    updateOwnerDetails('pumpName', e.target.value);
-  }, [updateOwnerDetails]);
-
-  const handleDealerNameChange = useCallback((e) => {
-    updateOwnerDetails('dealerName', e.target.value);
-  }, [updateOwnerDetails]);
-
-  const handleAddressChange = useCallback((e) => {
-    updateOwnerDetails('address', e.target.value);
-  }, [updateOwnerDetails]);
-
-  const handlePhoneChange = useCallback((e) => {
-    updateOwnerDetails('phone', e.target.value);
-  }, [updateOwnerDetails]);
-
-  const handleEmailChange = useCallback((e) => {
-    updateOwnerDetails('email', e.target.value);
-  }, [updateOwnerDetails]);
+  // Owner details functions removed
 
   // Employee form handlers removed
 
