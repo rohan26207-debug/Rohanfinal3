@@ -357,9 +357,11 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                 <Input
                   id="ownerEmail"
                   value={ownerDetails.email}
-                  onChange={(e) => updateOwnerDetails('email', e.target.value)}
+                  onChange={handleEmailChange}
                   placeholder="Enter email address"
                   className="mt-1"
+                  autoComplete="off"
+                  inputMode="email"
                 />
               </div>
             </CardContent>
