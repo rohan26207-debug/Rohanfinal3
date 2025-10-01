@@ -250,6 +250,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "ENHANCED TEXT SIZE & COMPACT TABLES: Increased all non-header text by 50% and made tables ultra-compact. Changes: 1) Header kept same (12px), 2) Summary section: 11px → 16px, 3) Summary table headers: 10px → 15px, 4) Summary data: 9px → 14px, 5) Reading section header: 10px → 15px, 6) Reading table headers: 8px → 12px, 7) Reading data: 8px → 12px, 8) Tighter column spacing in tables, 9) Reduced column widths for ultra-compact layout. Result: All text 50% larger except header, maximum table density."
+        - working: "NA"
+          agent: "main"
+          comment: "DOUBLED TEXT SIZE: Doubled all text and numbers except header for maximum readability. Changes: 1) Header kept at 12px (unchanged), 2) Summary section: 11px → 22px (2x), 3) Summary table headers: 10px → 20px (2x), 4) Summary data: 9px → 18px (2x), 5) Reading section header: 10px → 20px (2x), 6) Reading table headers: 8px → 16px (2x), 7) Reading data: 8px → 16px (2x), 8) Cash Total: 10px → 20px (2x), 9) Adjusted column spacing for larger text. Result: All non-header text doubled in size for excellent readability."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
