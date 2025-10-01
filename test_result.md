@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the PDF export functionality to verify the updated font sizes: Daily Summary font sizes should be doubled (48px heading, 32px values) and Records content font sizes should be 20% smaller (16px headings, 12px content)."
+user_problem_statement: "Fix PDF export to make income and expense data black and white, and reorganize header layout to move settings dropdown to topmost left position for better app name symmetry."
 
 frontend:
   - task: "Tab navigation R.S.P. to Rate renaming"
