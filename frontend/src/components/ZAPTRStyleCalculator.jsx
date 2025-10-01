@@ -346,11 +346,24 @@ const ZAPTRStyleCalculator = () => {
       const opt = {
         margin: [0.4, 0.4, 0.6, 0.4],
         filename: `Report-${selectedDate}.pdf`,
+        html2canvas: { 
+          scale: 1,
+          useCORS: false,
+          allowTaint: false,
+          backgroundColor: null,
+          logging: false,
+          imageTimeout: 0,
+          removeContainer: true,
+          foreignObjectRendering: true,
+          width: 794,
+          height: 1123
+        },
         jsPDF: { 
           unit: 'in', 
           format: 'a4', 
           orientation: 'portrait', 
-          compress: true 
+          compress: true,
+          precision: 2
         },
         pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
       };
