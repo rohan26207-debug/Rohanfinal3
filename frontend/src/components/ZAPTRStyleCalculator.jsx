@@ -424,13 +424,13 @@ const ZAPTRStyleCalculator = () => {
       // Reading Calculation
       if (todaySales.length > 0) {
         yPosition += 10;
-        pdf.setFontSize(11);
+        pdf.setFontSize(13); // 11 * 1.2 = 13.2 ≈ 13
         pdf.setFont('helvetica', 'bold');
         pdf.text('Reading Calculation', margin, yPosition);
-        yPosition += 15;
+        yPosition += 18; // 15 * 1.2 = 18
         
         // Headers
-        pdf.setFontSize(8);
+        pdf.setFontSize(10); // 8 * 1.2 = 9.6 ≈ 10
         pdf.text('Sr.', margin, yPosition);
         pdf.text('Description', margin + 30, yPosition);
         pdf.text('Start', margin + 150, yPosition);
