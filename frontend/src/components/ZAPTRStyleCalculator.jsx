@@ -549,7 +549,7 @@ const ZAPTRStyleCalculator = () => {
     
     // Add total if multiple fuel types
     if (Object.keys(stats.fuelSalesByType).length > 1) {
-      csv += `Total Reading Sales,${stats.totalLiters.toFixed(2)}L • ₹${stats.fuelCashSales.toFixed(2)}\n`;
+      csv += `Total Reading Sales,${stats.totalLiters.toFixed(2)} • ₹${stats.fuelCashSales.toFixed(2)}\n`;
     }
     
     csv += `${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 2 : 1)}. Credit Sales,${stats.creditLiters.toFixed(2)}L • ₹${stats.creditAmount.toFixed(2)}\n`;
