@@ -420,7 +420,14 @@ backend:
 
 test_plan:
   current_focus:
-    - "Remove L suffixes from UI displays"
+    - "Tab navigation R.S.P. to Rate renaming"
+    - "Rate tab content headers and labels"
+    - "Settings dropdown Rate integration"
+    - "Rate functionality testing"
+    - "PDF export income and expense black and white colors"
+    - "Remove all background colors from PDF export"
+    - "App title rename to M.Pump Calculator"
+    - "Add Employees tab in settings"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
