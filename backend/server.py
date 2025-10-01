@@ -361,6 +361,10 @@ async def get_fuel_rates(request: Request, date: Optional[str] = None):
         query["date"] = date
     
     rates = await db.fuel_rates.find(query).to_list(1000)
+    # Remove MongoDB _id field to avoid serialization issues
+    for rate in rates:
+        if "_id" in rate:
+            del rate["_id"]
     return rates
 
 @api_router.post("/fuel-rates")
