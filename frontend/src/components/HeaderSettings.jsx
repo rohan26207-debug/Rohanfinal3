@@ -425,9 +425,11 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
               <div className="flex gap-3">
                 <Input
                   value={newFuelType}
-                  onChange={(e) => setNewFuelType(e.target.value)}
+                  onChange={handleNewFuelTypeChange}
                   placeholder="Enter fuel type name"
                   className="flex-1"
+                  autoComplete="off"
+                  inputMode="text"
                 />
                 <Button onClick={addFuelType}>
                   <Plus className="w-4 h-4 mr-2" />
