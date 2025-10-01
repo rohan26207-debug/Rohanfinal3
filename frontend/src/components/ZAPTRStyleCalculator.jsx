@@ -605,11 +605,44 @@ Generated on: ${new Date().toLocaleString()}
     return text;
   };
 
+  // Show loading state
+  if (loading) {
+    return (
+      <div className={`min-h-screen transition-colors duration-300 ${
+        isDarkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-slate-50 to-slate-100'
+      }`}>
+        <div className="max-w-7xl mx-auto p-4">
+          <div className="flex items-center justify-center min-h-screen">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+              <p className={isDarkMode ? 'text-gray-300' : 'text-slate-600'}>Loading data...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`min-h-screen transition-colors duration-300 ${
       isDarkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-slate-50 to-slate-100'
     }`}>
       <div className="max-w-7xl mx-auto p-4">
+        
+        {/* Error Banner */}
+        {error && (
+          <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+            <div className="flex items-center">
+              <span className="font-medium">⚠️ {error}</span>
+              <button 
+                onClick={() => setError(null)} 
+                className="ml-auto text-red-600 hover:text-red-800"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        )}
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           {/* Left Side: Settings and App Title */}
