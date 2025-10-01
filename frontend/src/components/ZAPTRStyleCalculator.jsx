@@ -461,7 +461,13 @@ const ZAPTRStyleCalculator = () => {
       content += '</tr>';
       content += '</thead>';
       content += '<tbody>';
+
+      let totalLitres = 0;
+      let totalAmount = 0;
+
       todaySales.forEach((sale, index) => {
+        totalLitres += parseFloat(sale.liters);
+        totalAmount += parseFloat(sale.amount);
         content += '<tr>';
         content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: center;">${index + 1}</td>`;
         content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px;">${sale.nozzle} - ${sale.fuelType}</td>`;
