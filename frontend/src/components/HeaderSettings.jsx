@@ -101,13 +101,14 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
   };
 
   const removeFuelType = (fuelType) => {
-    const newSettings = { ...fuelSettings };
-    delete newSettings[fuelType];
+    const { [fuelType]: removed, ...newSettings } = fuelSettings;
+    
     setFuelSettings(newSettings);
+    localStorageService.setFuelSettings(newSettings);
     
     toast({
       title: "Fuel Type Removed",
-      description: `${fuelType} has been removed`,
+      description: `${fuelType} has been removed successfully`,
     });
   };
 
