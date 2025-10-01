@@ -492,22 +492,22 @@ const ZAPTRStyleCalculator = () => {
 
     // Income Table
     if (todayIncome.length > 0) {
-      content += '<div style="margin: 15px 0;">';
-      content += '<h3 style="color: #000000; font-size: 17px; margin-bottom: 8px;">Income (' + todayIncome.length + ')</h3>';
-      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 10px;">';
+      content += '<div style="margin: 18px 0;">';
+      content += '<h3 style="color: #000000; font-size: 20px; margin-bottom: 10px;">Income (' + todayIncome.length + ')</h3>';
+      content += '<table style="width: 100%; border-collapse: collapse; margin-bottom: 12px; border: 2px solid #444;">';
       content += '<thead>';
-      content += '<tr style="background-color: #f5f5f5;">';
-      content += '<th style="border: 1px solid #999; padding: 5px; font-size: 12px; text-align: center;">Sr.</th>';
-      content += '<th style="border: 1px solid #999; padding: 5px; font-size: 12px; text-align: center;">Description</th>';
-      content += '<th style="border: 1px solid #999; padding: 5px; font-size: 12px; text-align: center;">Amount</th>';
+      content += '<tr style="background-color: #e8e8e8;">';
+      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Sr.</th>';
+      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Description</th>';
+      content += '<th style="border: 2px solid #666; padding: 6px; font-size: 14px; text-align: center; font-weight: bold;">Amount</th>';
       content += '</tr>';
       content += '</thead>';
       content += '<tbody>';
       todayIncome.forEach((income, index) => {
         content += '<tr>';
-        content += `<td style="border: 1px solid #ccc; padding: 4px; font-size: 12px; text-align: center;">${index + 1}</td>`;
-        content += `<td style="border: 1px solid #ccc; padding: 4px; font-size: 12px;">${income.description}</td>`;
-        content += `<td style="border: 1px solid #ccc; padding: 4px; font-size: 12px; text-align: right;">₹${income.amount.toFixed(2)}</td>`;
+        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: center;">${index + 1}</td>`;
+        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px;">${income.description}</td>`;
+        content += `<td style="border: 1px solid #888; padding: 5px; font-size: 14px; text-align: right;">₹${income.amount.toFixed(2)}</td>`;
         content += '</tr>';
       });
       content += '</tbody>';
