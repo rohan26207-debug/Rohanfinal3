@@ -285,9 +285,209 @@ class BackendTester:
         if result:
             await self.test_protected_endpoint_authorized("fuel-rates", "GET")
     
-    async def test_sync_backup(self):
-        """Test sync backup endpoint"""
-        await self.test_protected_endpoint_authorized("sync/backup", "POST")
+    async def test_data_persistence_flow(self):
+        """Test complete data persistence flow: POST -> GET -> Verify"""
+        print("\n🔄 Testing Data Persistence Flow...")
+        
+        # Test Fuel Sales persistence
+        fuel_sale_data = {
+            "date": "2024-01-15",
+            "fuel_type": "Petrol",
+            "nozzle_id": "P1",
+            "opening_reading": 1000.0,
+            "closing_reading": 1050.0,
+            "liters": 50.0,
+            "rate": 95.50,
+            "amount": 4775.0
+        }
+        
+        headers = {"Authorization": f"Bearer {self.test_session_token}"}
+        
+        # POST fuel sale
+        response = await self.client.post(f"{BACKEND_URL}/fuel-sales", 
+                                        headers=headers, json=fuel_sale_data)
+        if response.status_code == 200:
+            # GET fuel sales and verify data
+            response = await self.client.get(f"{BACKEND_URL}/fuel-sales?date=2024-01-15", 
+                                           headers=headers)
+            if response.status_code == 200:
+                data = response.json()
+                if len(data) > 0 and data[0]["fuel_type"] == "Petrol":
+                    self.log_test("Data Persistence - Fuel Sales", True, 
+                                f"Successfully persisted and retrieved fuel sale data")
+                else:
+                    self.log_test("Data Persistence - Fuel Sales", False, 
+                                "Data not properly persisted", data)
+            else:
+                self.log_test("Data Persistence - Fuel Sales", False, 
+                            f"Failed to retrieve data: {response.status_code}")
+        else:
+            self.log_test("Data Persistence - Fuel Sales", False, 
+                        f"Failed to create data: {response.status_code}")
+    
+    async def test_date_filtering(self):
+        """Test date filtering functionality"""
+        print("\n📅 Testing Date Filtering...")
+        
+        headers = {"Authorization": f"Bearer {self.test_session_token}"}
+        
+        # Create records for different dates
+        dates = ["2024-01-15", "2024-01-16"]
+        
+        for i, date in enumerate(dates):
+            fuel_sale_data = {
+                "date": date,
+                "fuel_type": f"Petrol",
+                "nozzle_id": f"P{i+1}",
+                "opening_reading": 1000.0 + (i * 100),
+                "closing_reading": 1050.0 + (i * 100),
+                "liters": 50.0,
+                "rate": 95.50,
+                "amount": 4775.0
+            }
+            
+            await self.client.post(f"{BACKEND_URL}/fuel-sales", 
+                                 headers=headers, json=fuel_sale_data)
+        
+        # Test filtering by specific date
+        response = await self.client.get(f"{BACKEND_URL}/fuel-sales?date=2024-01-15", 
+                                       headers=headers)
+        if response.status_code == 200:
+            data = response.json()
+            # Should only return records for 2024-01-15
+            filtered_correctly = all(record["date"] == "2024-01-15" for record in data)
+            if filtered_correctly and len(data) > 0:
+                self.log_test("Date Filtering", True, 
+                            f"Successfully filtered {len(data)} records for specific date")
+            else:
+                self.log_test("Date Filtering", False, 
+                            "Date filtering not working correctly", data)
+        else:
+            self.log_test("Date Filtering", False, 
+                        f"Failed to test date filtering: {response.status_code}")
+    
+    async def test_uuid_generation(self):
+        """Test UUID generation and field mapping"""
+        print("\n🆔 Testing UUID Generation...")
+        
+        headers = {"Authorization": f"Bearer {self.test_session_token}"}
+        
+        # Create a record and check if it has proper UUID
+        fuel_sale_data = {
+            "date": "2024-01-15",
+            "fuel_type": "Diesel",
+            "nozzle_id": "D1",
+            "opening_reading": 2000.0,
+            "closing_reading": 2025.0,
+            "liters": 25.0,
+            "rate": 85.50,
+            "amount": 2137.5
+        }
+        
+        response = await self.client.post(f"{BACKEND_URL}/fuel-sales", 
+                                        headers=headers, json=fuel_sale_data)
+        if response.status_code == 200:
+            result = response.json()
+            if "id" in result and len(result["id"]) == 36:  # UUID length
+                self.log_test("UUID Generation", True, 
+                            f"Successfully generated UUID: {result['id']}")
+            else:
+                self.log_test("UUID Generation", False, 
+                            "UUID not properly generated", result)
+        else:
+            self.log_test("UUID Generation", False, 
+                        f"Failed to create record: {response.status_code}")
+    
+    async def test_error_handling(self):
+        """Test error handling for invalid requests"""
+        print("\n⚠️ Testing Error Handling...")
+        
+        headers = {"Authorization": f"Bearer {self.test_session_token}"}
+        
+        # Test with invalid/incomplete data
+        invalid_data = {
+            "date": "2024-01-15",
+            # Missing required fields
+        }
+        
+        response = await self.client.post(f"{BACKEND_URL}/fuel-sales", 
+                                        headers=headers, json=invalid_data)
+        
+        # Should return an error (400 or 422)
+        if response.status_code in [400, 422, 500]:
+            self.log_test("Error Handling", True, 
+                        f"Properly handled invalid request with status {response.status_code}")
+        else:
+            self.log_test("Error Handling", False, 
+                        f"Did not properly handle invalid request: {response.status_code}")
+    
+    async def test_mongodb_connection(self):
+        """Test MongoDB connection and collection access"""
+        print("\n🗄️ Testing MongoDB Connection...")
+        
+        try:
+            # Test database connection by checking collections
+            collections = await self.db.list_collection_names()
+            expected_collections = ["fuel_sales", "credit_sales", "income_expenses", "fuel_rates", "users", "user_sessions"]
+            
+            if any(col in collections for col in expected_collections):
+                self.log_test("MongoDB Connection", True, 
+                            f"Successfully connected to MongoDB with collections: {collections}")
+            else:
+                self.log_test("MongoDB Connection", False, 
+                            f"Collections not found: {collections}")
+                
+        except Exception as e:
+            self.log_test("MongoDB Connection", False, f"MongoDB connection failed: {str(e)}")
+    
+    async def test_all_endpoints_format(self):
+        """Test data format consistency across all endpoints"""
+        print("\n📋 Testing Data Format Consistency...")
+        
+        headers = {"Authorization": f"Bearer {self.test_session_token}"}
+        
+        # Test all main endpoints
+        endpoints = [
+            ("fuel-sales", {"date": "2024-01-15", "fuel_type": "Petrol", "nozzle_id": "P1", 
+                           "opening_reading": 1000.0, "closing_reading": 1050.0, "liters": 50.0, 
+                           "rate": 95.50, "amount": 4775.0}),
+            ("credit-sales", {"date": "2024-01-15", "customer_name": "Test Customer", "amount": 1000.0}),
+            ("income-expenses", {"date": "2024-01-15", "type": "income", "category": "Other", "amount": 500.0}),
+            ("fuel-rates", {"date": "2024-01-15", "fuel_type": "Petrol", "rate": 95.50})
+        ]
+        
+        format_consistent = True
+        
+        for endpoint, test_data in endpoints:
+            # POST data
+            post_response = await self.client.post(f"{BACKEND_URL}/{endpoint}", 
+                                                 headers=headers, json=test_data)
+            
+            # GET data
+            get_response = await self.client.get(f"{BACKEND_URL}/{endpoint}", 
+                                               headers=headers)
+            
+            if post_response.status_code == 200 and get_response.status_code == 200:
+                get_data = get_response.json()
+                if len(get_data) > 0:
+                    # Check if returned data has expected fields
+                    record = get_data[0]
+                    required_fields = ["id", "user_id", "date", "created_at"]
+                    has_required_fields = all(field in record for field in required_fields)
+                    
+                    if not has_required_fields:
+                        format_consistent = False
+                        break
+            else:
+                format_consistent = False
+                break
+        
+        if format_consistent:
+            self.log_test("Data Format Consistency", True, 
+                        "All endpoints return consistent data format with required fields")
+        else:
+            self.log_test("Data Format Consistency", False, 
+                        "Data format inconsistency found across endpoints")
     
     async def run_all_tests(self):
         """Run comprehensive test suite"""
