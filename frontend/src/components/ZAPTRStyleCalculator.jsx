@@ -334,16 +334,14 @@ const ZAPTRStyleCalculator = () => {
       element.innerHTML = htmlContent;
       
       const opt = {
-        margin: 0.3,
+        margin: 0.5,
         filename: `mpump_calculator_report_${selectedDate}.pdf`,
-        image: { type: 'jpeg', quality: 0.3 },
+        image: { type: 'jpeg', quality: 0.6 },
         html2canvas: { 
-          scale: 0.8, 
+          scale: 1, 
           useCORS: true,
           allowTaint: true,
-          backgroundColor: '#ffffff',
-          width: 595,
-          height: 842
+          backgroundColor: '#ffffff'
         },
         jsPDF: { 
           unit: 'pt', 
