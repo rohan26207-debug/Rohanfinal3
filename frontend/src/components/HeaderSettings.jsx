@@ -804,6 +804,15 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
             <div className="space-y-3">
               <Button
                 variant="ghost"
+                onClick={() => setCurrentView('owner')}
+                className="w-full justify-start flex items-center gap-3 h-12"
+              >
+                <User className="w-5 h-5" />
+                <span className="text-base">Owner Details</span>
+              </Button>
+              
+              <Button
+                variant="ghost"
                 onClick={() => setCurrentView('fuel')}
                 className="w-full justify-start flex items-center gap-3 h-12"
               >
@@ -825,7 +834,7 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                 onClick={() => setCurrentView('contact')}
                 className="w-full justify-start flex items-center gap-3 h-12"
               >
-                <User className="w-5 h-5" />
+                <Phone className="w-5 h-5" />
                 <span className="text-base">Contact</span>
               </Button>
             </div>
