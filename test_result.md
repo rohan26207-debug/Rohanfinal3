@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Remove the three dashboard cards (Cash in Hand, Credit Sales, Total Litres) that appear after Summary section and before the main tabs."
+user_problem_statement: "Add Employees tab in settings above Contact tab for managing employee names and contact numbers. Make Contact tab editable with fields for petrol pump name, dealer name, address, and contact information."
 
 frontend:
   - task: "Tab navigation R.S.P. to Rate renaming"
