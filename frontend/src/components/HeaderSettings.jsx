@@ -315,28 +315,24 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
             <CardContent className="space-y-4">
               <div>
                 <Label htmlFor="ownerPhone">Phone Number</Label>
-                <div className="flex items-center gap-2 mt-1">
-                  <Input
-                    id="ownerPhone"
-                    value={ownerDetails.phone}
-                    onChange={(e) => updateOwnerDetails('phone', e.target.value)}
-                    placeholder="Enter phone number"
-                  />
-                  <Edit className="w-4 h-4 text-gray-500" />
-                </div>
+                <Input
+                  id="ownerPhone"
+                  value={ownerDetails.phone}
+                  onChange={(e) => updateOwnerDetails('phone', e.target.value)}
+                  placeholder="Enter phone number"
+                  className="mt-1"
+                />
               </div>
               
               <div>
                 <Label htmlFor="ownerEmail">Email Address</Label>
-                <div className="flex items-center gap-2 mt-1">
-                  <Input
-                    id="ownerEmail"
-                    value={ownerDetails.email}
-                    onChange={(e) => updateOwnerDetails('email', e.target.value)}
-                    placeholder="Enter email address"
-                  />
-                  <Edit className="w-4 h-4 text-gray-500" />
-                </div>
+                <Input
+                  id="ownerEmail"
+                  value={ownerDetails.email}
+                  onChange={(e) => updateOwnerDetails('email', e.target.value)}
+                  placeholder="Enter email address"
+                  className="mt-1"
+                />
               </div>
             </CardContent>
           </Card>
