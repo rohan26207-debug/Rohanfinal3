@@ -259,6 +259,9 @@ metadata:
         - working: "NA"
           agent: "main"
           comment: "COMPLETE PDF FORMAT REDESIGN: Recreated PDF export to exactly match user's uploaded format. Changes: 1) Dark grey header bar with white text (Fuel Pump Calculator, version, date/time), 2) Professional table structure with light grey headers and black borders, 3) Proper column alignment (S.No centered, Description left, numbers right), 4) Four main sections: Reading Calculation, Credit Calculation, Extra Calculation, Summary, 5) Section summaries with total litres/amounts, 6) Professional footer with page numbers and copyright, 7) Multi-page support with consistent headers/footers, 8) Exact spacing and formatting as reference PDF. Result: Professional PDF matching uploaded reference format exactly."
+        - working: "NA"
+          agent: "main"
+          comment: "REMOVED SUMMARY TABLE: Removed the summary table section from PDF export as requested by user. Changes: 1) Eliminated Section 4 (Summary table), 2) PDF now contains only Reading Calculation, Credit Calculation, and Extra Calculation sections, 3) Individual section summaries (Total Reading Litres/Amount, Total Credit Litres/Amount, Total Extras Amount) are retained, 4) Maintains professional format without final summary table. Result: Cleaner PDF with three main sections and their individual totals only."
 
   - task: "Header layout reorganization - settings to topmost left"
     implemented: true
