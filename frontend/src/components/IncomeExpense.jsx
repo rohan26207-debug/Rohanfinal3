@@ -50,7 +50,7 @@ const IncomeExpense = ({ isDarkMode, incomeData, addIncomeRecord, expenseData, a
 
     if (editingId) {
       // For now, editing is not supported in offline mode
-      toast({ title: "Edit Not Supported", description: "Editing is not available in offline mode", variant: "destructive" });
+      toast({ title: "Edit Not Supported", description: "Editing is not currently available", variant: "destructive" });
       setEditingId(null);
       return;
     }
