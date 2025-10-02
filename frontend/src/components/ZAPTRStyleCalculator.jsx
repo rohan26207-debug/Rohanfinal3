@@ -322,136 +322,164 @@ const ZAPTRStyleCalculator = () => {
   };
 
   // Export functions
-  const exportToPDF = () => {
+  const exportToPDF = async () => {
     try {
-      // Get today's data
+      // Dynamic import for mobile compatibility
+      const { jsPDF } = await import('jspdf');
+      
       const todaySales = salesData.filter(sale => sale.date === selectedDate);
       const todayCredits = creditData.filter(credit => credit.date === selectedDate);
       const todayIncome = incomeData.filter(income => income.date === selectedDate);
       const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
 
-      // Create formatted HTML content with simplified markup
-      const htmlContent = `
-<!DOCTYPE html>
-<html>
-<head>
-<title>Daily Report - ${selectedDate}</title>
-<style>
-body{font:Arial;margin:10px;line-height:1.2}
-h1{font-size:28px;margin:0;text-align:center}
-p{font-size:18px;margin:2px 0;text-align:center}
-.s{margin:15px 0 5px 0;font-size:18px;font-weight:bold}
-table{width:100%;border-collapse:collapse;font-size:14px;margin:5px 0}
-th{background:#f0f0f0;border:1px solid #000;padding:4px;text-align:center;font-weight:bold;font-size:15px}
-td{border:1px solid #000;padding:3px;font-size:14px}
-.r{text-align:right}
-.c{text-align:center}
-.t{font-weight:bold;background:#f8f8f8}
-.print-btn{background:#007bff;color:white;border:none;padding:10px 20px;font-size:16px;cursor:pointer;border-radius:5px;margin:10px auto;display:block;box-shadow:0 2px 4px rgba(0,0,0,0.2)}
-.print-btn:hover{background:#0056b3}
-.no-print{display:block}
-@media print{body{margin:8mm}.no-print{display:none}}
-</style>
-</head>
-<body>
-<h1>Daily Report</h1>
-<p>Date: ${selectedDate}</p>
-
-<div class="s">SUMMARY</div>
-<table>
-<tr><th>Category<th>Litres<th>Amount</tr>
-${Object.entries(stats.fuelSalesByType).map(([fuelType, data]) => 
-  `<tr><td>${fuelType} Sales<td class="r">${data.liters.toFixed(2)}L<td class="r">₹${data.amount.toFixed(2)}</tr>`
-).join('')}
-<tr><td>Credit Sales<td class="r">${stats.creditLiters.toFixed(2)}L<td class="r">₹${stats.creditAmount.toFixed(2)}</tr>
-<tr><td>Income<td class="r">-<td class="r">₹${stats.otherIncome.toFixed(2)}</tr>
-<tr><td>Expenses<td class="r">-<td class="r">₹${stats.totalExpenses.toFixed(2)}</tr>
-<tr class="t"><td><b>Cash in Hand</b><td class="r"><b>${stats.totalLiters.toFixed(2)}L</b><td class="r"><b>₹${stats.adjustedCashSales.toFixed(2)}</b></tr>
-</table>
-
-${todaySales.length > 0 ? `
-<div class="s">SALES RECORDS</div>
-<table>
-<tr><th width="8%">Sr.No<th width="22%">Description<th width="12%">Start<th width="12%">End<th width="12%">Rate<th width="12%">Litres<th width="12%">Amount</tr>
-${todaySales.map((sale, index) => 
-  `<tr><td class="c">${index + 1}<td>${sale.nozzle} - ${sale.fuelType}<td class="r">${sale.startReading}<td class="r">${sale.endReading}<td class="r">₹${sale.rate}<td class="r">${sale.liters}<td class="r">₹${sale.amount.toFixed(2)}</tr>`
-).join('')}
-<tr class="t"><td colspan="5" class="r"><b>Total:</b><td class="r"><b>${todaySales.reduce((sum, sale) => sum + parseFloat(sale.liters), 0).toFixed(2)}</b><td class="r"><b>₹${todaySales.reduce((sum, sale) => sum + parseFloat(sale.amount), 0).toFixed(2)}</b></tr>
-</table>` : ''}
-
-${todayCredits.length > 0 ? `
-<div class="s">CREDIT RECORDS</div>
-<table>
-<tr><th width="8%">Sr.No<th width="35%">Customer<th width="20%">Vehicle<th width="12%">Rate<th width="12%">Litres<th width="13%">Amount</tr>
-${todayCredits.map((credit, index) => 
-  `<tr><td class="c">${index + 1}<td>${credit.customerName}<td>${credit.vehicleNumber || 'N/A'}<td class="r">₹${credit.rate}<td class="r">${credit.liters}<td class="r">₹${credit.amount.toFixed(2)}</tr>`
-).join('')}
-<tr class="t"><td colspan="4" class="r"><b>Total:</b><td class="r"><b>${todayCredits.reduce((sum, credit) => sum + parseFloat(credit.liters), 0).toFixed(2)}</b><td class="r"><b>₹${todayCredits.reduce((sum, credit) => sum + parseFloat(credit.amount), 0).toFixed(2)}</b></tr>
-</table>` : ''}
-
-${todayIncome.length > 0 ? `
-<div class="s">INCOME RECORDS</div>
-<table>
-<tr><th width="10%">Sr.No<th width="70%">Description<th width="20%">Amount</tr>
-${todayIncome.map((income, index) => 
-  `<tr><td class="c">${index + 1}<td>${income.description}<td class="r">₹${income.amount.toFixed(2)}</tr>`
-).join('')}
-<tr class="t"><td colspan="2" class="r"><b>Total Income:</b><td class="r"><b>₹${todayIncome.reduce((sum, income) => sum + parseFloat(income.amount), 0).toFixed(2)}</b></tr>
-</table>` : ''}
-
-${todayExpenses.length > 0 ? `
-<div class="s">EXPENSE RECORDS</div>
-<table>
-<tr><th width="10%">Sr.No<th width="70%">Description<th width="20%">Amount</tr>
-${todayExpenses.map((expense, index) => 
-  `<tr><td class="c">${index + 1}<td>${expense.description}<td class="r">₹${expense.amount.toFixed(2)}</tr>`
-).join('')}
-<tr class="t"><td colspan="2" class="r"><b>Total Expenses:</b><td class="r"><b>₹${todayExpenses.reduce((sum, expense) => sum + parseFloat(expense.amount), 0).toFixed(2)}</b></tr>
-</table>` : ''}
-
-<div style="margin-top:15px;text-align:center;font-size:10px;border-top:1px solid #000;padding-top:5px">
-Generated on: ${new Date().toLocaleString()}
-</div>
-
-<div class="no-print" style="text-align:center;margin:20px 0">
-<button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
-</div>
-
-<script>
-// Auto print on load (with delay for content loading)
-window.onload = function() {
-  setTimeout(() => {
-    window.print();
-  }, 500);
-};
-</script>
-</body>
-</html>`;
-
-      // Open in new window for printing/PDF generation
-      const printWindow = window.open('', '_blank', 'width=800,height=600');
-      if (!printWindow) {
-        alert('Please allow pop-ups for this site to enable PDF export and printing.');
-        return;
+      // Create new PDF document
+      const pdf = new jsPDF();
+      
+      // Set up fonts and colors
+      pdf.setFontSize(20);
+      pdf.setTextColor(0, 0, 0);
+      
+      // Title
+      pdf.text('M.Pump Calc Daily Report', 105, 20, { align: 'center' });
+      pdf.setFontSize(14);
+      pdf.text(selectedDate, 105, 30, { align: 'center' });
+      
+      let yPosition = 50;
+      
+      // Summary Section
+      pdf.setFontSize(16);
+      pdf.setFont(undefined, 'bold');
+      pdf.text('SUMMARY', 20, yPosition);
+      yPosition += 10;
+      
+      pdf.setFontSize(10);
+      pdf.setFont(undefined, 'normal');
+      
+      // Summary data
+      Object.entries(stats.fuelSalesByType).forEach(([fuelType, data], index) => {
+        pdf.text(`${index + 1}. ${fuelType} Sales: ${data.liters.toFixed(2)}L • ₹${data.amount.toFixed(2)}`, 20, yPosition);
+        yPosition += 6;
+      });
+      
+      if (Object.keys(stats.fuelSalesByType).length > 1) {
+        pdf.setFont(undefined, 'bold');
+        pdf.text(`Total Reading Sales: ${stats.totalLiters.toFixed(2)}L • ₹${stats.fuelCashSales.toFixed(2)}`, 20, yPosition);
+        yPosition += 6;
+        pdf.setFont(undefined, 'normal');
       }
       
-      printWindow.document.write(htmlContent);
-      printWindow.document.close();
+      pdf.text(`Credit Sales: ${stats.creditLiters.toFixed(2)}L • ₹${stats.creditAmount.toFixed(2)}`, 20, yPosition);
+      yPosition += 6;
+      pdf.text(`Income: ₹${stats.otherIncome.toFixed(2)}`, 20, yPosition);
+      yPosition += 6;
+      pdf.text(`Expenses: ₹${stats.totalExpenses.toFixed(2)}`, 20, yPosition);
+      yPosition += 6;
       
-      // Focus window and show user feedback
-      printWindow.focus();
+      pdf.setFont(undefined, 'bold');
+      pdf.text(`Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}`, 20, yPosition);
+      yPosition += 15;
       
-      // Show user feedback
-      setTimeout(() => {
-        toast({
-          title: "Print Preview Opened",
-          description: "Print dialog will appear automatically. You can also click the print button in the preview window."
+      // Sales Records
+      if (todaySales.length > 0) {
+        pdf.setFont(undefined, 'bold');
+        pdf.setFontSize(14);
+        pdf.text('READING SALES', 20, yPosition);
+        yPosition += 10;
+        
+        pdf.setFontSize(9);
+        pdf.setFont(undefined, 'normal');
+        
+        todaySales.forEach(sale => {
+          if (yPosition > 250) {
+            pdf.addPage();
+            yPosition = 20;
+          }
+          pdf.text(`${sale.nozzle} - ${sale.fuelType}: ${sale.startReading} → ${sale.endReading} = ${sale.liters.toFixed(2)}L @ ₹${sale.rate.toFixed(2)} = ₹${sale.amount.toFixed(2)}`, 20, yPosition);
+          yPosition += 6;
         });
-      }, 1000);
-
+        yPosition += 5;
+      }
+      
+      // Credit Sales
+      if (todayCredits.length > 0) {
+        if (yPosition > 230) {
+          pdf.addPage();
+          yPosition = 20;
+        }
+        
+        pdf.setFont(undefined, 'bold');
+        pdf.setFontSize(14);
+        pdf.text('CREDIT SALES', 20, yPosition);
+        yPosition += 10;
+        
+        pdf.setFontSize(9);
+        pdf.setFont(undefined, 'normal');
+        
+        todayCredits.forEach(credit => {
+          if (yPosition > 250) {
+            pdf.addPage();
+            yPosition = 20;
+          }
+          pdf.text(`${credit.customerName} - ${credit.vehicleNumber || 'N/A'}: ${credit.liters ? credit.liters.toFixed(2) + 'L' : ''} @ ₹${credit.rate ? credit.rate.toFixed(2) : 'N/A'} = ₹${credit.amount.toFixed(2)}`, 20, yPosition);
+          yPosition += 6;
+        });
+        yPosition += 5;
+      }
+      
+      // Income & Expenses
+      if (todayIncome.length > 0 || todayExpenses.length > 0) {
+        if (yPosition > 230) {
+          pdf.addPage();
+          yPosition = 20;
+        }
+        
+        pdf.setFont(undefined, 'bold');
+        pdf.setFontSize(14);
+        pdf.text('INCOME & EXPENSES', 20, yPosition);
+        yPosition += 10;
+        
+        pdf.setFontSize(9);
+        pdf.setFont(undefined, 'normal');
+        
+        todayIncome.forEach(income => {
+          if (yPosition > 250) {
+            pdf.addPage();
+            yPosition = 20;
+          }
+          pdf.text(`Income: ${income.description} - ₹${income.amount.toFixed(2)}`, 20, yPosition);
+          yPosition += 6;
+        });
+        
+        todayExpenses.forEach(expense => {
+          if (yPosition > 250) {
+            pdf.addPage();
+            yPosition = 20;
+          }
+          pdf.text(`Expense: ${expense.description} - ₹${expense.amount.toFixed(2)}`, 20, yPosition);
+          yPosition += 6;
+        });
+      }
+      
+      // Footer
+      pdf.setFontSize(8);
+      pdf.text(`Generated on: ${new Date().toLocaleString()}`, 105, 285, { align: 'center' });
+      
+      // Save the PDF
+      const fileName = `MPump_Report_${selectedDate}.pdf`;
+      pdf.save(fileName);
+      
+      toast({
+        title: "PDF Generated Successfully",
+        description: `Report saved as ${fileName}. Check your downloads folder.`
+      });
+      
     } catch (error) {
       console.error('Error generating PDF:', error);
-      alert('Error generating PDF. Please try again.');
+      toast({
+        title: "PDF Generation Failed",
+        description: "Please try again. If the issue persists, use the text copy feature instead.",
+        variant: "destructive"
+      });
     }
   };
 
