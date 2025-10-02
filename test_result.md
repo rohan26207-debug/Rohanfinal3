@@ -533,6 +533,18 @@ metadata:
           agent: "testing"
           comment: "❌ CRITICAL ISSUE IDENTIFIED: Enhanced Print/PDF functionality is not working as expected. TESTING RESULTS: 1) ✅ Print/PDF button is visible and clickable in Export Daily Report section, 2) ❌ Preview window does not open when Print/PDF button is clicked - window.open() call is failing, 3) ❌ No new window/tab opens despite button click being registered, 4) ✅ Manual JavaScript execution of PDF export function works correctly and creates preview window with proper content, 5) ❌ Actual button click handler is not triggering window.open() properly. ROOT CAUSE: The exportToPDF function's window.open() call is not executing when triggered by button click, possibly due to: - Event handler not properly bound to button, - JavaScript error preventing execution, - Browser security restrictions on programmatic window.open(), - React event handling issues. RECOMMENDATION: Debug the button click handler and ensure exportToPDF function is properly called when Print/PDF button is clicked."
 
+  - task: "Form reset functionality when date changes"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx, /app/frontend/src/components/SalesTracker.jsx, /app/frontend/src/components/CreditSales.jsx, /app/frontend/src/components/IncomeExpense.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "🎉 FORM RESET FUNCTIONALITY TESTING COMPLETED SUCCESSFULLY: Comprehensive testing of form reset when date changes in M.Pump Calc application. CRITICAL BUG FIXED: Found and fixed JavaScript error 'setSaleForm is not defined' in SalesTracker component (line 36) - changed to correct 'setFormData' function. TESTING RESULTS: ✅ SALES FORM RESET: Successfully filled sales form (Start=1000, End=1020), changed date from 2025-10-02 to 2025-10-03, verified all form fields cleared completely after date change, ✅ CREDIT FORM RESET: Successfully filled credit form (Customer='Test Customer', Vehicle='ABC123'), changed date back to 2025-10-02, verified all form fields cleared completely after date change, ✅ INCOME/EXPENSE FORM RESET: Successfully filled income form (Amount=500, Description='Test description'), changed date to 2025-10-03, verified all form fields cleared completely after date change, ✅ FINAL VERIFICATION: Checked all tabs after testing - all forms completely empty and ready for new entries, ✅ FORM RESET MECHANISM: Verified formResetKey prop correctly triggers useEffect in all child components (SalesTracker, CreditSales, IncomeExpense) when date changes, ✅ EDIT MODE RESET: Edit mode properly cancelled when date changes (setEditingId(null) called in all components). OVERALL RESULT: ALL TESTS PASSED - Form reset functionality working perfectly across all tabs when date changes. Users can now safely change dates without worrying about accidentally submitting old form data to new dates."
+
 backend:
   - task: "Remove L suffixes from UI displays"
     implemented: true
