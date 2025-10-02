@@ -33,7 +33,7 @@ const SalesTracker = ({ isDarkMode, salesData, addSaleRecord, updateSaleRecord, 
 
   // Reset form when date changes (formResetKey changes)
   useEffect(() => {
-    setSaleForm({
+    setFormData({
       nozzle: '',
       fuelType: '',
       startReading: '',
