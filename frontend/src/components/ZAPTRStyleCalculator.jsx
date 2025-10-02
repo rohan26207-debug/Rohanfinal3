@@ -483,69 +483,7 @@ const ZAPTRStyleCalculator = () => {
     }
   };
 
-  // Mobile-friendly share function
-  const shareReport = async () => {
-    try {
-      const todaySales = salesData.filter(sale => sale.date === selectedDate);
-      const todayCredits = creditData.filter(credit => credit.date === selectedDate);
-      const todayIncome = incomeData.filter(income => income.date === selectedDate);
-      const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
-
-      const reportText = `M.Pump Calc Daily Report - ${selectedDate}
-
-SUMMARY:
-${Object.entries(stats.fuelSalesByType).map(([fuelType, data], index) => 
-  `${index + 1}. ${fuelType} Sales: ${data.liters.toFixed(2)}L • ₹${data.amount.toFixed(2)}`
-).join('\n')}
-${Object.keys(stats.fuelSalesByType).length > 1 ? `Total Reading Sales: ${stats.totalLiters.toFixed(2)}L • ₹${stats.fuelCashSales.toFixed(2)}\n` : ''}Credit Sales: ${stats.creditLiters.toFixed(2)}L • ₹${stats.creditAmount.toFixed(2)}
-Income: ₹${stats.otherIncome.toFixed(2)}
-Expenses: ₹${stats.totalExpenses.toFixed(2)}
-Cash in Hand: ₹${stats.adjustedCashSales.toFixed(2)}
-
-${todaySales.length > 0 ? `READING SALES:
-${todaySales.map(sale => 
-  `${sale.nozzle} - ${sale.fuelType}: ${sale.startReading} → ${sale.endReading} = ${sale.liters.toFixed(2)}L @ ₹${sale.rate.toFixed(2)} = ₹${sale.amount.toFixed(2)}`
-).join('\n')}
-
-` : ''}${todayCredits.length > 0 ? `CREDIT SALES:
-${todayCredits.map(credit => 
-  `${credit.customerName} - ${credit.vehicleNumber || 'N/A'}: ${credit.liters ? credit.liters.toFixed(2) + 'L' : ''} @ ₹${credit.rate ? credit.rate.toFixed(2) : 'N/A'} = ₹${credit.amount.toFixed(2)}`
-).join('\n')}
-
-` : ''}${todayIncome.length > 0 || todayExpenses.length > 0 ? `INCOME & EXPENSES:
-${todayIncome.map(income => `Income: ${income.description} - ₹${income.amount.toFixed(2)}`).join('\n')}
-${todayExpenses.map(expense => `Expense: ${expense.description} - ₹${expense.amount.toFixed(2)}`).join('\n')}
-
-` : ''}Generated on: ${new Date().toLocaleString()}`;
-
-      // Check if native share API is available (mobile)
-      if (navigator.share) {
-        await navigator.share({
-          title: `M.Pump Calc Report - ${selectedDate}`,
-          text: reportText
-        });
-        toast({
-          title: "Report Shared",
-          description: "Daily report shared successfully"
-        });
-      } else {
-        // Fallback: copy to clipboard
-        await navigator.clipboard.writeText(reportText);
-        toast({
-          title: "Report Copied",
-          description: "Daily report copied to clipboard. You can paste it in any app."
-        });
-      }
-      
-    } catch (error) {
-      console.error('Share failed:', error);
-      toast({
-        title: "Share Failed",
-        description: "Unable to share. Try the copy button instead.",
-        variant: "destructive"
-      });
-    }
-  };
+  // Debug function removed
 
   // CSV export function removed per user request
 
