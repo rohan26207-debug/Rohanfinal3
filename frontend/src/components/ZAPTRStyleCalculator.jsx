@@ -85,9 +85,7 @@ const ZAPTRStyleCalculator = () => {
 
   // Reload data when date changes (to reflect any new data)
   useEffect(() => {
-    if (!loading) {
-      loadData();
-    }
+    loadData();
   }, [selectedDate]);
 
   const toggleTheme = () => {
