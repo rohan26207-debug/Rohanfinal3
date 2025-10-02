@@ -302,6 +302,67 @@ const ZAPTRStyleCalculator = () => {
     return false;
   };
 
+  // Update functions
+  const updateSaleRecord = (id, updatedData) => {
+    try {
+      const updatedSale = localStorageService.updateSaleRecord(id, updatedData);
+      if (updatedSale) {
+        setSalesData(prev => prev.map(sale => sale.id === id ? updatedSale : sale));
+        toast({ title: "Success", description: "Sale record updated successfully" });
+        return updatedSale;
+      }
+    } catch (error) {
+      console.error('Failed to update sale record:', error);
+      toast({ title: "Error", description: "Failed to update sale record", variant: "destructive" });
+    }
+    return null;
+  };
+
+  const updateCreditRecord = (id, updatedData) => {
+    try {
+      const updatedCredit = localStorageService.updateCreditRecord(id, updatedData);
+      if (updatedCredit) {
+        setCreditData(prev => prev.map(credit => credit.id === id ? updatedCredit : credit));
+        toast({ title: "Success", description: "Credit record updated successfully" });
+        return updatedCredit;
+      }
+    } catch (error) {
+      console.error('Failed to update credit record:', error);
+      toast({ title: "Error", description: "Failed to update credit record", variant: "destructive" });
+    }
+    return null;
+  };
+
+  const updateIncomeRecord = (id, updatedData) => {
+    try {
+      const updatedIncome = localStorageService.updateIncomeRecord(id, updatedData);
+      if (updatedIncome) {
+        setIncomeData(prev => prev.map(income => income.id === id ? updatedIncome : income));
+        toast({ title: "Success", description: "Income record updated successfully" });
+        return updatedIncome;
+      }
+    } catch (error) {
+      console.error('Failed to update income record:', error);
+      toast({ title: "Error", description: "Failed to update income record", variant: "destructive" });
+    }
+    return null;
+  };
+
+  const updateExpenseRecord = (id, updatedData) => {
+    try {
+      const updatedExpense = localStorageService.updateExpenseRecord(id, updatedData);
+      if (updatedExpense) {
+        setExpenseData(prev => prev.map(expense => expense.id === id ? updatedExpense : expense));
+        toast({ title: "Success", description: "Expense record updated successfully" });
+        return updatedExpense;
+      }
+    } catch (error) {
+      console.error('Failed to update expense record:', error);
+      toast({ title: "Error", description: "Failed to update expense record", variant: "destructive" });
+    }
+    return null;
+  };
+
   const updateFuelRate = (fuelType, rate) => {
     try {
       const success = localStorageService.updateFuelRate(fuelType, rate);
