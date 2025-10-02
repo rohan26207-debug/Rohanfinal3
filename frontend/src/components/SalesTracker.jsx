@@ -31,6 +31,19 @@ const SalesTracker = ({ isDarkMode, salesData, addSaleRecord, updateSaleRecord, 
   const [editingId, setEditingId] = useState(null);
   const { toast } = useToast();
 
+  // Reset form when date changes (formResetKey changes)
+  useEffect(() => {
+    setSaleForm({
+      nozzle: '',
+      fuelType: '',
+      startReading: '',
+      endReading: '',
+      rate: '',
+      type: 'cash'
+    });
+    setEditingId(null);
+  }, [formResetKey]);
+
   // Generate fuel types from settings (with safety check)
   const fuelTypes = fuelSettings ? Object.entries(fuelSettings).map(([type, config]) => ({
     type,
