@@ -980,6 +980,7 @@ window.onload = function() {
               creditData={creditData}
               incomeData={incomeData}
               expenseData={expenseData}
+              formResetKey={formResetKey}
             />
           </TabsContent>
 
