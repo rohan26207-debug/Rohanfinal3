@@ -955,6 +955,7 @@ Generated on: ${new Date().toLocaleString()}
               isDarkMode={isDarkMode}
               salesData={salesData}
               addSaleRecord={addSaleRecord}
+              deleteSaleRecord={deleteSaleRecord}
               fuelSettings={fuelSettings}
               selectedDate={selectedDate}
               creditData={creditData}
