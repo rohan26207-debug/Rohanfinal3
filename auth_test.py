@@ -8,7 +8,7 @@ import asyncio
 import httpx
 
 # Get backend URL from environment
-BACKEND_URL = "https://mpump-calc.preview.emergentagent.com/api"
+BACKEND_URL = "https://pumpcalc-mobile.preview.emergentagent.com/api"
 
 async def test_fuel_rates_without_auth():
     """Test fuel rates API without authentication (simulating user's issue)"""

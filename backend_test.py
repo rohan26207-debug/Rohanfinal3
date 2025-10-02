@@ -13,7 +13,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 import uuid
 
 # Get backend URL from environment
-BACKEND_URL = "https://mpump-calc.preview.emergentagent.com/api"
+BACKEND_URL = "https://pumpcalc-mobile.preview.emergentagent.com/api"
 
 # MongoDB connection for test data setup
 MONGO_URL = "mongodb://localhost:27017"
