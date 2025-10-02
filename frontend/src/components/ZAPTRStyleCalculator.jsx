@@ -681,7 +681,7 @@ Generated on: ${new Date().toLocaleString()}
                   }`}
                 >
                   <FileText className="w-4 h-4 mr-1" />
-                  PDF
+                  Print/PDF
                 </Button>
                 <Button
                   variant="outline"
