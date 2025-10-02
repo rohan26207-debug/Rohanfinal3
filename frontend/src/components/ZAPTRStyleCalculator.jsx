@@ -38,6 +38,7 @@ const ZAPTRStyleCalculator = () => {
   const [incomeData, setIncomeData] = useState([]);
   const [fuelSettings, setFuelSettings] = useState({});
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const { toast } = useToast();
 
   // Load data from localStorage
   // Loading state removed per user request
