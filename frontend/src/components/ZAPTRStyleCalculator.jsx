@@ -43,8 +43,6 @@ const ZAPTRStyleCalculator = () => {
 
   const loadData = () => {
     try {
-      setLoading(true);
-
       // Load all data from localStorage
       const salesData = localStorageService.getSalesData();
       const creditData = localStorageService.getCreditData();
@@ -77,8 +75,6 @@ const ZAPTRStyleCalculator = () => {
       };
       setFuelSettings(defaultFuelSettings);
       localStorageService.setFuelSettings(defaultFuelSettings);
-    } finally {
-      setLoading(false);
     }
   };
 
