@@ -259,7 +259,7 @@ const SalesTracker = ({ isDarkMode, salesData, addSaleRecord, fuelSettings, sele
                       {type} - ₹{config.price}
                     </SelectItem>
                   )) : (
-                    <SelectItem value="" disabled>Loading fuel types...</SelectItem>
+                    <SelectItem value="" disabled>Select fuel type</SelectItem>
                   )}
                 </SelectContent>
               </Select>
