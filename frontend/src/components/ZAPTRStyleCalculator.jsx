@@ -87,7 +87,19 @@ const ZAPTRStyleCalculator = () => {
   // Reload data when date changes (to reflect any new data)
   useEffect(() => {
     loadData();
+    
+    // Reset all forms when date changes to prevent adding old data to new date
+    resetAllForms();
   }, [selectedDate]);
+
+  // Function to reset all child component forms
+  const resetAllForms = () => {
+    // Trigger reset in child components by updating a reset key
+    setFormResetKey(prev => prev + 1);
+  };
+
+  // Add form reset state to force child component form resets
+  const [formResetKey, setFormResetKey] = useState(0);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
