@@ -39,7 +39,7 @@ const ZAPTRStyleCalculator = () => {
   const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
 
   // Load data from localStorage (offline mode)
-  const [loading, setLoading] = useState(true);
+  // Loading state removed per user request
 
   const loadData = () => {
     try {
