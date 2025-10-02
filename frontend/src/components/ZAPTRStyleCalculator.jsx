@@ -961,6 +961,7 @@ window.onload = function() {
               isDarkMode={isDarkMode}
               salesData={salesData}
               addSaleRecord={addSaleRecord}
+              updateSaleRecord={updateSaleRecord}
               deleteSaleRecord={deleteSaleRecord}
               fuelSettings={fuelSettings}
               selectedDate={selectedDate}
