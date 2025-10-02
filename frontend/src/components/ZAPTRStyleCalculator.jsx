@@ -1014,6 +1014,7 @@ window.onload = function() {
               selectedDate={selectedDate}
               salesData={salesData}
               creditData={creditData}
+              formResetKey={formResetKey}
             />
           </TabsContent>
 
