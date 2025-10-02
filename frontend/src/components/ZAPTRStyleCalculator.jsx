@@ -663,21 +663,9 @@ const ZAPTRStyleCalculator = () => {
                   }`}
                 >
                   <FileText className="w-4 h-4 mr-1" />
-                  PDF
+                  Print/PDF
                 </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={shareReport}
-                  className={`${
-                    isDarkMode 
-                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
-                      : 'border-slate-300 text-slate-700 hover:bg-slate-50'
-                  }`}
-                >
-                  <Share2 className="w-4 h-4 mr-1" />
-                  Share
-                </Button>
+                {/* CSV export removed per user request */}
                 <Button
                   variant="outline"
                   size="sm"
