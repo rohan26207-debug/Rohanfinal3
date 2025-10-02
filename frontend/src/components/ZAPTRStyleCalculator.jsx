@@ -983,8 +983,10 @@ Generated on: ${new Date().toLocaleString()}
               isDarkMode={isDarkMode}
               incomeData={incomeData}
               addIncomeRecord={addIncomeRecord}
+              deleteIncomeRecord={deleteIncomeRecord}
               expenseData={expenseData}
               addExpenseRecord={addExpenseRecord}
+              deleteExpenseRecord={deleteExpenseRecord}
               selectedDate={selectedDate}
               salesData={salesData}
               creditData={creditData}
