@@ -456,11 +456,7 @@ window.onload = function() {
     }
   };
 
-  // Test function for debugging
-  const testPrintFunction = () => {
-    console.log('Test print function called directly');
-    exportToPDF();
-  };
+  // Debug function removed
 
   const exportToCSV = () => {
     const csvContent = generateCSVContent();
