@@ -373,7 +373,7 @@ const HeaderSettings = ({ isDarkMode, fuelSettings, setFuelSettings }) => {
                       <h4 className={`font-medium ${
                         isDarkMode ? 'text-white' : 'text-slate-800'
                       }`}>
-                        Data Backup (Offline Mode)
+                        Data Backup
                       </h4>
                       
                       <p className={`text-sm ${
