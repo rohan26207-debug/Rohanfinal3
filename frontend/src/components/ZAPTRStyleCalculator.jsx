@@ -348,7 +348,10 @@ td{border:1px solid #000;padding:3px;font-size:14px}
 .r{text-align:right}
 .c{text-align:center}
 .t{font-weight:bold;background:#f8f8f8}
-@media print{body{margin:8mm}}
+.print-btn{background:#007bff;color:white;border:none;padding:10px 20px;font-size:16px;cursor:pointer;border-radius:5px;margin:10px auto;display:block;box-shadow:0 2px 4px rgba(0,0,0,0.2)}
+.print-btn:hover{background:#0056b3}
+.no-print{display:block}
+@media print{body{margin:8mm}.no-print{display:none}}
 </style>
 </head>
 <body>
