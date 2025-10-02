@@ -533,23 +533,7 @@ Generated on: ${new Date().toLocaleString()}
     return text;
   };
 
-  // Show loading state
-  if (loading) {
-    return (
-      <div className={`min-h-screen transition-colors duration-300 ${
-        isDarkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-slate-50 to-slate-100'
-      }`}>
-        <div className="max-w-7xl mx-auto p-4">
-          <div className="flex items-center justify-center min-h-screen">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-              <p className={isDarkMode ? 'text-gray-300' : 'text-slate-600'}>Loading offline data...</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // Loading screen removed per user request
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${
