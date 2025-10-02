@@ -18,7 +18,6 @@ import {
   ChevronLeft,
   ChevronRight,
   FileText,
-  Download,
   Share2
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
