@@ -775,11 +775,7 @@ Generated on: ${new Date().toLocaleString()}
           isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
         } shadow-lg mb-6`}>
           <CardContent className="p-6">
-            <h2 className={`text-2xl font-bold mb-4 ${
-              isDarkMode ? 'text-white' : 'text-slate-800'
-            }`}>
-              Summary
-            </h2>
+            {/* Summary title removed per user request */}
             
             <div className="space-y-3">
               {/* Reading Sales by Fuel Type */}
