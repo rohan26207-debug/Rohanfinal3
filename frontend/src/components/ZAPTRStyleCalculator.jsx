@@ -479,53 +479,7 @@ window.onload = function() {
 
   // PDF export content generation function removed
 
-  const generateCSVContent = () => {
-    const todaySales = salesData.filter(sale => sale.date === selectedDate);
-    const todayCredits = creditData.filter(credit => credit.date === selectedDate);
-    const todayIncome = incomeData.filter(income => income.date === selectedDate);
-    const todayExpenses = expenseData.filter(expense => expense.date === selectedDate);
-
-    let csv = `M.Pump Calc Daily Report - ${selectedDate}\n\n`;
-    
-    csv += 'SUMMARY\n';
-    csv += 'Metric,Value\n';
-    
-    // Add fuel sales by type
-    Object.entries(stats.fuelSalesByType).forEach(([fuelType, data], index) => {
-      csv += `${index + 1}. ${fuelType} Sales,${data.liters.toFixed(2)}L • ₹${data.amount.toFixed(2)}\n`;
-    });
-    
-    // Add total if multiple fuel types
-    if (Object.keys(stats.fuelSalesByType).length > 1) {
-      csv += `Total Reading Sales,${stats.totalLiters.toFixed(2)}L • ₹${stats.fuelCashSales.toFixed(2)}\n`;
-    }
-    
-    csv += `${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 2 : 1)}. Credit Sales,${stats.creditLiters.toFixed(2)}L • ₹${stats.creditAmount.toFixed(2)}\n`;
-    csv += `${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 3 : 2)}. Income,₹${stats.otherIncome.toFixed(2)}\n`;
-    csv += `${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 4 : 3)}. Expenses,₹${stats.totalExpenses.toFixed(2)}\n`;
-    csv += `${Object.keys(stats.fuelSalesByType).length + (Object.keys(stats.fuelSalesByType).length > 1 ? 5 : 4)}. Cash in Hand,₹${stats.adjustedCashSales.toFixed(2)}\n\n`;
-    
-    csv += 'DETAILED RECORDS\n';
-    csv += 'Type,Description,Amount,Details,Date\n';
-    
-    todaySales.forEach(sale => {
-      csv += `"Fuel Sale","${sale.nozzle} - ${sale.fuelType}","₹${sale.amount.toFixed(2)}","${sale.liters} @ ₹${sale.rate} (${sale.startReading} → ${sale.endReading})","${sale.date}"\n`;
-    });
-
-    todayCredits.forEach(credit => {
-      csv += `"Credit Sale","${credit.customerName} - ${credit.vehicleNumber || 'N/A'}","₹${credit.amount.toFixed(2)}","${credit.liters} ${credit.fuelType} @ ₹${credit.rate}","${credit.date}"\n`;
-    });
-
-    todayIncome.forEach(income => {
-      csv += `"Income","${income.description}","₹${income.amount.toFixed(2)}","","${income.date}"\n`;
-    });
-
-    todayExpenses.forEach(expense => {
-      csv += `"Expense","${expense.description}","₹${expense.amount.toFixed(2)}","","${expense.date}"\n`;
-    });
-
-    return csv;
-  };
+  // CSV content generation function removed per user request
 
   const generateTextContent = () => {
     const todaySales = salesData.filter(sale => sale.date === selectedDate);
