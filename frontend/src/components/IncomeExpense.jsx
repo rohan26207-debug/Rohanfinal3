@@ -29,6 +29,17 @@ const IncomeExpense = ({ isDarkMode, incomeData, addIncomeRecord, updateIncomeRe
   const [editingId, setEditingId] = useState(null);
   const { toast } = useToast();
 
+  // Reset form when date changes (formResetKey changes)
+  useEffect(() => {
+    setFormData({
+      amount: '',
+      description: '',
+      type: 'income'
+    });
+    setActiveType('income');
+    setEditingId(null);
+  }, [formResetKey]);
+
   // Removed category arrays - simplified to just amount and description
 
   const handleSubmit = () => {
