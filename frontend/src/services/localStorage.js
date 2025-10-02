@@ -216,26 +216,75 @@ class LocalStorageService {
   // Delete methods
   deleteSaleRecord(id) {
     const sales = this.getSalesData();
-    const filtered = sales.filter(sale => sale.id !== id);
-    return this.setSalesData(filtered);
+    const updatedSales = sales.filter(sale => sale.id !== id);
+    this.setSalesData(updatedSales);
+    return true;
   }
 
   deleteCreditRecord(id) {
     const credits = this.getCreditData();
-    const filtered = credits.filter(credit => credit.id !== id);
-    return this.setCreditData(filtered);
+    const updatedCredits = credits.filter(credit => credit.id !== id);
+    this.setCreditData(updatedCredits);
+    return true;
   }
 
   deleteIncomeRecord(id) {
     const income = this.getIncomeData();
-    const filtered = income.filter(item => item.id !== id);
-    return this.setIncomeData(filtered);
+    const updatedIncome = income.filter(item => item.id !== id);
+    this.setIncomeData(updatedIncome);
+    return true;
   }
 
   deleteExpenseRecord(id) {
     const expenses = this.getExpenseData();
-    const filtered = expenses.filter(item => item.id !== id);
-    return this.setExpenseData(filtered);
+    const updatedExpenses = expenses.filter(expense => expense.id !== id);
+    this.setExpenseData(updatedExpenses);
+    return true;
+  }
+
+  // Update methods
+  updateSaleRecord(id, updatedData) {
+    const sales = this.getSalesData();
+    const saleIndex = sales.findIndex(sale => sale.id === id);
+    if (saleIndex !== -1) {
+      sales[saleIndex] = { ...sales[saleIndex], ...updatedData };
+      this.setSalesData(sales);
+      return sales[saleIndex];
+    }
+    return null;
+  }
+
+  updateCreditRecord(id, updatedData) {
+    const credits = this.getCreditData();
+    const creditIndex = credits.findIndex(credit => credit.id === id);
+    if (creditIndex !== -1) {
+      credits[creditIndex] = { ...credits[creditIndex], ...updatedData };
+      this.setCreditData(credits);
+      return credits[creditIndex];
+    }
+    return null;
+  }
+
+  updateIncomeRecord(id, updatedData) {
+    const income = this.getIncomeData();
+    const incomeIndex = income.findIndex(item => item.id === id);
+    if (incomeIndex !== -1) {
+      income[incomeIndex] = { ...income[incomeIndex], ...updatedData };
+      this.setIncomeData(income);
+      return income[incomeIndex];
+    }
+    return null;
+  }
+
+  updateExpenseRecord(id, updatedData) {
+    const expenses = this.getExpenseData();
+    const expenseIndex = expenses.findIndex(expense => expense.id === id);
+    if (expenseIndex !== -1) {
+      expenses[expenseIndex] = { ...expenses[expenseIndex], ...updatedData };
+      this.setExpenseData(expenses);
+      return expenses[expenseIndex];
+    }
+    return null;
   }
 
   // Export all data (for backup)
