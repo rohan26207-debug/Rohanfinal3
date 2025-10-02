@@ -413,6 +413,19 @@ ${todayExpenses.map((expense, index) =>
 <div style="margin-top:15px;text-align:center;font-size:10px;border-top:1px solid #000;padding-top:5px">
 Generated on: ${new Date().toLocaleString()}
 </div>
+
+<div class="no-print" style="text-align:center;margin:20px 0">
+<button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+</div>
+
+<script>
+// Auto print on load (with delay for content loading)
+window.onload = function() {
+  setTimeout(() => {
+    window.print();
+  }, 500);
+};
+</script>
 </body>
 </html>`;
 
