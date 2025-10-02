@@ -651,7 +651,7 @@ Generated on: ${new Date().toLocaleString()}
                   <div className={`text-sm ${
                     isDarkMode ? 'text-gray-400' : 'text-slate-500'
                   }`}>
-                    {selectedDate}
+                    Summary + All Records for {selectedDate}
                   </div>
                 </div>
               </div>
