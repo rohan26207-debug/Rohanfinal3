@@ -171,7 +171,7 @@ const UnifiedRecords = ({
       <CardHeader className="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-t-lg">
         <CardTitle className="flex items-center gap-2">
           <Receipt className="w-5 h-5" />
-          {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : selectedDate} ({totalRecords})
+          All Records for {selectedDate === new Date().toISOString().split('T')[0] ? 'Today' : selectedDate} ({totalRecords})
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0">
