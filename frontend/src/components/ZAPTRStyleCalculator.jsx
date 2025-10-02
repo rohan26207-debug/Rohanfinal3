@@ -240,6 +240,67 @@ const ZAPTRStyleCalculator = () => {
     }
   };
 
+  // Delete functions
+  const deleteSaleRecord = (id) => {
+    try {
+      const success = localStorageService.deleteSaleRecord(id);
+      if (success) {
+        setSalesData(prev => prev.filter(sale => sale.id !== id));
+        toast({ title: "Success", description: "Sale record deleted successfully" });
+        return true;
+      }
+    } catch (error) {
+      console.error('Failed to delete sale record:', error);
+      toast({ title: "Error", description: "Failed to delete sale record", variant: "destructive" });
+    }
+    return false;
+  };
+
+  const deleteCreditRecord = (id) => {
+    try {
+      const success = localStorageService.deleteCreditRecord(id);
+      if (success) {
+        setCreditData(prev => prev.filter(credit => credit.id !== id));
+        toast({ title: "Success", description: "Credit record deleted successfully" });
+        return true;
+      }
+    } catch (error) {
+      console.error('Failed to delete credit record:', error);
+      toast({ title: "Error", description: "Failed to delete credit record", variant: "destructive" });
+    }
+    return false;
+  };
+
+  const deleteIncomeRecord = (id) => {
+    try {
+      const success = localStorageService.deleteIncomeRecord(id);
+      if (success) {
+        setIncomeData(prev => prev.filter(income => income.id !== id));
+        toast({ title: "Success", description: "Income record deleted successfully" });
+        return true;
+      }
+    } catch (error) {
+      console.error('Failed to delete income record:', error);
+      toast({ title: "Error", description: "Failed to delete income record", variant: "destructive" });
+    }
+    return false;
+  };
+
+  const deleteExpenseRecord = (id) => {
+    try {
+      const success = localStorageService.deleteExpenseRecord(id);
+      if (success) {
+        setExpenseData(prev => prev.filter(expense => expense.id !== id));
+        toast({ title: "Success", description: "Expense record deleted successfully" });
+        return true;
+      }
+    } catch (error) {
+      console.error('Failed to delete expense record:', error);
+      toast({ title: "Error", description: "Failed to delete expense record", variant: "destructive" });
+    }
+    return false;
+  };
+
   const updateFuelRate = (fuelType, rate) => {
     try {
       const success = localStorageService.updateFuelRate(fuelType, rate);
