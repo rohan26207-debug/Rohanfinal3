@@ -21,6 +21,7 @@ import {
   Download,
   Share2
 } from 'lucide-react';
+import { useToast } from '../hooks/use-toast';
 import SalesTracker from './SalesTracker';
 import CreditSales from './CreditSales';
 import IncomeExpense from './IncomeExpense';
