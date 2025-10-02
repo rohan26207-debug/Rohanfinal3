@@ -19,7 +19,7 @@ import {
 import { useToast } from '../hooks/use-toast';
 import UnifiedRecords from './UnifiedRecords';
 
-const SalesTracker = ({ isDarkMode, salesData, addSaleRecord, updateSaleRecord, deleteSaleRecord, fuelSettings, selectedDate, creditData, incomeData, expenseData }) => {
+const SalesTracker = ({ isDarkMode, salesData, addSaleRecord, updateSaleRecord, deleteSaleRecord, fuelSettings, selectedDate, creditData, incomeData, expenseData, formResetKey }) => {
   const [formData, setFormData] = useState({
     nozzle: '',
     fuelType: '',
