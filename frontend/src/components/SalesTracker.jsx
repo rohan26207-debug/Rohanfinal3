@@ -172,9 +172,13 @@ const SalesTracker = ({ isDarkMode, salesData, addSaleRecord, updateSaleRecord, 
     };
 
     if (editingId) {
-      // For now, editing is not supported in offline mode
-      // TODO: Implement edit functionality with localStorage
-      toast({ title: "Edit Not Supported", description: "Editing is not currently available", variant: "destructive" });
+      // Update existing sale record
+      if (updateSaleRecord) {
+        updateSaleRecord(editingId, saleRecord);
+        toast({ title: "Sale Updated", description: "Sale record updated successfully" });
+      } else {
+        toast({ title: "Error", description: "Update function not available", variant: "destructive" });
+      }
       setEditingId(null);
     } else {
       const newSale = addSaleRecord({
