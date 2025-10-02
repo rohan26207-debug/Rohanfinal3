@@ -108,13 +108,19 @@ const IncomeExpense = ({ isDarkMode, incomeData, addIncomeRecord, updateIncomeRe
   };
 
   const editRecord = (record, type) => {
-    setFormData({
-      amount: record.amount.toString(),
-      description: record.description || '',
-      type: type
-    });
-    setActiveType(type);
-    setEditingId(record.id);
+    if (editingId === record.id) {
+      // Cancel editing
+      setEditingId(null);
+      setFormData({ description: '', amount: '' });
+    } else {
+      // Start editing
+      setActiveType(type);
+      setEditingId(record.id);
+      setFormData({
+        description: record.description,
+        amount: record.amount.toString()
+      });
+    }
   };
 
   const deleteRecord = (id, type) => {
