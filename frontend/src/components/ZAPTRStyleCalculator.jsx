@@ -944,7 +944,7 @@ Generated on: ${new Date().toLocaleString()}
             </TabsTrigger>
             <TabsTrigger value="expenses" className="flex items-center gap-2">
               <TrendingDown className="w-4 h-4" />
-              Income/Expenses
+              Inc./Exp.
             </TabsTrigger>
             <TabsTrigger value="prices" className="flex items-center gap-2">
               <IndianRupee className="w-4 h-4" />
