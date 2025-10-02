@@ -430,11 +430,8 @@ window.onload = function() {
 </html>`;
 
       // Open in new window for printing/PDF generation
-      console.log('Opening print window...');
       const printWindow = window.open('', '_blank', 'width=800,height=600');
-      console.log('Print window result:', printWindow);
       if (!printWindow) {
-        console.error('Failed to open print window - likely blocked by popup blocker');
         alert('Please allow pop-ups for this site to enable PDF export and printing.');
         return;
       }
