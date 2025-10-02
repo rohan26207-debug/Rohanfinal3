@@ -32,6 +32,18 @@ const CreditSales = ({ isDarkMode, creditData, addCreditRecord, updateCreditReco
   const [editingId, setEditingId] = useState(null);
   const { toast } = useToast();
 
+  // Reset form when date changes (formResetKey changes)
+  useEffect(() => {
+    setFormData({
+      customerName: '',
+      vehicleNumber: '',
+      fuelType: '',
+      liters: '',
+      rate: ''
+    });
+    setEditingId(null);
+  }, [formResetKey]);
+
   // Generate fuel types from settings
   const fuelTypes = Object.entries(fuelSettings).map(([type, config]) => ({
     type,
