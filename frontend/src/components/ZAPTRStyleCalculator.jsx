@@ -460,6 +460,12 @@ window.onload = function() {
     }
   };
 
+  // Test function for debugging
+  const testPrintFunction = () => {
+    console.log('Test print function called directly');
+    exportToPDF();
+  };
+
   const exportToCSV = () => {
     const csvContent = generateCSVContent();
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
