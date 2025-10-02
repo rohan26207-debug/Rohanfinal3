@@ -106,7 +106,7 @@ const IncomeExpense = ({ isDarkMode, incomeData, addIncomeRecord, expenseData, a
 
   const deleteRecord = (id, type) => {
     // For now, deletion is not supported in offline mode
-    toast({ title: "Delete Not Supported", description: "Deletion is not available in offline mode", variant: "destructive" });
+    toast({ title: "Delete Not Supported", description: "Deletion is not currently available", variant: "destructive" });
   };
 
   // Filter data for selected date  
