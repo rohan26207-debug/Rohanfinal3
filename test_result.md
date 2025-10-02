@@ -518,6 +518,21 @@ metadata:
           agent: "testing"
           comment: "✅ COMPREHENSIVE DELETE FUNCTIONALITY TESTING COMPLETED: 1) READING SALES: Successfully added sale record (P1, Petrol, 1000-1020, ₹2050.00) and verified delete button removes record from list with success toast, 2) CREDIT SALES: Successfully added credit record (John Doe, Diesel, ₹897.50) and confirmed delete functionality works correctly, 3) INCOME/EXPENSES: Successfully added and deleted income records with proper 'Income record deleted successfully' success messages, 4) NO ERRORS: Confirmed no 'Delete Not Supported' error messages appear, 5) SUCCESS FEEDBACK: All delete operations show proper success toasts and update UI immediately, 6) DATA PERSISTENCE: All deletions correctly update localStorage. Delete functionality is working perfectly across all tabs with proper user feedback and no critical issues."
 
+  - task: "Enhanced Print/PDF functionality with in-preview printing capability"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/components/ZAPTRStyleCalculator.jsx"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "Added enhanced Print/PDF functionality with in-preview printing capability. Features: 1) Preview window opens with formatted daily report content, 2) '🖨️ Print / Save as PDF' button visible in preview window, 3) Automatic print dialog appears initially, 4) In-preview print functionality allows multiple print operations, 5) Professional button styling with blue background and white text, 6) Enhanced user experience with full control over printing from preview window."
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL ISSUE IDENTIFIED: Enhanced Print/PDF functionality is not working as expected. TESTING RESULTS: 1) ✅ Print/PDF button is visible and clickable in Export Daily Report section, 2) ❌ Preview window does not open when Print/PDF button is clicked - window.open() call is failing, 3) ❌ No new window/tab opens despite button click being registered, 4) ✅ Manual JavaScript execution of PDF export function works correctly and creates preview window with proper content, 5) ❌ Actual button click handler is not triggering window.open() properly. ROOT CAUSE: The exportToPDF function's window.open() call is not executing when triggered by button click, possibly due to: - Event handler not properly bound to button, - JavaScript error preventing execution, - Browser security restrictions on programmatic window.open(), - React event handling issues. RECOMMENDATION: Debug the button click handler and ensure exportToPDF function is properly called when Print/PDF button is clicked."
+
 backend:
   - task: "Remove L suffixes from UI displays"
     implemented: true
