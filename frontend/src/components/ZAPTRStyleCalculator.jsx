@@ -996,6 +996,7 @@ window.onload = function() {
               salesData={salesData}
               incomeData={incomeData}
               expenseData={expenseData}
+              formResetKey={formResetKey}
             />
           </TabsContent>
 
