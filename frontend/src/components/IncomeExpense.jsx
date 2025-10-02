@@ -19,7 +19,7 @@ import {
 import { useToast } from '../hooks/use-toast';
 import UnifiedRecords from './UnifiedRecords';
 
-const IncomeExpense = ({ isDarkMode, incomeData, addIncomeRecord, expenseData, addExpenseRecord, selectedDate, salesData, creditData }) => {
+const IncomeExpense = ({ isDarkMode, incomeData, addIncomeRecord, deleteIncomeRecord, expenseData, addExpenseRecord, deleteExpenseRecord, selectedDate, salesData, creditData }) => {
   const [activeType, setActiveType] = useState('income');
   const [formData, setFormData] = useState({
     amount: '',
