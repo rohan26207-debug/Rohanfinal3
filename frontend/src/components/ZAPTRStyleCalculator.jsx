@@ -324,7 +324,6 @@ const ZAPTRStyleCalculator = () => {
 
   // Export functions
   const exportToPDF = () => {
-    console.log('exportToPDF function called');
     try {
       // Get today's data
       const todaySales = salesData.filter(sale => sale.date === selectedDate);
