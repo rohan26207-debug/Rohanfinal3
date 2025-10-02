@@ -224,7 +224,7 @@ const SalesTracker = ({ isDarkMode, salesData, addSaleRecord, fuelSettings, sele
   const deleteSale = (id) => {
     // For now, deletion is not supported in offline mode
     // TODO: Implement delete functionality with localStorage
-    toast({ title: "Delete Not Supported", description: "Deletion is not available in offline mode", variant: "destructive" });
+    toast({ title: "Delete Not Supported", description: "Deletion is not currently available", variant: "destructive" });
   };
 
   const calculation = calculateSale();
