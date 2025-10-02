@@ -241,60 +241,7 @@ const PriceConfiguration = ({
           </CardContent>
         </Card>
 
-        {/* Price History / Summary */}
-        <Card className={`${
-          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200'
-        } shadow-lg`}>
-          <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-t-lg">
-            <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="w-5 h-5" />
-              Current Rate Summary
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-0">
-            <ScrollArea className="h-[400px]">
-              <div className="p-4 space-y-3">
-                {Object.entries(fuelSettings).length === 0 ? (
-                  <div className="text-center py-8 text-slate-500">
-                    <Fuel className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                    <p>No fuel types configured</p>
-                    <p className="text-xs">Add fuel types in Settings</p>
-                  </div>
-                ) : (
-                  Object.entries(fuelSettings).map(([fuelType, config]) => (
-                    <div key={fuelType} className={`border rounded-lg p-4 ${
-                      isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-slate-200 bg-white'
-                    }`}>
-                      <div className="flex items-center justify-between mb-2">
-                        <Badge className="bg-purple-100 text-purple-800 border-0">
-                          {fuelType}
-                        </Badge>
-                        <div className="flex items-center gap-1">
-                          <IndianRupee className="w-4 h-4 text-green-600" />
-                          <span className="font-bold text-green-600">
-                            {config.price.toFixed(2)}
-                          </span>
-                          <span className="text-sm text-slate-500"></span>
-                        </div>
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-2 text-sm">
-                        <div className="flex justify-between">
-                          <span className="text-slate-600">Nozzles:</span>
-                          <span className="font-medium">{config.nozzleCount}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-slate-600">Date:</span>
-                          <span className="font-medium">{selectedDate}</span>
-                        </div>
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            </ScrollArea>
-          </CardContent>
-        </Card>
+        {/* Current Rate Summary removed per user request */}
       </div>
 
       {/* Unified Records View */}
