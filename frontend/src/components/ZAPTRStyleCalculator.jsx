@@ -535,12 +535,7 @@ Generated on: ${new Date().toLocaleString()}
     }`}>
       <div className="max-w-7xl mx-auto p-4">
         
-        {/* Offline Mode Badge */}
-        <div className="mb-4 p-3 bg-blue-100 border border-blue-400 text-blue-800 rounded-lg">
-          <div className="flex items-center">
-            <span className="font-medium">📱 Offline Mode - All data saved locally in your browser</span>
-          </div>
-        </div>
+        {/* Offline mode display removed per user request */}
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           {/* Left Side: Settings and App Title */}
