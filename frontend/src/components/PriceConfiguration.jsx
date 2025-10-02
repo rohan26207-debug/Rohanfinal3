@@ -11,8 +11,7 @@ import {
   Save,
   RotateCcw,
   Fuel,
-  Calendar,
-  TrendingUp
+  Calendar
 } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 import UnifiedRecords from './UnifiedRecords';
