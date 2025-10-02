@@ -49,31 +49,44 @@ const IncomeExpense = ({ isDarkMode, incomeData, addIncomeRecord, updateIncomeRe
     };
 
     if (editingId) {
-      // For now, editing is not supported in offline mode
-      toast({ title: "Edit Not Supported", description: "Editing is not currently available", variant: "destructive" });
-      setEditingId(null);
-      return;
-    }
-    
-    if (activeType === 'income') {
-      const newIncome = addIncomeRecord({
+      // Update existing record
+      const recordData = {
+        description: formData.description,
         amount: parseFloat(formData.amount),
-        description: formData.description
-      });
+        date: selectedDate
+      };
       
-      if (!newIncome) {
-        toast({ title: "Error", description: "Failed to add income record", variant: "destructive" });
-        return;
+      if (activeType === 'income' && updateIncomeRecord) {
+        updateIncomeRecord(editingId, recordData);
+        toast({ title: "Income Updated", description: "Income record updated successfully" });
+      } else if (activeType === 'expense' && updateExpenseRecord) {
+        updateExpenseRecord(editingId, recordData);
+        toast({ title: "Expense Updated", description: "Expense record updated successfully" });
+      } else {
+        toast({ title: "Error", description: "Update function not available", variant: "destructive" });
       }
+      setEditingId(null);
     } else {
-      const newExpense = addExpenseRecord({
-        amount: parseFloat(formData.amount),
-        description: formData.description
-      });
-      
-      if (!newExpense) {
-        toast({ title: "Error", description: "Failed to add expense record", variant: "destructive" });
-        return;
+      if (activeType === 'income') {
+        const newIncome = addIncomeRecord({
+          description: formData.description,
+          amount: parseFloat(formData.amount),
+          date: selectedDate
+        });
+        
+        if (newIncome) {
+          setFormData({ description: '', amount: '' });
+        }
+      } else {
+        const newExpense = addExpenseRecord({
+          description: formData.description,
+          amount: parseFloat(formData.amount),
+          date: selectedDate
+        });
+        
+        if (newExpense) {
+          setFormData({ description: '', amount: '' });
+        }
       }
     }
 
