@@ -458,21 +458,7 @@ window.onload = function() {
 
   // Debug function removed
 
-  const exportToCSV = () => {
-    const csvContent = generateCSVContent();
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-    
-    if (link.download !== undefined) {
-      const url = URL.createObjectURL(blob);
-      link.setAttribute('href', url);
-      link.setAttribute('download', `mpump_calculator_report_${selectedDate}.csv`);
-      link.style.visibility = 'hidden';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-  };
+  // CSV export function removed per user request
 
   const copyToClipboard = () => {
     const textContent = generateTextContent();
