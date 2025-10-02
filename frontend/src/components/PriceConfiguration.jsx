@@ -5,7 +5,7 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Separator } from './ui/separator';
 import { Badge } from './ui/badge';
-import { ScrollArea } from './ui/scroll-area';
+// ScrollArea import removed as no longer needed
 import { 
   IndianRupee,
   Save,
