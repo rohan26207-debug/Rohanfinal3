@@ -976,6 +976,7 @@ window.onload = function() {
               isDarkMode={isDarkMode}
               creditData={creditData}
               addCreditRecord={addCreditRecord}
+              updateCreditRecord={updateCreditRecord}
               deleteCreditRecord={deleteCreditRecord}
               fuelSettings={fuelSettings}
               selectedDate={selectedDate}
