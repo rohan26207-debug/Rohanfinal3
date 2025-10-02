@@ -969,6 +969,7 @@ Generated on: ${new Date().toLocaleString()}
               isDarkMode={isDarkMode}
               creditData={creditData}
               addCreditRecord={addCreditRecord}
+              deleteCreditRecord={deleteCreditRecord}
               fuelSettings={fuelSettings}
               selectedDate={selectedDate}
               salesData={salesData}
