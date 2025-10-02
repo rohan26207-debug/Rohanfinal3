@@ -464,85 +464,14 @@ const ZAPTRStyleCalculator = () => {
       pdf.setFontSize(8);
       pdf.text(`Generated on: ${new Date().toLocaleString()}`, 105, 285, { align: 'center' });
       
-      // Create blob and handle mobile WebView compatibility
-      const pdfBlob = pdf.output('blob');
+      // Save the PDF
       const fileName = `MPump_Report_${selectedDate}.pdf`;
+      pdf.save(fileName);
       
-      // Check if we're in a mobile WebView environment
-      const isMobileWebView = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) && 
-                              (window.navigator.standalone || !window.chrome);
-      
-      if (isMobileWebView) {
-        // For mobile WebView apps - use data URL approach
-        const pdfDataUrl = pdf.output('dataurlstring');
-        
-        // Try to open in same window with proper MIME type
-        const newWindow = window.open();
-        if (newWindow) {
-          newWindow.document.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>M.Pump Calc Report - ${selectedDate}</title>
-              <style>
-                body { margin: 0; padding: 20px; font-family: Arial; }
-                .header { text-align: center; margin-bottom: 20px; }
-                .download-btn { 
-                  background: #007bff; color: white; border: none; 
-                  padding: 12px 24px; border-radius: 5px; 
-                  font-size: 16px; cursor: pointer; margin: 10px;
-                  display: inline-block; text-decoration: none;
-                }
-                .pdf-container { width: 100%; height: 70vh; border: 1px solid #ddd; }
-                iframe { width: 100%; height: 100%; border: none; }
-              </style>
-            </head>
-            <body>
-              <div class="header">
-                <h2>M.Pump Calc Daily Report</h2>
-                <p>Date: ${selectedDate}</p>
-                <a href="${pdfDataUrl}" download="${fileName}" class="download-btn">📄 Download PDF</a>
-                <button onclick="window.close()" class="download-btn">❌ Close</button>
-              </div>
-              <div class="pdf-container">
-                <iframe src="${pdfDataUrl}" type="application/pdf"></iframe>
-              </div>
-            </body>
-            </html>
-          `);
-          newWindow.document.close();
-        } else {
-          // Fallback: create downloadable link
-          const link = document.createElement('a');
-          link.href = pdfDataUrl;
-          link.download = fileName;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        }
-        
-        toast({
-          title: "PDF Generated",
-          description: "PDF opened in new window. Use the download button to save it."
-        });
-        
-      } else {
-        // For regular browsers - use standard download
-        const url = URL.createObjectURL(pdfBlob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = fileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-        
-        toast({
-          title: "PDF Downloaded",
-          description: `${fileName} has been saved to your downloads folder.`
-        });
-      }
+      toast({
+        title: "PDF Generated Successfully",
+        description: `Report saved as ${fileName}. Check your downloads folder.`
+      });
       
     } catch (error) {
       console.error('Error generating PDF:', error);
