@@ -413,16 +413,29 @@ Generated on: ${new Date().toLocaleString()}
 </body>
 </html>`;
 
-      // Open in new window for printing
-      const printWindow = window.open('', '_blank');
+      // Open in new window for printing/PDF generation
+      const printWindow = window.open('', '_blank', 'width=800,height=600');
+      if (!printWindow) {
+        alert('Please allow pop-ups for this site to enable PDF export and printing.');
+        return;
+      }
+      
       printWindow.document.write(htmlContent);
       printWindow.document.close();
       
-      // Focus and print
-      printWindow.focus();
-      setTimeout(() => {
-        printWindow.print();
-      }, 500);
+      // Wait for content to load, then focus and show print dialog
+      printWindow.onload = function() {
+        printWindow.focus();
+        setTimeout(() => {
+          printWindow.print();
+          
+          // Show user feedback
+          toast({
+            title: "Print Dialog Opened",
+            description: "Choose 'Save as PDF' or print directly from the dialog"
+          });
+        }, 800);
+      };
 
     } catch (error) {
       console.error('Error generating PDF:', error);
