@@ -439,19 +439,16 @@ window.onload = function() {
       printWindow.document.write(htmlContent);
       printWindow.document.close();
       
-      // Wait for content to load, then focus and show print dialog
-      printWindow.onload = function() {
-        printWindow.focus();
-        setTimeout(() => {
-          printWindow.print();
-          
-          // Show user feedback
-          toast({
-            title: "Print Dialog Opened",
-            description: "Choose 'Save as PDF' or print directly from the dialog"
-          });
-        }, 800);
-      };
+      // Focus window and show user feedback
+      printWindow.focus();
+      
+      // Show user feedback
+      setTimeout(() => {
+        toast({
+          title: "Print Preview Opened",
+          description: "Print dialog will appear automatically. You can also click the print button in the preview window."
+        });
+      }, 1000);
 
     } catch (error) {
       console.error('Error generating PDF:', error);
